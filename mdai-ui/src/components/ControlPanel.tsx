@@ -11,6 +11,7 @@ interface ControlPanelProps {
   connectionStatus: SocketStatus
   currentPhase: string
   pairingToken?: string
+  qrPayload?: Record<string, unknown>
   expiresInSeconds?: number
   lastHeartbeatSeconds?: number
   metrics: MetricsSnapshot | null
@@ -35,6 +36,7 @@ export default function ControlPanel(props: ControlPanelProps) {
     connectionStatus,
     currentPhase,
     pairingToken,
+    qrPayload,
     expiresInSeconds,
     lastHeartbeatSeconds,
     metrics,
@@ -54,12 +56,23 @@ export default function ControlPanel(props: ControlPanelProps) {
     return `${lastHeartbeatSeconds}s ago`
   }, [lastHeartbeatSeconds])
 
+  const qrPayloadJson = useMemo(() => (qrPayload ? JSON.stringify(qrPayload) : undefined), [qrPayload])
+
   const handleCopyToken = async () => {
     if (!pairingToken) return
     try {
       await navigator.clipboard.writeText(pairingToken)
     } catch (error) {
       console.warn('Failed to copy pairing token', error)
+    }
+  }
+
+  const handleCopyQrPayload = async () => {
+    if (!qrPayloadJson) return
+    try {
+      await navigator.clipboard.writeText(qrPayloadJson)
+    } catch (error) {
+      console.warn('Failed to copy QR payload', error)
     }
   }
 
@@ -124,6 +137,17 @@ export default function ControlPanel(props: ControlPanelProps) {
             </button>
           </div>
         </div>
+        {qrPayloadJson && (
+          <div className="qr-payload">
+            <div className="qr-payload-header">
+              <span>QR payload</span>
+              <button type="button" onClick={handleCopyQrPayload}>
+                Copy JSON
+              </button>
+            </div>
+            <pre>{qrPayloadJson}</pre>
+          </div>
+        )}
         <button
           type="button"
           className="trigger-button"

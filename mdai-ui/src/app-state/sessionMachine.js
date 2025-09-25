@@ -1,20 +1,19 @@
 import { assign, createMachine } from 'xstate';
-const assignPairingDetails = assign({
-    pairingToken: (_ctx, event) => event.type === 'CONTROLLER_STATE' && typeof event.data?.pairing_token === 'string'
-        ? event.data.pairing_token
-        : undefined,
-    expiresIn: (_ctx, event) => event.type === 'CONTROLLER_STATE' && typeof event.data?.expires_in === 'number'
-        ? event.data.expires_in
-        : undefined,
-    error: (_ctx, event) => (event.type === 'CONTROLLER_STATE' ? event.error : undefined)
+const isControllerState = (event) => event.type === 'CONTROLLER_STATE';
+const assignSessionDetails = assign({
+    token: (_ctx, event) => isControllerState(event) && typeof event.data?.token === 'string' ? event.data.token : undefined,
+    qrPayload: (_ctx, event) => isControllerState(event) ? event.data?.qr_payload : undefined,
+    expiresIn: (_ctx, event) => isControllerState(event) && typeof event.data?.expires_in === 'number' ? event.data.expires_in : undefined,
+    error: (_ctx, event) => (isControllerState(event) ? event.error : undefined)
 });
 const assignError = assign({
-    error: (_ctx, event) => (event.type === 'CONTROLLER_STATE' ? event.error : undefined)
+    error: (_ctx, event) => (isControllerState(event) ? event.error : undefined)
 });
 const resetContext = assign({
-    pairingToken: () => undefined,
+    token: () => undefined,
+    qrPayload: () => undefined,
     expiresIn: () => undefined,
-    error: (_ctx, event) => (event.type === 'CONTROLLER_STATE' ? event.error : undefined)
+    error: (_ctx, event) => (isControllerState(event) ? event.error : undefined)
 });
 const phaseGuard = (phase) => {
     return (_ctx, event) => event.type === 'CONTROLLER_STATE' && event.phase === phase;
@@ -28,7 +27,7 @@ export const sessionMachine = createMachine({
         CONTROLLER_STATE: [
             { cond: phaseGuard('idle'), target: '.idle', actions: resetContext },
             { cond: phaseGuard('pairing_request'), target: '.pairing_request' },
-            { cond: phaseGuard('qr_display'), target: '.qr_display', actions: assignPairingDetails },
+            { cond: phaseGuard('qr_display'), target: '.qr_display', actions: assignSessionDetails },
             { cond: phaseGuard('waiting_activation'), target: '.waiting_activation' },
             { cond: phaseGuard('human_detect'), target: '.human_detect' },
             { cond: phaseGuard('stabilizing'), target: '.stabilizing' },
@@ -42,7 +41,7 @@ export const sessionMachine = createMachine({
         },
         RESET: {
             target: '.idle',
-            actions: assign({ pairingToken: undefined, expiresIn: undefined, error: undefined })
+            actions: assign({ token: undefined, qrPayload: undefined, expiresIn: undefined, error: undefined })
         }
     },
     states: {

@@ -14,13 +14,9 @@ DEFAULT_ENV_FILE = ROOT_DIR / ".env"
 class Settings(BaseSettings):
     """Environment-driven settings for controller subsystems."""
 
-    device_id: str = Field(..., description="Unique device identifier used during pairing")
-    evm_address: str = Field(..., description="Public EVM address for signature association")
-    private_key: str = Field(..., description="Hex-encoded private key used for nonce signing")
-    public_key: str = Field(..., description="Hex-encoded public key for diagnostics")
-
-    backend_api_url: str = Field(..., description="Base URL for backend REST calls")
-    backend_ws_url: str = Field(..., description="Base URL for backend WebSocket endpoint")
+    backend_api_url: str = Field(..., description="Bridge REST base URL (e.g. https://mdai.mercle.ai)")
+    backend_ws_url: str = Field(..., description="Bridge WebSocket base URL (e.g. wss://mdai.mercle.ai/ws)")
+    hardware_api_key: str = Field(..., description="API key used to mint hardware session tokens")
 
     controller_host: str = Field("0.0.0.0", description="Host interface for local FastAPI server")
     controller_port: int = Field(5000, description="Port for FastAPI server")

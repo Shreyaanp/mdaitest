@@ -6,6 +6,7 @@ import json
 import logging
 from collections.abc import Awaitable, Callable
 from typing import Any, Optional
+from urllib.parse import urlencode
 
 import websockets
 
@@ -17,21 +18,23 @@ IncomingHandler = Callable[[dict[str, Any]], Awaitable[None]]
 
 
 class BackendWebSocketClient:
-    """Maintains connection to backend `/ws/device/{device_id}`."""
+    """Maintains bridge websocket connection for the hardware role."""
 
     def __init__(self, settings: Settings) -> None:
         self.settings = settings
-        self._uri = f"{settings.backend_ws_url}/device/{settings.device_id}"
         self._conn: Optional[websockets.client.WebSocketClientProtocol] = None
         self._listener_task: Optional[asyncio.Task[None]] = None
         self._stop_event = asyncio.Event()
+        self._handler: Optional[IncomingHandler] = None
 
-    async def connect(self, handler: IncomingHandler) -> None:
+    async def connect(self, token: str, handler: IncomingHandler) -> None:
         await self.disconnect()
-        logger.info("Connecting to backend websocket %s", self._uri)
+        uri = self._build_uri(token)
+        logger.info("Connecting to bridge websocket %s", uri)
         self._stop_event.clear()
-        self._conn = await websockets.connect(self._uri, ping_interval=30, ping_timeout=10)
-        self._listener_task = asyncio.create_task(self._listen(handler), name="backend-ws-listener")
+        self._handler = handler
+        self._conn = await websockets.connect(uri, ping_interval=None, ping_timeout=None)
+        self._listener_task = asyncio.create_task(self._listen(), name="bridge-ws-listener")
 
     async def disconnect(self) -> None:
         self._stop_event.set()
@@ -45,25 +48,37 @@ class BackendWebSocketClient:
         if self._conn:
             await self._conn.close()
             self._conn = None
+        self._handler = None
 
-    async def _listen(self, handler: IncomingHandler) -> None:
+    async def send(self, message: dict[str, Any]) -> None:
+        if not self._conn:
+            raise RuntimeError("Bridge websocket not connected")
+        await self._conn.send(json.dumps(message))
+
+    async def _listen(self) -> None:
         assert self._conn is not None
         try:
             async for message in self._conn:
                 try:
                     payload = json.loads(message)
                 except json.JSONDecodeError:
-                    logger.warning("Invalid JSON from backend: %s", message)
+                    logger.warning("Invalid JSON from bridge: %s", message)
                     continue
-                await handler(payload)
-        except asyncio.CancelledError:  # pragma: no cover - cooperative cancel
+
+                if payload.get("type") == "ping":
+                    await self.send({"type": "pong"})
+                    continue
+
+                if self._handler:
+                    await self._handler(payload)
+        except asyncio.CancelledError:  # cooperative cancel
             raise
         except websockets.ConnectionClosedOK:
-            logger.info("Backend websocket closed cleanly")
+            logger.info("Bridge websocket closed cleanly")
         except websockets.ConnectionClosedError as exc:
-            logger.warning("Backend websocket closed: %s", exc)
+            logger.warning("Bridge websocket closed: %s", exc)
         except Exception:  # pragma: no cover - defensive guard
-            logger.exception("Backend websocket listener crashed")
+            logger.exception("Bridge websocket listener crashed")
         finally:
             self._stop_event.set()
             self._listener_task = None
@@ -71,7 +86,7 @@ class BackendWebSocketClient:
                 await self._conn.close()
                 self._conn = None
 
-    async def send(self, message: dict[str, Any]) -> None:
-        if not self._conn:
-            raise RuntimeError("Backend websocket not connected")
-        await self._conn.send(json.dumps(message))
+    def _build_uri(self, token: str) -> str:
+        base = self.settings.backend_ws_url.rstrip('/')
+        query = urlencode({"token": token})
+        return f"{base}/hardware?{query}"

@@ -1,9 +1,38 @@
 import react from '@vitejs/plugin-react';
-import { defineConfig } from 'vite';
-export default defineConfig({
-    plugins: [react()],
-    server: {
-        port: 3000,
-        host: '0.0.0.0'
-    }
+import { defineConfig, loadEnv } from 'vite';
+function resolveEnv(mode) {
+    var rawEnv = loadEnv(mode, process.cwd(), '');
+    var resolved = {};
+    var bridge = function (target, candidates) {
+        if (rawEnv[target]) {
+            return;
+        }
+        for (var _i = 0, candidates_1 = candidates; _i < candidates_1.length; _i++) {
+            var key = candidates_1[_i];
+            var value = rawEnv[key];
+            if (typeof value === 'string' && value.length > 0) {
+                resolved[target] = value;
+                break;
+            }
+        }
+    };
+    bridge('VITE_BACKEND_URL', ['VITE_BACKEND_API_URL', 'BACKEND_API_URL']);
+    bridge('VITE_DEVICE_ID', ['DEVICE_ID']);
+    bridge('VITE_DEVICE_ADDRESS', ['DEVICE_ADDRESS', 'EVM_ADDRESS']);
+    bridge('VITE_BACKEND_WS_URL', ['BACKEND_WS_URL']);
+    return Object.keys(resolved).reduce(function (acc, key) {
+        acc["import.meta.env.".concat(key)] = JSON.stringify(resolved[key]);
+        return acc;
+    }, {});
+}
+export default defineConfig(function (_a) {
+    var mode = _a.mode;
+    return ({
+        plugins: [react()],
+        define: resolveEnv(mode),
+        server: {
+            port: 3000,
+            host: '0.0.0.0'
+        }
+    });
 });

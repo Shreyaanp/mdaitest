@@ -13,7 +13,8 @@ export type SessionPhase =
   | 'error'
 
 export interface SessionContext {
-  pairingToken?: string
+  token?: string
+  qrPayload?: Record<string, unknown>
   expiresIn?: number
   error?: string
   lastHeartbeatTs?: number
@@ -29,26 +30,29 @@ export type SessionEvent =
   | { type: 'HEARTBEAT' }
   | { type: 'RESET' }
 
-const assignPairingDetails = assign<SessionContext, SessionEvent>({
-  pairingToken: (_ctx, event) =>
-    event.type === 'CONTROLLER_STATE' && typeof event.data?.pairing_token === 'string'
-      ? (event.data.pairing_token as string)
-      : undefined,
-  expiresIn: (_ctx, event) =>
-    event.type === 'CONTROLLER_STATE' && typeof event.data?.expires_in === 'number'
-      ? (event.data.expires_in as number)
-      : undefined,
-  error: (_ctx, event) => (event.type === 'CONTROLLER_STATE' ? event.error : undefined)
+const isControllerState = (
+  event: SessionEvent
+): event is Extract<SessionEvent, { type: 'CONTROLLER_STATE' }> => event.type === 'CONTROLLER_STATE'
+
+const assignSessionDetails = assign({
+  token: (_ctx: SessionContext, event: SessionEvent) =>
+    isControllerState(event) && typeof event.data?.token === 'string' ? (event.data.token as string) : undefined,
+  qrPayload: (_ctx: SessionContext, event: SessionEvent) =>
+    isControllerState(event) ? (event.data?.qr_payload as Record<string, unknown> | undefined) : undefined,
+  expiresIn: (_ctx: SessionContext, event: SessionEvent) =>
+    isControllerState(event) && typeof event.data?.expires_in === 'number' ? (event.data.expires_in as number) : undefined,
+  error: (_ctx: SessionContext, event: SessionEvent) => (isControllerState(event) ? event.error : undefined)
 })
 
-const assignError = assign<SessionContext, SessionEvent>({
-  error: (_ctx, event) => (event.type === 'CONTROLLER_STATE' ? event.error : undefined)
+const assignError = assign({
+  error: (_ctx: SessionContext, event: SessionEvent) => (isControllerState(event) ? event.error : undefined)
 })
 
-const resetContext = assign<SessionContext, SessionEvent>({
-  pairingToken: () => undefined,
+const resetContext = assign({
+  token: () => undefined,
+  qrPayload: () => undefined,
   expiresIn: () => undefined,
-  error: (_ctx, event) => (event.type === 'CONTROLLER_STATE' ? event.error : undefined)
+  error: (_ctx: SessionContext, event: SessionEvent) => (isControllerState(event) ? event.error : undefined)
 })
 
 const phaseGuard = (phase: SessionPhase) => {
@@ -66,7 +70,7 @@ export const sessionMachine = createMachine<SessionContext, SessionEvent>(
       CONTROLLER_STATE: [
         { cond: phaseGuard('idle'), target: '.idle', actions: resetContext },
         { cond: phaseGuard('pairing_request'), target: '.pairing_request' },
-        { cond: phaseGuard('qr_display'), target: '.qr_display', actions: assignPairingDetails },
+        { cond: phaseGuard('qr_display'), target: '.qr_display', actions: assignSessionDetails },
         { cond: phaseGuard('waiting_activation'), target: '.waiting_activation' },
         { cond: phaseGuard('human_detect'), target: '.human_detect' },
         { cond: phaseGuard('stabilizing'), target: '.stabilizing' },
@@ -80,7 +84,7 @@ export const sessionMachine = createMachine<SessionContext, SessionEvent>(
       },
       RESET: {
         target: '.idle',
-        actions: assign({ pairingToken: undefined, expiresIn: undefined, error: undefined })
+        actions: assign({ token: undefined, qrPayload: undefined, expiresIn: undefined, error: undefined })
       }
     },
     states: {

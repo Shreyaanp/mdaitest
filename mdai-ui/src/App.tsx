@@ -22,6 +22,17 @@ const DEFAULT_CONTROLLER_HTTP_URL = 'http://127.0.0.1:5000'
 const DEFAULT_BACKEND_URL = 'https://mdai.mercle.ai'
 const DEFAULT_DEVICE_ID = 'alpha'
 
+const readEnv = (...keys: string[]): string | undefined => {
+  const env = import.meta.env as Record<string, string | undefined>
+  for (const key of keys) {
+    const value = env[key]
+    if (typeof value === 'string' && value.length > 0) {
+      return value
+    }
+  }
+  return undefined
+}
+
 type ControllerData = Record<string, unknown>
 
 function getNumberField(data: ControllerData | undefined, key: string): number | undefined {
@@ -41,9 +52,7 @@ function buildControllerUrl(baseUrl: string, path: string) {
 const nowId = () => `${Date.now()}-${Math.random().toString(16).slice(2, 8)}`
 
 export default function App() {
-  const [state, send] = useMachine(sessionMachine, {
-    devTools: true
-  })
+  const [state, send] = useMachine(sessionMachine)
 
   const [metrics, setMetrics] = useState<MetricsSnapshot | null>(null)
   const [logs, setLogs] = useState<LogEntry[]>([])
@@ -53,11 +62,11 @@ export default function App() {
   const [tokenExpiryTs, setTokenExpiryTs] = useState<number | null>(null)
   const [now, setNow] = useState(Date.now())
 
-  const controllerHttpBase = (import.meta.env.VITE_CONTROLLER_HTTP_URL as string | undefined) ?? DEFAULT_CONTROLLER_HTTP_URL
-  const previewUrl = (import.meta.env.VITE_PREVIEW_URL as string | undefined) ?? `${normaliseBaseUrl(controllerHttpBase)}/preview`
-  const backendUrl = (import.meta.env.VITE_BACKEND_URL as string | undefined) ?? DEFAULT_BACKEND_URL
-  const deviceId = (import.meta.env.VITE_DEVICE_ID as string | undefined) ?? DEFAULT_DEVICE_ID
-  const deviceAddress = (import.meta.env.VITE_DEVICE_ADDRESS as string | undefined) ?? undefined
+  const controllerHttpBase = readEnv('VITE_CONTROLLER_HTTP_URL') ?? DEFAULT_CONTROLLER_HTTP_URL
+  const previewUrl = readEnv('VITE_PREVIEW_URL') ?? `${normaliseBaseUrl(controllerHttpBase)}/preview`
+  const backendUrl = readEnv('VITE_BACKEND_URL', 'VITE_BACKEND_API_URL') ?? DEFAULT_BACKEND_URL
+  const deviceId = readEnv('VITE_DEVICE_ID') ?? DEFAULT_DEVICE_ID
+  const deviceAddress = readEnv('VITE_DEVICE_ADDRESS')
 
   const appendLog = useCallback((message: string, level: LogLevel = 'info') => {
     setLogs((prev) => {
@@ -101,13 +110,17 @@ export default function App() {
       }
 
       if (type === 'state') {
+        const payload = message.data as ControllerData | undefined
         const phase = message.phase ?? 'unknown'
         if (message.error) {
           appendLog(`Phase → ${phase} (${message.error})`, 'error')
         } else {
           appendLog(`Phase → ${phase}`)
         }
-        const expires = getNumberField(message.data as ControllerData | undefined, 'expires_in')
+        if (payload && typeof payload.token === 'string') {
+          appendLog(`Token issued: ${payload.token.slice(0, 12)}…`)
+        }
+        const expires = getNumberField(payload, 'expires_in')
         if (typeof expires === 'number') {
           setTokenExpiryTs(Date.now() + expires * 1000)
         } else {
@@ -120,13 +133,12 @@ export default function App() {
         const payload = message.data as ControllerData | undefined
         const eventName = payload && typeof payload.event === 'string' ? payload.event : 'event'
         appendLog(`Backend → ${eventName}`)
-        if (eventName === 'hardware_register_result') {
-          const ok = payload && typeof payload.ok === 'boolean' ? payload.ok : undefined
-          if (ok === true) {
-            appendLog('Hardware registration succeeded')
-          } else if (ok === false) {
-            appendLog('Hardware registration failed', 'error')
-          }
+        if (eventName === 'backend_response') {
+          const status = getNumberField(payload, 'status_code')
+          appendLog(`Backend response status ${status ?? 'unknown'}`)
+        }
+        if (eventName === 'error') {
+          appendLog(String(payload?.message ?? 'Bridge error'), 'error')
         }
         return
       }
@@ -170,7 +182,8 @@ export default function App() {
     return Math.max(Math.floor((now - lastHeartbeatTs) / 1000), 0)
   }, [lastHeartbeatTs, now])
 
-  const pairingToken = state.context.pairingToken
+  const pairingToken = state.context.token
+  const qrPayload = state.context.qrPayload as ControllerData | undefined
   const expiresInSeconds = useMemo(() => {
     if (tokenExpiryTs) {
       const remaining = Math.floor((tokenExpiryTs - now) / 1000)
@@ -219,6 +232,7 @@ export default function App() {
         connectionStatus={connectionStatus}
         currentPhase={state.value as string}
         pairingToken={pairingToken}
+        qrPayload={qrPayload}
         expiresInSeconds={expiresInSeconds}
         lastHeartbeatSeconds={heartbeatAgeSeconds}
         metrics={metrics}

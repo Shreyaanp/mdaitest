@@ -1,4 +1,4 @@
-"""Session orchestration for mdai kiosk."""
+"""Session orchestration for the mdai kiosk using the websocket bridge."""
 from __future__ import annotations
 
 import asyncio
@@ -8,12 +8,11 @@ import logging
 import time
 from dataclasses import dataclass, field
 from typing import Any, AsyncIterator, Dict, List, Optional
+from urllib.parse import urlparse
 
-from .backend.http_client import PairingHttpClient
+from .backend.http_client import BridgeHttpClient
 from .backend.ws_client import BackendWebSocketClient
 from .config import Settings, get_settings
-from .crypto.ecdsa import sign_nonce
-from .backend.security import compute_hmac
 from .sensors.realsense import RealSenseService
 from .sensors.tof import ToFSensor, mock_distance_provider
 from .state import ControllerEvent, SessionPhase
@@ -23,18 +22,17 @@ logger = logging.getLogger(__name__)
 
 @dataclass
 class SessionContext:
-    pairing_token: Optional[str] = None
+    token: Optional[str] = None
     expires_in: Optional[int] = None
-    session_id: Optional[str] = None
-    session_key: Optional[str] = None
+    issued_at: Optional[float] = None
+    platform_id: Optional[str] = None
     latest_distance_mm: Optional[int] = None
     best_frame_b64: Optional[str] = None
-    next_seq: int = 1
     metadata: Dict[str, Any] = field(default_factory=dict)
 
 
 class SessionManager:
-    """Coordinates sensors, backend comms, and UI state updates."""
+    """Coordinates sensors, bridge comms, and UI state updates."""
 
     def __init__(
         self,
@@ -56,12 +54,12 @@ class SessionManager:
         self._tof.register_callback(self._handle_tof_trigger)
 
         self._realsense = RealSenseService(enable_hardware=self.settings.realsense_enable_hardware)
-        self._http_client = PairingHttpClient(self.settings)
+        self._http_client = BridgeHttpClient(self.settings)
         self._ws_client = BackendWebSocketClient(self.settings)
 
         self._session_task: Optional[asyncio.Task[None]] = None
         self._background_tasks: list[asyncio.Task[Any]] = []
-        self._session_active_event: Optional[asyncio.Event] = None
+        self._app_ready_event: Optional[asyncio.Event] = None
         self._ack_event: Optional[asyncio.Event] = None
         self._last_metrics_ts: float = 0.0
 
@@ -100,8 +98,7 @@ class SessionManager:
             self._ui_subscribers.remove(queue)
 
     async def trigger_debug_session(self) -> None:
-        """Trigger a session manually (used by debug endpoint)."""
-
+        logger.info("Debug session trigger invoked")
         self._schedule_session()
 
     async def preview_frames(self) -> AsyncIterator[bytes]:
@@ -128,41 +125,53 @@ class SessionManager:
         if triggered and self.phase == SessionPhase.IDLE:
             self._schedule_session()
         elif not triggered and self.phase not in {SessionPhase.IDLE, SessionPhase.COMPLETE}:
-            logger.info("ToF reset detected mid-session; cancelling")
+            logger.info("ToF reset detected mid-session; cancelling active session")
             if self._session_task:
                 self._session_task.cancel()
 
     def _schedule_session(self) -> None:
         if self._session_task and not self._session_task.done():
-            logger.info("Existing session task running; ignoring new trigger")
+            logger.info("Session already in progress; ignoring trigger")
             return
         self._session_task = asyncio.create_task(self._run_session(), name="controller-session")
 
     async def _run_session(self) -> None:
         try:
             await self._set_phase(SessionPhase.PAIRING_REQUEST)
-            nonce = await self._http_client.prepare()
-            if not nonce:
-                await self._set_phase(SessionPhase.ERROR, error="missing_nonce")
+            token_info = await self._http_client.issue_token()
+            if not token_info:
+                await self._set_phase(SessionPhase.ERROR, error="token_issue_failed")
                 return
 
-            signature = sign_nonce(self.settings, nonce)
-            pairing_data = await self._http_client.request(signature)
-            token = pairing_data.get("pairing_token")
-            expires_in = pairing_data.get("expires_in")
+            token = token_info.get("token")
+            expires_in = token_info.get("expires_in")
             if not token:
-                await self._set_phase(SessionPhase.ERROR, error="missing_pairing_token")
+                await self._set_phase(SessionPhase.ERROR, error="token_missing")
                 return
 
-            self._current_session = SessionContext(pairing_token=token, expires_in=expires_in)
+            qr_payload = self._build_qr_payload(token)
+            self._current_session = SessionContext(
+                token=token,
+                expires_in=expires_in,
+                issued_at=time.time(),
+                metadata={"qr_payload": qr_payload},
+            )
             self._last_metrics_ts = 0.0
-            await self._set_phase(SessionPhase.QR_DISPLAY, data={"pairing_token": token, "expires_in": expires_in})
 
-            self._session_active_event = asyncio.Event()
+            await self._set_phase(
+                SessionPhase.QR_DISPLAY,
+                data={
+                    "token": token,
+                    "expires_in": expires_in,
+                    "qr_payload": qr_payload,
+                },
+            )
+
+            self._app_ready_event = asyncio.Event()
             self._ack_event = asyncio.Event()
-            await self._ws_client.connect(self._handle_backend_message)
+            await self._ws_client.connect(token, self._handle_bridge_message)
 
-            await self._await_session_activation()
+            await self._await_app_ready()
             await self._set_phase(SessionPhase.HUMAN_DETECT)
             await self._collect_best_frame()
             await self._upload_frame()
@@ -179,16 +188,24 @@ class SessionManager:
             await self._ws_client.disconnect()
             await asyncio.sleep(1.0)
             await self._set_phase(SessionPhase.IDLE)
-            if self._session_task:
-                self._session_task = None
-            self._session_active_event = None
+            self._session_task = None
+            self._app_ready_event = None
             self._ack_event = None
+            self._current_session = SessionContext()
 
-    async def _await_session_activation(self) -> None:
+    async def _await_app_ready(self) -> None:
         await self._set_phase(SessionPhase.WAITING_ACTIVATION)
-        if not self._session_active_event:
-            raise RuntimeError("session_activation_event_not_initialized")
-        await asyncio.wait_for(self._session_active_event.wait(), timeout=60.0)
+        if not self._app_ready_event:
+            raise RuntimeError("app_ready_event_not_initialized")
+        timeout = self._token_timeout()
+        logger.info("Waiting for app connection with timeout=%ss", timeout)
+        await asyncio.wait_for(self._app_ready_event.wait(), timeout=timeout)
+
+    def _token_timeout(self) -> float:
+        expires_in = self._current_session.expires_in
+        if not expires_in:
+            return 90.0
+        return max(10.0, expires_in - 5.0)
 
     async def _collect_best_frame(self) -> None:
         await self._set_phase(SessionPhase.STABILIZING)
@@ -238,28 +255,17 @@ class SessionManager:
         await self._set_phase(SessionPhase.UPLOADING)
         if not self._current_session.best_frame_b64:
             raise RuntimeError("no_frame_to_upload")
-        if not self._current_session.session_id or not self._current_session.session_key:
-            raise RuntimeError("session_not_activated")
+        if not self._current_session.platform_id:
+            raise RuntimeError("platform_id_missing")
 
-        payload_body = {
-            "snapshot_base64": self._current_session.best_frame_b64,
-        }
-        seq = self._current_session.next_seq
-        timestamp_ms = int(time.time() * 1000)
-        envelope_core = {
-            "session_id": self._current_session.session_id,
-            "seq": seq,
-            "timestamp": timestamp_ms,
-            "payload": payload_body,
-        }
-        hmac_value = compute_hmac(self._current_session.session_key, envelope_core)
-        envelope = {**envelope_core, "hmac": hmac_value}
         payload = {
-            "type": "session_message",
-            "envelope": envelope,
+            "type": "to_backend",
+            "data": {
+                "platform_id": self._current_session.platform_id,
+                "image_base64": self._current_session.best_frame_b64,
+            },
         }
         await self._ws_client.send(payload)
-        self._current_session.next_seq += 1
 
     async def _wait_for_ack(self) -> None:
         await self._set_phase(SessionPhase.WAITING_ACK)
@@ -275,49 +281,88 @@ class SessionManager:
         except asyncio.CancelledError:  # pragma: no cover - cooperative cancel
             raise
 
-    async def _handle_backend_message(self, message: dict[str, Any]) -> None:
+    async def _handle_bridge_message(self, message: dict[str, Any]) -> None:
         message_type = message.get("type")
-        logger.info("Backend message received: %s", message_type)
-        if message_type == "session_activated":
-            self._current_session.session_id = message.get("session_id")
-            self._current_session.session_key = message.get("session_key")
-            if self._session_active_event and not self._session_active_event.is_set():
-                self._session_active_event.set()
+        logger.info("Bridge message received: %s", message_type)
+
+        if message_type == "joined":
             await self._broadcast(
                 ControllerEvent(
                     type="backend",
                     phase=self._phase,
-                    data={"event": "session_activated"},
+                    data={"event": "joined", "role": message.get("role")},
                 )
             )
-        elif message_type == "end_session":
+            return
+
+        if message_type == "from_app":
+            data = message.get("data") or {}
+            await self._broadcast(
+                ControllerEvent(
+                    type="backend",
+                    phase=self._phase,
+                    data={"event": "from_app", "data": data},
+                )
+            )
+
+            if data.get("message") == "hello":
+                await self._ws_client.send({"type": "to_app", "data": {"message": "hello"}})
+            platform_id = data.get("platform_id")
+            if platform_id:
+                self._current_session.platform_id = platform_id
+                if self._app_ready_event and not self._app_ready_event.is_set():
+                    self._app_ready_event.set()
+            return
+
+        if message_type == "backend_response":
             if self._ack_event and not self._ack_event.is_set():
                 self._ack_event.set()
             await self._broadcast(
                 ControllerEvent(
                     type="backend",
                     phase=self._phase,
-                    data={"event": "end_session", "reason": message.get("reason")},
+                    data={
+                        "event": "backend_response",
+                        "status_code": message.get("status_code"),
+                        "data": message.get("data"),
+                        "latency_ms": message.get("latency_ms"),
+                    },
                 )
             )
-        elif message_type == "session_message":
+            return
+
+        if message_type == "status":
             await self._broadcast(
                 ControllerEvent(
                     type="backend",
                     phase=self._phase,
-                    data={"event": "session_message", "payload": message.get("envelope")},
+                    data={"event": "status", "message": message.get("msg")},
                 )
             )
-        elif message_type == "hardware_register_result":
+            return
+
+        if message_type == "error":
+            detail = message.get("message", "unknown_error")
             await self._broadcast(
                 ControllerEvent(
                     type="backend",
                     phase=self._phase,
-                    data={"event": "hardware_register_result", "ok": message.get("ok")},
+                    data={"event": "error", "code": message.get("code"), "message": detail},
                 )
             )
-        else:
-            logger.debug("Unhandled backend message: %s", message)
+            raise RuntimeError(detail)
+
+    def _build_qr_payload(self, token: str) -> Dict[str, Any]:
+        ws_base = self.settings.backend_ws_url.rstrip('/')
+        app_ws = f"{ws_base}/app"
+        hardware_ws = f"{ws_base}/hardware"
+        server_host = urlparse(self.settings.backend_api_url).netloc or self.settings.backend_api_url
+        return {
+            "token": token,
+            "ws_app_url": app_ws,
+            "ws_hardware_url": hardware_ws,
+            "server_host": server_host,
+        }
 
     @staticmethod
     def _compute_focus(image) -> float:

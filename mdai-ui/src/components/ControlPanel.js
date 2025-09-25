@@ -6,7 +6,7 @@ const statusLabels = {
     closed: 'Disconnected'
 };
 export default function ControlPanel(props) {
-    const { deviceId, backendUrl, controllerUrl, connectionStatus, currentPhase, pairingToken, expiresInSeconds, lastHeartbeatSeconds, metrics, logs, onTrigger, triggerDisabled, isTriggering } = props;
+    const { deviceId, deviceAddress, backendUrl, controllerUrl, connectionStatus, currentPhase, pairingToken, qrPayload, expiresInSeconds, lastHeartbeatSeconds, metrics, logs, onTrigger, triggerDisabled, isTriggering } = props;
     const heartbeatLabel = useMemo(() => {
         if (typeof lastHeartbeatSeconds !== 'number') {
             return 'No heartbeat yet';
@@ -16,6 +16,7 @@ export default function ControlPanel(props) {
         }
         return `${lastHeartbeatSeconds}s ago`;
     }, [lastHeartbeatSeconds]);
+    const qrPayloadJson = useMemo(() => (qrPayload ? JSON.stringify(qrPayload) : undefined), [qrPayload]);
     const handleCopyToken = async () => {
         if (!pairingToken)
             return;
@@ -26,6 +27,16 @@ export default function ControlPanel(props) {
             console.warn('Failed to copy pairing token', error);
         }
     };
+    const handleCopyQrPayload = async () => {
+        if (!qrPayloadJson)
+            return;
+        try {
+            await navigator.clipboard.writeText(qrPayloadJson);
+        }
+        catch (error) {
+            console.warn('Failed to copy QR payload', error);
+        }
+    };
     return (<aside className="control-panel" aria-label="controller status and controls">
       <section>
         <h2>Device</h2>
@@ -34,6 +45,10 @@ export default function ControlPanel(props) {
             <dt>ID</dt>
             <dd>{deviceId}</dd>
           </div>
+          {deviceAddress && (<div>
+              <dt>Address</dt>
+              <dd className="address-value">{deviceAddress}</dd>
+            </div>)}
           <div>
             <dt>Backend</dt>
             <dd><a href={backendUrl} target="_blank" rel="noreferrer">{backendUrl}</a></dd>
@@ -74,6 +89,15 @@ export default function ControlPanel(props) {
             </button>
           </div>
         </div>
+        {qrPayloadJson && (<div className="qr-payload">
+            <div className="qr-payload-header">
+              <span>QR payload</span>
+              <button type="button" onClick={handleCopyQrPayload}>
+                Copy JSON
+              </button>
+            </div>
+            <pre>{qrPayloadJson}</pre>
+          </div>)}
         <button type="button" className="trigger-button" onClick={onTrigger} disabled={triggerDisabled}>
           {isTriggering ? 'Triggering…' : 'Trigger Session'}
         </button>

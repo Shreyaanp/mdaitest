@@ -15,7 +15,13 @@ export default function StageRouter({ state }: StageRouterProps) {
   }
 
   if (state.matches('qr_display')) {
-    return <QRCodeStage pairingToken={state.context.pairingToken} expiresIn={state.context.expiresIn} />
+    return (
+      <QRCodeStage
+        token={state.context.token}
+        qrPayload={state.context.qrPayload as Record<string, unknown> | undefined}
+        expiresIn={state.context.expiresIn}
+      />
+    )
   }
 
   if (state.matches('pairing_request')) {

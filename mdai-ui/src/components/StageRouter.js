@@ -7,7 +7,7 @@ export default function StageRouter({ state }) {
         return <ErrorOverlay message={state.context.error ?? 'Unknown error'}/>;
     }
     if (state.matches('qr_display')) {
-        return <QRCodeStage pairingToken={state.context.pairingToken} expiresIn={state.context.expiresIn}/>;
+        return (<QRCodeStage token={state.context.token} qrPayload={state.context.qrPayload} expiresIn={state.context.expiresIn}/>);
     }
     if (state.matches('pairing_request')) {
         return <InstructionStage title="Preparing session"/>;
