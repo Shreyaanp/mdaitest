@@ -3,7 +3,9 @@ from __future__ import annotations
 
 from typing import AsyncIterator
 
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect
+from fastapi import Body, FastAPI, WebSocket, WebSocketDisconnect
+from pydantic import BaseModel
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse, StreamingResponse
 
 from .config import Settings, get_settings
@@ -14,6 +16,14 @@ settings: Settings = get_settings()
 configure_logging(settings.log_level)
 app = FastAPI(title="mdai-controller", version="0.1.0")
 manager = SessionManager(settings=settings)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.on_event("startup")
@@ -35,6 +45,27 @@ async def healthcheck() -> JSONResponse:
 async def debug_trigger() -> JSONResponse:
     await manager.trigger_debug_session()
     return JSONResponse({"status": "scheduled"})
+
+
+class TofTriggerRequest(BaseModel):
+    triggered: bool = True
+    distance_mm: int | None = None
+
+
+@app.post("/debug/tof-trigger")
+async def debug_tof_trigger(payload: TofTriggerRequest) -> JSONResponse:
+    await manager.simulate_tof_trigger(triggered=payload.triggered, distance_mm=payload.distance_mm)
+    return JSONResponse({"status": "ok"})
+
+
+@app.post("/debug/app-ready")
+async def debug_app_ready(payload: dict[str, str] | None = Body(default=None)) -> JSONResponse:
+    """Local helper to simulate the mobile app signalling readiness."""
+
+    platform_id = (payload or {}).get("platform_id")
+    acknowledged = await manager.mark_app_ready(platform_id=platform_id)
+    status = "acknowledged" if acknowledged else "ignored"
+    return JSONResponse({"status": status})
 
 
 @app.get("/preview")

@@ -6,7 +6,7 @@ const statusLabels = {
     closed: 'Disconnected'
 };
 export default function ControlPanel(props) {
-    const { deviceId, deviceAddress, backendUrl, controllerUrl, connectionStatus, currentPhase, pairingToken, qrPayload, expiresInSeconds, lastHeartbeatSeconds, metrics, logs, onTrigger, triggerDisabled, isTriggering } = props;
+    const { deviceId, deviceAddress, backendUrl, controllerUrl, connectionStatus, currentPhase, pairingToken, qrPayload, expiresInSeconds, lastHeartbeatSeconds, metrics, logs, onTrigger, triggerDisabled, isTriggering, onTofTrigger, tofTriggerDisabled, isTofTriggering } = props;
     const heartbeatLabel = useMemo(() => {
         if (typeof lastHeartbeatSeconds !== 'number') {
             return 'No heartbeat yet';
@@ -98,6 +98,11 @@ export default function ControlPanel(props) {
             </div>
             <pre>{qrPayloadJson}</pre>
           </div>)}
+        <div className="debug-controls">
+          <button type="button" className="trigger-button secondary" onClick={onTofTrigger} disabled={tofTriggerDisabled}>
+            {isTofTriggering ? 'ToF triggering…' : 'ToF Trigger'}
+          </button>
+        </div>
         <button type="button" className="trigger-button" onClick={onTrigger} disabled={triggerDisabled}>
           {isTriggering ? 'Triggering…' : 'Trigger Session'}
         </button>

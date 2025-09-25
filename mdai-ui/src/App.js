@@ -37,16 +37,16 @@ function buildControllerUrl(baseUrl, path) {
 }
 const nowId = () => `${Date.now()}-${Math.random().toString(16).slice(2, 8)}`;
 export default function App() {
-    const [state, send] = useMachine(sessionMachine, {
-        devTools: true
-    });
+    const [state, send] = useMachine(sessionMachine);
     const [metrics, setMetrics] = useState(null);
     const [logs, setLogs] = useState([]);
     const [connectionStatus, setConnectionStatus] = useState('connecting');
     const [lastHeartbeatTs, setLastHeartbeatTs] = useState(null);
     const [isTriggering, setIsTriggering] = useState(false);
+    const [isTofTriggering, setIsTofTriggering] = useState(false);
     const [tokenExpiryTs, setTokenExpiryTs] = useState(null);
     const [now, setNow] = useState(Date.now());
+    const [qrPayloadOverride, setQrPayloadOverride] = useState(null);
     const controllerHttpBase = readEnv('VITE_CONTROLLER_HTTP_URL') ?? DEFAULT_CONTROLLER_HTTP_URL;
     const previewUrl = readEnv('VITE_PREVIEW_URL') ?? `${normaliseBaseUrl(controllerHttpBase)}/preview`;
     const backendUrl = readEnv('VITE_BACKEND_URL', 'VITE_BACKEND_API_URL') ?? DEFAULT_BACKEND_URL;
@@ -95,14 +95,20 @@ export default function App() {
             else {
                 appendLog(`Phase → ${phase}`);
             }
-            if (payload && typeof payload.token === 'string') {
-                appendLog(`Token issued: ${payload.token.slice(0, 12)}…`);
-            }
-            const expires = getNumberField(payload, 'expires_in');
-            if (typeof expires === 'number') {
-                setTokenExpiryTs(Date.now() + expires * 1000);
-            }
-            else {
+        if (payload && typeof payload.token === 'string') {
+            appendLog(`Token issued: ${payload.token.slice(0, 12)}…`);
+        }
+        if (phase === 'qr_display' && payload && payload.qr_payload && typeof payload.qr_payload === 'object') {
+            setQrPayloadOverride(payload.qr_payload);
+        }
+        if (phase === 'idle') {
+            setQrPayloadOverride(null);
+        }
+        const expires = getNumberField(payload, 'expires_in');
+        if (typeof expires === 'number') {
+            setTokenExpiryTs(Date.now() + expires * 1000);
+        }
+        else {
                 setTokenExpiryTs(null);
             }
             return;
@@ -178,11 +184,39 @@ export default function App() {
             setIsTriggering(false);
         }
     }, [appendLog, controllerHttpBase]);
+    const triggerTof = useCallback(async () => {
+        setIsTofTriggering(true);
+        try {
+            const url = buildControllerUrl(controllerHttpBase, '/debug/tof-trigger');
+            const response = await fetch(url, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ triggered: true })
+            });
+            if (!response.ok) {
+                const text = await response.text().catch(() => '');
+                throw new Error(text || `HTTP ${response.status}`);
+            }
+            appendLog('Simulated ToF trigger');
+        }
+        catch (error) {
+            const reason = error instanceof Error ? error.message : String(error);
+            appendLog(`ToF trigger failed: ${reason}`, 'error');
+        }
+        finally {
+            setIsTofTriggering(false);
+        }
+    }, [appendLog, controllerHttpBase]);
+    useEffect(() => {
+        if (state.matches('qr_display')) {
+            appendLog('QR code displayed – waiting for mobile activation');
+        }
+    }, [state, appendLog]);
     return (<div className="app-shell">
       <div className="visual-area">
-        <StageRouter state={state}/>
+        <StageRouter state={state} qrPayload={qrPayloadOverride ?? state.context.qrPayload}/>
         <iframe title="RealSense preview" className={`preview-frame ${showPreview ? 'visible' : 'hidden'}`} src={previewUrl} allow="autoplay"/>
       </div>
-      <ControlPanel deviceId={deviceId} deviceAddress={deviceAddress} backendUrl={backendUrl} controllerUrl={controllerHttpBase} connectionStatus={connectionStatus} currentPhase={state.value} pairingToken={pairingToken} qrPayload={qrPayload} expiresInSeconds={expiresInSeconds} lastHeartbeatSeconds={heartbeatAgeSeconds} metrics={metrics} logs={logs} onTrigger={triggerSession} triggerDisabled={isTriggering || state.value !== 'idle'} isTriggering={isTriggering}/>
+      <ControlPanel deviceId={deviceId} deviceAddress={deviceAddress} backendUrl={backendUrl} controllerUrl={controllerHttpBase} connectionStatus={connectionStatus} currentPhase={state.value} pairingToken={pairingToken} qrPayload={qrPayloadOverride ?? qrPayload} expiresInSeconds={expiresInSeconds} lastHeartbeatSeconds={heartbeatAgeSeconds} metrics={metrics} logs={logs} onTrigger={triggerSession} triggerDisabled={isTriggering || state.value !== 'idle'} isTriggering={isTriggering} onTofTrigger={triggerTof} tofTriggerDisabled={isTofTriggering || state.value !== 'idle'} isTofTriggering={isTofTriggering}/>
     </div>);
 }

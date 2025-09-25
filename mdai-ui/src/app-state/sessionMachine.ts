@@ -1,4 +1,5 @@
 import { assign, createMachine } from 'xstate'
+import type { GuardArgs } from 'xstate'
 
 export type SessionPhase =
   | 'idle'
@@ -31,8 +32,9 @@ export type SessionEvent =
   | { type: 'RESET' }
 
 const isControllerState = (
-  event: SessionEvent
-): event is Extract<SessionEvent, { type: 'CONTROLLER_STATE' }> => event.type === 'CONTROLLER_STATE'
+  event: SessionEvent | undefined
+): event is Extract<SessionEvent, { type: 'CONTROLLER_STATE' }> =>
+  event?.type === 'CONTROLLER_STATE'
 
 const assignSessionDetails = assign({
   token: (_ctx: SessionContext, event: SessionEvent) =>
@@ -55,10 +57,8 @@ const resetContext = assign({
   error: (_ctx: SessionContext, event: SessionEvent) => (isControllerState(event) ? event.error : undefined)
 })
 
-const phaseGuard = (phase: SessionPhase) => {
-  return (_ctx: SessionContext, event: SessionEvent) =>
-    event.type === 'CONTROLLER_STATE' && event.phase === phase
-}
+const phaseGuard = (phase: SessionPhase) => ({ event }: GuardArgs<SessionContext, SessionEvent>) =>
+  event.type === 'CONTROLLER_STATE' && event.phase === phase
 
 export const sessionMachine = createMachine<SessionContext, SessionEvent>(
   {
@@ -68,16 +68,16 @@ export const sessionMachine = createMachine<SessionContext, SessionEvent>(
     context: {},
     on: {
       CONTROLLER_STATE: [
-        { cond: phaseGuard('idle'), target: '.idle', actions: resetContext },
-        { cond: phaseGuard('pairing_request'), target: '.pairing_request' },
-        { cond: phaseGuard('qr_display'), target: '.qr_display', actions: assignSessionDetails },
-        { cond: phaseGuard('waiting_activation'), target: '.waiting_activation' },
-        { cond: phaseGuard('human_detect'), target: '.human_detect' },
-        { cond: phaseGuard('stabilizing'), target: '.stabilizing' },
-        { cond: phaseGuard('uploading'), target: '.uploading' },
-        { cond: phaseGuard('waiting_ack'), target: '.waiting_ack' },
-        { cond: phaseGuard('complete'), target: '.complete' },
-        { cond: phaseGuard('error'), target: '.error', actions: assignError }
+        { guard: phaseGuard('idle'), target: '.idle', actions: resetContext },
+        { guard: phaseGuard('pairing_request'), target: '.pairing_request' },
+        { guard: phaseGuard('qr_display'), target: '.qr_display', actions: assignSessionDetails },
+        { guard: phaseGuard('waiting_activation'), target: '.waiting_activation' },
+        { guard: phaseGuard('human_detect'), target: '.human_detect' },
+        { guard: phaseGuard('stabilizing'), target: '.stabilizing' },
+        { guard: phaseGuard('uploading'), target: '.uploading' },
+        { guard: phaseGuard('waiting_ack'), target: '.waiting_ack' },
+        { guard: phaseGuard('complete'), target: '.complete' },
+        { guard: phaseGuard('error'), target: '.error', actions: assignError }
       ],
       HEARTBEAT: {
         actions: assign({ lastHeartbeatTs: () => Date.now() })

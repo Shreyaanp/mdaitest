@@ -28,8 +28,31 @@ function resolveEnv(mode) {
 export default defineConfig(function (_a) {
     var mode = _a.mode;
     return ({
-        plugins: [react()],
+        plugins: [
+            react({
+                include: [/\.jsx?$/, /\.tsx?$/]
+            })
+        ],
         define: resolveEnv(mode),
+        resolve: {
+            extensions: ['.ts', '.tsx', '.js', '.jsx', '.mjs', '.json']
+        },
+        optimizeDeps: {
+            esbuildOptions: {
+                loader: {
+                    '.js': 'jsx'
+                }
+            }
+        },
+        build: {
+            rollupOptions: {
+                output: {
+                    entryFileNames: `assets/[name].js`,
+                    chunkFileNames: `assets/[name].js`,
+                    assetFileNames: `assets/[name].[ext]`
+                }
+            }
+        },
         server: {
             port: 3000,
             host: '0.0.0.0'

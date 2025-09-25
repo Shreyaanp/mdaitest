@@ -19,6 +19,9 @@ interface ControlPanelProps {
   onTrigger: () => void
   triggerDisabled: boolean
   isTriggering: boolean
+  onTofTrigger: () => void
+  tofTriggerDisabled: boolean
+  isTofTriggering: boolean
 }
 
 const statusLabels: Record<SocketStatus, string> = {
@@ -43,7 +46,10 @@ export default function ControlPanel(props: ControlPanelProps) {
     logs,
     onTrigger,
     triggerDisabled,
-    isTriggering
+    isTriggering,
+    onTofTrigger,
+    tofTriggerDisabled,
+    isTofTriggering
   } = props
 
   const heartbeatLabel = useMemo(() => {
@@ -148,6 +154,16 @@ export default function ControlPanel(props: ControlPanelProps) {
             <pre>{qrPayloadJson}</pre>
           </div>
         )}
+        <div className="debug-controls">
+          <button
+            type="button"
+            className="trigger-button secondary"
+            onClick={onTofTrigger}
+            disabled={tofTriggerDisabled}
+          >
+            {isTofTriggering ? 'ToF triggering…' : 'ToF Trigger'}
+          </button>
+        </div>
         <button
           type="button"
           className="trigger-button"

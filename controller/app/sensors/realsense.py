@@ -28,6 +28,7 @@ class RealSenseService:
         self.enable_hardware = enable_hardware and MediaPipeLiveness is not None
         self._liveness_config = liveness_config or {}
         self._instance: Optional[MediaPipeLiveness] = None
+        self._hardware_active = False
         self._lock = asyncio.Lock()
         self._preview_subscribers: list[asyncio.Queue[bytes]] = []
         self._result_subscribers: list[asyncio.Queue[Optional[LivenessResult]]] = []
@@ -40,10 +41,7 @@ class RealSenseService:
         if not self.enable_hardware:
             logger.warning("RealSense hardware disabled – using placeholder frames")
         else:
-            logger.info("Starting RealSense liveness worker")
-            self._instance = MediaPipeLiveness(
-                config=LivenessConfig(**self._liveness_config) if self._liveness_config else None
-            )
+            logger.info("RealSense hardware idle until session start")
         self._stop_event.clear()
         self._loop_task = asyncio.create_task(self._preview_loop(), name="realsense-preview-loop")
 
@@ -53,9 +51,7 @@ class RealSenseService:
         self._stop_event.set()
         await self._loop_task
         self._loop_task = None
-        if self._instance:
-            self._instance.close()
-            self._instance = None
+        await self.set_hardware_active(False)
 
     async def preview_stream(self) -> AsyncIterator[bytes]:
         queue: asyncio.Queue[bytes] = asyncio.Queue(maxsize=2)
@@ -70,8 +66,8 @@ class RealSenseService:
     async def gather_results(self, duration: float) -> List[LivenessResult]:
         """Collect liveness results produced by the preview loop for a duration."""
 
-        if not self.enable_hardware or not self._instance:
-            logger.warning("RealSense hardware disabled – gather_results will return empty list")
+        if not self.enable_hardware or not self._hardware_active or not self._instance:
+            logger.warning("RealSense hardware inactive – gather_results will return empty list")
             await asyncio.sleep(duration)
             return []
 
@@ -99,7 +95,7 @@ class RealSenseService:
         try:
             while not self._stop_event.is_set():
                 result: Optional[LivenessResult]
-                if self.enable_hardware and self._instance:
+                if self.enable_hardware and self._hardware_active and self._instance:
                     result = await self._run_process()
                     frame_bytes = self._serialize_frame(result)
                 else:
@@ -160,3 +156,31 @@ class RealSenseService:
                     pass
             queue.put_nowait(result)
 
+    async def set_hardware_active(self, active: bool) -> None:
+        if not self.enable_hardware:
+            return
+
+        async with self._lock:
+            if active and not self._hardware_active:
+                logger.info("Activating RealSense hardware pipeline")
+
+                def _create() -> MediaPipeLiveness:
+                    return MediaPipeLiveness(
+                        config=LivenessConfig(**self._liveness_config) if self._liveness_config else None
+                    )
+
+                loop = asyncio.get_running_loop()
+                self._instance = await loop.run_in_executor(None, _create)
+                self._hardware_active = True
+            elif not active and self._hardware_active:
+                logger.info("Deactivating RealSense hardware pipeline")
+                instance = self._instance
+                self._instance = None
+                self._hardware_active = False
+                if instance:
+                    loop = asyncio.get_running_loop()
+
+                    def _close() -> None:
+                        instance.close()
+
+                    await loop.run_in_executor(None, _close)

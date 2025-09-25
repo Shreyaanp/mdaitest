@@ -76,6 +76,32 @@ body {
   font-size: 0.95rem;
 }
 
+.qr-metadata {
+  margin-top: 12px;
+  text-align: left;
+  font-size: 0.85rem;
+  color: #d8d8df;
+}
+
+.qr-endpoint {
+  display: flex;
+  flex-direction: column;
+  margin: 4px 0;
+}
+
+.qr-endpoint span {
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.qr-endpoint code {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 4px 6px;
+  border-radius: 6px;
+  word-break: break-all;
+}
+
 .preview-frame {
   position: absolute;
   inset: 0;
@@ -219,6 +245,24 @@ body {
 .token-value button:disabled {
   opacity: 0.4;
   cursor: not-allowed;
+}
+
+.debug-controls {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.trigger-button.secondary {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  color: #f5f5f5;
+}
+
+.trigger-button.secondary:not(:disabled):hover {
+  box-shadow: none;
+  transform: none;
+  background: rgba(255, 255, 255, 0.12);
 }
 
 .trigger-button {

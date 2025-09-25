@@ -7,29 +7,39 @@ import QRCodeStage from './QRCodeStage'
 
 interface StageRouterProps {
   state: StateFrom<typeof sessionMachine>
+  qrPayload?: Record<string, unknown> | null
 }
 
-export default function StageRouter({ state }: StageRouterProps) {
+export default function StageRouter({ state, qrPayload }: StageRouterProps) {
   if (state.matches('error')) {
     return <ErrorOverlay message={state.context.error ?? 'Unknown error'} />
   }
 
-  if (state.matches('qr_display')) {
+  if (state.matches('qr_display') || state.matches('waiting_activation')) {
+    const payload = (qrPayload ?? (state.context.qrPayload as Record<string, unknown> | undefined))
+    const status = state.matches('waiting_activation') ? 'Waiting for activation' : undefined
+
+    if (!payload) {
+      return (
+        <InstructionStage
+          title="Preparing session"
+          subtitle="Awaiting QR payload from controller"
+        />
+      )
+    }
+
     return (
       <QRCodeStage
         token={state.context.token}
-        qrPayload={state.context.qrPayload as Record<string, unknown> | undefined}
+        qrPayload={payload}
         expiresIn={state.context.expiresIn}
+        status={status}
       />
     )
   }
 
   if (state.matches('pairing_request')) {
     return <InstructionStage title="Preparing session" />
-  }
-
-  if (state.matches('waiting_activation')) {
-    return <InstructionStage title="Waiting for activation" subtitle="Complete the mobile step" />
   }
 
   if (state.matches('human_detect')) {

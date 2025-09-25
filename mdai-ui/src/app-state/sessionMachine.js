@@ -1,5 +1,5 @@
 import { assign, createMachine } from 'xstate';
-const isControllerState = (event) => event.type === 'CONTROLLER_STATE';
+const isControllerState = (event) => (event?.type === 'CONTROLLER_STATE');
 const assignSessionDetails = assign({
     token: (_ctx, event) => isControllerState(event) && typeof event.data?.token === 'string' ? event.data.token : undefined,
     qrPayload: (_ctx, event) => isControllerState(event) ? event.data?.qr_payload : undefined,
@@ -16,7 +16,7 @@ const resetContext = assign({
     error: (_ctx, event) => (isControllerState(event) ? event.error : undefined)
 });
 const phaseGuard = (phase) => {
-    return (_ctx, event) => event.type === 'CONTROLLER_STATE' && event.phase === phase;
+    return ({ event }) => event.type === 'CONTROLLER_STATE' && event.phase === phase;
 };
 export const sessionMachine = createMachine({
     id: 'session',
@@ -25,16 +25,16 @@ export const sessionMachine = createMachine({
     context: {},
     on: {
         CONTROLLER_STATE: [
-            { cond: phaseGuard('idle'), target: '.idle', actions: resetContext },
-            { cond: phaseGuard('pairing_request'), target: '.pairing_request' },
-            { cond: phaseGuard('qr_display'), target: '.qr_display', actions: assignSessionDetails },
-            { cond: phaseGuard('waiting_activation'), target: '.waiting_activation' },
-            { cond: phaseGuard('human_detect'), target: '.human_detect' },
-            { cond: phaseGuard('stabilizing'), target: '.stabilizing' },
-            { cond: phaseGuard('uploading'), target: '.uploading' },
-            { cond: phaseGuard('waiting_ack'), target: '.waiting_ack' },
-            { cond: phaseGuard('complete'), target: '.complete' },
-            { cond: phaseGuard('error'), target: '.error', actions: assignError }
+            { guard: phaseGuard('idle'), target: '.idle', actions: resetContext },
+            { guard: phaseGuard('pairing_request'), target: '.pairing_request' },
+            { guard: phaseGuard('qr_display'), target: '.qr_display', actions: assignSessionDetails },
+            { guard: phaseGuard('waiting_activation'), target: '.waiting_activation' },
+            { guard: phaseGuard('human_detect'), target: '.human_detect' },
+            { guard: phaseGuard('stabilizing'), target: '.stabilizing' },
+            { guard: phaseGuard('uploading'), target: '.uploading' },
+            { guard: phaseGuard('waiting_ack'), target: '.waiting_ack' },
+            { guard: phaseGuard('complete'), target: '.complete' },
+            { guard: phaseGuard('error'), target: '.error', actions: assignError }
         ],
         HEARTBEAT: {
             actions: assign({ lastHeartbeatTs: () => Date.now() })

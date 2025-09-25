@@ -101,6 +101,31 @@ class SessionManager:
         logger.info("Debug session trigger invoked")
         self._schedule_session()
 
+    async def simulate_tof_trigger(self, *, triggered: bool, distance_mm: Optional[int] = None) -> None:
+        """Public hook to emulate ToF sensor transitions for debugging."""
+
+        if distance_mm is None:
+            distance_mm = max(0, self.settings.tof_threshold_mm - 50)
+        await self._handle_tof_trigger(triggered, distance_mm)
+
+    async def mark_app_ready(self, *, platform_id: Optional[str] = None) -> bool:
+        """Manually shortcut the app-ready handshake for local testing."""
+
+        if platform_id:
+            self._current_session.platform_id = platform_id
+
+        if self._app_ready_event and not self._app_ready_event.is_set():
+            self._app_ready_event.set()
+            await self._broadcast(
+                ControllerEvent(
+                    type="backend",
+                    phase=self._phase,
+                    data={"event": "app_ready_override", "platform_id": platform_id},
+                )
+            )
+            return True
+        return False
+
     async def preview_frames(self) -> AsyncIterator[bytes]:
         async for frame in self._realsense.preview_stream():
             yield frame
@@ -173,6 +198,7 @@ class SessionManager:
 
             await self._await_app_ready()
             await self._set_phase(SessionPhase.HUMAN_DETECT)
+            await self._realsense.set_hardware_active(True)
             await self._collect_best_frame()
             await self._upload_frame()
             await self._wait_for_ack()
@@ -185,6 +211,7 @@ class SessionManager:
             logger.exception("Session failed: %s", exc)
             await self._set_phase(SessionPhase.ERROR, error=str(exc))
         finally:
+            await self._realsense.set_hardware_active(False)
             await self._ws_client.disconnect()
             await asyncio.sleep(1.0)
             await self._set_phase(SessionPhase.IDLE)

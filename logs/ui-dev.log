@@ -1,0 +1,15 @@
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3100
+
+
+  VITE v5.4.20  ready in 1711 ms
+
+  ➜  Local:   http://localhost:3100/
+  ➜  Network: http://10.25.150.34:3100/
+  ➜  Network: http://100.114.92.8:3100/
+12:36:58 PM [vite] hmr update /src/App.tsx
+12:37:06 PM [vite] hmr update /src/App.tsx
+12:37:19 PM [vite] hmr update /src/App.tsx
+12:37:26 PM [vite] hmr update /src/App.tsx
+12:37:38 PM [vite] hmr update /src/components/StageRouter.tsx

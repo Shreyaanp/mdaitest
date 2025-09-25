@@ -5,7 +5,8 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Optional
 
-from pydantic import BaseSettings, Field
+from pydantic import Field
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 ROOT_DIR = Path(__file__).resolve().parents[2]
 DEFAULT_ENV_FILE = ROOT_DIR / ".env"
@@ -38,10 +39,12 @@ class Settings(BaseSettings):
 
     log_level: str = Field("INFO", description="Logging level for controller")
 
-    class Config:
-        env_file = str(DEFAULT_ENV_FILE)
-        env_file_encoding = "utf-8"
-        case_sensitive = False
+    model_config = SettingsConfigDict(
+        env_file=str(DEFAULT_ENV_FILE),
+        env_file_encoding="utf-8",
+        case_sensitive=False,
+        extra="ignore",
+    )
 
 
 @lru_cache()
