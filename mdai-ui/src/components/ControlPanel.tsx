@@ -5,6 +5,7 @@ import type { SocketStatus } from '../hooks/useControllerSocket'
 
 interface ControlPanelProps {
   deviceId: string
+  deviceAddress?: string
   backendUrl: string
   controllerUrl: string
   connectionStatus: SocketStatus
@@ -28,6 +29,7 @@ const statusLabels: Record<SocketStatus, string> = {
 export default function ControlPanel(props: ControlPanelProps) {
   const {
     deviceId,
+    deviceAddress,
     backendUrl,
     controllerUrl,
     connectionStatus,
@@ -70,6 +72,12 @@ export default function ControlPanel(props: ControlPanelProps) {
             <dt>ID</dt>
             <dd>{deviceId}</dd>
           </div>
+          {deviceAddress && (
+            <div>
+              <dt>Address</dt>
+              <dd className="address-value">{deviceAddress}</dd>
+            </div>
+          )}
           <div>
             <dt>Backend</dt>
             <dd><a href={backendUrl} target="_blank" rel="noreferrer">{backendUrl}</a></dd>

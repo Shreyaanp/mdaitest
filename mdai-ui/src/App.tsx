@@ -57,6 +57,7 @@ export default function App() {
   const previewUrl = (import.meta.env.VITE_PREVIEW_URL as string | undefined) ?? `${normaliseBaseUrl(controllerHttpBase)}/preview`
   const backendUrl = (import.meta.env.VITE_BACKEND_URL as string | undefined) ?? DEFAULT_BACKEND_URL
   const deviceId = (import.meta.env.VITE_DEVICE_ID as string | undefined) ?? DEFAULT_DEVICE_ID
+  const deviceAddress = (import.meta.env.VITE_DEVICE_ADDRESS as string | undefined) ?? undefined
 
   const appendLog = useCallback((message: string, level: LogLevel = 'info') => {
     setLogs((prev) => {
@@ -212,6 +213,7 @@ export default function App() {
       </div>
       <ControlPanel
         deviceId={deviceId}
+        deviceAddress={deviceAddress}
         backendUrl={backendUrl}
         controllerUrl={controllerHttpBase}
         connectionStatus={connectionStatus}
