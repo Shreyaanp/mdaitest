@@ -260,26 +260,6 @@ export default function App() {
           allow="autoplay"
         />
       </div>
-      <ControlPanel
-        deviceId={deviceId}
-        deviceAddress={deviceAddress}
-        backendUrl={backendUrl}
-        controllerUrl={controllerHttpBase}
-        connectionStatus={connectionStatus}
-        currentPhase={state.value as string}
-        pairingToken={pairingToken}
-        qrPayload={qrPayloadOverride ?? qrPayload}
-        expiresInSeconds={expiresInSeconds}
-        lastHeartbeatSeconds={heartbeatAgeSeconds}
-        metrics={metrics}
-      logs={logs}
-      onTrigger={triggerSession}
-      triggerDisabled={isTriggering || (state.value as string) !== 'idle'}
-      isTriggering={isTriggering}
-      onTofTrigger={triggerTof}
-      tofTriggerDisabled={isTofTriggering || (state.value as string) !== 'idle'}
-      isTofTriggering={isTofTriggering}
-    />
     </div>
   )
 }

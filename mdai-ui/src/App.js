@@ -1,7 +1,7 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useMachine } from '@xstate/react';
 import StageRouter from './components/StageRouter';
-import ControlPanel from './components/ControlPanel';
 import { sessionMachine } from './app-state/sessionMachine';
 import { useControllerSocket } from './hooks/useControllerSocket';
 const previewVisibleStates = new Set([
@@ -95,20 +95,20 @@ export default function App() {
             else {
                 appendLog(`Phase → ${phase}`);
             }
-        if (payload && typeof payload.token === 'string') {
-            appendLog(`Token issued: ${payload.token.slice(0, 12)}…`);
-        }
-        if (phase === 'qr_display' && payload && payload.qr_payload && typeof payload.qr_payload === 'object') {
-            setQrPayloadOverride(payload.qr_payload);
-        }
-        if (phase === 'idle') {
-            setQrPayloadOverride(null);
-        }
-        const expires = getNumberField(payload, 'expires_in');
-        if (typeof expires === 'number') {
-            setTokenExpiryTs(Date.now() + expires * 1000);
-        }
-        else {
+            if (payload && typeof payload.token === 'string') {
+                appendLog(`Token issued: ${payload.token.slice(0, 12)}…`);
+            }
+            if (phase === 'qr_display' && payload && payload.qr_payload && typeof payload.qr_payload === 'object') {
+                setQrPayloadOverride(payload.qr_payload);
+            }
+            if (phase === 'idle') {
+                setQrPayloadOverride(null);
+            }
+            const expires = getNumberField(payload, 'expires_in');
+            if (typeof expires === 'number') {
+                setTokenExpiryTs(Date.now() + expires * 1000);
+            }
+            else {
                 setTokenExpiryTs(null);
             }
             return;
@@ -212,11 +212,5 @@ export default function App() {
             appendLog('QR code displayed – waiting for mobile activation');
         }
     }, [state, appendLog]);
-    return (<div className="app-shell">
-      <div className="visual-area">
-        <StageRouter state={state} qrPayload={qrPayloadOverride ?? state.context.qrPayload}/>
-        <iframe title="RealSense preview" className={`preview-frame ${showPreview ? 'visible' : 'hidden'}`} src={previewUrl} allow="autoplay"/>
-      </div>
-      <ControlPanel deviceId={deviceId} deviceAddress={deviceAddress} backendUrl={backendUrl} controllerUrl={controllerHttpBase} connectionStatus={connectionStatus} currentPhase={state.value} pairingToken={pairingToken} qrPayload={qrPayloadOverride ?? qrPayload} expiresInSeconds={expiresInSeconds} lastHeartbeatSeconds={heartbeatAgeSeconds} metrics={metrics} logs={logs} onTrigger={triggerSession} triggerDisabled={isTriggering || state.value !== 'idle'} isTriggering={isTriggering} onTofTrigger={triggerTof} tofTriggerDisabled={isTofTriggering || state.value !== 'idle'} isTofTriggering={isTofTriggering}/>
-    </div>);
+    return (_jsx("div", { className: "app-shell", children: _jsxs("div", { className: "visual-area", children: [_jsx(StageRouter, { state: state, qrPayload: qrPayloadOverride ?? state.context.qrPayload }), _jsx("iframe", { title: "RealSense preview", className: `preview-frame ${showPreview ? 'visible' : 'hidden'}`, src: previewUrl, allow: "autoplay" })] }) }));
 }

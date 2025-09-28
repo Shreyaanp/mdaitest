@@ -1,24 +1,28 @@
-import { assign, createMachine } from 'xstate';
-const isControllerState = (event) => (event?.type === 'CONTROLLER_STATE');
-const assignSessionDetails = assign({
-    token: (_ctx, event) => isControllerState(event) && typeof event.data?.token === 'string' ? event.data.token : undefined,
-    qrPayload: (_ctx, event) => isControllerState(event) ? event.data?.qr_payload : undefined,
-    expiresIn: (_ctx, event) => isControllerState(event) && typeof event.data?.expires_in === 'number' ? event.data.expires_in : undefined,
-    error: (_ctx, event) => (isControllerState(event) ? event.error : undefined)
+import { setup } from 'xstate';
+const isControllerState = (event) => event?.type === 'CONTROLLER_STATE';
+const sessionMachineSetup = setup({
+    types: {
+        context: {},
+        events: {}
+    }
 });
-const assignError = assign({
-    error: (_ctx, event) => (isControllerState(event) ? event.error : undefined)
+const assignSessionDetails = sessionMachineSetup.assign({
+    token: ({ event }) => isControllerState(event) && typeof event.data?.token === 'string' ? event.data.token : undefined,
+    qrPayload: ({ event }) => isControllerState(event) ? event.data?.qr_payload : undefined,
+    expiresIn: ({ event }) => isControllerState(event) && typeof event.data?.expires_in === 'number' ? event.data.expires_in : undefined,
+    error: ({ event }) => (isControllerState(event) ? event.error : undefined)
 });
-const resetContext = assign({
+const assignError = sessionMachineSetup.assign({
+    error: ({ event }) => (isControllerState(event) ? event.error : undefined)
+});
+const resetContext = sessionMachineSetup.assign({
     token: () => undefined,
     qrPayload: () => undefined,
     expiresIn: () => undefined,
-    error: (_ctx, event) => (isControllerState(event) ? event.error : undefined)
+    error: ({ event }) => (isControllerState(event) ? event.error : undefined)
 });
-const phaseGuard = (phase) => {
-    return ({ event }) => event.type === 'CONTROLLER_STATE' && event.phase === phase;
-};
-export const sessionMachine = createMachine({
+const phaseGuard = (phase) => ({ event }) => event.type === 'CONTROLLER_STATE' && event.phase === phase;
+export const sessionMachine = sessionMachineSetup.createMachine({
     id: 'session',
     predictableActionArguments: true,
     initial: 'idle',
@@ -37,11 +41,16 @@ export const sessionMachine = createMachine({
             { guard: phaseGuard('error'), target: '.error', actions: assignError }
         ],
         HEARTBEAT: {
-            actions: assign({ lastHeartbeatTs: () => Date.now() })
+            actions: sessionMachineSetup.assign({ lastHeartbeatTs: () => Date.now() })
         },
         RESET: {
             target: '.idle',
-            actions: assign({ token: undefined, qrPayload: undefined, expiresIn: undefined, error: undefined })
+            actions: sessionMachineSetup.assign({
+                token: undefined,
+                qrPayload: undefined,
+                expiresIn: undefined,
+                error: undefined
+            })
         }
     },
     states: {

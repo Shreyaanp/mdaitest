@@ -1,5 +1,4 @@
 import { useEffect, useRef } from 'react'
-import type { Sender } from 'xstate'
 import type { SessionEvent, SessionPhase } from '../app-state/sessionMachine'
 
 const DEFAULT_WS_URL = 'ws://127.0.0.1:5000/ws/ui'
@@ -18,7 +17,9 @@ interface ControllerSocketOptions {
   onStatusChange?: (status: SocketStatus) => void
 }
 
-export function useControllerSocket(send: Sender<SessionEvent>, options?: ControllerSocketOptions) {
+type SendEvent = (event: SessionEvent) => void
+
+export function useControllerSocket(send: SendEvent, options?: ControllerSocketOptions) {
   const retryRef = useRef<number | null>(null)
   const socketRef = useRef<WebSocket | null>(null)
 
