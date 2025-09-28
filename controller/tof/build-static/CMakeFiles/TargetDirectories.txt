@@ -1,0 +1,4 @@
+/workspace/mdaitest/controller/tof/build-static/CMakeFiles/vl53l0x.dir
+/workspace/mdaitest/controller/tof/build-static/CMakeFiles/tof-reader.dir
+/workspace/mdaitest/controller/tof/build-static/CMakeFiles/edit_cache.dir
+/workspace/mdaitest/controller/tof/build-static/CMakeFiles/rebuild_cache.dir

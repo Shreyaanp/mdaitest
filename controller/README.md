@@ -29,9 +29,34 @@ HARDWARE_API_KEY=HARDWARE-DEV-KEY
 
 (Existing `VITE_` entries remain for the React build.)
 
+### Enabling the VL53L0X ToF sensor
+
+1. Build the native reader once on the Jetson:
+
+   ```bash
+   mkdir -p controller/tof/build
+   cmake -S controller/tof -B controller/tof/build
+   cmake --build controller/tof/build --target tof-reader
+   sudo cp controller/tof/build/tof-reader /usr/local/bin/
+   ```
+
+2. Point the controller at the binary and bus wiring via `.env`:
+
+   ```
+   TOF_READER_BINARY=/usr/local/bin/tof-reader
+   TOF_I2C_BUS=/dev/i2c-1
+   TOF_I2C_ADDRESS=0x29
+   # Optional: expose XSHUT GPIO if you wired it
+   # TOF_XSHUT_PATH=/sys/class/gpio/gpio216/value
+   # TOF_OUTPUT_HZ=20
+   ```
+
+   With these values set the FastAPI service will spawn the process reader
+   at startup and emit real ToF transitions instead of the mocked provider.
+
 ## Next integration steps
 
-1. Replace `mock_distance_provider` with the actual ToF driver and feed noise-filtered distances.
+1. Tune the ToF thresholds/noise filtering now that hardware measurements are available through `TOF_*` settings.
 2. Enable hardware capture in `RealSenseService` by ensuring the Jetson has the `pyrealsense2`, `mediapipe`, and `opencv-python` builds installed.
 3. Flesh out bridge message handling (additional app ↔ hardware events) once the mobile contract is final.
 4. Add automated tests for session transitions (happy path, cancellation, error handling) using `asyncio` fakes.

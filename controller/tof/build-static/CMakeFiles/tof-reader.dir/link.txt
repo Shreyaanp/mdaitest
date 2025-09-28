@@ -1,0 +1,1 @@
+/usr/bin/c++ -O2 -static -static-libstdc++ -static-libgcc -O3 -DNDEBUG -static -static-libstdc++ -static-libgcc CMakeFiles/tof-reader.dir/src/main.cpp.o CMakeFiles/tof-reader.dir/src/tof_reader.cpp.o -o tof-reader  libvl53l0x.a 

@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/tof-reader.dir/src/main.cpp.o CMakeFiles/tof-reader.dir/src/tof_reader.cpp.o -o tof-reader  libvl53l0x.a 

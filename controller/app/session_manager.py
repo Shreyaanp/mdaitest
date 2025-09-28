@@ -14,7 +14,8 @@ from .backend.http_client import BridgeHttpClient
 from .backend.ws_client import BackendWebSocketClient
 from .config import Settings, get_settings
 from .sensors.realsense import RealSenseService
-from .sensors.tof import ToFSensor, mock_distance_provider
+from .sensors.tof import DistanceProvider, ToFSensor, mock_distance_provider
+from .sensors.tof_process import ToFReaderProcess
 from .state import ControllerEvent, SessionPhase
 
 logger = logging.getLogger(__name__)
@@ -38,13 +39,27 @@ class SessionManager:
         self,
         *,
         settings: Optional[Settings] = None,
-        tof_distance_provider=mock_distance_provider,
+        tof_distance_provider: Optional[DistanceProvider] = None,
     ) -> None:
         self.settings = settings or get_settings()
         self._lock = asyncio.Lock()
         self._phase: SessionPhase = SessionPhase.IDLE
         self._ui_subscribers: List[asyncio.Queue[ControllerEvent]] = []
         self._current_session = SessionContext()
+
+        self._tof_process: Optional[ToFReaderProcess] = None
+        if tof_distance_provider is None:
+            if self.settings.tof_reader_binary:
+                self._tof_process = ToFReaderProcess(
+                    binary_path=self.settings.tof_reader_binary,
+                    i2c_bus=self.settings.tof_i2c_bus,
+                    i2c_address=self.settings.tof_i2c_address,
+                    xshut_path=self.settings.tof_xshut_path,
+                    output_hz=self.settings.tof_output_hz,
+                )
+                tof_distance_provider = self._tof_process.get_distance
+            else:
+                tof_distance_provider = mock_distance_provider
 
         self._tof = ToFSensor(
             threshold_mm=self.settings.tof_threshold_mm,
@@ -69,6 +84,8 @@ class SessionManager:
 
     async def start(self) -> None:
         logger.info("Starting session manager")
+        if self._tof_process:
+            await self._tof_process.start()
         await self._realsense.start()
         await self._tof.start()
         self._background_tasks.append(asyncio.create_task(self._heartbeat_loop(), name="controller-heartbeat"))
@@ -76,6 +93,8 @@ class SessionManager:
     async def stop(self) -> None:
         logger.info("Stopping session manager")
         await self._tof.stop()
+        if self._tof_process:
+            await self._tof_process.stop()
         await self._realsense.stop()
         for task in self._background_tasks:
             task.cancel()

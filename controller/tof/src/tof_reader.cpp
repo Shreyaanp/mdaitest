@@ -80,7 +80,7 @@ bool ToFReader::init() {
     }
 
     sensor_ = std::make_unique<VL53L0X>(static_cast<uint8_t>(bus_number_), config_.i2c_address, -1, true);
-    sensor_->setTimeout(100);
+    sensor_->setTimeout(200);  // Increased timeout for single-shot mode
 
     if (!sensor_->init()) {
         std::cerr << "VL53L0X init failed" << std::endl;
@@ -92,7 +92,7 @@ bool ToFReader::init() {
         std::cerr << "Failed to set measurement timing budget" << std::endl;
     }
 
-    sensor_->startContinuous(static_cast<uint32_t>(config_.inter_measurement_ms));
+    // Remove continuous mode - we'll use single-shot mode instead
     initialized_ = true;
     return true;
 }
@@ -102,7 +102,8 @@ std::optional<ToFMeasurement> ToFReader::read_once() {
         return std::nullopt;
     }
 
-    uint16_t distance = sensor_->readRangeContinuousMillimeters(false);
+    // Use single-shot mode instead of continuous mode
+    uint16_t distance = sensor_->readRangeSingleMillimeters();
     if (sensor_->timeoutOccurred()) {
         std::cerr << "VL53L0X measurement timeout" << std::endl;
         return std::nullopt;

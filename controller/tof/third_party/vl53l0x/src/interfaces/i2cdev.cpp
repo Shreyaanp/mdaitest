@@ -701,7 +701,8 @@ bool I2Cdev::writeBytes(uint16_t regAddr, uint8_t length, uint8_t* data) {
     buf[0] = (uint8_t)(regAddr >> 8);
     buf[1] = (uint8_t)(regAddr & 0xff);
 
-    memcpy(buf+2, data, length*2);
+    // length is the number of bytes requested, so copy exactly that many
+    memcpy(buf + 2, data, length);
 
     struct i2c_rdwr_ioctl_data msgset;
     struct i2c_msg msgs[2] = {
@@ -719,7 +720,7 @@ bool I2Cdev::writeBytes(uint16_t regAddr, uint8_t length, uint8_t* data) {
     err = ioctl(fd, I2C_RDWR, &msgset);
     close(fd);
 
-    return TRUE;
+    return err >= 0;
 }
 
 /** Write multiple words to a 16-bit device register.

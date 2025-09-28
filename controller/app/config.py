@@ -24,6 +24,17 @@ class Settings(BaseSettings):
 
     tof_threshold_mm: int = Field(450, description="Distance threshold that triggers workflow")
     tof_debounce_ms: int = Field(200, description="Debounce period before treating ToF trigger as valid")
+    tof_reader_binary: Optional[str] = Field(
+        None,
+        description="Path to the compiled tof-reader executable (enables hardware polling when set)",
+    )
+    tof_i2c_bus: str = Field("/dev/i2c-1", description="I2C bus exposed by the ToF sensor")
+    tof_i2c_address: int = Field(0x29, description="7-bit I2C address for the ToF sensor")
+    tof_xshut_path: Optional[str] = Field(
+        None,
+        description="Optional sysfs GPIO value path to toggle the sensor XSHUT line",
+    )
+    tof_output_hz: int = Field(20, description="Polling rate (Hz) requested from the tof-reader process")
 
     preview_frame_width: int = Field(640, description="Preview width for MJPEG streaming")
     preview_frame_height: int = Field(480, description="Preview height for MJPEG streaming")
