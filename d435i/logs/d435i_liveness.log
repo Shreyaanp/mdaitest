@@ -3698,3 +3698,5 @@
 2025-09-21 01:55:54,951 | INFO | status No reliable face/depth data detected.
 2025-09-21 01:55:55,180 | INFO | status No reliable face/depth data detected.
 2025-09-21 01:55:55,387 | INFO | status No reliable face/depth data detected.
+2025-09-29 04:21:29,144 | INFO | Connected to Intel RealSense D435I (S/N 215322072881)
+2025-09-29 04:21:29,719 | INFO | status No reliable face/depth data detected.
