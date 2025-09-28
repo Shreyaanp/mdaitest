@@ -344,3 +344,790 @@ RuntimeError: no_viable_frame
 2025-09-25 22:57:45,346 | INFO | app.session_manager | Stopping session manager
 2025-09-25 22:57:45,371 | INFO | app.sensors.tof | ToF polling stopped
 2025-09-25 22:57:45,439 | INFO | app.sensors.realsense | RealSense preview loop stopped
+2025-09-29 00:20:01,291 | INFO | app.session_manager | Starting session manager
+2025-09-29 00:20:01,293 | INFO | app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 00:20:01,303 | WARNING | app.sensors.realsense | RealSense hardware disabled – using placeholder frames
+2025-09-29 00:20:01,305 | INFO | app.sensors.tof | Starting ToF polling threshold=450 debounce_ms=200 interval_ms=50
+2025-09-29 00:20:01,441 | INFO | app.session_manager | ToF trigger=True distance=158 phase=SessionPhase.IDLE
+2025-09-29 00:20:01,442 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 00:20:02,462 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 401 Unauthorized"
+2025-09-29 00:20:02,465 | ERROR | app.session_manager | Session failed: Client error '401 Unauthorized' for url 'https://mdai.mercle.ai/auth'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+Traceback (most recent call last):
+  File "/workspace/mdaitest/controller/app/session_manager.py", line 185, in _run_session
+    token_info = await self._http_client.issue_token()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/app/backend/http_client.py", line 26, in issue_token
+    response.raise_for_status()
+  File "/root/.local/lib/python3.12/site-packages/httpx/_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '401 Unauthorized' for url 'https://mdai.mercle.ai/auth'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+2025-09-29 00:20:27,646 | INFO | app.session_manager | Starting session manager
+2025-09-29 00:20:27,646 | INFO | app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 00:20:27,659 | WARNING | app.sensors.realsense | RealSense hardware disabled – using placeholder frames
+2025-09-29 00:20:27,660 | INFO | app.sensors.tof | Starting ToF polling threshold=450 debounce_ms=200 interval_ms=50
+2025-09-29 00:20:27,666 | INFO | app.session_manager | Stopping session manager
+2025-09-29 00:20:27,851 | WARNING | app.sensors.tof_process | tof-reader stderr: Failed to set measurement timing budget
+2025-09-29 00:20:27,892 | INFO | app.session_manager | ToF trigger=True distance=158 phase=SessionPhase.IDLE
+2025-09-29 00:20:27,893 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 00:20:27,943 | INFO | app.sensors.tof | ToF polling stopped
+2025-09-29 00:20:27,945 | WARNING | app.sensors.tof_process | tof-reader exited with code 0
+2025-09-29 00:20:27,998 | INFO | app.sensors.realsense | RealSense preview loop stopped
+2025-09-29 00:20:28,002 | INFO | app.session_manager | Session cancelled
+2025-09-29 00:20:36,639 | INFO | app.session_manager | ToF trigger=True distance=300 phase=SessionPhase.IDLE
+2025-09-29 00:20:36,641 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 00:20:37,503 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 401 Unauthorized"
+2025-09-29 00:20:37,505 | ERROR | app.session_manager | Session failed: Client error '401 Unauthorized' for url 'https://mdai.mercle.ai/auth'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+Traceback (most recent call last):
+  File "/workspace/mdaitest/controller/app/session_manager.py", line 185, in _run_session
+    token_info = await self._http_client.issue_token()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/app/backend/http_client.py", line 26, in issue_token
+    response.raise_for_status()
+  File "/root/.local/lib/python3.12/site-packages/httpx/_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '401 Unauthorized' for url 'https://mdai.mercle.ai/auth'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+2025-09-29 00:27:31,948 | INFO | app.session_manager | ToF trigger=False distance=455 phase=SessionPhase.IDLE
+2025-09-29 00:28:41,800 | INFO | app.session_manager | ToF trigger=True distance=198 phase=SessionPhase.IDLE
+2025-09-29 00:28:41,801 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 00:28:42,665 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 401 Unauthorized"
+2025-09-29 00:28:42,667 | ERROR | app.session_manager | Session failed: Client error '401 Unauthorized' for url 'https://mdai.mercle.ai/auth'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+Traceback (most recent call last):
+  File "/workspace/mdaitest/controller/app/session_manager.py", line 185, in _run_session
+    token_info = await self._http_client.issue_token()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/app/backend/http_client.py", line 26, in issue_token
+    response.raise_for_status()
+  File "/root/.local/lib/python3.12/site-packages/httpx/_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '401 Unauthorized' for url 'https://mdai.mercle.ai/auth'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+2025-09-29 00:33:20,215 | INFO | controller.app.session_manager | Starting session manager
+2025-09-29 00:33:20,218 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 00:33:20,237 | INFO | controller.app.sensors.realsense | RealSense hardware idle until session start
+2025-09-29 00:33:20,238 | INFO | controller.app.sensors.tof | Starting ToF polling threshold=450 debounce_ms=200 interval_ms=50
+2025-09-29 00:33:20,374 | INFO | controller.app.session_manager | ToF trigger=True distance=187 phase=SessionPhase.IDLE
+2025-09-29 00:33:20,375 | INFO | controller.app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 00:33:21,340 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 401 Unauthorized"
+2025-09-29 00:33:21,343 | ERROR | controller.app.session_manager | Session failed: Client error '401 Unauthorized' for url 'https://mdai.mercle.ai/auth'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+Traceback (most recent call last):
+  File "/workspace/mdaitest/controller/app/session_manager.py", line 185, in _run_session
+    token_info = await self._http_client.issue_token()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/app/backend/http_client.py", line 26, in issue_token
+    response.raise_for_status()
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '401 Unauthorized' for url 'https://mdai.mercle.ai/auth'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+2025-09-29 00:33:43,704 | WARNING | controller.app.sensors.tof_process | tof-reader exited with code 0
+2025-09-29 00:33:43,727 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 00:33:43,884 | WARNING | controller.app.sensors.tof_process | tof-reader exited with code 0
+2025-09-29 00:33:53,264 | INFO | controller.app.session_manager | Starting session manager
+2025-09-29 00:33:53,265 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 00:33:53,284 | INFO | controller.app.sensors.realsense | RealSense hardware idle until session start
+2025-09-29 00:33:53,285 | INFO | controller.app.sensors.tof | Starting ToF polling threshold=450 debounce_ms=200 interval_ms=50
+2025-09-29 00:33:53,421 | INFO | controller.app.session_manager | ToF trigger=True distance=190 phase=SessionPhase.IDLE
+2025-09-29 00:33:53,422 | INFO | controller.app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 00:33:54,524 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 401 Unauthorized"
+2025-09-29 00:33:54,526 | ERROR | controller.app.session_manager | Session failed: Client error '401 Unauthorized' for url 'https://mdai.mercle.ai/auth'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+Traceback (most recent call last):
+  File "/workspace/mdaitest/controller/app/session_manager.py", line 185, in _run_session
+    token_info = await self._http_client.issue_token()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/app/backend/http_client.py", line 26, in issue_token
+    response.raise_for_status()
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '401 Unauthorized' for url 'https://mdai.mercle.ai/auth'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+2025-09-29 00:35:05,904 | INFO | controller.app.session_manager | ToF trigger=False distance=455 phase=SessionPhase.IDLE
+2025-09-29 00:35:07,173 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: Failed to read device(-1): Remote I/O error
+2025-09-29 00:35:07,176 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: terminate called after throwing an instance of 'std::runtime_error'
+2025-09-29 00:35:07,184 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: what():  Error reading byte from register
+2025-09-29 00:35:07,830 | WARNING | controller.app.sensors.tof_process | tof-reader exited with code -6
+2025-09-29 00:35:07,862 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 00:35:08,034 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: Failed to write reg: Remote I/O error
+2025-09-29 00:35:08,034 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: terminate called after throwing an instance of 'std::runtime_error'
+2025-09-29 00:35:08,035 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: what():  Error reading byte from register
+2025-09-29 00:35:08,602 | WARNING | controller.app.sensors.tof_process | tof-reader exited with code -6
+2025-09-29 00:35:08,989 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 00:35:10,957 | INFO | controller.app.session_manager | ToF trigger=True distance=113 phase=SessionPhase.IDLE
+2025-09-29 00:35:10,958 | INFO | controller.app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 00:35:11,939 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 401 Unauthorized"
+2025-09-29 00:35:11,941 | ERROR | controller.app.session_manager | Session failed: Client error '401 Unauthorized' for url 'https://mdai.mercle.ai/auth'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+Traceback (most recent call last):
+  File "/workspace/mdaitest/controller/app/session_manager.py", line 185, in _run_session
+    token_info = await self._http_client.issue_token()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/app/backend/http_client.py", line 26, in issue_token
+    response.raise_for_status()
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '401 Unauthorized' for url 'https://mdai.mercle.ai/auth'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+2025-09-29 00:35:12,067 | INFO | controller.app.session_manager | ToF trigger=False distance=662 phase=SessionPhase.ERROR
+2025-09-29 00:35:12,067 | INFO | controller.app.session_manager | ToF reset detected mid-session; cancelling active session
+2025-09-29 00:35:12,269 | INFO | controller.app.session_manager | ToF trigger=True distance=112 phase=SessionPhase.ERROR
+2025-09-29 00:35:12,471 | INFO | controller.app.session_manager | ToF trigger=False distance=666 phase=SessionPhase.ERROR
+2025-09-29 00:35:12,471 | INFO | controller.app.session_manager | ToF reset detected mid-session; cancelling active session
+2025-09-29 00:35:12,978 | INFO | controller.app.session_manager | ToF trigger=True distance=135 phase=SessionPhase.ERROR
+2025-09-29 00:36:00,612 | WARNING | controller.app.sensors.tof_process | tof-reader exited with code 0
+2025-09-29 00:36:00,633 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 00:36:00,852 | WARNING | controller.app.sensors.tof_process | tof-reader exited with code 0
+2025-09-29 00:36:52,654 | INFO | controller.app.session_manager | Starting session manager
+2025-09-29 00:36:52,654 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 00:36:52,673 | INFO | controller.app.sensors.realsense | RealSense hardware idle until session start
+2025-09-29 00:36:52,674 | INFO | controller.app.sensors.tof | Starting ToF polling threshold=450 debounce_ms=200 interval_ms=50
+2025-09-29 00:37:14,743 | INFO | controller.app.session_manager | ToF trigger=True distance=247 phase=SessionPhase.IDLE
+2025-09-29 00:37:14,744 | INFO | controller.app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 00:37:15,633 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 401 Unauthorized"
+2025-09-29 00:37:15,635 | ERROR | controller.app.session_manager | Session failed: Client error '401 Unauthorized' for url 'https://mdai.mercle.ai/auth'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+Traceback (most recent call last):
+  File "/workspace/mdaitest/controller/app/session_manager.py", line 185, in _run_session
+    token_info = await self._http_client.issue_token()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/app/backend/http_client.py", line 26, in issue_token
+    response.raise_for_status()
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '401 Unauthorized' for url 'https://mdai.mercle.ai/auth'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+2025-09-29 00:37:29,330 | INFO | controller.app.session_manager | Debug session trigger invoked
+2025-09-29 00:37:29,332 | INFO | controller.app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 00:37:30,206 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 401 Unauthorized"
+2025-09-29 00:37:30,208 | ERROR | controller.app.session_manager | Session failed: Client error '401 Unauthorized' for url 'https://mdai.mercle.ai/auth'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+Traceback (most recent call last):
+  File "/workspace/mdaitest/controller/app/session_manager.py", line 185, in _run_session
+    token_info = await self._http_client.issue_token()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/app/backend/http_client.py", line 26, in issue_token
+    response.raise_for_status()
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '401 Unauthorized' for url 'https://mdai.mercle.ai/auth'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+2025-09-29 00:37:35,126 | INFO | controller.app.session_manager | ToF trigger=True distance=0 phase=SessionPhase.IDLE
+2025-09-29 00:37:35,128 | INFO | controller.app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 00:37:35,419 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 401 Unauthorized"
+2025-09-29 00:37:35,421 | ERROR | controller.app.session_manager | Session failed: Client error '401 Unauthorized' for url 'https://mdai.mercle.ai/auth'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+Traceback (most recent call last):
+  File "/workspace/mdaitest/controller/app/session_manager.py", line 185, in _run_session
+    token_info = await self._http_client.issue_token()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/app/backend/http_client.py", line 26, in issue_token
+    response.raise_for_status()
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '401 Unauthorized' for url 'https://mdai.mercle.ai/auth'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+2025-09-29 00:37:39,447 | INFO | controller.app.session_manager | ToF trigger=True distance=0 phase=SessionPhase.IDLE
+2025-09-29 00:37:39,449 | INFO | controller.app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 00:37:39,737 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 401 Unauthorized"
+2025-09-29 00:37:39,739 | ERROR | controller.app.session_manager | Session failed: Client error '401 Unauthorized' for url 'https://mdai.mercle.ai/auth'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+Traceback (most recent call last):
+  File "/workspace/mdaitest/controller/app/session_manager.py", line 185, in _run_session
+    token_info = await self._http_client.issue_token()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/app/backend/http_client.py", line 26, in issue_token
+    response.raise_for_status()
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '401 Unauthorized' for url 'https://mdai.mercle.ai/auth'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+2025-09-29 00:40:28,110 | WARNING | controller.app.sensors.tof_process | tof-reader exited with code 0
+2025-09-29 00:40:28,113 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 00:40:28,245 | WARNING | controller.app.sensors.tof_process | tof-reader exited with code 0
+2025-09-29 00:40:35,495 | INFO | controller.app.session_manager | Starting session manager
+2025-09-29 00:40:35,496 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 00:40:35,517 | INFO | controller.app.sensors.realsense | RealSense hardware idle until session start
+2025-09-29 00:40:35,518 | INFO | controller.app.sensors.tof | Starting ToF polling threshold=450 debounce_ms=200 interval_ms=50
+2025-09-29 00:40:37,721 | INFO | controller.app.session_manager | ToF trigger=True distance=316 phase=SessionPhase.IDLE
+2025-09-29 00:40:37,722 | INFO | controller.app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 00:40:38,786 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 401 Unauthorized"
+2025-09-29 00:40:38,788 | ERROR | controller.app.session_manager | Session failed: Client error '401 Unauthorized' for url 'https://mdai.mercle.ai/auth'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+Traceback (most recent call last):
+  File "/workspace/mdaitest/controller/app/session_manager.py", line 185, in _run_session
+    token_info = await self._http_client.issue_token()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/app/backend/http_client.py", line 26, in issue_token
+    response.raise_for_status()
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_models.py", line 829, in raise_for_status
+    raise HTTPStatusError(message, request=request, response=self)
+httpx.HTTPStatusError: Client error '401 Unauthorized' for url 'https://mdai.mercle.ai/auth'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/401
+2025-09-29 00:42:01,474 | WARNING | controller.app.sensors.tof_process | tof-reader exited with code 0
+2025-09-29 00:42:01,506 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 00:42:01,669 | WARNING | controller.app.sensors.tof_process | tof-reader exited with code 0
+2025-09-29 00:42:43,509 | INFO | controller.app.session_manager | Starting session manager
+2025-09-29 00:42:43,510 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 00:42:43,529 | INFO | controller.app.sensors.realsense | RealSense hardware idle until session start
+2025-09-29 00:42:43,530 | INFO | controller.app.sensors.tof | Starting ToF polling threshold=450 debounce_ms=200 interval_ms=50
+2025-09-29 00:42:50,319 | INFO | controller.app.session_manager | ToF trigger=True distance=375 phase=SessionPhase.IDLE
+2025-09-29 00:42:50,320 | INFO | controller.app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 00:42:51,457 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-09-29 00:42:51,459 | INFO | controller.app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiMGMyMTM1NWE0YjRhNGEzYzgyOWUyNGE5NTYzNjk3ZDMiLCJleHAiOjE3NTkwODY5NTF9.1bQkz-6bZ6umr0UVjMbjeYl_MjYQVNvft6EtfN5u-Ss
+2025-09-29 00:42:52,352 | INFO | controller.app.session_manager | Waiting for app connection with timeout=175.0s
+2025-09-29 00:42:52,353 | INFO | controller.app.session_manager | Bridge message received: joined
+2025-09-29 00:45:47,352 | ERROR | controller.app.session_manager | Session failed: 
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/asyncio/tasks.py", line 520, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/locks.py", line 212, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspace/mdaitest/controller/app/session_manager.py", line 218, in _run_session
+    await self._await_app_ready()
+  File "/workspace/mdaitest/controller/app/session_manager.py", line 248, in _await_app_ready
+    await asyncio.wait_for(self._app_ready_event.wait(), timeout=timeout)
+  File "/usr/lib/python3.12/asyncio/tasks.py", line 519, in wait_for
+    async with timeouts.timeout(timeout):
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/timeouts.py", line 115, in __aexit__
+    raise TimeoutError from exc_val
+TimeoutError
+2025-09-29 00:49:32,735 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: Failed to read device(-1): Remote I/O error
+2025-09-29 00:49:32,736 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: terminate called after throwing an instance of 'std::runtime_error'
+2025-09-29 00:49:32,736 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: what():  Error reading byte from register
+2025-09-29 00:49:33,367 | WARNING | controller.app.sensors.tof_process | tof-reader exited with code -6
+2025-09-29 00:49:33,379 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 00:49:43,607 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: Failed to write reg: Connection timed out
+2025-09-29 00:49:43,608 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: terminate called after throwing an instance of 'std::runtime_error'
+2025-09-29 00:49:43,609 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: what():  Error reading byte from register
+2025-09-29 00:49:44,094 | WARNING | controller.app.sensors.tof_process | tof-reader exited with code -6
+2025-09-29 00:49:44,419 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 00:49:44,449 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: Failed to write reg: Resource temporarily unavailable
+2025-09-29 00:49:44,450 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: terminate called after throwing an instance of 'std::runtime_error'
+2025-09-29 00:49:44,451 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: what():  Error reading byte from register
+2025-09-29 00:49:44,940 | WARNING | controller.app.sensors.tof_process | tof-reader exited with code -6
+2025-09-29 00:49:44,991 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 01:03:54,329 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: Failed to write device(-1): Remote I/O error
+2025-09-29 01:03:54,330 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: terminate called after throwing an instance of 'std::runtime_error'
+2025-09-29 01:03:54,331 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: what():  Error writing byte to register: Remote I/O error
+2025-09-29 01:03:54,835 | WARNING | controller.app.sensors.tof_process | tof-reader exited with code -6
+2025-09-29 01:03:54,883 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 01:03:56,903 | INFO | controller.app.session_manager | ToF trigger=False distance=522 phase=SessionPhase.IDLE
+2025-09-29 01:03:57,238 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: Failed to write reg: Remote I/O error
+2025-09-29 01:03:57,239 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: terminate called after throwing an instance of 'std::runtime_error'
+2025-09-29 01:03:57,239 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: what():  Error reading byte from register
+2025-09-29 01:03:57,758 | WARNING | controller.app.sensors.tof_process | tof-reader exited with code -6
+2025-09-29 01:03:57,763 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 01:04:00,291 | INFO | controller.app.session_manager | ToF trigger=True distance=216 phase=SessionPhase.IDLE
+2025-09-29 01:04:00,292 | INFO | controller.app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 01:04:01,194 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-09-29 01:04:01,197 | INFO | controller.app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiMDg0ZGZkMDA0NzU2NDU2MjgyYzdjY2Y4ODljMDMyZjUiLCJleHAiOjE3NTkwODgyMjF9.remKxcRN3nvZjtpTPRRV46lCwEKJfwUN3KD1JDUdEEc
+2025-09-29 01:04:02,184 | INFO | controller.app.session_manager | Waiting for app connection with timeout=175.0s
+2025-09-29 01:04:02,185 | INFO | controller.app.session_manager | Bridge message received: joined
+2025-09-29 01:04:02,757 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: Failed to write reg: Remote I/O error
+2025-09-29 01:04:02,758 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: terminate called after throwing an instance of 'std::runtime_error'
+2025-09-29 01:04:02,759 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: what():  Error reading byte from register
+2025-09-29 01:04:03,254 | WARNING | controller.app.sensors.tof_process | tof-reader exited with code -6
+2025-09-29 01:04:03,267 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 01:04:34,751 | INFO | controller.app.session_manager | Bridge message received: from_app
+2025-09-29 01:04:36,279 | INFO | controller.app.session_manager | Bridge message received: from_app
+2025-09-29 01:04:36,281 | INFO | controller.app.sensors.realsense | Activating RealSense hardware pipeline
+2025-09-29 01:04:51,729 | ERROR | controller.app.session_manager | Session failed: liveness_capture_failed
+Traceback (most recent call last):
+  File "/workspace/mdaitest/controller/app/session_manager.py", line 221, in _run_session
+    await self._collect_best_frame()
+  File "/workspace/mdaitest/controller/app/session_manager.py", line 260, in _collect_best_frame
+    raise RuntimeError("liveness_capture_failed")
+RuntimeError: liveness_capture_failed
+2025-09-29 01:04:51,733 | ERROR | controller.app.sensors.realsense | RealSense preview loop crashed
+Traceback (most recent call last):
+  File "/workspace/mdaitest/controller/app/sensors/realsense.py", line 99, in _preview_loop
+    result = await self._run_process()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/app/sensors/realsense.py", line 120, in _run_process
+    return await loop.run_in_executor(None, self._instance.process)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/d435i/mediapipe_liveness.py", line 518, in process
+    self.start()
+  File "/workspace/mdaitest/d435i/mediapipe_liveness.py", line 477, in start
+    profile = pipe.start(cfg)
+              ^^^^^^^^^^^^^^^
+RuntimeError: No device connected
+2025-09-29 01:04:51,740 | INFO | controller.app.sensors.realsense | RealSense preview loop stopped
+2025-09-29 01:04:52,720 | INFO | controller.app.session_manager | Bridge message received: from_app
+2025-09-29 01:04:52,722 | INFO | controller.app.sensors.realsense | Deactivating RealSense hardware pipeline
+2025-09-29 01:11:56,512 | INFO | controller.app.session_manager | Starting session manager
+2025-09-29 01:11:56,515 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 01:11:56,538 | INFO | controller.app.sensors.realsense | RealSense hardware idle until session start
+2025-09-29 01:11:56,540 | INFO | controller.app.sensors.tof | Starting ToF polling threshold=450 debounce_ms=200 interval_ms=50
+2025-09-29 01:11:56,677 | INFO | controller.app.session_manager | ToF trigger=True distance=125 phase=SessionPhase.IDLE
+2025-09-29 01:11:56,678 | INFO | controller.app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 01:11:56,710 | ERROR | controller.app.session_manager | Session failed: [Errno -3] Temporary failure in name resolution
+Traceback (most recent call last):
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpcore/_async/connection.py", line 101, in handle_async_request
+    raise exc
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpcore/_async/connection.py", line 78, in handle_async_request
+    stream = await self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpcore/_async/connection.py", line 124, in _connect
+    stream = await self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpcore/_backends/auto.py", line 31, in connect_tcp
+    return await self._backend.connect_tcp(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpcore/_backends/anyio.py", line 113, in connect_tcp
+    with map_exceptions(exc_map):
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [Errno -3] Temporary failure in name resolution
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspace/mdaitest/controller/app/session_manager.py", line 185, in _run_session
+    token_info = await self._http_client.issue_token()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/app/backend/http_client.py", line 25, in issue_token
+    response = await self._client.post("/auth", json=payload)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1859, in post
+    return await self.request(
+           ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [Errno -3] Temporary failure in name resolution
+2025-09-29 01:13:00,155 | INFO | controller.app.session_manager | Starting session manager
+2025-09-29 01:13:00,157 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 01:13:00,178 | INFO | controller.app.sensors.realsense | RealSense hardware idle until session start
+2025-09-29 01:13:00,179 | INFO | controller.app.sensors.tof | Starting ToF polling threshold=450 debounce_ms=200 interval_ms=50
+2025-09-29 01:13:00,314 | INFO | controller.app.session_manager | ToF trigger=True distance=156 phase=SessionPhase.IDLE
+2025-09-29 01:13:00,315 | INFO | controller.app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 01:13:10,348 | ERROR | controller.app.session_manager | Session failed: [Errno -3] Temporary failure in name resolution
+Traceback (most recent call last):
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpcore/_async/connection.py", line 101, in handle_async_request
+    raise exc
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpcore/_async/connection.py", line 78, in handle_async_request
+    stream = await self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpcore/_async/connection.py", line 124, in _connect
+    stream = await self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpcore/_backends/auto.py", line 31, in connect_tcp
+    return await self._backend.connect_tcp(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpcore/_backends/anyio.py", line 113, in connect_tcp
+    with map_exceptions(exc_map):
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [Errno -3] Temporary failure in name resolution
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspace/mdaitest/controller/app/session_manager.py", line 185, in _run_session
+    token_info = await self._http_client.issue_token()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/app/backend/http_client.py", line 25, in issue_token
+    response = await self._client.post("/auth", json=payload)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1859, in post
+    return await self.request(
+           ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [Errno -3] Temporary failure in name resolution
+2025-09-29 01:11:58,104 | INFO | controller.app.session_manager | Starting session manager
+2025-09-29 01:11:58,107 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 01:11:58,127 | INFO | controller.app.sensors.realsense | RealSense hardware idle until session start
+2025-09-29 01:11:58,128 | INFO | controller.app.sensors.tof | Starting ToF polling threshold=450 debounce_ms=200 interval_ms=50
+2025-09-29 01:11:58,267 | INFO | controller.app.session_manager | ToF trigger=True distance=196 phase=SessionPhase.IDLE
+2025-09-29 01:11:58,267 | INFO | controller.app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 01:12:06,689 | ERROR | controller.app.session_manager | Session failed: [Errno -3] Temporary failure in name resolution
+Traceback (most recent call last):
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpcore/_async/connection.py", line 101, in handle_async_request
+    raise exc
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpcore/_async/connection.py", line 78, in handle_async_request
+    stream = await self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpcore/_async/connection.py", line 124, in _connect
+    stream = await self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpcore/_backends/auto.py", line 31, in connect_tcp
+    return await self._backend.connect_tcp(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpcore/_backends/anyio.py", line 113, in connect_tcp
+    with map_exceptions(exc_map):
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [Errno -3] Temporary failure in name resolution
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspace/mdaitest/controller/app/session_manager.py", line 185, in _run_session
+    token_info = await self._http_client.issue_token()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/app/backend/http_client.py", line 25, in issue_token
+    response = await self._client.post("/auth", json=payload)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1859, in post
+    return await self.request(
+           ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [Errno -3] Temporary failure in name resolution
+2025-09-29 01:13:08,340 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: Failed to read device(-1): Remote I/O error
+2025-09-29 01:13:08,341 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: terminate called after throwing an instance of 'std::runtime_error'
+2025-09-29 01:13:08,341 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: what():  Error reading byte from register
+2025-09-29 01:13:08,843 | WARNING | controller.app.sensors.tof_process | tof-reader exited with code -6
+2025-09-29 01:13:08,874 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 01:13:10,111 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: Failed to write reg: Input/output error
+2025-09-29 01:13:10,112 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: terminate called after throwing an instance of 'std::runtime_error'
+2025-09-29 01:13:10,112 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: what():  Error reading byte from register
+2025-09-29 01:13:10,632 | WARNING | controller.app.sensors.tof_process | tof-reader exited with code -6
+2025-09-29 01:13:11,097 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 01:13:11,123 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: Failed to write reg: Remote I/O error
+2025-09-29 01:13:11,123 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: terminate called after throwing an instance of 'std::runtime_error'
+2025-09-29 01:13:11,125 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: what():  Error reading byte from register
+2025-09-29 01:13:11,608 | WARNING | controller.app.sensors.tof_process | tof-reader exited with code -6
+2025-09-29 01:13:11,665 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 01:13:11,691 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: Failed to write reg: Remote I/O error
+2025-09-29 01:13:11,692 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: terminate called after throwing an instance of 'std::runtime_error'
+2025-09-29 01:13:11,693 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: what():  Error reading byte from register
+2025-09-29 01:13:12,198 | WARNING | controller.app.sensors.tof_process | tof-reader exited with code -6
+2025-09-29 01:13:12,234 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 01:13:12,260 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: Failed to write reg: Remote I/O error
+2025-09-29 01:13:12,261 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: terminate called after throwing an instance of 'std::runtime_error'
+2025-09-29 01:13:12,261 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: what():  Error reading byte from register
+2025-09-29 01:13:12,748 | WARNING | controller.app.sensors.tof_process | tof-reader exited with code -6
+2025-09-29 01:13:12,802 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 01:13:12,828 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: Failed to write reg: Remote I/O error
+2025-09-29 01:13:12,829 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: terminate called after throwing an instance of 'std::runtime_error'
+2025-09-29 01:13:12,829 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: what():  Error reading byte from register
+2025-09-29 01:13:13,327 | WARNING | controller.app.sensors.tof_process | tof-reader exited with code -6
+2025-09-29 01:13:13,370 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 01:13:13,398 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: Failed to write reg: Remote I/O error
+2025-09-29 01:13:13,399 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: terminate called after throwing an instance of 'std::runtime_error'
+2025-09-29 01:13:13,399 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: what():  Error reading byte from register
+2025-09-29 01:13:13,904 | WARNING | controller.app.sensors.tof_process | tof-reader exited with code -6
+2025-09-29 01:13:13,939 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 01:13:13,966 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: Failed to write reg: Remote I/O error
+2025-09-29 01:13:13,967 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: terminate called after throwing an instance of 'std::runtime_error'
+2025-09-29 01:13:13,967 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: what():  Error reading byte from register
+2025-09-29 01:13:14,454 | WARNING | controller.app.sensors.tof_process | tof-reader exited with code -6
+2025-09-29 01:13:14,509 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 01:13:14,536 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: Failed to write reg: Remote I/O error
+2025-09-29 01:13:14,537 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: terminate called after throwing an instance of 'std::runtime_error'
+2025-09-29 01:13:14,537 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: what():  Error reading byte from register
+2025-09-29 01:13:15,025 | WARNING | controller.app.sensors.tof_process | tof-reader exited with code -6
+2025-09-29 01:13:15,078 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 01:13:15,105 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: Failed to write reg: Remote I/O error
+2025-09-29 01:13:15,106 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: terminate called after throwing an instance of 'std::runtime_error'
+2025-09-29 01:13:15,106 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: what():  Error reading byte from register
+2025-09-29 01:13:15,594 | WARNING | controller.app.sensors.tof_process | tof-reader exited with code -6
+2025-09-29 01:13:15,647 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 01:13:15,673 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: Failed to write reg: Remote I/O error
+2025-09-29 01:13:15,674 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: terminate called after throwing an instance of 'std::runtime_error'
+2025-09-29 01:13:15,675 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: what():  Error reading byte from register
+2025-09-29 01:13:16,186 | WARNING | controller.app.sensors.tof_process | tof-reader exited with code -6
+2025-09-29 01:13:16,216 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 01:13:16,243 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: Failed to write reg: Remote I/O error
+2025-09-29 01:13:16,244 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: terminate called after throwing an instance of 'std::runtime_error'
+2025-09-29 01:13:16,244 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: what():  Error reading byte from register
+2025-09-29 01:13:16,759 | WARNING | controller.app.sensors.tof_process | tof-reader exited with code -6
+2025-09-29 01:13:16,785 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 01:13:16,812 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: Failed to write reg: Remote I/O error
+2025-09-29 01:13:16,813 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: terminate called after throwing an instance of 'std::runtime_error'
+2025-09-29 01:13:16,814 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: what():  Error reading byte from register
+2025-09-29 01:13:17,303 | WARNING | controller.app.sensors.tof_process | tof-reader exited with code -6
+2025-09-29 01:13:17,354 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 01:13:17,381 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: Failed to write reg: Remote I/O error
+2025-09-29 01:13:17,382 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: terminate called after throwing an instance of 'std::runtime_error'
+2025-09-29 01:13:17,382 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: what():  Error reading byte from register
+2025-09-29 01:13:17,869 | WARNING | controller.app.sensors.tof_process | tof-reader exited with code -6
+2025-09-29 01:13:17,924 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 01:13:17,950 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: Failed to write reg: Remote I/O error
+2025-09-29 01:13:17,951 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: terminate called after throwing an instance of 'std::runtime_error'
+2025-09-29 01:13:17,951 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: what():  Error reading byte from register
+2025-09-29 01:13:18,441 | WARNING | controller.app.sensors.tof_process | tof-reader exited with code -6
+2025-09-29 01:13:18,492 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 01:13:18,519 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: Failed to write reg: Remote I/O error
+2025-09-29 01:13:18,520 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: terminate called after throwing an instance of 'std::runtime_error'
+2025-09-29 01:13:18,520 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: what():  Error reading byte from register
+2025-09-29 01:13:19,009 | WARNING | controller.app.sensors.tof_process | tof-reader exited with code -6
+2025-09-29 01:13:19,059 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 01:13:30,233 | INFO | controller.app.session_manager | ToF trigger=False distance=455 phase=SessionPhase.IDLE
+2025-09-29 01:13:30,435 | INFO | controller.app.session_manager | ToF trigger=True distance=441 phase=SessionPhase.IDLE
+2025-09-29 01:13:30,435 | INFO | controller.app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 01:13:30,638 | INFO | controller.app.session_manager | ToF trigger=False distance=450 phase=SessionPhase.PAIRING_REQUEST
+2025-09-29 01:13:30,638 | INFO | controller.app.session_manager | ToF reset detected mid-session; cancelling active session
+2025-09-29 01:13:30,639 | INFO | controller.app.session_manager | Session cancelled
+2025-09-29 01:13:30,890 | INFO | controller.app.session_manager | ToF trigger=True distance=446 phase=SessionPhase.IDLE
+2025-09-29 01:13:30,891 | INFO | controller.app.session_manager | Session already in progress; ignoring trigger
+2025-09-29 01:13:39,462 | INFO | controller.app.session_manager | ToF trigger=False distance=522 phase=SessionPhase.IDLE
+2025-09-29 01:13:39,815 | INFO | controller.app.session_manager | ToF trigger=True distance=422 phase=SessionPhase.IDLE
+2025-09-29 01:13:39,816 | INFO | controller.app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 01:13:49,826 | ERROR | controller.app.session_manager | Session failed: [Errno -3] Temporary failure in name resolution
+Traceback (most recent call last):
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 101, in map_httpcore_exceptions
+    yield
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 394, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpcore/_async/connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpcore/_async/connection.py", line 101, in handle_async_request
+    raise exc
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpcore/_async/connection.py", line 78, in handle_async_request
+    stream = await self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpcore/_async/connection.py", line 124, in _connect
+    stream = await self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpcore/_backends/auto.py", line 31, in connect_tcp
+    return await self._backend.connect_tcp(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpcore/_backends/anyio.py", line 113, in connect_tcp
+    with map_exceptions(exc_map):
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [Errno -3] Temporary failure in name resolution
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspace/mdaitest/controller/app/session_manager.py", line 185, in _run_session
+    token_info = await self._http_client.issue_token()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/app/backend/http_client.py", line 25, in issue_token
+    response = await self._client.post("/auth", json=payload)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1859, in post
+    return await self.request(
+           ^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1540, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1629, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1657, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1694, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_client.py", line 1730, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 393, in handle_async_request
+    with map_httpcore_exceptions():
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/workspace/mdaitest/controller/.venv/lib/python3.12/site-packages/httpx/_transports/default.py", line 118, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [Errno -3] Temporary failure in name resolution
+2025-09-29 01:26:14,424 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: Failed to write reg: Remote I/O error
+2025-09-29 01:26:14,425 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: terminate called after throwing an instance of 'std::runtime_error'
+2025-09-29 01:26:14,426 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: what():  Error reading byte from register
+2025-09-29 01:26:14,918 | WARNING | controller.app.sensors.tof_process | tof-reader exited with code -6
+2025-09-29 01:26:14,951 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 01:26:16,471 | INFO | controller.app.session_manager | ToF trigger=False distance=629 phase=SessionPhase.IDLE
+2025-09-29 01:26:16,674 | INFO | controller.app.session_manager | ToF trigger=True distance=230 phase=SessionPhase.IDLE
+2025-09-29 01:26:16,675 | INFO | controller.app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 01:26:17,711 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-09-29 01:26:17,713 | INFO | controller.app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiMDY0Yzc0MGU1Mzc2NDQ1Mjk0NTg0NWNkZDk1YTMyNDYiLCJleHAiOjE3NTkwODk1NTd9.vAjjxy9iJeoUT7xxi1RXvTUSvqS7XSIGw3rfpiEOuEU
+2025-09-29 01:26:18,820 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: Failed to read device(-1): Remote I/O error
+2025-09-29 01:26:18,820 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: terminate called after throwing an instance of 'std::runtime_error'
+2025-09-29 01:26:18,821 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: what():  Error reading byte from register
+2025-09-29 01:26:18,827 | INFO | controller.app.session_manager | Waiting for app connection with timeout=175.0s
+2025-09-29 01:26:18,827 | INFO | controller.app.session_manager | Bridge message received: joined
+2025-09-29 01:26:19,347 | WARNING | controller.app.sensors.tof_process | tof-reader exited with code -6
+2025-09-29 01:26:19,391 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 01:26:33,549 | INFO | controller.app.session_manager | Bridge message received: from_app
+2025-09-29 01:26:34,825 | INFO | controller.app.session_manager | Bridge message received: from_app
+2025-09-29 01:26:34,827 | INFO | controller.app.sensors.realsense | Activating RealSense hardware pipeline
+2025-09-29 01:26:36,085 | INFO | root | Connected to Intel RealSense D435I (S/N 215322072881)
+2025-09-29 01:26:36,087 | INFO | controller.app.session_manager | Bridge message received: from_app
+2025-09-29 01:26:38,888 | ERROR | controller.app.session_manager | Session failed: no_viable_frame
+Traceback (most recent call last):
+  File "/workspace/mdaitest/controller/app/session_manager.py", line 221, in _run_session
+    await self._collect_best_frame()
+  File "/workspace/mdaitest/controller/app/session_manager.py", line 296, in _collect_best_frame
+    raise RuntimeError("no_viable_frame")
+RuntimeError: no_viable_frame
+2025-09-29 01:26:38,916 | INFO | controller.app.sensors.realsense | Deactivating RealSense hardware pipeline
+2025-09-29 01:27:50,297 | INFO | controller.app.session_manager | ToF trigger=False distance=878 phase=SessionPhase.IDLE
+2025-09-29 01:27:53,165 | INFO | controller.app.session_manager | ToF trigger=True distance=428 phase=SessionPhase.IDLE
+2025-09-29 01:27:53,166 | INFO | controller.app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 01:27:54,106 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-09-29 01:27:54,108 | INFO | controller.app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiZjYzZjcxNmM5ZGFiNDM3OTg1MGE0ODY4M2E4ZmIxNjEiLCJleHAiOjE3NTkwODk2NTN9.J-Zf_q6mmahjemBl7-XLOw51AgxHshKvFSlxVhH8Y7E
+2025-09-29 01:27:55,002 | INFO | controller.app.session_manager | Waiting for app connection with timeout=175.0s
+2025-09-29 01:27:55,003 | INFO | controller.app.session_manager | Bridge message received: joined
+2025-09-29 01:27:55,152 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: Failed to write reg: Remote I/O error
+2025-09-29 01:27:55,153 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: terminate called after throwing an instance of 'std::runtime_error'
+2025-09-29 01:27:55,153 | WARNING | controller.app.sensors.tof_process | tof-reader stderr: what():  Error reading word from register
+2025-09-29 01:27:55,670 | WARNING | controller.app.sensors.tof_process | tof-reader exited with code -6
+2025-09-29 01:27:55,698 | INFO | controller.app.sensors.tof_process | Starting tof-reader process: /workspace/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 01:28:09,396 | INFO | controller.app.session_manager | Bridge message received: from_app
+2025-09-29 01:28:10,690 | INFO | controller.app.session_manager | Bridge message received: from_app
+2025-09-29 01:28:10,692 | INFO | controller.app.sensors.realsense | Activating RealSense hardware pipeline
+2025-09-29 01:28:11,731 | INFO | root | Connected to Intel RealSense D435I (S/N 215322072881)
+2025-09-29 01:28:11,733 | INFO | controller.app.session_manager | Bridge message received: from_app
+2025-09-29 01:28:12,325 | INFO | root | face_detected score=0.763 bbox=(238, 125, 526, 413) instant_alive=False depth={'range': 0.7630000412464142, 'stdev': 0.18905265629291534, 'center_mean': 0.37900978326797485, 'outer_mean': 0.47805458307266235, 'left_mean': 0.3960094749927521, 'right_mean': 0.5022463798522949, 'prominence': 0.0990447998046875, 'prominence_ratio': 0.12980969128506317, 'asymmetry': 0.10623690485954285, 'reason': 'depth_ok'} screen={'mean': 17.8180790960452, 'stdev': 15.572237745440553, 'saturation_fraction': 0.0, 'flicker_pp': 0.0, 'reason': 'clear'} movement={'reason': 'insufficient_samples', 'samples': 1} stats={'count': 6307.0, 'min': 0.36100003123283386, 'max': 1.124000072479248, 'stdev': 0.18905265629291534, 'range': 0.7630000412464142, 'center_mean': 0.37900978326797485, 'outer_mean': 0.47805458307266235}
+2025-09-29 01:28:12,507 | INFO | root | face_detected score=0.808 bbox=(243, 124, 531, 412) instant_alive=False depth={'range': 0.7590000033378601, 'stdev': 0.21098388731479645, 'center_mean': 0.37922465801239014, 'outer_mean': 0.4992259442806244, 'left_mean': 0.39616408944129944, 'right_mean': 0.5276919603347778, 'prominence': 0.12000128626823425, 'prominence_ratio': 0.15810446079117743, 'asymmetry': 0.1315278708934784, 'reason': 'cheeks_unbalanced'} screen={'mean': 37.019350282485874, 'stdev': 27.070665918114823, 'saturation_fraction': 0.0, 'flicker_pp': 19.201271186440675, 'reason': 'clear'} movement={'reason': 'insufficient_samples', 'samples': 2} stats={'count': 6375.0, 'min': 0.359000027179718, 'max': 1.1180000305175781, 'stdev': 0.21098388731479645, 'range': 0.7590000033378601, 'center_mean': 0.37922465801239014, 'outer_mean': 0.4992259442806244}
+2025-09-29 01:28:12,688 | INFO | root | face_detected score=0.741 bbox=(246, 124, 524, 402) instant_alive=True depth={'range': 0.7560000419616699, 'stdev': 0.19742773473262787, 'center_mean': 0.37922996282577515, 'outer_mean': 0.4823175370693207, 'left_mean': 0.39381474256515503, 'right_mean': 0.5099826455116272, 'prominence': 0.10308757424354553, 'prominence_ratio': 0.13635921762127654, 'asymmetry': 0.11616790294647217, 'reason': 'depth_ok'} screen={'mean': 62.87547169811321, 'stdev': 37.91958574757993, 'saturation_fraction': 0.0001509433962264151, 'flicker_pp': 45.057392602068006, 'reason': 'clear'} movement={'eye_var': 0.039768069982528687, 'mouth_var': 0.004477987880818546, 'nose_var': 0.0010000169277191162, 'center_shift': 7.810249675906654, 'reason': 'movement_ok'} stats={'count': 5978.0, 'min': 0.36000001430511475, 'max': 1.1160000562667847, 'stdev': 0.19742773473262787, 'range': 0.7560000419616699, 'center_mean': 0.37922996282577515, 'outer_mean': 0.4823175370693207}
+2025-09-29 01:28:12,872 | INFO | root | face_detected score=0.814 bbox=(245, 117, 532, 405) instant_alive=False depth={'range': 0.7550000548362732, 'stdev': 0.21867597103118896, 'center_mean': 0.37881892919540405, 'outer_mean': 0.5046314597129822, 'left_mean': 0.3937036097049713, 'right_mean': 0.5378082394599915, 'prominence': 0.12581253051757812, 'prominence_ratio': 0.16663910116517994, 'asymmetry': 0.14410462975502014, 'reason': 'cheeks_unbalanced'} screen={'mean': 72.23516949152543, 'stdev': 42.70437639290458, 'saturation_fraction': 0.0, 'flicker_pp': 54.41709039548023, 'reason': 'clear'} movement={'eye_var': 0.0455283522605896, 'mouth_var': 0.004477987880818546, 'nose_var': 0.0020000040531158447, 'center_shift': 10.307764064044152, 'reason': 'movement_ok'} stats={'count': 6428.0, 'min': 0.359000027179718, 'max': 1.1140000820159912, 'stdev': 0.21867597103118896, 'range': 0.7550000548362732, 'center_mean': 0.37881892919540405, 'outer_mean': 0.5046314597129822}
+2025-09-29 01:28:13,053 | INFO | root | face_detected score=0.833 bbox=(243, 125, 530, 413) instant_alive=False depth={'range': 0.7509999871253967, 'stdev': 0.21547558903694153, 'center_mean': 0.3777500092983246, 'outer_mean': 0.5011556148529053, 'left_mean': 0.3921559154987335, 'right_mean': 0.5305587649345398, 'prominence': 0.12340560555458069, 'prominence_ratio': 0.16432171460740022, 'asymmetry': 0.13840284943580627, 'reason': 'cheeks_unbalanced'} screen={'mean': 73.21228813559323, 'stdev': 43.27579066916365, 'saturation_fraction': 0.0, 'flicker_pp': 55.39420903954803, 'reason': 'clear'} movement={'eye_var': 0.0455283522605896, 'mouth_var': 0.004477987880818546, 'nose_var': 0.0029999911785125732, 'center_shift': 10.307764064044152, 'reason': 'movement_ok'} stats={'count': 6292.0, 'min': 0.359000027179718, 'max': 1.1100000143051147, 'stdev': 0.21547558903694153, 'range': 0.7509999871253967, 'center_mean': 0.3777500092983246, 'outer_mean': 0.5011556148529053}
+2025-09-29 01:28:13,233 | INFO | root | face_detected score=0.830 bbox=(242, 129, 531, 419) instant_alive=False depth={'range': 0.7550000548362732, 'stdev': 0.21780014038085938, 'center_mean': 0.3761177361011505, 'outer_mean': 0.5017082095146179, 'left_mean': 0.39107242226600647, 'right_mean': 0.5369117856025696, 'prominence': 0.1255904734134674, 'prominence_ratio': 0.1663449858168587, 'asymmetry': 0.1458393633365631, 'reason': 'cheeks_unbalanced'} screen={'mean': 74.2410924719257, 'stdev': 44.16732382807889, 'saturation_fraction': 0.00013863856924996534, 'flicker_pp': 56.4230133758805, 'reason': 'clear'} movement={'eye_var': 0.0455283522605896, 'mouth_var': 0.00471333775203675, 'nose_var': 0.004999995231628418, 'center_shift': 14.534441853748634, 'reason': 'movement_ok'} stats={'count': 6507.0, 'min': 0.359000027179718, 'max': 1.1140000820159912, 'stdev': 0.21780014038085938, 'range': 0.7550000548362732, 'center_mean': 0.3761177361011505, 'outer_mean': 0.5017082095146179}
+2025-09-29 01:28:13,415 | INFO | root | face_detected score=0.848 bbox=(246, 129, 536, 419) instant_alive=False depth={'range': 0.7750000655651093, 'stdev': 0.21997451782226562, 'center_mean': 0.3745706379413605, 'outer_mean': 0.5013248920440674, 'left_mean': 0.38983508944511414, 'right_mean': 0.5405797362327576, 'prominence': 0.1267542541027069, 'prominence_ratio': 0.1635538624248775, 'asymmetry': 0.15074464678764343, 'reason': 'cheeks_unbalanced'} screen={'mean': 72.70067932898932, 'stdev': 43.92839283457971, 'saturation_fraction': 0.0, 'flicker_pp': 56.4230133758805, 'reason': 'clear'} movement={'eye_var': 0.0455283522605896, 'mouth_var': 0.00471333775203675, 'nose_var': 0.0059999823570251465, 'center_shift': 15.811388300841896, 'reason': 'movement_ok'} stats={'count': 6603.0, 'min': 0.3570000231266022, 'max': 1.1320000886917114, 'stdev': 0.21997451782226562, 'range': 0.7750000655651093, 'center_mean': 0.3745706379413605, 'outer_mean': 0.5013248920440674}
+2025-09-29 01:28:13,601 | INFO | root | face_detected score=0.788 bbox=(243, 131, 531, 418) instant_alive=False depth={'range': 0.7540000081062317, 'stdev': 0.2119378000497818, 'center_mean': 0.37353020906448364, 'outer_mean': 0.49129050970077515, 'left_mean': 0.3881518244743347, 'right_mean': 0.5216704607009888, 'prominence': 0.1177603006362915, 'prominence_ratio': 0.15618076839556236, 'asymmetry': 0.13351863622665405, 'reason': 'cheeks_unbalanced'} screen={'mean': 71.61553672316384, 'stdev': 43.34988627397038, 'saturation_fraction': 0.0, 'flicker_pp': 56.4230133758805, 'reason': 'clear'} movement={'eye_var': 0.0455283522605896, 'mouth_var': 0.00471333775203675, 'nose_var': 0.0059999823570251465, 'center_shift': 16.224980739587952, 'reason': 'movement_ok'} stats={'count': 6365.0, 'min': 0.35600000619888306, 'max': 1.1100000143051147, 'stdev': 0.2119378000497818, 'range': 0.7540000081062317, 'center_mean': 0.37353020906448364, 'outer_mean': 0.49129050970077515}
+2025-09-29 01:28:13,783 | INFO | root | face_detected score=0.858 bbox=(245, 130, 532, 417) instant_alive=False depth={'range': 0.7660000920295715, 'stdev': 0.21447990834712982, 'center_mean': 0.3741719722747803, 'outer_mean': 0.49580875039100647, 'left_mean': 0.38997238874435425, 'right_mean': 0.527014970779419, 'prominence': 0.1216367781162262, 'prominence_ratio': 0.15879473042090755, 'asymmetry': 0.1370425820350647, 'reason': 'cheeks_unbalanced'} screen={'mean': 71.33206214689265, 'stdev': 43.55944753086152, 'saturation_fraction': 0.0, 'flicker_pp': 56.4230133758805, 'reason': 'clear'} movement={'eye_var': 0.0455283522605896, 'mouth_var': 0.00471333775203675, 'nose_var': 0.0059999823570251465, 'center_shift': 16.224980739587952, 'reason': 'movement_ok'} stats={'count': 6453.0, 'min': 0.35600000619888306, 'max': 1.1220000982284546, 'stdev': 0.21447990834712982, 'range': 0.7660000920295715, 'center_mean': 0.3741719722747803, 'outer_mean': 0.49580875039100647}
+2025-09-29 01:28:13,967 | INFO | root | face_detected score=0.841 bbox=(241, 127, 532, 419) instant_alive=False depth={'range': 0.7550000548362732, 'stdev': 0.2093014270067215, 'center_mean': 0.3705214858055115, 'outer_mean': 0.48615244030952454, 'left_mean': 0.3853941559791565, 'right_mean': 0.515167236328125, 'prominence': 0.11563095450401306, 'prominence_ratio': 0.15315357100085034, 'asymmetry': 0.1297730803489685, 'reason': 'cheeks_unbalanced'} screen={'mean': 71.69553302274596, 'stdev': 43.63628269879067, 'saturation_fraction': 0.0, 'flicker_pp': 56.4230133758805, 'reason': 'clear'} movement={'eye_var': 0.0455283522605896, 'mouth_var': 0.00471333775203675, 'nose_var': 0.009000003337860107, 'center_shift': 16.224980739587952, 'reason': 'movement_ok'} stats={'count': 6552.0, 'min': 0.35100001096725464, 'max': 1.1060000658035278, 'stdev': 0.2093014270067215, 'range': 0.7550000548362732, 'center_mean': 0.3705214858055115, 'outer_mean': 0.48615244030952454}
+2025-09-29 01:28:14,149 | INFO | root | face_detected score=0.791 bbox=(241, 125, 544, 429) instant_alive=False depth={'range': 0.7700000107288361, 'stdev': 0.22102859616279602, 'center_mean': 0.35825687646865845, 'outer_mean': 0.4868517816066742, 'left_mean': 0.3722244203090668, 'right_mean': 0.5142247676849365, 'prominence': 0.12859490513801575, 'prominence_ratio': 0.16700636798211924, 'asymmetry': 0.14200034737586975, 'reason': 'cheeks_unbalanced'} screen={'mean': 73.2867071013394, 'stdev': 43.76357504340354, 'saturation_fraction': 0.00012635835228708617, 'flicker_pp': 56.4230133758805, 'reason': 'clear'} movement={'eye_var': 0.0455283522605896, 'mouth_var': 0.00471333775203675, 'nose_var': 0.023000001907348633, 'center_shift': 19.13765920900464, 'reason': 'movement_ok'} stats={'count': 6830.0, 'min': 0.3400000035762787, 'max': 1.1100000143051147, 'stdev': 0.22102859616279602, 'range': 0.7700000107288361, 'center_mean': 0.35825687646865845, 'outer_mean': 0.4868517816066742}
+2025-09-29 01:28:14,339 | INFO | root | face_detected score=0.775 bbox=(239, 122, 546, 430) instant_alive=False depth={'range': 0.7900000512599945, 'stdev': 0.22254668176174164, 'center_mean': 0.34583353996276855, 'outer_mean': 0.47260934114456177, 'left_mean': 0.35845571756362915, 'right_mean': 0.49961546063423157, 'prominence': 0.1267758011817932, 'prominence_ratio': 0.16047568728583592, 'asymmetry': 0.14115974307060242, 'reason': 'cheeks_unbalanced'} screen={'mean': 72.99840939679433, 'stdev': 43.201041497377275, 'saturation_fraction': 0.0, 'flicker_pp': 37.22174218943982, 'reason': 'clear'} movement={'eye_var': 0.05598028004169464, 'mouth_var': 0.00471333775203675, 'nose_var': 0.0339999794960022, 'center_shift': 19.13765920900464, 'reason': 'movement_ok'} stats={'count': 7017.0, 'min': 0.32600000500679016, 'max': 1.1160000562667847, 'stdev': 0.22254668176174164, 'range': 0.7900000512599945, 'center_mean': 0.34583353996276855, 'outer_mean': 0.47260934114456177}
+2025-09-29 01:28:14,518 | INFO | root | face_detected score=0.808 bbox=(235, 119, 542, 427) instant_alive=False depth={'range': 0.7900000810623169, 'stdev': 0.21614639461040497, 'center_mean': 0.3399159908294678, 'outer_mean': 0.45938652753829956, 'left_mean': 0.35247802734375, 'right_mean': 0.48212161660194397, 'prominence': 0.11947053670883179, 'prominence_ratio': 0.1512285119618965, 'asymmetry': 0.12964358925819397, 'reason': 'cheeks_unbalanced'} screen={'mean': 72.91166034503854, 'stdev': 42.68704490374801, 'saturation_fraction': 0.0, 'flicker_pp': 11.365620773812488, 'reason': 'clear'} movement={'eye_var': 0.05598028004169464, 'mouth_var': 0.00471333775203675, 'nose_var': 0.04100000858306885, 'center_shift': 19.13765920900464, 'reason': 'movement_ok'} stats={'count': 6836.0, 'min': 0.32200002670288086, 'max': 1.1120001077651978, 'stdev': 0.21614639461040497, 'range': 0.7900000810623169, 'center_mean': 0.3399159908294678, 'outer_mean': 0.45938652753829956}
+2025-09-29 01:28:14,702 | INFO | root | face_detected score=0.833 bbox=(237, 118, 539, 420) instant_alive=False depth={'range': 0.7780000567436218, 'stdev': 0.21211087703704834, 'center_mean': 0.34616366028785706, 'outer_mean': 0.46080952882766724, 'left_mean': 0.35953760147094727, 'right_mean': 0.4855353534221649, 'prominence': 0.11464586853981018, 'prominence_ratio': 0.14735971745255283, 'asymmetry': 0.12599775195121765, 'reason': 'cheeks_unbalanced'} screen={'mean': 73.85442957297641, 'stdev': 41.89898891340794, 'saturation_fraction': 0.0, 'flicker_pp': 2.9090303250330436, 'reason': 'clear'} movement={'eye_var': 0.05598028004169464, 'mouth_var': 0.004890435258857906, 'nose_var': 0.04100000858306885, 'center_shift': 19.13765920900464, 'reason': 'movement_ok'} stats={'count': 6762.0, 'min': 0.328000009059906, 'max': 1.1060000658035278, 'stdev': 0.21211087703704834, 'range': 0.7780000567436218, 'center_mean': 0.34616366028785706, 'outer_mean': 0.46080952882766724}
+2025-09-29 01:28:14,906 | INFO | root | face_detected score=0.818 bbox=(232, 115, 539, 423) instant_alive=False depth={'range': 0.7860000431537628, 'stdev': 0.2187781035900116, 'center_mean': 0.3481524586677551, 'outer_mean': 0.47083044052124023, 'left_mean': 0.36246457695961, 'right_mean': 0.49579501152038574, 'prominence': 0.12267798185348511, 'prominence_ratio': 0.15607884875075761, 'asymmetry': 0.13333043456077576, 'reason': 'cheeks_unbalanced'} screen={'mean': 75.31188058240548, 'stdev': 43.43562049922989, 'saturation_fraction': 0.0001223540927444023, 'flicker_pp': 3.9798184355128257, 'reason': 'clear'} movement={'eye_var': 0.05598028004169464, 'mouth_var': 0.004890435258857906, 'nose_var': 0.04100000858306885, 'center_shift': 19.13765920900464, 'reason': 'movement_ok'} stats={'count': 7025.0, 'min': 0.33000001311302185, 'max': 1.1160000562667847, 'stdev': 0.2187781035900116, 'range': 0.7860000431537628, 'center_mean': 0.3481524586677551, 'outer_mean': 0.47083044052124023}
+2025-09-29 01:28:15,087 | INFO | root | face_detected score=0.854 bbox=(236, 118, 538, 420) instant_alive=False depth={'range': 0.7810000777244568, 'stdev': 0.21050958335399628, 'center_mean': 0.35005325078964233, 'outer_mean': 0.4636387228965759, 'left_mean': 0.36350634694099426, 'right_mean': 0.48758238554000854, 'prominence': 0.1135854721069336, 'prominence_ratio': 0.14543592932523047, 'asymmetry': 0.12407603859901428, 'reason': 'cheeks_unbalanced'} screen={'mean': 73.6346717654557, 'stdev': 42.318051224466345, 'saturation_fraction': 0.00012746972594008922, 'flicker_pp': 3.9798184355128257, 'reason': 'clear'} movement={'eye_var': 0.05598028004169464, 'mouth_var': 0.004890435258857906, 'nose_var': 0.04100000858306885, 'center_shift': 19.13765920900464, 'reason': 'movement_ok'} stats={'count': 6776.0, 'min': 0.3330000042915344, 'max': 1.1140000820159912, 'stdev': 0.21050958335399628, 'range': 0.7810000777244568, 'center_mean': 0.35005325078964233, 'outer_mean': 0.4636387228965759}
+2025-09-29 01:28:15,272 | INFO | root | face_detected score=0.814 bbox=(239, 115, 537, 413) instant_alive=False depth={'range': 0.7800000905990601, 'stdev': 0.21234996616840363, 'center_mean': 0.34977513551712036, 'outer_mean': 0.46537071466445923, 'left_mean': 0.36392736434936523, 'right_mean': 0.48999810218811035, 'prominence': 0.11559557914733887, 'prominence_ratio': 0.1481994432315495, 'asymmetry': 0.12607073783874512, 'reason': 'cheeks_unbalanced'} screen={'mean': 72.00704225352112, 'stdev': 40.59326866735984, 'saturation_fraction': 0.0, 'flicker_pp': 3.9798184355128257, 'reason': 'clear'} movement={'eye_var': 0.05598028004169464, 'mouth_var': 0.004890435258857906, 'nose_var': 0.04100000858306885, 'center_shift': 19.13765920900464, 'reason': 'movement_ok'} stats={'count': 6635.0, 'min': 0.3320000171661377, 'max': 1.1120001077651978, 'stdev': 0.21234996616840363, 'range': 0.7800000905990601, 'center_mean': 0.34977513551712036, 'outer_mean': 0.46537071466445923}
+2025-09-29 01:28:15,453 | INFO | root | face_detected score=0.804 bbox=(245, 119, 543, 417) instant_alive=False depth={'range': 0.7750000357627869, 'stdev': 0.2169247716665268, 'center_mean': 0.3493974804878235, 'outer_mean': 0.4698934555053711, 'left_mean': 0.36158332228660583, 'right_mean': 0.4922370910644531, 'prominence': 0.12049597501754761, 'prominence_ratio': 0.15547867026735104, 'asymmetry': 0.1306537687778473, 'reason': 'cheeks_unbalanced'} screen={'mean': 71.72496087636932, 'stdev': 41.13087903299856, 'saturation_fraction': 0.0, 'flicker_pp': 3.9798184355128257, 'reason': 'clear'} movement={'eye_var': 0.055781662464141846, 'mouth_var': 0.004890435258857906, 'nose_var': 0.04100000858306885, 'center_shift': 18.35755975068582, 'reason': 'movement_ok'} stats={'count': 6552.0, 'min': 0.33100003004074097, 'max': 1.1060000658035278, 'stdev': 0.2169247716665268, 'range': 0.7750000357627869, 'center_mean': 0.3493974804878235, 'outer_mean': 0.4698934555053711}
+2025-09-29 01:28:15,634 | INFO | root | face_detected score=0.826 bbox=(242, 114, 537, 409) instant_alive=True depth={'range': 0.7780000865459442, 'stdev': 0.1925770342350006, 'center_mean': 0.35115113854408264, 'outer_mean': 0.4468250572681427, 'left_mean': 0.36516517400741577, 'right_mean': 0.4647826850414276, 'prominence': 0.09567391872406006, 'prominence_ratio': 0.12297417491149612, 'asymmetry': 0.09961751103401184, 'reason': 'depth_ok'} screen={'mean': 71.24106312292359, 'stdev': 40.41872318928233, 'saturation_fraction': 0.000132890365448505, 'flicker_pp': 4.070817459481887, 'reason': 'clear'} movement={'eye_var': 0.055781662464141846, 'mouth_var': 0.00323861138895154, 'nose_var': 0.04100000858306885, 'center_shift': 18.35755975068582, 'reason': 'movement_ok'} stats={'count': 6448.0, 'min': 0.33400002121925354, 'max': 1.1120001077651978, 'stdev': 0.1925770342350006, 'range': 0.7780000865459442, 'center_mean': 0.35115113854408264, 'outer_mean': 0.4468250572681427}
+2025-09-29 01:28:15,831 | INFO | root | face_detected score=0.893 bbox=(240, 112, 535, 407) instant_alive=True depth={'range': 0.7770000100135803, 'stdev': 0.20336072146892548, 'center_mean': 0.35090652108192444, 'outer_mean': 0.45705947279930115, 'left_mean': 0.3644353747367859, 'right_mean': 0.4812341034412384, 'prominence': 0.10615295171737671, 'prominence_ratio': 0.13661898371857342, 'asymmetry': 0.11679872870445251, 'reason': 'depth_ok'} screen={'mean': 70.95149501661129, 'stdev': 40.21883212995892, 'saturation_fraction': 0.0, 'flicker_pp': 4.360385565794189, 'reason': 'clear'} movement={'eye_var': 0.055781662464141846, 'mouth_var': 0.00323861138895154, 'nose_var': 0.04100000858306885, 'center_shift': 19.45507645834372, 'reason': 'movement_ok'} stats={'count': 6424.0, 'min': 0.3330000042915344, 'max': 1.1100000143051147, 'stdev': 0.20336072146892548, 'range': 0.7770000100135803, 'center_mean': 0.35090652108192444, 'outer_mean': 0.45705947279930115}
+2025-09-29 01:28:16,016 | INFO | root | face_detected score=0.867 bbox=(237, 110, 537, 410) instant_alive=True depth={'range': 0.784000039100647, 'stdev': 0.20404644310474396, 'center_mean': 0.35002267360687256, 'outer_mean': 0.456853985786438, 'left_mean': 0.3642007112503052, 'right_mean': 0.4753606617450714, 'prominence': 0.10683131217956543, 'prominence_ratio': 0.13626442200451322, 'asymmetry': 0.11115995049476624, 'reason': 'depth_ok'} screen={'mean': 71.37115284298383, 'stdev': 40.5968378957289, 'saturation_fraction': 0.0, 'flicker_pp': 4.360385565794189, 'reason': 'clear'} movement={'eye_var': 0.055781662464141846, 'mouth_var': 0.00323861138895154, 'nose_var': 0.04100000858306885, 'center_shift': 19.45507645834372, 'reason': 'movement_ok'} stats={'count': 6504.0, 'min': 0.3320000171661377, 'max': 1.1160000562667847, 'stdev': 0.20404644310474396, 'range': 0.784000039100647, 'center_mean': 0.35002267360687256, 'outer_mean': 0.456853985786438}
+2025-09-29 01:28:16,212 | INFO | root | face_detected score=0.882 bbox=(239, 107, 539, 406) instant_alive=True depth={'range': 0.7830000519752502, 'stdev': 0.20806780457496643, 'center_mean': 0.3493324816226959, 'outer_mean': 0.4583742320537567, 'left_mean': 0.36311331391334534, 'right_mean': 0.47979429364204407, 'prominence': 0.10904175043106079, 'prominence_ratio': 0.1392614855592723, 'asymmetry': 0.11668097972869873, 'reason': 'depth_ok'} screen={'mean': 70.98278560250391, 'stdev': 41.18561070218945, 'saturation_fraction': 0.0, 'flicker_pp': 4.360385565794189, 'reason': 'clear'} movement={'eye_var': 0.055781662464141846, 'mouth_var': 0.00323861138895154, 'nose_var': 0.03600001335144043, 'center_shift': 22.192341021172147, 'reason': 'movement_ok'} stats={'count': 6633.0, 'min': 0.33100003004074097, 'max': 1.1140000820159912, 'stdev': 0.20806780457496643, 'range': 0.7830000519752502, 'center_mean': 0.3493324816226959, 'outer_mean': 0.4583742320537567}
+2025-09-29 01:28:16,403 | INFO | root | face_detected score=0.849 bbox=(237, 109, 540, 412) instant_alive=True depth={'range': 0.7860001027584076, 'stdev': 0.20672078430652618, 'center_mean': 0.34409186244010925, 'outer_mean': 0.45150601863861084, 'left_mean': 0.3576951324939728, 'right_mean': 0.47177278995513916, 'prominence': 0.10741415619850159, 'prominence_ratio': 0.13665921393844577, 'asymmetry': 0.11407765746116638, 'reason': 'depth_ok'} screen={'mean': 71.38942001274697, 'stdev': 41.134437866189145, 'saturation_fraction': 0.0, 'flicker_pp': 4.360385565794189, 'reason': 'clear'} movement={'eye_var': 0.055781662464141846, 'mouth_var': 0.00323861138895154, 'nose_var': 0.0350000262260437, 'center_shift': 22.192341021172147, 'reason': 'movement_ok'} stats={'count': 6631.0, 'min': 0.32600000500679016, 'max': 1.1120001077651978, 'stdev': 0.20672078430652618, 'range': 0.7860001027584076, 'center_mean': 0.34409186244010925, 'outer_mean': 0.45150601863861084}
+2025-09-29 01:28:16,586 | INFO | root | face_detected score=0.841 bbox=(233, 93, 557, 417) instant_alive=False depth={'range': 0.8210000693798065, 'stdev': 0.23821164667606354, 'center_mean': 0.33421292901039124, 'outer_mean': 0.47663265466690063, 'left_mean': 0.3480387330055237, 'right_mean': 0.5059319734573364, 'prominence': 0.1424197256565094, 'prominence_ratio': 0.17347102755313407, 'asymmetry': 0.15789324045181274, 'reason': 'cheeks_unbalanced'} screen={'mean': 73.25111507582515, 'stdev': 43.64401203936457, 'saturation_fraction': 0.0, 'flicker_pp': 4.360385565794189, 'reason': 'clear'} movement={'eye_var': 0.055781662464141846, 'mouth_var': 0.00323861138895154, 'nose_var': 0.04000002145767212, 'center_shift': 23.96351393264352, 'reason': 'movement_ok'} stats={'count': 7740.0, 'min': 0.3160000145435333, 'max': 1.1370000839233398, 'stdev': 0.23821164667606354, 'range': 0.8210000693798065, 'center_mean': 0.33421292901039124, 'outer_mean': 0.47663265466690063}
+2025-09-29 01:28:16,766 | INFO | root | face_detected score=0.824 bbox=(229, 90, 559, 420) instant_alive=False depth={'range': 0.807000070810318, 'stdev': 0.24228480458259583, 'center_mean': 0.32636645436286926, 'outer_mean': 0.47174832224845886, 'left_mean': 0.3401733636856079, 'right_mean': 0.5021098852157593, 'prominence': 0.1453818678855896, 'prominence_ratio': 0.18015099768158632, 'asymmetry': 0.16193652153015137, 'reason': 'cheeks_unbalanced'} screen={'mean': 72.89804469273743, 'stdev': 43.31142441422032, 'saturation_fraction': 0.0, 'flicker_pp': 4.360385565794189, 'reason': 'clear'} movement={'eye_var': 0.055781662464141846, 'mouth_var': 0.0038136476650834084, 'nose_var': 0.04800000786781311, 'center_shift': 23.96351393264352, 'reason': 'movement_ok'} stats={'count': 8014.0, 'min': 0.3070000112056732, 'max': 1.1140000820159912, 'stdev': 0.24228480458259583, 'range': 0.807000070810318, 'center_mean': 0.32636645436286926, 'outer_mean': 0.47174832224845886}
+2025-09-29 01:28:16,948 | INFO | root | face_detected score=0.853 bbox=(226, 90, 560, 424) instant_alive=False depth={'range': 0.812000036239624, 'stdev': 0.24623945355415344, 'center_mean': 0.32336869835853577, 'outer_mean': 0.47410818934440613, 'left_mean': 0.33690527081489563, 'right_mean': 0.5069339871406555, 'prominence': 0.15073949098587036, 'prominence_ratio': 0.1856397589388612, 'asymmetry': 0.1700287163257599, 'reason': 'cheeks_unbalanced'} screen={'mean': 73.04482401656314, 'stdev': 44.04019619707308, 'saturation_fraction': 0.0, 'flicker_pp': 2.683176748844417, 'reason': 'clear'} movement={'eye_var': 0.055781662464141846, 'mouth_var': 0.0038136476650834084, 'nose_var': 0.04999998211860657, 'center_shift': 23.96351393264352, 'reason': 'movement_ok'} stats={'count': 8237.0, 'min': 0.30400002002716064, 'max': 1.1160000562667847, 'stdev': 0.24623945355415344, 'range': 0.812000036239624, 'center_mean': 0.32336869835853577, 'outer_mean': 0.47410818934440613}
+2025-09-29 01:28:17,130 | INFO | root | face_detected score=0.811 bbox=(225, 100, 554, 429) instant_alive=False depth={'range': 0.8090001046657562, 'stdev': 0.23471303284168243, 'center_mean': 0.32270947098731995, 'outer_mean': 0.46060818433761597, 'left_mean': 0.3359350264072418, 'right_mean': 0.4870937764644623, 'prominence': 0.13789871335029602, 'prominence_ratio': 0.17045574228605298, 'asymmetry': 0.15115875005722046, 'reason': 'cheeks_unbalanced'} screen={'mean': 72.11033519553072, 'stdev': 43.10897994485517, 'saturation_fraction': 0.00010743446497636442, 'flicker_pp': 2.299620059213865, 'reason': 'clear'} movement={'eye_var': 0.055781662464141846, 'mouth_var': 0.0038136476650834084, 'nose_var': 0.03599998354911804, 'center_shift': 23.96351393264352, 'reason': 'movement_ok'} stats={'count': 7721.0, 'min': 0.30300000309944153, 'max': 1.1120001077651978, 'stdev': 0.23471303284168243, 'range': 0.8090001046657562, 'center_mean': 0.32270947098731995, 'outer_mean': 0.46060818433761597}
+2025-09-29 01:28:17,314 | INFO | root | face_detected score=0.777 bbox=(228, 102, 560, 434) instant_alive=False depth={'range': 0.8200000524520874, 'stdev': 0.24689418077468872, 'center_mean': 0.3231962025165558, 'outer_mean': 0.4776257872581482, 'left_mean': 0.33806055784225464, 'right_mean': 0.5120202898979187, 'prominence': 0.1544295847415924, 'prominence_ratio': 0.18832874983336143, 'asymmetry': 0.17395973205566406, 'reason': 'cheeks_unbalanced'} screen={'mean': 73.11142766698322, 'stdev': 43.07542302074992, 'saturation_fraction': 0.00010551862403714256, 'flicker_pp': 2.299620059213865, 'reason': 'clear'} movement={'eye_var': 0.055781662464141846, 'mouth_var': 0.0038136476650834084, 'nose_var': 0.02899998426437378, 'center_shift': 23.04886114323222, 'reason': 'movement_ok'} stats={'count': 8025.0, 'min': 0.30400002002716064, 'max': 1.124000072479248, 'stdev': 0.24689418077468872, 'range': 0.8200000524520874, 'center_mean': 0.3231962025165558, 'outer_mean': 0.4776257872581482}
+2025-09-29 01:28:17,499 | INFO | root | face_detected score=0.854 bbox=(220, 101, 558, 438) instant_alive=False depth={'range': 0.8200000822544098, 'stdev': 0.2449771910905838, 'center_mean': 0.32184216380119324, 'outer_mean': 0.4715203642845154, 'left_mean': 0.33606818318367004, 'right_mean': 0.5005073547363281, 'prominence': 0.14967820048332214, 'prominence_ratio': 0.18253437252325008, 'asymmetry': 0.16443917155265808, 'reason': 'cheeks_unbalanced'} screen={'mean': 72.94047739969528, 'stdev': 44.47930125002898, 'saturation_fraction': 0.0, 'flicker_pp': 2.299620059213865, 'reason': 'clear'} movement={'eye_var': 0.03163060545921326, 'mouth_var': 0.0038136476650834084, 'nose_var': 0.030999988317489624, 'center_shift': 20.35313243704762, 'reason': 'movement_ok'} stats={'count': 8253.0, 'min': 0.3020000159740448, 'max': 1.1220000982284546, 'stdev': 0.2449771910905838, 'range': 0.8200000822544098, 'center_mean': 0.32184216380119324, 'outer_mean': 0.4715203642845154}
+2025-09-29 01:28:17,678 | INFO | root | face_detected score=0.780 bbox=(229, 105, 560, 435) instant_alive=False depth={'range': 0.8200000524520874, 'stdev': 0.2442067265510559, 'center_mean': 0.32283326983451843, 'outer_mean': 0.4713647663593292, 'left_mean': 0.3364621102809906, 'right_mean': 0.5050485134124756, 'prominence': 0.1485314965248108, 'prominence_ratio': 0.18113595978518487, 'asymmetry': 0.16858640313148499, 'reason': 'cheeks_unbalanced'} screen={'mean': 72.79082393016819, 'stdev': 43.694319132882, 'saturation_fraction': 0.00010645092612305727, 'flicker_pp': 2.299620059213865, 'reason': 'clear'} movement={'eye_var': 0.03163060545921326, 'mouth_var': 0.0038136476650834084, 'nose_var': 0.030999988317489624, 'center_shift': 17.755280904564703, 'reason': 'movement_ok'} stats={'count': 8095.0, 'min': 0.30400002002716064, 'max': 1.124000072479248, 'stdev': 0.2442067265510559, 'range': 0.8200000524520874, 'center_mean': 0.32283326983451843, 'outer_mean': 0.4713647663593292}
+2025-09-29 01:28:17,860 | INFO | root | face_detected score=0.815 bbox=(225, 103, 556, 433) instant_alive=False depth={'range': 0.8200000524520874, 'stdev': 0.2403934746980667, 'center_mean': 0.32304108142852783, 'outer_mean': 0.46787747740745544, 'left_mean': 0.3373779356479645, 'right_mean': 0.49850907921791077, 'prominence': 0.1448363959789276, 'prominence_ratio': 0.17662973989552325, 'asymmetry': 0.1611311435699463, 'reason': 'cheeks_unbalanced'} screen={'mean': 72.6108154140941, 'stdev': 43.750175207111596, 'saturation_fraction': 0.00010645092612305727, 'flicker_pp': 2.268329473321245, 'reason': 'clear'} movement={'eye_var': 0.03163060545921326, 'mouth_var': 0.003639298491179943, 'nose_var': 0.030999988317489624, 'center_shift': 17.755280904564703, 'reason': 'movement_ok'} stats={'count': 8012.0, 'min': 0.30400002002716064, 'max': 1.124000072479248, 'stdev': 0.2403934746980667, 'range': 0.8200000524520874, 'center_mean': 0.32304108142852783, 'outer_mean': 0.46787747740745544}
+2025-09-29 01:28:18,045 | INFO | root | face_detected score=0.820 bbox=(226, 103, 554, 432) instant_alive=False depth={'range': 0.8059999942779541, 'stdev': 0.2338383048772812, 'center_mean': 0.3232821822166443, 'outer_mean': 0.46137937903404236, 'left_mean': 0.33713528513908386, 'right_mean': 0.48788851499557495, 'prominence': 0.13809719681739807, 'prominence_ratio': 0.17133647369453256, 'asymmetry': 0.1507532298564911, 'reason': 'cheeks_unbalanced'} screen={'mean': 72.1022776106575, 'stdev': 43.45882401290592, 'saturation_fraction': 0.00010743446497636442, 'flicker_pp': 2.268329473321245, 'reason': 'clear'} movement={'eye_var': 0.03497159481048584, 'mouth_var': 0.003639298491179943, 'nose_var': 0.030999988317489624, 'center_shift': 17.0, 'reason': 'movement_ok'} stats={'count': 7844.0, 'min': 0.30400002002716064, 'max': 1.1100000143051147, 'stdev': 0.2338383048772812, 'range': 0.8059999942779541, 'center_mean': 0.3232821822166443, 'outer_mean': 0.46137937903404236}
+2025-09-29 01:28:18,226 | INFO | root | face_detected score=0.862 bbox=(223, 95, 553, 426) instant_alive=False depth={'range': 0.8059999942779541, 'stdev': 0.23382095992565155, 'center_mean': 0.3238436281681061, 'outer_mean': 0.4594692587852478, 'left_mean': 0.3378713130950928, 'right_mean': 0.48567357659339905, 'prominence': 0.13562563061714172, 'prominence_ratio': 0.16827001436723382, 'asymmetry': 0.14780226349830627, 'reason': 'cheeks_unbalanced'} screen={'mean': 72.08654460293805, 'stdev': 43.34504486726507, 'saturation_fraction': 0.0, 'flicker_pp': 1.8616950630781872, 'reason': 'clear'} movement={'eye_var': 0.03497159481048584, 'mouth_var': 0.003639298491179943, 'nose_var': 0.030999988317489624, 'center_shift': 17.0, 'reason': 'movement_ok'} stats={'count': 7868.0, 'min': 0.30400002002716064, 'max': 1.1100000143051147, 'stdev': 0.23382095992565155, 'range': 0.8059999942779541, 'center_mean': 0.3238436281681061, 'outer_mean': 0.4594692587852478}
+2025-09-29 01:28:18,411 | INFO | root | face_detected score=0.881 bbox=(222, 90, 554, 422) instant_alive=False depth={'range': 0.8159999847412109, 'stdev': 0.24192307889461517, 'center_mean': 0.32318419218063354, 'outer_mean': 0.46802785992622375, 'left_mean': 0.33588293194770813, 'right_mean': 0.49641692638397217, 'prominence': 0.1448436677455902, 'prominence_ratio': 0.17750449810550722, 'asymmetry': 0.16053399443626404, 'reason': 'cheeks_unbalanced'} screen={'mean': 72.74443389258204, 'stdev': 43.697356991099355, 'saturation_fraction': 0.0, 'flicker_pp': 1.1645704728871067, 'reason': 'clear'} movement={'eye_var': 0.03250153362751007, 'mouth_var': 0.003639298491179943, 'nose_var': 0.030999988317489624, 'center_shift': 17.0, 'reason': 'movement_ok'} stats={'count': 7911.0, 'min': 0.30400002002716064, 'max': 1.1200000047683716, 'stdev': 0.24192307889461517, 'range': 0.8159999847412109, 'center_mean': 0.32318419218063354, 'outer_mean': 0.46802785992622375}
+2025-09-29 01:28:18,518 | INFO | controller.app.session_manager | Bridge message received: backend_response
+2025-09-29 01:28:18,612 | INFO | root | face_detected score=0.807 bbox=(228, 89, 560, 421) instant_alive=False depth={'range': 0.8300000429153442, 'stdev': 0.2496618628501892, 'center_mean': 0.32379940152168274, 'outer_mean': 0.47853121161460876, 'left_mean': 0.337495893239975, 'right_mean': 0.5132828950881958, 'prominence': 0.15473181009292603, 'prominence_ratio': 0.18642385794274938, 'asymmetry': 0.17578700184822083, 'reason': 'cheeks_unbalanced'} screen={'mean': 72.90376701487813, 'stdev': 43.92974553222292, 'saturation_fraction': 0.0, 'flicker_pp': 1.02488306404517, 'reason': 'clear'} movement={'eye_var': 0.030109941959381104, 'mouth_var': 0.003639298491179943, 'nose_var': 0.030999988317489624, 'center_shift': 17.0, 'reason': 'movement_ok'} stats={'count': 8128.0, 'min': 0.30400002002716064, 'max': 1.1340000629425049, 'stdev': 0.2496618628501892, 'range': 0.8300000429153442, 'center_mean': 0.32379940152168274, 'outer_mean': 0.47853121161460876}
+2025-09-29 01:28:18,621 | INFO | controller.app.sensors.realsense | Deactivating RealSense hardware pipeline
