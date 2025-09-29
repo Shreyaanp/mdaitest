@@ -44,8 +44,10 @@ class SessionManager:
         self.settings = settings or get_settings()
         self._lock = asyncio.Lock()
         self._phase: SessionPhase = SessionPhase.IDLE
+        self._phase_started_at: float = time.time()
         self._ui_subscribers: List[asyncio.Queue[ControllerEvent]] = []
         self._current_session = SessionContext()
+        self._tof_bypass: bool = False
 
         self._tof_process: Optional[ToFReaderProcess] = None
         if tof_distance_provider is None:
@@ -139,6 +141,18 @@ class SessionManager:
             distance_mm = max(0, self.settings.tof_threshold_mm - 50)
         await self._handle_tof_trigger(triggered, distance_mm)
 
+    async def set_tof_bypass(self, enabled: bool) -> None:
+        if enabled == self._tof_bypass:
+            return
+        self._tof_bypass = enabled
+        event_data = {"event": "tof_bypass", "enabled": enabled}
+        logger.info("ToF bypass %s", "enabled" if enabled else "disabled")
+        await self._broadcast(
+            ControllerEvent(type="backend", phase=self._phase, data=event_data)
+        )
+        if enabled and self.phase == SessionPhase.IDLE:
+            self._schedule_session()
+
     async def mark_app_ready(self, *, platform_id: Optional[str] = None) -> bool:
         """Manually shortcut the app-ready handshake for local testing."""
 
@@ -174,10 +188,15 @@ class SessionManager:
     async def _set_phase(self, phase: SessionPhase, *, data: Optional[Dict[str, Any]] = None, error: Optional[str] = None) -> None:
         self._phase = phase
         await self._broadcast(ControllerEvent(type="state", data=data or {}, phase=phase, error=error))
+        self._phase_started_at = time.time()
 
     async def _handle_tof_trigger(self, triggered: bool, distance: int) -> None:
         logger.info("ToF trigger=%s distance=%s phase=%s", triggered, distance, self.phase)
         self._current_session.latest_distance_mm = distance
+        if self._tof_bypass:
+            if triggered and self.phase == SessionPhase.IDLE:
+                self._schedule_session()
+            return
         if triggered and self.phase == SessionPhase.IDLE:
             self._schedule_session()
         elif not triggered and self.phase not in {SessionPhase.IDLE, SessionPhase.COMPLETE}:
@@ -205,6 +224,7 @@ class SessionManager:
                 await self._set_phase(SessionPhase.ERROR, error="token_missing")
                 return
 
+            await self._ensure_phase_duration(3.0)
             qr_payload = self._build_qr_payload(token)
             self._current_session = SessionContext(
                 token=token,
@@ -226,14 +246,17 @@ class SessionManager:
             self._app_ready_event = asyncio.Event()
             self._ack_event = asyncio.Event()
             await self._ws_client.connect(token, self._handle_bridge_message)
+            await self._ensure_phase_duration(3.0)
 
             await self._await_app_ready()
             await self._set_phase(SessionPhase.HUMAN_DETECT)
             await self._realsense.set_hardware_active(True)
+            await self._ensure_phase_duration(3.0)
             await self._collect_best_frame()
             await self._upload_frame()
             await self._wait_for_ack()
             await self._set_phase(SessionPhase.COMPLETE)
+            await self._ensure_phase_duration(3.0)
         except asyncio.CancelledError:
             logger.info("Session cancelled")
             await self._set_phase(SessionPhase.IDLE)
@@ -241,10 +264,10 @@ class SessionManager:
         except Exception as exc:  # pragma: no cover - defensive guard
             logger.exception("Session failed: %s", exc)
             await self._set_phase(SessionPhase.ERROR, error=str(exc))
+            await self._ensure_phase_duration(3.0)
         finally:
             await self._realsense.set_hardware_active(False)
             await self._ws_client.disconnect()
-            await asyncio.sleep(1.0)
             await self._set_phase(SessionPhase.IDLE)
             self._session_task = None
             self._app_ready_event = None
@@ -258,6 +281,7 @@ class SessionManager:
         timeout = self._token_timeout()
         logger.info("Waiting for app connection with timeout=%ss", timeout)
         await asyncio.wait_for(self._app_ready_event.wait(), timeout=timeout)
+        await self._ensure_phase_duration(3.0)
 
     def _token_timeout(self) -> float:
         expires_in = self._current_session.expires_in
@@ -300,6 +324,8 @@ class SessionManager:
                             "stability": stability,
                             "focus": focus_score,
                             "composite": composite,
+                            "instant_alive": result.instant_alive,
+                            "stable_alive": result.stable_alive,
                         },
                     )
                 )
@@ -308,6 +334,7 @@ class SessionManager:
             raise RuntimeError("no_viable_frame")
 
         self._current_session.best_frame_b64 = base64.b64encode(best_bytes).decode()
+        await self._ensure_phase_duration(3.0)
 
     async def _upload_frame(self) -> None:
         await self._set_phase(SessionPhase.UPLOADING)
@@ -324,12 +351,14 @@ class SessionManager:
             },
         }
         await self._ws_client.send(payload)
+        await self._ensure_phase_duration(3.0)
 
     async def _wait_for_ack(self) -> None:
         await self._set_phase(SessionPhase.WAITING_ACK)
         if not self._ack_event:
             raise RuntimeError("ack_event_not_initialized")
         await asyncio.wait_for(self._ack_event.wait(), timeout=120.0)
+        await self._ensure_phase_duration(3.0)
 
     async def _heartbeat_loop(self) -> None:
         try:
@@ -445,3 +474,8 @@ class SessionManager:
         except Exception:
             logger.exception("Failed to encode JPEG frame")
             return None
+    async def _ensure_phase_duration(self, minimum_seconds: float) -> None:
+        elapsed = time.time() - self._phase_started_at
+        remaining = minimum_seconds - elapsed
+        if remaining > 0:
+            await asyncio.sleep(remaining)

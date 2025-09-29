@@ -13,7 +13,7 @@ const PROCESSING_DURATION_MS = 3000;
 const EMBEDDING_MESSAGE_DURATION_MS = 3000;
 const UPLOADING_DURATION_MS = 3000;
 const SCAN_COMPLETE_DURATION_MS = 3000;
-export default function StageRouter({ state, qrPayload }) {
+export default function StageRouter({ state, qrPayload, onMockTof, processingReady = false }) {
     const [idleMode, setIdleMode] = useState(state.matches('idle') ? 'idle' : 'exit');
     const [showIdleBars, setShowIdleBars] = useState(true);
     const [viewState, setViewState] = useState(state.matches('idle') ? 'idle' : 'default');
@@ -92,14 +92,14 @@ export default function StageRouter({ state, qrPayload }) {
             clearTimers(overlayTimersRef);
             setViewState('default');
         }
-        if (currentPhase === 'human_detect') {
+        if ((currentPhase === 'human_detect' || currentPhase === 'stabilizing') && processingReady) {
             startProcessingSequence();
         }
         if (currentPhase === 'uploading' || currentPhase === 'waiting_ack') {
             startUploadingSequence();
         }
         previousPhaseRef.current = currentPhase;
-    }, [state.value]);
+    }, [state.value, processingReady]);
     useEffect(() => {
         return () => {
             clearTimers(idleTimersRef);
@@ -107,7 +107,7 @@ export default function StageRouter({ state, qrPayload }) {
         };
     }, []);
     if (viewState === 'idle' || viewState === 'idleExit' || viewState === 'heroHold') {
-        return _jsx(IdleScreen, { mode: idleMode, showBars: showIdleBars });
+        return _jsx(IdleScreen, { mode: idleMode, showBars: showIdleBars, onMockTof: onMockTof });
     }
     if (viewState === 'scanPrompt') {
         return (_jsx(HandjetMessage, { lines: ['scan this', 'to get started'], durationMs: SCAN_PROMPT_DURATION_MS, onComplete: () => setViewState('default') }));
@@ -128,30 +128,27 @@ export default function StageRouter({ state, qrPayload }) {
         return _jsx(ErrorOverlay, { message: state.context.error ?? 'Unknown error' });
     }
     if (state.matches('qr_display') || state.matches('waiting_activation')) {
-        const payload = (qrPayload ?? state.context.qrPayload);
+        const payload = qrPayload ?? state.context.qrPayload;
         const status = state.matches('waiting_activation') ? 'Waiting for activation' : undefined;
         if (!payload) {
-            return (_jsx(InstructionStage, { title: "Preparing session", subtitle: "Awaiting QR payload from controller" }));
+            return _jsx(InstructionStage, { title: "preparing session", randomState: true });
         }
         return (_jsx(QRCodeStage, { token: state.context.token, qrPayload: payload, expiresIn: state.context.expiresIn, status: status }));
     }
-    if (state.matches('pairing_request')) {
-        return _jsx(InstructionStage, { title: "Preparing session" });
-    }
     if (state.matches('human_detect')) {
-        return (_jsx(InstructionStage, { title: "Center your face", subtitle: "Move closer until your face fills the frame" }));
+        return (_jsx(InstructionStage, { title: "Center your face", subtitle: "Move closer until your face fills the frame", className: "instruction-stage--tall" }));
     }
     if (state.matches('stabilizing')) {
-        return _jsx(InstructionStage, { title: "Hold steady", subtitle: "Stay still for four seconds" });
+        return (_jsx(InstructionStage, { title: "Hold steady", subtitle: "Stay still for four seconds", className: "instruction-stage--tall" }));
     }
     if (state.matches('uploading')) {
-        return _jsx(InstructionStage, { title: "Uploading", subtitle: "Please hold still" });
+        return (_jsx(InstructionStage, { title: "Uploading", subtitle: "Please hold still", className: "instruction-stage--tall" }));
     }
     if (state.matches('waiting_ack')) {
-        return _jsx(InstructionStage, { title: "Processing", subtitle: "This will take a moment" });
+        return (_jsx(InstructionStage, { title: "Processing", subtitle: "This will take a moment", className: "instruction-stage--tall" }));
     }
     if (state.matches('complete')) {
-        return _jsx(InstructionStage, { title: "Completed", subtitle: "You may step away" });
+        return (_jsx(InstructionStage, { title: "Completed", subtitle: "You may step away", className: "instruction-stage--tall" }));
     }
-    return _jsx(IdleScreen, { mode: "idle" });
+    return _jsx(IdleScreen, { mode: "idle", onMockTof: onMockTof });
 }

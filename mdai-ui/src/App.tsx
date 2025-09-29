@@ -1,7 +1,8 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useMachine } from '@xstate/react'
 
 import StageRouter from './components/StageRouter'
+import PreviewSurface from './components/PreviewSurface'
 import ControlPanel from './components/ControlPanel'
 import { sessionMachine } from './app-state/sessionMachine'
 import {
@@ -21,7 +22,6 @@ const previewVisibleStates = new Set([
 const DEFAULT_CONTROLLER_HTTP_URL = 'http://127.0.0.1:5000'
 const DEFAULT_BACKEND_URL = 'https://mdai.mercle.ai'
 const DEFAULT_DEVICE_ID = 'alpha'
-
 const readEnv = (...keys: string[]): string | undefined => {
   const env = import.meta.env as Record<string, string | undefined>
   for (const key of keys) {
@@ -39,6 +39,12 @@ function getNumberField(data: ControllerData | undefined, key: string): number |
   if (!data) return undefined
   const value = data[key]
   return typeof value === 'number' ? value : undefined
+}
+
+function getBooleanField(data: ControllerData | undefined, key: string): boolean | undefined {
+  if (!data) return undefined
+  const value = data[key]
+  return typeof value === 'boolean' ? value : undefined
 }
 
 function normaliseBaseUrl(url: string) {
@@ -63,9 +69,13 @@ export default function App() {
   const [tokenExpiryTs, setTokenExpiryTs] = useState<number | null>(null)
   const [now, setNow] = useState(Date.now())
   const [qrPayloadOverride, setQrPayloadOverride] = useState<ControllerData | null>(null)
+  const [processingReady, setProcessingReady] = useState(false)
+  const [stableAliveSince, setStableAliveSince] = useState<number | null>(null)
+  const stableAliveTimerRef = useRef<number | null>(null)
 
   const controllerHttpBase = readEnv('VITE_CONTROLLER_HTTP_URL') ?? DEFAULT_CONTROLLER_HTTP_URL
-  const previewUrl = readEnv('VITE_PREVIEW_URL') ?? `${normaliseBaseUrl(controllerHttpBase)}/preview`
+  const controllerUrl = normaliseBaseUrl(controllerHttpBase)
+  const previewUrl = readEnv('VITE_PREVIEW_URL') ?? `${controllerUrl}/preview`
   const backendUrl = readEnv('VITE_BACKEND_URL', 'VITE_BACKEND_API_URL') ?? DEFAULT_BACKEND_URL
   const deviceId = readEnv('VITE_DEVICE_ID') ?? DEFAULT_DEVICE_ID
   const deviceAddress = readEnv('VITE_DEVICE_ADDRESS')
@@ -103,11 +113,31 @@ export default function App() {
 
       if (type === 'metrics') {
         const payload = message.data as ControllerData | undefined
+        const stability = getNumberField(payload, 'stability')
+        const focus = getNumberField(payload, 'focus')
+        const composite = getNumberField(payload, 'composite')
+        const instantAlive = getBooleanField(payload, 'instant_alive')
+        const stableAlive = getBooleanField(payload, 'stable_alive')
+
         setMetrics({
-          stability: getNumberField(payload, 'stability'),
-          focus: getNumberField(payload, 'focus'),
-          composite: getNumberField(payload, 'composite')
+          stability,
+          focus,
+          composite,
+          instantAlive,
+          stableAlive
         })
+
+        const stableFlag = stableAlive === true
+        setStableAliveSince((previous) => {
+          if (stableFlag) {
+            return previous ?? Date.now()
+          }
+          return null
+        })
+
+        if (!stableFlag) {
+          setProcessingReady(false)
+        }
         return
       }
 
@@ -122,11 +152,17 @@ export default function App() {
        if (payload && typeof payload.token === 'string') {
          appendLog(`Token issued: ${payload.token.slice(0, 12)}…`)
        }
-        if (phase === 'qr_display' && payload && payload.qr_payload && typeof payload.qr_payload === 'object') {
+       if (phase === 'qr_display' && payload && payload.qr_payload && typeof payload.qr_payload === 'object') {
           setQrPayloadOverride(payload.qr_payload as ControllerData)
         }
         if (phase === 'idle') {
           setQrPayloadOverride(null)
+          setProcessingReady(false)
+          setStableAliveSince(null)
+          if (stableAliveTimerRef.current) {
+            window.clearTimeout(stableAliveTimerRef.current)
+            stableAliveTimerRef.current = null
+          }
         }
        const expires = getNumberField(payload, 'expires_in')
        if (typeof expires === 'number') {
@@ -182,6 +218,31 @@ export default function App() {
       document.body.style.backgroundColor = ''
     }
   }, [])
+
+  useEffect(() => {
+    if (stableAliveSince === null) {
+      if (stableAliveTimerRef.current) {
+        window.clearTimeout(stableAliveTimerRef.current)
+        stableAliveTimerRef.current = null
+      }
+      return
+    }
+
+    if (stableAliveTimerRef.current) {
+      window.clearTimeout(stableAliveTimerRef.current)
+    }
+
+    stableAliveTimerRef.current = window.setTimeout(() => {
+      setProcessingReady(true)
+    }, 3000)
+
+    return () => {
+      if (stableAliveTimerRef.current) {
+        window.clearTimeout(stableAliveTimerRef.current)
+        stableAliveTimerRef.current = null
+      }
+    }
+  }, [stableAliveSince])
 
   const showPreview = useMemo(() => previewVisibleStates.has(state.value as string), [state.value])
 
@@ -252,14 +313,36 @@ export default function App() {
   return (
     <div className="app-shell">
       <div className="visual-area">
-        <StageRouter state={state} qrPayload={qrPayloadOverride ?? (state.context.qrPayload as ControllerData | undefined)} />
-        <iframe
-          title="RealSense preview"
-          className={`preview-frame ${showPreview ? 'visible' : 'hidden'}`}
-          src={previewUrl}
-          allow="autoplay"
+        <StageRouter
+          state={state}
+          qrPayload={qrPayloadOverride ?? (state.context.qrPayload as ControllerData | undefined)}
+          onMockTof={triggerTof}
+        />
+        <PreviewSurface
+          visible={showPreview}
+          previewUrl={previewUrl}
         />
       </div>
+      <ControlPanel
+        deviceId={deviceId}
+        deviceAddress={deviceAddress}
+        backendUrl={backendUrl}
+        controllerUrl={controllerUrl}
+        connectionStatus={connectionStatus}
+        currentPhase={String(state.value)}
+        pairingToken={pairingToken}
+        qrPayload={qrPayloadOverride ?? (state.context.qrPayload as ControllerData | undefined)}
+        expiresInSeconds={expiresInSeconds}
+        lastHeartbeatSeconds={heartbeatAgeSeconds}
+        metrics={metrics}
+        logs={logs}
+        onTrigger={triggerSession}
+        triggerDisabled={!state.matches('idle') || isTriggering}
+        isTriggering={isTriggering}
+        onTofTrigger={triggerTof}
+        tofTriggerDisabled={!state.matches('idle') || isTofTriggering}
+        isTofTriggering={isTofTriggering}
+      />
     </div>
   )
 }

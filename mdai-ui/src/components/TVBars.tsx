@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import type { CSSProperties } from 'react'
 
-export type TVBarsMode = 'idle' | 'exit'
+export type TVBarsMode = 'entry' | 'idle' | 'exit'
 
 export interface TVBarsProps {
   fallMs?: number
@@ -30,7 +30,7 @@ const STYLE_RULES = String.raw`
 }
 
 main[data-tv-bars] {
-  animation: fall var(--fall-duration) linear forwards;
+  /* Stationary by default; entry/exit modes control animations */
   --marquee-gradient: linear-gradient(
     to right,
     #bfbfbf 0 14.285%,
@@ -41,6 +41,10 @@ main[data-tv-bars] {
     #000 71.425% 85.71%,
     #0038ff 85.71% 100%
   );
+}
+
+main[data-tv-bars][data-mode="entry"] {
+  animation: fall var(--fall-duration) linear forwards;
 }
 
 main[data-tv-bars][data-mode="exit"] {
@@ -115,12 +119,12 @@ export function TVBars({
       width: '100%',
       height: '100%',
       display: 'block',
-      backgroundColor: '#000',
+      backgroundColor: 'transparent',
       backgroundImage:
         'linear-gradient(to right,#0038ff 0 14.285%,#ff0000 14.285% 28.57%,#ff00a8 28.57% 42.855%,#00c83b 42.855% 57.14%,#00d7e6 57.14% 71.425%,#d3c600 71.425% 85.71%,#bfbfbf 85.71% 100%)',
       backgroundRepeat: 'no-repeat',
       backgroundPosition: 'top left',
-      backgroundSize: mode === 'exit' ? '100% 60%' : '100% 0%',
+      backgroundSize: mode === 'entry' ? '100% 0%' : '100% 60%',
       overflow: 'hidden',
       ['--fall-duration' as '--fall-duration']: `${fallMs}ms`,
       ['--marquee-duration' as '--marquee-duration']: `${marqueeMs}ms`,

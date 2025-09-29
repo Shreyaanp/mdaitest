@@ -344,3 +344,894 @@ RuntimeError: no_viable_frame
 2025-09-25 22:57:45,346 | INFO | app.session_manager | Stopping session manager
 2025-09-25 22:57:45,371 | INFO | app.sensors.tof | ToF polling stopped
 2025-09-25 22:57:45,439 | INFO | app.sensors.realsense | RealSense preview loop stopped
+2025-09-29 02:45:40,890 | INFO | app.session_manager | Starting session manager
+2025-09-29 02:45:40,890 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:45:40,894 | WARNING | app.sensors.realsense | RealSense hardware disabled – using placeholder frames
+2025-09-29 02:45:40,894 | ERROR | app.sensors.realsense | RealSense preview loop crashed
+Traceback (most recent call last):
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/sensors/realsense.py", line 99, in _preview_loop
+    frame_bytes = self._placeholder_frame()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/sensors/realsense.py", line 135, in _placeholder_frame
+    return _PLACEHOLDER_JPEG
+           ^^^^^^^^^^^^^^^^^
+NameError: name '_PLACEHOLDER_JPEG' is not defined
+2025-09-29 02:45:40,895 | INFO | app.sensors.realsense | RealSense preview loop stopped
+2025-09-29 02:45:40,895 | INFO | app.sensors.tof | Starting ToF polling threshold=450 debounce_ms=200 interval_ms=50
+2025-09-29 02:45:40,895 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:45:40,896 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:45:41,445 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:45:41,450 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:45:41,451 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:45:42,000 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:45:42,005 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:45:42,005 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:45:42,555 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:45:42,559 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:45:42,560 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:45:43,108 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:45:43,113 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:45:43,113 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:45:43,662 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:45:43,667 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:45:43,667 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:45:44,216 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:45:44,220 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:45:44,220 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:45:44,770 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:45:44,774 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:45:44,774 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:45:45,324 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:45:45,329 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:45:45,329 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:45:45,879 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:45:45,900 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:45:45,903 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:45:46,439 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:45:46,464 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:45:46,465 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:45:47,005 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:45:47,012 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:45:47,012 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:45:47,562 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:45:47,582 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:45:47,584 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:45:48,125 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:45:48,136 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:45:48,138 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:45:48,679 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:45:48,683 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:45:48,683 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:45:49,232 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:45:49,236 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:45:49,237 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:45:49,788 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:45:49,819 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:45:49,820 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:45:50,358 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:45:50,363 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:45:50,363 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:45:50,914 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:45:50,922 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:45:50,922 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:45:51,470 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:45:51,475 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:45:51,475 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:45:52,025 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:45:52,055 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:45:52,056 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:45:52,595 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:45:52,601 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:45:52,601 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:45:53,151 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:45:53,176 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:45:53,178 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:45:53,719 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:45:53,746 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:45:53,749 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:45:54,291 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:45:54,295 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:45:54,296 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:45:54,845 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:45:54,852 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:45:54,852 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:45:55,400 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:45:55,405 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:45:55,406 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:45:55,954 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:45:55,961 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:45:55,961 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:45:56,509 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:45:56,516 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:45:56,516 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:45:57,065 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:45:57,085 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:45:57,086 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:45:57,630 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:45:57,636 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:45:57,636 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:45:58,186 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:45:58,212 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:45:58,216 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:45:58,756 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:45:58,759 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:45:58,760 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:45:59,310 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:45:59,336 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:45:59,338 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:45:59,883 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:45:59,888 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:45:59,889 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:46:00,437 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:46:00,441 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:46:00,442 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:46:00,991 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:46:00,998 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:46:00,999 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:46:01,546 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:46:01,567 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:46:01,569 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:46:02,114 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:46:02,119 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:46:02,120 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:46:02,669 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:46:02,679 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:46:02,679 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:46:03,229 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:46:03,242 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:46:03,242 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:46:03,792 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:46:03,797 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:46:03,797 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:46:04,345 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:46:04,350 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:46:04,351 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:46:04,899 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:46:04,905 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:46:04,907 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:46:05,454 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:46:05,461 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:46:05,463 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:46:06,010 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:46:06,016 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:46:06,016 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:46:06,564 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:46:06,569 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:46:06,570 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:46:07,119 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:46:07,124 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:46:07,125 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:46:07,674 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:46:07,680 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:46:07,680 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:46:08,231 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:46:08,262 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:46:08,264 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:46:08,802 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:46:08,833 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:46:08,836 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:46:09,372 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:46:09,386 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:46:09,388 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:46:09,927 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:46:09,932 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:46:09,932 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:46:10,483 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:46:10,513 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:46:10,515 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:46:11,053 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:46:11,059 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:46:11,059 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:46:11,609 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:46:11,614 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:46:11,614 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:46:12,164 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:46:12,169 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:46:12,170 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:46:12,719 | INFO | app.sensors.tof_process | Starting tof-reader process: /home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/tof/build/tof-reader --bus /dev/i2c-1 --addr 0x29 --hz 20
+2025-09-29 02:46:12,730 | WARNING | app.sensors.tof_process | tof-reader stderr: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-29 02:46:12,731 | WARNING | app.sensors.tof_process | tof-reader exited with code 255
+2025-09-29 02:46:12,865 | INFO | app.session_manager | Stopping session manager
+2025-09-29 02:46:13,280 | INFO | app.sensors.tof | ToF polling stopped
+2025-09-29 02:46:28,424 | INFO | app.session_manager | Starting session manager
+2025-09-29 02:46:28,424 | WARNING | app.sensors.realsense | RealSense hardware disabled – using placeholder frames
+2025-09-29 02:46:28,424 | ERROR | app.sensors.realsense | RealSense preview loop crashed
+Traceback (most recent call last):
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/sensors/realsense.py", line 99, in _preview_loop
+    frame_bytes = self._placeholder_frame()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/sensors/realsense.py", line 135, in _placeholder_frame
+    return _PLACEHOLDER_JPEG
+           ^^^^^^^^^^^^^^^^^
+NameError: name '_PLACEHOLDER_JPEG' is not defined
+2025-09-29 02:46:28,425 | INFO | app.sensors.realsense | RealSense preview loop stopped
+2025-09-29 02:46:28,425 | INFO | app.sensors.tof | Starting ToF polling threshold=450 debounce_ms=200 interval_ms=50
+2025-09-29 02:47:21,482 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.IDLE
+2025-09-29 02:47:21,483 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 02:47:22,551 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-09-29 02:47:22,551 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiMmFmY2FiMjUwNjJkNDYwYWIyNTAxYmFhYmQ3MDE0MTYiLCJleHAiOjE3NTkwOTM1MjJ9.CYXkZa02y2tp2xx-ajvDYNhfmJEozGgr-0dqoemMrZQ
+2025-09-29 02:47:23,776 | INFO | app.session_manager | Waiting for app connection with timeout=175.0s
+2025-09-29 02:47:23,776 | INFO | app.session_manager | Bridge message received: joined
+2025-09-29 02:47:48,537 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.WAITING_ACTIVATION
+2025-09-29 02:47:52,003 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.WAITING_ACTIVATION
+2025-09-29 02:48:21,205 | INFO | app.sensors.tof | ToF polling cancelled
+2025-09-29 02:48:21,205 | INFO | app.sensors.tof | ToF polling stopped
+2025-09-29 02:48:21,206 | INFO | app.session_manager | Stopping session manager
+2025-09-29 02:48:21,211 | INFO | app.session_manager | Session cancelled
+2025-09-29 02:48:24,645 | INFO | app.session_manager | Starting session manager
+2025-09-29 02:48:24,645 | WARNING | app.sensors.realsense | RealSense hardware disabled – using placeholder frames
+2025-09-29 02:48:24,646 | ERROR | app.sensors.realsense | RealSense preview loop crashed
+Traceback (most recent call last):
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/sensors/realsense.py", line 99, in _preview_loop
+    frame_bytes = self._placeholder_frame()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/sensors/realsense.py", line 135, in _placeholder_frame
+    return _PLACEHOLDER_JPEG
+           ^^^^^^^^^^^^^^^^^
+NameError: name '_PLACEHOLDER_JPEG' is not defined
+2025-09-29 02:48:24,646 | INFO | app.sensors.realsense | RealSense preview loop stopped
+2025-09-29 02:48:24,646 | INFO | app.sensors.tof | Starting ToF polling threshold=450 debounce_ms=200 interval_ms=50
+2025-09-29 02:48:33,590 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.IDLE
+2025-09-29 02:48:33,591 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 02:48:34,650 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-09-29 02:48:34,651 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiNWIwYmFjZDI2YWEyNGM1YmJhOTFmNGQ4YWY1NzhjYzIiLCJleHAiOjE3NTkwOTM1OTR9.x86HnDAnm7ocTbBk2LAZs7CXKEj-xYncK3mv_ecAWOw
+2025-09-29 02:48:35,752 | INFO | app.session_manager | Waiting for app connection with timeout=175.0s
+2025-09-29 02:48:35,752 | INFO | app.session_manager | Bridge message received: joined
+2025-09-29 02:51:30,751 | ERROR | app.session_manager | Session failed: 
+Traceback (most recent call last):
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/asyncio/tasks.py", line 500, in wait_for
+    return fut.result()
+           ^^^^^^^^^^^^
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/asyncio/locks.py", line 213, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 218, in _run_session
+    await self._await_app_ready()
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 248, in _await_app_ready
+    await asyncio.wait_for(self._app_ready_event.wait(), timeout=timeout)
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/asyncio/tasks.py", line 502, in wait_for
+    raise exceptions.TimeoutError() from exc
+TimeoutError
+2025-09-29 03:25:56,306 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.IDLE
+2025-09-29 03:25:56,306 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 03:25:57,379 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-09-29 03:25:57,380 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiMDFmYmExMmRkYTMyNGRhYmI5YjNmOGRhNWJkZjVhYTMiLCJleHAiOjE3NTkwOTU4Mzh9._oQS8G7NUdCRbbANBg-UKnN0VVpm6FKQwnqwjzAsNPE
+2025-09-29 03:25:58,388 | INFO | app.session_manager | Waiting for app connection with timeout=175.0s
+2025-09-29 03:25:58,398 | INFO | app.session_manager | Bridge message received: joined
+2025-09-29 03:27:41,467 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.WAITING_ACTIVATION
+2025-09-29 03:27:46,945 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.WAITING_ACTIVATION
+2025-09-29 03:27:47,805 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.WAITING_ACTIVATION
+2025-09-29 03:27:56,619 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.WAITING_ACTIVATION
+2025-09-29 03:28:53,388 | ERROR | app.session_manager | Session failed: 
+Traceback (most recent call last):
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/asyncio/tasks.py", line 500, in wait_for
+    return fut.result()
+           ^^^^^^^^^^^^
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/asyncio/locks.py", line 213, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 218, in _run_session
+    await self._await_app_ready()
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 248, in _await_app_ready
+    await asyncio.wait_for(self._app_ready_event.wait(), timeout=timeout)
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/asyncio/tasks.py", line 502, in wait_for
+    raise exceptions.TimeoutError() from exc
+TimeoutError
+2025-09-29 03:29:17,628 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.IDLE
+2025-09-29 03:29:17,629 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 03:29:19,013 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-09-29 03:29:19,013 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiMGE0MDEzZTRjZTBhNDRjMzkzYTJjOWI4NDk2MmY5OGMiLCJleHAiOjE3NTkwOTYwMzl9.8J7V6M2SCX2BDkdXzsr0vrjvvTvOd-XdHfZJ2l-xCFM
+2025-09-29 03:29:20,651 | INFO | app.session_manager | Waiting for app connection with timeout=175.0s
+2025-09-29 03:29:20,651 | INFO | app.session_manager | Bridge message received: joined
+2025-09-29 03:32:15,652 | ERROR | app.session_manager | Session failed: 
+Traceback (most recent call last):
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/asyncio/tasks.py", line 500, in wait_for
+    return fut.result()
+           ^^^^^^^^^^^^
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/asyncio/locks.py", line 213, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 218, in _run_session
+    await self._await_app_ready()
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 248, in _await_app_ready
+    await asyncio.wait_for(self._app_ready_event.wait(), timeout=timeout)
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/asyncio/tasks.py", line 502, in wait_for
+    raise exceptions.TimeoutError() from exc
+TimeoutError
+2025-09-29 03:33:39,431 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.IDLE
+2025-09-29 03:33:39,431 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 03:33:41,185 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-09-29 03:33:41,186 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiYWM1ZjEyOTllNDgxNDUzMzgwZDUzMWNjODExN2NkZjYiLCJleHAiOjE3NTkwOTYzMDF9.kBsrBriaFcvJkWF8KR9tWmsw7VcHhgvhDyJqVQ80rww
+2025-09-29 03:33:42,291 | INFO | app.session_manager | Waiting for app connection with timeout=175.0s
+2025-09-29 03:33:42,291 | INFO | app.session_manager | Bridge message received: joined
+2025-09-29 03:36:37,292 | ERROR | app.session_manager | Session failed: 
+Traceback (most recent call last):
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/asyncio/tasks.py", line 500, in wait_for
+    return fut.result()
+           ^^^^^^^^^^^^
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/asyncio/locks.py", line 213, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 218, in _run_session
+    await self._await_app_ready()
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 248, in _await_app_ready
+    await asyncio.wait_for(self._app_ready_event.wait(), timeout=timeout)
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/asyncio/tasks.py", line 502, in wait_for
+    raise exceptions.TimeoutError() from exc
+TimeoutError
+2025-09-29 03:40:55,888 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.IDLE
+2025-09-29 03:40:55,888 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 03:40:57,501 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-09-29 03:40:57,502 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiNmRmZmE4ZjAwMjE5NGQ5ZWFmY2Q5ZTFlM2Q1OTQ0M2UiLCJleHAiOjE3NTkwOTY3Mzh9.B5lViwejFoL88Mfv0fIJ5NF-3s3dAQQRo5jjee31ORU
+2025-09-29 03:40:59,140 | INFO | app.session_manager | Waiting for app connection with timeout=175.0s
+2025-09-29 03:40:59,140 | INFO | app.session_manager | Bridge message received: joined
+2025-09-29 03:43:54,140 | ERROR | app.session_manager | Session failed: 
+Traceback (most recent call last):
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/asyncio/tasks.py", line 500, in wait_for
+    return fut.result()
+           ^^^^^^^^^^^^
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/asyncio/locks.py", line 213, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 218, in _run_session
+    await self._await_app_ready()
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 248, in _await_app_ready
+    await asyncio.wait_for(self._app_ready_event.wait(), timeout=timeout)
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/asyncio/tasks.py", line 502, in wait_for
+    raise exceptions.TimeoutError() from exc
+TimeoutError
+2025-09-29 03:43:57,262 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.IDLE
+2025-09-29 03:43:57,262 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 03:43:58,345 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-09-29 03:43:58,345 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiM2FhMWNiYzAyZWZiNDM5ODk2YWIyOGFmYTliNTEwMjIiLCJleHAiOjE3NTkwOTY5MTl9.oe0k-fkTTgx5eMH1JFQ6anXuUPf9Pa0LgHO1I86ApXc
+2025-09-29 03:43:59,358 | INFO | app.session_manager | Waiting for app connection with timeout=175.0s
+2025-09-29 03:43:59,359 | INFO | app.session_manager | Bridge message received: joined
+2025-09-29 03:44:15,958 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-29 03:44:16,944 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-29 03:44:16,944 | WARNING | app.sensors.realsense | RealSense hardware inactive – gather_results will return empty list
+2025-09-29 03:44:17,696 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-29 03:44:20,945 | ERROR | app.session_manager | Session failed: liveness_capture_failed
+Traceback (most recent call last):
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 221, in _run_session
+    await self._collect_best_frame()
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 260, in _collect_best_frame
+    raise RuntimeError("liveness_capture_failed")
+RuntimeError: liveness_capture_failed
+2025-09-29 04:09:05,617 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.IDLE
+2025-09-29 04:09:05,618 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 04:09:06,633 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-09-29 04:09:06,633 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiMThjNTZjZjkzNzRmNDQ0ZjkyMTg0MWQ4YWM1YjVkZjAiLCJleHAiOjE3NTkwOTg0MjZ9.DlpC1ONRqbBF9LmYVvDhCKT8dmn8YBwtl9RPhOEVyOo
+2025-09-29 04:09:07,671 | INFO | app.session_manager | Waiting for app connection with timeout=175.0s
+2025-09-29 04:09:07,671 | INFO | app.session_manager | Bridge message received: joined
+2025-09-29 04:09:41,167 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.WAITING_ACTIVATION
+2025-09-29 04:10:23,885 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.WAITING_ACTIVATION
+2025-09-29 04:10:31,303 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.WAITING_ACTIVATION
+2025-09-29 04:12:02,671 | ERROR | app.session_manager | Session failed: 
+Traceback (most recent call last):
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/asyncio/tasks.py", line 500, in wait_for
+    return fut.result()
+           ^^^^^^^^^^^^
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/asyncio/locks.py", line 213, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 218, in _run_session
+    await self._await_app_ready()
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 248, in _await_app_ready
+    await asyncio.wait_for(self._app_ready_event.wait(), timeout=timeout)
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/asyncio/tasks.py", line 502, in wait_for
+    raise exceptions.TimeoutError() from exc
+TimeoutError
+2025-09-29 04:15:00,599 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.IDLE
+2025-09-29 04:15:00,599 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 04:15:02,223 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-09-29 04:15:02,223 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiMzk4MzFkNTljZjgxNDgzOGJhYjI3ZmYzYTk3ZmYzOTYiLCJleHAiOjE3NTkwOTg3ODF9.DA5r4QWuVAIJkVErEljyEkad1qYKUtpn1w83cOl8LYo
+2025-09-29 04:15:03,098 | INFO | app.session_manager | Waiting for app connection with timeout=175.0s
+2025-09-29 04:15:03,098 | INFO | app.session_manager | Bridge message received: joined
+2025-09-29 04:17:58,098 | ERROR | app.session_manager | Session failed: 
+Traceback (most recent call last):
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/asyncio/tasks.py", line 500, in wait_for
+    return fut.result()
+           ^^^^^^^^^^^^
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/asyncio/locks.py", line 213, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 218, in _run_session
+    await self._await_app_ready()
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 248, in _await_app_ready
+    await asyncio.wait_for(self._app_ready_event.wait(), timeout=timeout)
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/asyncio/tasks.py", line 502, in wait_for
+    raise exceptions.TimeoutError() from exc
+TimeoutError
+2025-09-29 04:28:25,736 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.IDLE
+2025-09-29 04:28:25,737 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 04:28:27,362 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-09-29 04:28:27,362 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiZWFhMzJjNzk3MjBjNGYwNmFjODVmNzYyZmNjZDAzNGQiLCJleHAiOjE3NTkwOTk1ODZ9.uSnanqhK3DAMy6NZCYkVIPXK8YeR62zYFQWJFZcgrT8
+2025-09-29 04:28:28,530 | INFO | app.session_manager | Waiting for app connection with timeout=175.0s
+2025-09-29 04:28:28,530 | INFO | app.session_manager | Bridge message received: joined
+2025-09-29 04:29:52,246 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.WAITING_ACTIVATION
+2025-09-29 04:30:42,442 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.WAITING_ACTIVATION
+2025-09-29 04:30:47,737 | INFO | app.sensors.tof | ToF polling cancelled
+2025-09-29 04:30:47,737 | INFO | app.sensors.tof | ToF polling stopped
+2025-09-29 04:30:47,738 | INFO | app.session_manager | Stopping session manager
+2025-09-29 04:30:47,742 | INFO | app.session_manager | Session cancelled
+2025-09-29 04:30:51,376 | INFO | app.session_manager | Starting session manager
+2025-09-29 04:30:51,377 | WARNING | app.sensors.realsense | RealSense hardware disabled – using placeholder frames
+2025-09-29 04:30:51,377 | ERROR | app.sensors.realsense | RealSense preview loop crashed
+Traceback (most recent call last):
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/sensors/realsense.py", line 99, in _preview_loop
+    frame_bytes = self._placeholder_frame()
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/sensors/realsense.py", line 135, in _placeholder_frame
+    return _PLACEHOLDER_JPEG
+           ^^^^^^^^^^^^^^^^^
+NameError: name '_PLACEHOLDER_JPEG' is not defined
+2025-09-29 04:30:51,377 | INFO | app.sensors.realsense | RealSense preview loop stopped
+2025-09-29 04:30:51,377 | INFO | app.sensors.tof | Starting ToF polling threshold=450 debounce_ms=200 interval_ms=50
+2025-09-29 04:30:59,807 | INFO | app.session_manager | Debug session trigger invoked
+2025-09-29 04:30:59,807 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 04:31:01,036 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-09-29 04:31:01,036 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiOGFiOGZiYTM3OTQ0NDUzNWE3ZGU0NTI4MWYzOTIzNjgiLCJleHAiOjE3NTkwOTk3NDB9.w0EqSMeYLevnDt1Wp1QaVpX1q0gHmhaTFy0iMkpMyTg
+2025-09-29 04:31:02,178 | INFO | app.session_manager | Waiting for app connection with timeout=175.0s
+2025-09-29 04:31:02,179 | INFO | app.session_manager | Bridge message received: joined
+2025-09-29 04:31:49,604 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-29 04:31:50,630 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-29 04:31:50,630 | WARNING | app.sensors.realsense | RealSense hardware inactive – gather_results will return empty list
+2025-09-29 04:31:51,567 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-29 04:31:54,630 | ERROR | app.session_manager | Session failed: liveness_capture_failed
+Traceback (most recent call last):
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 221, in _run_session
+    await self._collect_best_frame()
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 260, in _collect_best_frame
+    raise RuntimeError("liveness_capture_failed")
+RuntimeError: liveness_capture_failed
+2025-09-29 04:55:46,863 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.IDLE
+2025-09-29 04:55:46,863 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 04:55:47,972 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-09-29 04:55:47,973 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiMjE4NmY3MzRkYjJjNDljYjgxYTlkYzg2ODY5MTVkODUiLCJleHAiOjE3NTkxMDEyMjd9.H75PkIwUyTJtOrf_zrWHjWzbgfGXGO5p7yFdQof3k34
+2025-09-29 04:55:48,982 | INFO | app.session_manager | Waiting for app connection with timeout=175.0s
+2025-09-29 04:55:48,992 | INFO | app.session_manager | Bridge message received: joined
+2025-09-29 04:58:43,983 | ERROR | app.session_manager | Session failed: 
+Traceback (most recent call last):
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/asyncio/tasks.py", line 500, in wait_for
+    return fut.result()
+           ^^^^^^^^^^^^
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/asyncio/locks.py", line 213, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 218, in _run_session
+    await self._await_app_ready()
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 248, in _await_app_ready
+    await asyncio.wait_for(self._app_ready_event.wait(), timeout=timeout)
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/asyncio/tasks.py", line 502, in wait_for
+    raise exceptions.TimeoutError() from exc
+TimeoutError
+2025-09-29 05:01:09,802 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.IDLE
+2025-09-29 05:01:09,803 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 05:01:10,920 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-09-29 05:01:10,921 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiN2ZiMjVjMWQ5ZGNmNDE1YjliYTIzMmVlNTI3MGVjM2IiLCJleHAiOjE3NTkxMDE1NTB9.fzB-QBlfCMbwU3fevthglfdLxFdnhKwz5AVt1UMaALo
+2025-09-29 05:01:12,187 | INFO | app.session_manager | Waiting for app connection with timeout=175.0s
+2025-09-29 05:01:12,187 | INFO | app.session_manager | Bridge message received: joined
+2025-09-29 05:02:32,765 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-29 05:02:33,796 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-29 05:02:33,796 | WARNING | app.sensors.realsense | RealSense hardware inactive – gather_results will return empty list
+2025-09-29 05:02:34,532 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-29 05:02:37,800 | ERROR | app.session_manager | Session failed: liveness_capture_failed
+Traceback (most recent call last):
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 221, in _run_session
+    await self._collect_best_frame()
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 260, in _collect_best_frame
+    raise RuntimeError("liveness_capture_failed")
+RuntimeError: liveness_capture_failed
+2025-09-29 06:50:09,423 | INFO | app.session_manager | Stopping session manager
+2025-09-29 06:50:09,429 | INFO | app.sensors.tof | ToF polling stopped
+2025-09-29 14:42:44,241 | INFO | controller.app.session_manager | Starting session manager
+2025-09-29 14:42:44,241 | INFO | controller.app.sensors.realsense | RealSense hardware idle until session start
+2025-09-29 14:42:44,241 | INFO | controller.app.sensors.tof | Starting ToF polling threshold=450 debounce_ms=200 interval_ms=50
+2025-09-29 14:43:59,997 | INFO | app.session_manager | Starting session manager
+2025-09-29 14:43:59,997 | WARNING | app.sensors.realsense | RealSense hardware disabled – using placeholder frames
+2025-09-29 14:43:59,997 | INFO | app.sensors.tof | Starting ToF polling threshold=450 debounce_ms=200 interval_ms=50
+2025-09-29 14:44:06,012 | INFO | app.session_manager | Stopping session manager
+2025-09-29 14:44:06,022 | INFO | app.sensors.tof | ToF polling stopped
+2025-09-29 14:44:06,112 | INFO | app.sensors.realsense | RealSense preview loop stopped
+2025-09-29 14:50:29,240 | INFO | app.session_manager | Starting session manager
+2025-09-29 14:50:29,240 | WARNING | app.sensors.realsense | RealSense hardware disabled – using placeholder frames
+2025-09-29 14:50:29,240 | INFO | app.sensors.tof | Starting ToF polling threshold=450 debounce_ms=200 interval_ms=50
+2025-09-29 14:50:31,836 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.IDLE
+2025-09-29 14:50:31,837 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 14:50:32,892 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.PAIRING_REQUEST
+2025-09-29 14:50:33,089 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-09-29 14:50:34,837 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiNWRlMGViNmUzZGRiNDBiYmFiNGE3YmIyZWM5ZjkyZDMiLCJleHAiOjE3NTkxMzY5MTN9.xhy6SFR-obV7WwsUSoRBzbpm8uHd8keXXRQ8lIe9wrQ
+2025-09-29 14:50:35,345 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.QR_DISPLAY
+2025-09-29 14:50:35,761 | INFO | app.session_manager | Bridge message received: joined
+2025-09-29 14:50:35,879 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.QR_DISPLAY
+2025-09-29 14:50:36,216 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.QR_DISPLAY
+2025-09-29 14:50:37,836 | INFO | app.session_manager | Waiting for app connection with timeout=175.0s
+2025-09-29 14:51:28,464 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.WAITING_ACTIVATION
+2025-09-29 14:51:58,024 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.WAITING_ACTIVATION
+2025-09-29 14:52:00,603 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.WAITING_ACTIVATION
+2025-09-29 14:52:05,851 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.WAITING_ACTIVATION
+2025-09-29 14:52:06,326 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.WAITING_ACTIVATION
+2025-09-29 14:52:10,575 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.WAITING_ACTIVATION
+2025-09-29 14:52:12,232 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.WAITING_ACTIVATION
+2025-09-29 14:52:13,631 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.WAITING_ACTIVATION
+2025-09-29 14:52:14,185 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.WAITING_ACTIVATION
+2025-09-29 14:52:14,712 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.WAITING_ACTIVATION
+2025-09-29 14:52:15,555 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.WAITING_ACTIVATION
+2025-09-29 14:53:32,836 | ERROR | app.session_manager | Session failed: 
+Traceback (most recent call last):
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/asyncio/tasks.py", line 500, in wait_for
+    return fut.result()
+           ^^^^^^^^^^^^
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/asyncio/locks.py", line 213, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 251, in _run_session
+    await self._await_app_ready()
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 283, in _await_app_ready
+    await asyncio.wait_for(self._app_ready_event.wait(), timeout=timeout)
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/asyncio/tasks.py", line 502, in wait_for
+    raise exceptions.TimeoutError() from exc
+TimeoutError
+2025-09-29 14:53:33,338 | WARNING | app.backend.ws_client | Bridge websocket closed: received 4000 (private use); then sent 4000 (private use)
+2025-09-29 14:56:59,746 | INFO | app.sensors.realsense | RealSense preview loop stopped
+2025-09-29 14:56:59,746 | INFO | app.session_manager | Stopping session manager
+2025-09-29 14:56:59,746 | INFO | app.sensors.tof | ToF polling cancelled
+2025-09-29 14:56:59,746 | INFO | app.sensors.tof | ToF polling stopped
+2025-09-29 15:04:26,277 | INFO | app.session_manager | Starting session manager
+2025-09-29 15:04:26,277 | WARNING | app.sensors.realsense | RealSense hardware disabled – using placeholder frames
+2025-09-29 15:04:26,277 | INFO | app.sensors.tof | Starting ToF polling threshold=450 debounce_ms=200 interval_ms=50
+2025-09-29 15:04:42,346 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.IDLE
+2025-09-29 15:04:42,349 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 15:04:43,291 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-09-29 15:04:45,350 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiMDA0YzVkZWEyMjgxNDZkM2E4YTU0OTFlNmZiMDc2YzkiLCJleHAiOjE3NTkxMzc3NjN9.KDuhI1v08dOXKw419MQYarREyXF9gw7VPbphbaUdWbA
+2025-09-29 15:04:46,596 | INFO | app.session_manager | Bridge message received: joined
+2025-09-29 15:04:48,351 | INFO | app.session_manager | Waiting for app connection with timeout=175.0s
+2025-09-29 15:07:43,351 | ERROR | app.session_manager | Session failed: 
+Traceback (most recent call last):
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/asyncio/tasks.py", line 500, in wait_for
+    return fut.result()
+           ^^^^^^^^^^^^
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/asyncio/locks.py", line 213, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 251, in _run_session
+    await self._await_app_ready()
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 283, in _await_app_ready
+    await asyncio.wait_for(self._app_ready_event.wait(), timeout=timeout)
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/asyncio/tasks.py", line 502, in wait_for
+    raise exceptions.TimeoutError() from exc
+TimeoutError
+2025-09-29 15:07:43,609 | WARNING | app.backend.ws_client | Bridge websocket closed: received 4000 (private use); then sent 4000 (private use)
+2025-09-29 15:09:16,132 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.IDLE
+2025-09-29 15:09:16,134 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 15:09:17,415 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-09-29 15:09:19,135 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiNTJhMzVjMDljZGFhNDljYmEwMWRiNGM5ODNjZmVjZjciLCJleHAiOjE3NTkxMzgwMzd9.I3axgiSrQuzmYWN6ETCN8OicYOD7FlTQG8fdnNJax3E
+2025-09-29 15:09:20,165 | INFO | app.session_manager | Bridge message received: joined
+2025-09-29 15:09:22,136 | INFO | app.session_manager | Waiting for app connection with timeout=175.0s
+2025-09-29 15:10:12,134 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.WAITING_ACTIVATION
+2025-09-29 15:10:17,844 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.WAITING_ACTIVATION
+2025-09-29 15:10:19,161 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.WAITING_ACTIVATION
+2025-09-29 15:12:17,136 | ERROR | app.session_manager | Session failed: 
+Traceback (most recent call last):
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/asyncio/tasks.py", line 500, in wait_for
+    return fut.result()
+           ^^^^^^^^^^^^
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/asyncio/locks.py", line 213, in wait
+    await fut
+asyncio.exceptions.CancelledError
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 251, in _run_session
+    await self._await_app_ready()
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 283, in _await_app_ready
+    await asyncio.wait_for(self._app_ready_event.wait(), timeout=timeout)
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/asyncio/tasks.py", line 502, in wait_for
+    raise exceptions.TimeoutError() from exc
+TimeoutError
+2025-09-29 15:12:17,540 | WARNING | app.backend.ws_client | Bridge websocket closed: received 4000 (private use); then sent 4000 (private use)
+2025-09-29 15:16:06,358 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.IDLE
+2025-09-29 15:16:06,359 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 15:16:07,588 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-09-29 15:16:09,359 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiN2M4NGQ2OTU4MDYwNDNjMzk3NjQ3ODlmYjA4YTI1ZTMiLCJleHAiOjE3NTkxMzg0NDd9.rLuIFe5m1sMUV3wyjYrR9EOHJaB79jKjSJSK9DwoTlk
+2025-09-29 15:16:10,385 | INFO | app.session_manager | Bridge message received: joined
+2025-09-29 15:16:12,359 | INFO | app.session_manager | Waiting for app connection with timeout=175.0s
+2025-09-29 15:18:16,169 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-29 15:18:48,203 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.WAITING_ACTIVATION
+2025-09-29 15:18:50,847 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.WAITING_ACTIVATION
+2025-09-29 15:18:52,102 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.WAITING_ACTIVATION
+2025-09-29 15:18:57,034 | INFO | app.sensors.realsense | RealSense preview loop stopped
+2025-09-29 15:18:57,035 | INFO | app.session_manager | Stopping session manager
+2025-09-29 15:18:57,035 | INFO | app.sensors.tof | ToF polling cancelled
+2025-09-29 15:18:57,035 | INFO | app.sensors.tof | ToF polling stopped
+2025-09-29 15:18:57,038 | INFO | app.session_manager | Session cancelled
+2025-09-29 15:19:02,447 | INFO | app.session_manager | Starting session manager
+2025-09-29 15:19:02,447 | WARNING | app.sensors.realsense | RealSense hardware disabled – using placeholder frames
+2025-09-29 15:19:02,447 | INFO | app.sensors.tof | Starting ToF polling threshold=450 debounce_ms=200 interval_ms=50
+2025-09-29 15:19:12,335 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.IDLE
+2025-09-29 15:19:12,336 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 15:19:13,869 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-09-29 15:19:15,337 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiYjMwZGNjNmM4MzA1NGUxZmI2NTM2ODMyM2QxYWIzYjciLCJleHAiOjE3NTkxMzg2MzN9.N9GViMeM06ZKLc9s11YfMxQ0zQTiPZRdCzDXqukeuZg
+2025-09-29 15:19:16,714 | INFO | app.session_manager | Bridge message received: joined
+2025-09-29 15:19:18,337 | INFO | app.session_manager | Waiting for app connection with timeout=175.0s
+2025-09-29 15:19:29,434 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-29 15:19:30,453 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-29 15:19:31,176 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-29 15:19:33,453 | WARNING | app.sensors.realsense | RealSense hardware inactive – gather_results will return empty list
+2025-09-29 15:19:37,454 | ERROR | app.session_manager | Session failed: liveness_capture_failed
+Traceback (most recent call last):
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 255, in _run_session
+    await self._collect_best_frame()
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 296, in _collect_best_frame
+    raise RuntimeError("liveness_capture_failed")
+RuntimeError: liveness_capture_failed
+2025-09-29 15:20:42,181 | INFO | app.sensors.realsense | RealSense preview loop stopped
+2025-09-29 15:20:42,195 | INFO | app.session_manager | Stopping session manager
+2025-09-29 15:20:42,196 | INFO | app.sensors.tof | ToF polling cancelled
+2025-09-29 15:20:42,197 | INFO | app.sensors.tof | ToF polling stopped
+2025-09-29 15:20:48,151 | INFO | app.session_manager | Starting session manager
+2025-09-29 15:20:48,152 | WARNING | app.sensors.realsense | RealSense hardware disabled – using placeholder frames
+2025-09-29 15:20:48,152 | INFO | app.sensors.tof | Starting ToF polling threshold=450 debounce_ms=200 interval_ms=50
+2025-09-29 15:20:56,740 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.IDLE
+2025-09-29 15:20:56,743 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 15:20:58,621 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-09-29 15:20:59,744 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiOGI3OTNjNzRjNjQxNDk4ZmIwYmI4OTYzYzBmMmJjMTUiLCJleHAiOjE3NTkxMzg3Mzh9.WtWhuKiRaUkJLuXIeCezrRAIlVKeCwvCHDqZiEfqAec
+2025-09-29 15:21:01,048 | INFO | app.session_manager | Bridge message received: joined
+2025-09-29 15:21:02,745 | INFO | app.session_manager | Waiting for app connection with timeout=175.0s
+2025-09-29 15:21:19,179 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-29 15:21:20,212 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-29 15:21:20,957 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-29 15:21:23,213 | WARNING | app.sensors.realsense | RealSense hardware inactive – gather_results will return empty list
+2025-09-29 15:21:27,214 | ERROR | app.session_manager | Session failed: liveness_capture_failed
+Traceback (most recent call last):
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 255, in _run_session
+    await self._collect_best_frame()
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 296, in _collect_best_frame
+    raise RuntimeError("liveness_capture_failed")
+RuntimeError: liveness_capture_failed
+2025-09-29 15:24:34,374 | INFO | app.sensors.realsense | RealSense preview loop stopped
+2025-09-29 15:24:34,379 | INFO | app.session_manager | Stopping session manager
+2025-09-29 15:24:34,380 | INFO | app.sensors.tof | ToF polling cancelled
+2025-09-29 15:24:34,380 | INFO | app.sensors.tof | ToF polling stopped
+2025-09-29 15:27:28,077 | INFO | app.session_manager | Starting session manager
+2025-09-29 15:27:28,077 | WARNING | app.sensors.realsense | RealSense hardware disabled – using placeholder frames
+2025-09-29 15:27:28,077 | INFO | app.sensors.tof | Starting ToF polling threshold=450 debounce_ms=200 interval_ms=50
+2025-09-29 15:28:00,685 | INFO | app.session_manager | Stopping session manager
+2025-09-29 15:28:00,714 | INFO | app.sensors.tof | ToF polling stopped
+2025-09-29 15:28:00,785 | INFO | app.sensors.realsense | RealSense preview loop stopped
+2025-09-29 15:28:17,501 | INFO | app.session_manager | Starting session manager
+2025-09-29 15:28:17,501 | WARNING | app.sensors.realsense | RealSense hardware disabled – using placeholder frames
+2025-09-29 15:28:17,501 | INFO | app.sensors.tof | Starting ToF polling threshold=450 debounce_ms=200 interval_ms=50
+2025-09-29 15:28:26,117 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.IDLE
+2025-09-29 15:28:26,117 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 15:28:27,499 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.PAIRING_REQUEST
+2025-09-29 15:28:27,887 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-09-29 15:28:29,118 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiMDM0ZmNmNDA1MzdjNDkxOWEwMWU1M2ZlODI0NGMzOTUiLCJleHAiOjE3NTkxMzkxODh9.KrSJEz5Bh6ygp5AsInFeT_Y3bRDAhTlK8Fb4lh14F60
+2025-09-29 15:28:30,544 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.QR_DISPLAY
+2025-09-29 15:28:30,731 | INFO | app.session_manager | Bridge message received: joined
+2025-09-29 15:28:32,118 | INFO | app.session_manager | Waiting for app connection with timeout=175.0s
+2025-09-29 15:28:33,968 | INFO | app.sensors.realsense | RealSense preview loop stopped
+2025-09-29 15:28:33,968 | INFO | app.session_manager | Stopping session manager
+2025-09-29 15:28:33,968 | INFO | app.sensors.tof | ToF polling cancelled
+2025-09-29 15:28:33,968 | INFO | app.sensors.tof | ToF polling stopped
+2025-09-29 15:28:33,969 | INFO | app.session_manager | Session cancelled
+2025-09-29 15:28:36,786 | INFO | app.session_manager | Starting session manager
+2025-09-29 15:28:36,786 | WARNING | app.sensors.realsense | RealSense hardware disabled – using placeholder frames
+2025-09-29 15:28:36,787 | INFO | app.sensors.tof | Starting ToF polling threshold=450 debounce_ms=200 interval_ms=50
+2025-09-29 15:29:00,381 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.IDLE
+2025-09-29 15:29:00,385 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 15:29:01,817 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-09-29 15:29:03,384 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiYTE3YTNiODE1MzkwNDRhNzhmZjEwODg1YWVmN2EwZDAiLCJleHAiOjE3NTkxMzkyMjF9.3cS8Ow9rwSDG6cTm_FLN2lfwUw_lszzfWpA8Ko8WBcg
+2025-09-29 15:29:04,783 | INFO | app.session_manager | Bridge message received: joined
+2025-09-29 15:29:06,383 | INFO | app.session_manager | Waiting for app connection with timeout=175.0s
+2025-09-29 15:29:20,632 | INFO | app.session_manager | Bridge message received: status
+2025-09-29 15:29:25,419 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-29 15:29:26,376 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-29 15:29:27,304 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-29 15:29:29,377 | WARNING | app.sensors.realsense | RealSense hardware inactive – gather_results will return empty list
+2025-09-29 15:29:33,378 | ERROR | app.session_manager | Session failed: liveness_capture_failed
+Traceback (most recent call last):
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 255, in _run_session
+    await self._collect_best_frame()
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 296, in _collect_best_frame
+    raise RuntimeError("liveness_capture_failed")
+RuntimeError: liveness_capture_failed
+2025-09-29 15:42:07,316 | INFO | app.session_manager | Stopping session manager
+2025-09-29 15:42:07,326 | INFO | app.sensors.tof | ToF polling stopped
+2025-09-29 15:42:07,419 | INFO | app.sensors.realsense | RealSense preview loop stopped
+2025-09-29 15:42:07,547 | INFO | app.session_manager | Starting session manager
+2025-09-29 15:42:07,548 | INFO | app.sensors.realsense | RealSense hardware idle until session start
+2025-09-29 15:42:07,548 | INFO | app.sensors.tof | Starting ToF polling threshold=450 debounce_ms=200 interval_ms=50
+2025-09-29 15:42:30,690 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.IDLE
+2025-09-29 15:42:30,691 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 15:42:31,730 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-09-29 15:42:33,691 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiMTE0ODJlNzA1ZTAzNDhiNzkzNTU0N2E0MWEzZGE4NjgiLCJleHAiOjE3NTkxNDAwMzF9.XWG1wi_VWa1YCh12-Wu6HgDPkD6xy8t1VA2kb0m-Unc
+2025-09-29 15:42:35,409 | INFO | app.session_manager | Bridge message received: joined
+2025-09-29 15:42:36,691 | INFO | app.session_manager | Waiting for app connection with timeout=175.0s
+2025-09-29 15:42:54,413 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-29 15:42:55,554 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-29 15:42:55,554 | INFO | app.sensors.realsense | Activating RealSense hardware pipeline
+2025-09-29 15:42:55,813 | INFO | root | Connected to Intel RealSense D435I (S/N 215322072881)
+2025-09-29 15:42:56,331 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-29 15:42:56,814 | ERROR | app.sensors.realsense | RealSense preview loop crashed
+Traceback (most recent call last):
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/sensors/realsense.py", line 107, in _preview_loop
+    result = await self._run_process()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/sensors/realsense.py", line 131, in _run_process
+    return await loop.run_in_executor(None, self._instance.process)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/d435i/mediapipe_liveness.py", line 543, in process
+    frames = self.pipe.wait_for_frames(timeout_ms=timeout_ms)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+RuntimeError: Frame didn't arrive within 1000
+2025-09-29 15:42:56,821 | INFO | app.sensors.realsense | RealSense preview loop stopped
+2025-09-29 15:43:02,554 | ERROR | app.session_manager | Session failed: liveness_capture_failed
+Traceback (most recent call last):
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 255, in _run_session
+    await self._collect_best_frame()
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 296, in _collect_best_frame
+    raise RuntimeError("liveness_capture_failed")
+RuntimeError: liveness_capture_failed
+2025-09-29 15:43:05,554 | INFO | app.sensors.realsense | Deactivating RealSense hardware pipeline
+2025-09-29 15:44:24,951 | INFO | app.session_manager | Starting session manager
+2025-09-29 15:44:24,951 | INFO | app.sensors.realsense | RealSense hardware idle until session start
+2025-09-29 15:44:24,951 | INFO | app.sensors.tof | Starting ToF polling threshold=450 debounce_ms=200 interval_ms=50
+2025-09-29 15:44:37,581 | INFO | app.session_manager | Stopping session manager
+2025-09-29 15:44:37,594 | INFO | app.sensors.tof | ToF polling stopped
+2025-09-29 15:45:40,455 | INFO | app.session_manager | Starting session manager
+2025-09-29 15:45:40,455 | WARNING | app.sensors.realsense | RealSense hardware disabled – using placeholder frames
+2025-09-29 15:45:40,455 | INFO | app.sensors.tof | Starting ToF polling threshold=450 debounce_ms=200 interval_ms=50
+2025-09-29 15:45:40,456 | INFO | app.session_manager | Stopping session manager
+2025-09-29 15:45:40,506 | INFO | app.sensors.tof | ToF polling stopped
+2025-09-29 15:45:40,556 | INFO | app.sensors.realsense | RealSense preview loop stopped
+2025-09-29 15:47:00,596 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.IDLE
+2025-09-29 15:47:00,596 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 15:47:00,600 | ERROR | app.session_manager | Session failed: [Errno -3] Temporary failure in name resolution
+Traceback (most recent call last):
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/httpx/_transports/default.py", line 66, in map_httpcore_exceptions
+    yield
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/httpx/_transports/default.py", line 366, in handle_async_request
+    resp = await self._pool.handle_async_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/httpcore/_async/connection_pool.py", line 256, in handle_async_request
+    raise exc from None
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/httpcore/_async/connection_pool.py", line 236, in handle_async_request
+    response = await connection.handle_async_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/httpcore/_async/connection.py", line 101, in handle_async_request
+    raise exc
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/httpcore/_async/connection.py", line 78, in handle_async_request
+    stream = await self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/httpcore/_async/connection.py", line 124, in _connect
+    stream = await self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/httpcore/_backends/auto.py", line 31, in connect_tcp
+    return await self._backend.connect_tcp(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/httpcore/_backends/anyio.py", line 113, in connect_tcp
+    with map_exceptions(exc_map):
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore.ConnectError: [Errno -3] Temporary failure in name resolution
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 216, in _run_session
+    token_info = await self._http_client.issue_token()
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/backend/http_client.py", line 25, in issue_token
+    response = await self._client.post("/auth", json=payload)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/httpx/_client.py", line 1848, in post
+    return await self.request(
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/httpx/_client.py", line 1530, in request
+    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/httpx/_client.py", line 1617, in send
+    response = await self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/httpx/_client.py", line 1645, in _send_handling_auth
+    response = await self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/httpx/_client.py", line 1682, in _send_handling_redirects
+    response = await self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/httpx/_client.py", line 1719, in _send_single_request
+    response = await transport.handle_async_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/httpx/_transports/default.py", line 365, in handle_async_request
+    with map_httpcore_exceptions():
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/contextlib.py", line 158, in __exit__
+    self.gen.throw(typ, value, traceback)
+  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/httpx/_transports/default.py", line 83, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx.ConnectError: [Errno -3] Temporary failure in name resolution
+2025-09-29 15:48:44,272 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.IDLE
+2025-09-29 15:48:44,272 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 15:48:45,241 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-09-29 15:48:47,272 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiODYxYzk0MjU2ZmNhNDQyMjlkYWRjNDk4YzEyOTRmOGUiLCJleHAiOjE3NTkxNDA0MDV9.iJOzCAbgE4wXEb-jpxxdhi5wFbhnaGzy7xt74WEENLs
+2025-09-29 15:48:48,173 | INFO | app.session_manager | Bridge message received: joined
+2025-09-29 15:48:50,272 | INFO | app.session_manager | Waiting for app connection with timeout=175.0s
+2025-09-29 15:49:05,556 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-29 15:49:06,994 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-29 15:49:06,995 | INFO | app.sensors.realsense | Activating RealSense hardware pipeline
+2025-09-29 15:49:07,248 | INFO | root | Connected to Intel RealSense D435I (S/N 215322072881)
+2025-09-29 15:49:07,634 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-29 15:49:08,248 | WARNING | app.sensors.realsense | RealSense frame timeout; retrying
+2025-09-29 15:49:09,249 | WARNING | app.sensors.realsense | RealSense frame timeout; retrying
+2025-09-29 15:49:10,250 | WARNING | app.sensors.realsense | RealSense frame timeout; retrying
+2025-09-29 15:49:11,250 | WARNING | app.sensors.realsense | RealSense frame timeout; retrying
+2025-09-29 15:49:12,251 | WARNING | app.sensors.realsense | RealSense frame timeout; retrying
+2025-09-29 15:49:13,252 | WARNING | app.sensors.realsense | RealSense frame timeout; retrying
+2025-09-29 15:49:13,995 | ERROR | app.session_manager | Session failed: liveness_capture_failed
+Traceback (most recent call last):
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 255, in _run_session
+    await self._collect_best_frame()
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 296, in _collect_best_frame
+    raise RuntimeError("liveness_capture_failed")
+RuntimeError: liveness_capture_failed
+2025-09-29 15:49:14,253 | WARNING | app.sensors.realsense | RealSense frame timeout; retrying
+2025-09-29 15:49:15,254 | WARNING | app.sensors.realsense | RealSense frame timeout; retrying
+2025-09-29 15:49:16,254 | WARNING | app.sensors.realsense | RealSense frame timeout; retrying
+2025-09-29 15:49:17,255 | WARNING | app.sensors.realsense | RealSense frame timeout; retrying
+2025-09-29 15:49:17,255 | INFO | app.sensors.realsense | Deactivating RealSense hardware pipeline
+2025-09-29 15:49:17,885 | ERROR | app.sensors.realsense | RealSense preview loop crashed
+Traceback (most recent call last):
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/sensors/realsense.py", line 107, in _preview_loop
+    result = await self._run_process()
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/sensors/realsense.py", line 132, in _run_process
+    return await loop.run_in_executor(None, self._instance.process)
+                                            ^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'process'
+2025-09-29 15:49:17,886 | INFO | app.sensors.realsense | RealSense preview loop stopped

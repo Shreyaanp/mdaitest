@@ -12,6 +12,8 @@ import UploadingScreen from './UploadingScreen'
 interface StageRouterProps {
   state: StateFrom<typeof sessionMachine>
   qrPayload?: Record<string, unknown> | null
+  onMockTof?: () => void
+  processingReady?: boolean
 }
 
 const HERO_HOLD_DURATION_MS = 3000
@@ -32,7 +34,7 @@ type ViewState =
   | 'scanComplete'
   | 'default'
 
-export default function StageRouter({ state, qrPayload }: StageRouterProps) {
+export default function StageRouter({ state, qrPayload, onMockTof, processingReady = false }: StageRouterProps) {
   const [idleMode, setIdleMode] = useState<'idle' | 'exit'>(state.matches('idle') ? 'idle' : 'exit')
   const [showIdleBars, setShowIdleBars] = useState<boolean>(true)
   const [viewState, setViewState] = useState<ViewState>(state.matches('idle') ? 'idle' : 'default')
@@ -130,7 +132,7 @@ export default function StageRouter({ state, qrPayload }: StageRouterProps) {
       setViewState('default')
     }
 
-    if (currentPhase === 'human_detect') {
+    if ((currentPhase === 'human_detect' || currentPhase === 'stabilizing') && processingReady) {
       startProcessingSequence()
     }
 
@@ -139,7 +141,7 @@ export default function StageRouter({ state, qrPayload }: StageRouterProps) {
     }
 
     previousPhaseRef.current = currentPhase
-  }, [state.value])
+  }, [state.value, processingReady])
 
   useEffect(() => {
     return () => {
@@ -149,7 +151,7 @@ export default function StageRouter({ state, qrPayload }: StageRouterProps) {
   }, [])
 
   if (viewState === 'idle' || viewState === 'idleExit' || viewState === 'heroHold') {
-    return <IdleScreen mode={idleMode} showBars={showIdleBars} />
+    return <IdleScreen mode={idleMode} showBars={showIdleBars} onMockTof={onMockTof} />
   }
 
   if (viewState === 'scanPrompt') {
@@ -205,16 +207,11 @@ export default function StageRouter({ state, qrPayload }: StageRouterProps) {
   }
 
   if (state.matches('qr_display') || state.matches('waiting_activation')) {
-    const payload = (qrPayload ?? (state.context.qrPayload as Record<string, unknown> | undefined))
+    const payload = qrPayload ?? (state.context.qrPayload as Record<string, unknown> | undefined)
     const status = state.matches('waiting_activation') ? 'Waiting for activation' : undefined
 
     if (!payload) {
-      return (
-        <InstructionStage
-          title="Preparing session"
-          subtitle="Awaiting QR payload from controller"
-        />
-      )
+      return <InstructionStage title="preparing session" randomState />
     }
 
     return (
@@ -227,34 +224,55 @@ export default function StageRouter({ state, qrPayload }: StageRouterProps) {
     )
   }
 
-  if (state.matches('pairing_request')) {
-    return <InstructionStage title="Preparing session" />
-  }
-
   if (state.matches('human_detect')) {
     return (
       <InstructionStage
         title="Center your face"
         subtitle="Move closer until your face fills the frame"
+        className="instruction-stage--tall"
       />
     )
   }
 
   if (state.matches('stabilizing')) {
-    return <InstructionStage title="Hold steady" subtitle="Stay still for four seconds" />
+    return (
+      <InstructionStage
+        title="Hold steady"
+        subtitle="Stay still for four seconds"
+        className="instruction-stage--tall"
+      />
+    )
   }
 
   if (state.matches('uploading')) {
-    return <InstructionStage title="Uploading" subtitle="Please hold still" />
+    return (
+      <InstructionStage
+        title="Uploading"
+        subtitle="Please hold still"
+        className="instruction-stage--tall"
+      />
+    )
   }
 
   if (state.matches('waiting_ack')) {
-    return <InstructionStage title="Processing" subtitle="This will take a moment" />
+    return (
+      <InstructionStage
+        title="Processing"
+        subtitle="This will take a moment"
+        className="instruction-stage--tall"
+      />
+    )
   }
 
   if (state.matches('complete')) {
-    return <InstructionStage title="Completed" subtitle="You may step away" />
+    return (
+      <InstructionStage
+        title="Completed"
+        subtitle="You may step away"
+        className="instruction-stage--tall"
+      />
+    )
   }
 
-  return <IdleScreen mode="idle" />
+  return <IdleScreen mode="idle" onMockTof={onMockTof} />
 }

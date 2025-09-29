@@ -38,6 +38,11 @@ class LivenessThresholds:
     color_flicker_peak_to_peak: float = 70.0
     flicker_window_s: float = 2.0
 
+    ir_std_min: float = 6.0
+    ir_saturation_fraction_max: float = 0.90
+    ir_dark_fraction_max: float = 0.95
+    ir_flicker_peak_to_peak: float = 70.0
+
     min_eye_change: float = 0.009
     min_mouth_change: float = 0.012
     min_nose_depth_change_m: float = 0.003
@@ -250,70 +255,85 @@ def evaluate_depth_profile(stats: Dict[str, float], thresholds: LivenessThreshol
     return True, info
 
 
-def sample_color_metrics(color_image: np.ndarray, mask: MaskInfo) -> Optional[Dict[str, float]]:
-    x0, y0, x1, y1 = mask.bbox
-    stride = mask.stride
-    roi = color_image[y0:y1, x0:x1]
-    if roi.size == 0:
-        return None
+def compute_intensity_metrics(
+    image: np.ndarray,
+    bbox: Tuple[int, int, int, int],
+    stride: int,
+) -> Tuple[Optional[Dict[str, float]], Optional[MaskInfo]]:
+    x0, y0, x1, y1 = bbox
+    patch = image[y0:y1, x0:x1]
+    if patch.size == 0:
+        return None, None
     if stride > 1:
-        roi = roi[::stride, ::stride]
-    gray = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
-    values = gray[mask.ellipse_mask]
-    if values.size == 0:
-        return None
+        patch = patch[::stride, ::stride]
+
+    ellipse_mask, inner_mask, outer_mask = _ellipse_masks(patch.shape)
+    if not ellipse_mask.any():
+        return None, None
+
+    values = patch.astype(np.float32)
+    ellipse_values = values[ellipse_mask]
+    if ellipse_values.size == 0:
+        return None, None
+
     metrics = {
-        "mean": float(values.mean()),
-        "stdev": float(values.std()),
-        "saturation_fraction": float(np.mean(values >= 240)),
-        "dark_fraction": float(np.mean(values <= 30)),
+        "mean": float(ellipse_values.mean()),
+        "stdev": float(ellipse_values.std()),
+        "saturation_fraction": float(np.mean(ellipse_values >= 240)),
+        "dark_fraction": float(np.mean(ellipse_values <= 30)),
     }
-    return metrics
+
+    mask_info = MaskInfo(
+        bbox=bbox,
+        stride=stride,
+        ellipse_mask=ellipse_mask,
+        inner_mask=inner_mask,
+        outer_mask=outer_mask,
+    )
+    return metrics, mask_info
 
 
-def evaluate_screen_suspect(
-    color_metrics: Optional[Dict[str, float]],
-    color_history: Deque[Tuple[float, float]],
+def evaluate_ir_profile(
+    ir_metrics: Optional[Dict[str, float]],
+    intensity_history: Deque[Tuple[float, float]],
     now: float,
     thresholds: LivenessThresholds,
 ) -> Tuple[bool, Dict[str, float]]:
-    if not color_metrics:
-        return True, {"reason": "no_color_metrics"}
+    if not ir_metrics:
+        return False, {"reason": "no_ir_metrics"}
 
-    mean = color_metrics["mean"]
-    stdev = color_metrics["stdev"]
-    sat_frac = color_metrics["saturation_fraction"]
+    mean = ir_metrics["mean"]
+    stdev = ir_metrics["stdev"]
+    saturation_fraction = ir_metrics["saturation_fraction"]
+    dark_fraction = ir_metrics["dark_fraction"]
 
     suspicious = False
     reasons: List[str] = []
-    if (
-        mean > thresholds.color_mean_high
-        and stdev < thresholds.color_uniformity_std_max
-        and sat_frac > 0.2
-    ):
+    if stdev < thresholds.ir_std_min:
         suspicious = True
-        reasons.append("bright_uniform")
-    if sat_frac > thresholds.color_saturation_fraction_max:
+        reasons.append("ir_uniform_low")
+    if saturation_fraction > thresholds.ir_saturation_fraction_max:
         suspicious = True
-        reasons.append("high_saturation")
-    if color_metrics.get("dark_fraction", 0.0) > thresholds.color_dark_fraction_max:
+        reasons.append("ir_saturation_high")
+    if dark_fraction > thresholds.ir_dark_fraction_max:
         suspicious = True
-        reasons.append("very_dark")
+        reasons.append("ir_dark_high")
 
-    # flicker detection using recent brightness history
-    recent = [val for (t, val) in color_history if now - t <= thresholds.flicker_window_s]
+    recent = [value for (timestamp, value) in intensity_history if now - timestamp <= thresholds.flicker_window_s]
     flicker_pp = max(recent) - min(recent) if len(recent) >= 2 else 0.0
-    if flicker_pp >= thresholds.color_flicker_peak_to_peak:
+    if flicker_pp >= thresholds.ir_flicker_peak_to_peak:
         suspicious = True
-        reasons.append("flicker")
+        reasons.append("ir_flicker")
 
     info = {
         "mean": mean,
         "stdev": stdev,
-        "saturation_fraction": sat_frac,
+        "saturation_fraction": saturation_fraction,
+        "dark_fraction": dark_fraction,
         "flicker_pp": flicker_pp,
         "reason": ",".join(reasons) if reasons else "clear",
     }
+
     return not suspicious, info
 
 
@@ -459,7 +479,7 @@ class MediaPipeLiveness:
         )
         self.pipe: Optional[rs.pipeline] = None
         self.align_to_color: Optional[rs.align] = None
-        self.color_history: Deque[Tuple[float, float]] = deque(maxlen=180)
+        self._ir_history: Deque[Tuple[float, float]] = deque(maxlen=180)
         self.movement_history: Deque[Dict[str, float]] = deque(maxlen=180)
         self.decision_acc = DecisionAccumulator()
         self._started = False
@@ -474,6 +494,7 @@ class MediaPipeLiveness:
         cfg = rs.config()
         cfg.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
         cfg.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 30)
+        cfg.enable_stream(rs.stream.infrared, 1, 640, 480, rs.format.y8, 30)
         profile = pipe.start(cfg)
         device = profile.get_device()
         logging.info(
@@ -523,22 +544,28 @@ class MediaPipeLiveness:
         frames = self.align_to_color.process(frames)
         depth_frame = frames.get_depth_frame()
         color_frame = frames.get_color_frame()
-        if not depth_frame or not color_frame:
+        ir_frame = (
+            frames.get_infrared_frame(1)
+            or frames.get_infrared_frame(0)
+            or frames.first(rs.stream.infrared)
+        )
+        if not depth_frame or not color_frame or not ir_frame:
             return None
 
         color_image = np.asanyarray(color_frame.get_data())
-        rgb_image = cv2.cvtColor(color_image, cv2.COLOR_BGR2RGB)
+        ir_image = np.asanyarray(ir_frame.get_data())
+        ir_rgb = cv2.cvtColor(ir_image, cv2.COLOR_GRAY2RGB)
 
-        detection_result = self.face_detector.process(rgb_image)
-        mesh_result = self.face_mesh.process(rgb_image)
+        detection_result = self.face_detector.process(ir_rgb)
+        mesh_result = self.face_mesh.process(ir_rgb)
 
         stats: Optional[Dict[str, float]] = None
         mask_info: Optional[MaskInfo] = None
-        bbox_px: Optional[Tuple[int, int, int, int]] = None
+        bbox_color: Optional[Tuple[int, int, int, int]] = None
         depth_ok = False
         depth_info: Dict[str, float | int | str] = {"reason": "no_depth"}
-        screen_ok = True
-        screen_info: Dict[str, float | int | str] = {"reason": "no_color_metrics"}
+        screen_ok = False
+        screen_info: Dict[str, float | int | str] = {"reason": "no_ir_metrics"}
         movement_ok = False
         movement_info: Dict[str, float | int | str] = {"reason": "not_evaluated"}
         instant_alive = False
@@ -546,28 +573,31 @@ class MediaPipeLiveness:
         detections = detection_result.detections if detection_result and detection_result.detections else []
         if detections:
             det = max(detections, key=lambda d: d.score[0])
-            width = color_frame.get_width()
-            height = color_frame.get_height()
-            bbox_px = bbox_from_detection(det, width, height)
-            if bbox_px:
-                stats, mask_info = compute_depth_metrics(depth_frame, bbox_px, self.config.stride, self.thresholds)
+            width_color = color_frame.get_width()
+            height_color = color_frame.get_height()
+            width_ir = ir_frame.get_width()
+            height_ir = ir_frame.get_height()
+            bbox_color = bbox_from_detection(det, width_color, height_color)
+            bbox_ir = bbox_from_detection(det, width_ir, height_ir)
+            if bbox_color and bbox_ir:
+                stats, mask_info = compute_depth_metrics(depth_frame, bbox_color, self.config.stride, self.thresholds)
                 if stats and mask_info:
                     depth_ok, depth_info = evaluate_depth_profile(stats, self.thresholds)
-                    color_metrics = sample_color_metrics(color_image, mask_info)
+                    ir_metrics, _ = compute_intensity_metrics(ir_image, bbox_ir, self.config.stride)
                     now = time.time()
-                    if color_metrics:
-                        self.color_history.append((now, color_metrics["mean"]))
-                    screen_ok, screen_info = evaluate_screen_suspect(color_metrics, self.color_history, now, self.thresholds)
+                    if ir_metrics:
+                        self._ir_history.append((now, ir_metrics["mean"]))
+                    screen_ok, screen_info = evaluate_ir_profile(ir_metrics, self._ir_history, now, self.thresholds)
 
-                    landmark_metrics = extract_landmark_metrics(mesh_result, width, height, depth_frame, self.thresholds)
-                    update_movement_history(self.movement_history, landmark_metrics, bbox_px, now, self.thresholds)
+                    landmark_metrics = extract_landmark_metrics(mesh_result, width_ir, height_ir, depth_frame, self.thresholds)
+                    update_movement_history(self.movement_history, landmark_metrics, bbox_color, now, self.thresholds)
                     movement_ok, movement_info = movement_liveness_ok(self.movement_history, now, self.thresholds)
 
                     instant_alive = depth_ok and screen_ok and movement_ok
                     logging.info(
-                        "face_detected score=%.3f bbox=%s instant_alive=%s depth=%s screen=%s movement=%s stats=%s",
+                        "face_detected score=%.3f bbox=%s instant_alive=%s depth=%s ir=%s movement=%s stats=%s",
                         det.score[0],
-                        bbox_px,
+                        bbox_color,
                         instant_alive,
                         depth_info,
                         screen_info,
@@ -579,7 +609,7 @@ class MediaPipeLiveness:
                     logging.info(
                         "face_detected score=%.3f bbox=%s instant_alive=%s reason=no_depth_samples",
                         det.score[0],
-                        bbox_px,
+                        bbox_color,
                         instant_alive,
                     )
             else:
@@ -598,7 +628,7 @@ class MediaPipeLiveness:
             timestamp=timestamp,
             color_image=color_image,
             depth_frame=depth_frame,
-            bbox=bbox_px,
+            bbox=bbox_color,
             stats=stats,
             depth_ok=depth_ok,
             depth_info=depth_info,

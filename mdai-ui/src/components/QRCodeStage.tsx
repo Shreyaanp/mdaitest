@@ -24,30 +24,9 @@ export default function QRCodeStage({ token, qrPayload, expiresIn, status }: QRC
   return (
     <div className="overlay">
       <div className="overlay-card">
-        <h1>{heading}</h1>
-        <p>{subtitle}</p>
         <div className="qr-wrapper">
-          <QRCodeSVG value={qrValue} size={240} includeMargin fgColor="#111" bgColor="#fff" />
+          <QRCodeSVG value={qrValue} size={350}  fgColor="#111" bgColor="#fff" />
         </div>
-        {token ? <p className="token-hint">Token: {token}</p> : null}
-        {serverHost ? <p className="token-hint">Bridge host: {serverHost}</p> : null}
-        <div className="qr-metadata">
-          {wsApp ? (
-            <p className="qr-endpoint">
-              <span>App WS:</span>
-              <code>{wsApp}</code>
-            </p>
-          ) : null}
-          {wsHardware ? (
-            <p className="qr-endpoint">
-              <span>Hardware WS:</span>
-              <code>{wsHardware}</code>
-            </p>
-          ) : null}
-        </div>
-        {typeof expiresIn === 'number' ? (
-          <p className="expires">Expires in {Math.round(expiresIn)} seconds</p>
-        ) : null}
       </div>
     </div>
   )

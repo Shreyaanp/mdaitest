@@ -9,6 +9,11 @@ from typing import AsyncIterator, List, Optional
 
 logger = logging.getLogger(__name__)
 
+
+_PLACEHOLDER_JPEG = base64.b64decode(
+    b"/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAABAAEDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD5/ooooA//2Q=="
+)
+
 try:  # pragma: no cover - optional dependency
     from d435i.mediapipe_liveness import LivenessConfig, LivenessResult, LivenessThresholds, MediaPipeLiveness
 except Exception:  # noqa: BLE001 - broad to avoid hardware import failures during dev
@@ -98,16 +103,18 @@ class RealSenseService:
     async def _preview_loop(self) -> None:
         try:
             while not self._stop_event.is_set():
-                result: Optional[LivenessResult]
                 if self.enable_hardware and self._hardware_active and self._instance:
                     result = await self._run_process()
                     frame_bytes = self._serialize_frame(result)
-                else:
-                    result = None
+                    self._broadcast_frame(frame_bytes)
+                    self._broadcast_result(result)
+                elif not self.enable_hardware:
                     frame_bytes = self._placeholder_frame()
-                self._broadcast_frame(frame_bytes)
-                self._broadcast_result(result)
-                await asyncio.sleep(1 / 15)
+                    self._broadcast_frame(frame_bytes)
+                    self._broadcast_result(None)
+                    await asyncio.sleep(0.1)
+                else:
+                    await asyncio.sleep(0.05)
         except asyncio.CancelledError:  # pragma: no cover - cooperative cancel
             raise
         except Exception:  # pragma: no cover - defensive guard
@@ -117,11 +124,21 @@ class RealSenseService:
             logger.info("RealSense preview loop stopped")
 
     async def _run_process(self) -> Optional[LivenessResult]:
-        if not self._instance:
+        instance = self._instance
+        if not instance:
             return None
         async with self._lock:
             loop = asyncio.get_running_loop()
-            return await loop.run_in_executor(None, self._instance.process)
+            try:
+                return await loop.run_in_executor(None, instance.process)
+            except RuntimeError as exc:
+                # RealSense occasionally fails to deliver a frame inside the default
+                # 1s timeout. Rather than crash the preview loop we treat this as a
+                # transient condition and retry on the next iteration.
+                if "Frame didn't arrive" in str(exc):
+                    logger.warning("RealSense frame timeout; retrying")
+                    return None
+                raise
 
     def _serialize_frame(self, result: Optional[LivenessResult]) -> bytes:
         if not result:

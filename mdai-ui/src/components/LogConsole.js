@@ -1,14 +1,9 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { useEffect, useRef } from 'react';
 export default function LogConsole({ entries }) {
     const endRef = useRef(null);
     useEffect(() => {
         endRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [entries]);
-    return (<div className="log-console">
-      {entries.length === 0 ? (<div className="log-placeholder">Awaiting events…</div>) : (entries.map((entry) => (<div key={entry.id} className={`log-entry ${entry.level}`}>
-            <span className="time">{new Date(entry.ts).toLocaleTimeString()}</span>
-            <span className="message">{entry.message}</span>
-          </div>)))}
-      <div ref={endRef}/>
-    </div>);
+    return (_jsxs("div", { className: "log-console", children: [entries.length === 0 ? (_jsx("div", { className: "log-placeholder", children: "Awaiting events\u2026" })) : (entries.map((entry) => (_jsxs("div", { className: `log-entry ${entry.level}`, children: [_jsx("span", { className: "time", children: new Date(entry.ts).toLocaleTimeString() }), _jsx("span", { className: "message", children: entry.message })] }, entry.id)))), _jsx("div", { ref: endRef })] }));
 }

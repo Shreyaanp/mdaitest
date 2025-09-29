@@ -1,7 +1,9 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useMachine } from '@xstate/react';
 import StageRouter from './components/StageRouter';
+import PreviewSurface from './components/PreviewSurface';
+import ControlPanel from './components/ControlPanel';
 import { sessionMachine } from './app-state/sessionMachine';
 import { useControllerSocket } from './hooks/useControllerSocket';
 const previewVisibleStates = new Set([
@@ -29,6 +31,12 @@ function getNumberField(data, key) {
     const value = data[key];
     return typeof value === 'number' ? value : undefined;
 }
+function getBooleanField(data, key) {
+    if (!data)
+        return undefined;
+    const value = data[key];
+    return typeof value === 'boolean' ? value : undefined;
+}
 function normaliseBaseUrl(url) {
     return url.endsWith('/') ? url.slice(0, -1) : url;
 }
@@ -47,8 +55,12 @@ export default function App() {
     const [tokenExpiryTs, setTokenExpiryTs] = useState(null);
     const [now, setNow] = useState(Date.now());
     const [qrPayloadOverride, setQrPayloadOverride] = useState(null);
+    const [processingReady, setProcessingReady] = useState(false);
+    const [stableAliveSince, setStableAliveSince] = useState(null);
+    const stableAliveTimerRef = useRef(null);
     const controllerHttpBase = readEnv('VITE_CONTROLLER_HTTP_URL') ?? DEFAULT_CONTROLLER_HTTP_URL;
-    const previewUrl = readEnv('VITE_PREVIEW_URL') ?? `${normaliseBaseUrl(controllerHttpBase)}/preview`;
+    const controllerUrl = normaliseBaseUrl(controllerHttpBase);
+    const previewUrl = readEnv('VITE_PREVIEW_URL') ?? `${controllerUrl}/preview`;
     const backendUrl = readEnv('VITE_BACKEND_URL', 'VITE_BACKEND_API_URL') ?? DEFAULT_BACKEND_URL;
     const deviceId = readEnv('VITE_DEVICE_ID') ?? DEFAULT_DEVICE_ID;
     const deviceAddress = readEnv('VITE_DEVICE_ADDRESS');
@@ -79,11 +91,28 @@ export default function App() {
         }
         if (type === 'metrics') {
             const payload = message.data;
+            const stability = getNumberField(payload, 'stability');
+            const focus = getNumberField(payload, 'focus');
+            const composite = getNumberField(payload, 'composite');
+            const instantAlive = getBooleanField(payload, 'instant_alive');
+            const stableAlive = getBooleanField(payload, 'stable_alive');
             setMetrics({
-                stability: getNumberField(payload, 'stability'),
-                focus: getNumberField(payload, 'focus'),
-                composite: getNumberField(payload, 'composite')
+                stability,
+                focus,
+                composite,
+                instantAlive,
+                stableAlive
             });
+            const stableFlag = stableAlive === true;
+            setStableAliveSince((previous) => {
+                if (stableFlag) {
+                    return previous ?? Date.now();
+                }
+                return null;
+            });
+            if (!stableFlag) {
+                setProcessingReady(false);
+            }
             return;
         }
         if (type === 'state') {
@@ -103,6 +132,12 @@ export default function App() {
             }
             if (phase === 'idle') {
                 setQrPayloadOverride(null);
+                setProcessingReady(false);
+                setStableAliveSince(null);
+                if (stableAliveTimerRef.current) {
+                    window.clearTimeout(stableAliveTimerRef.current);
+                    stableAliveTimerRef.current = null;
+                }
             }
             const expires = getNumberField(payload, 'expires_in');
             if (typeof expires === 'number') {
@@ -147,6 +182,27 @@ export default function App() {
             document.body.style.backgroundColor = '';
         };
     }, []);
+    useEffect(() => {
+        if (stableAliveSince === null) {
+            if (stableAliveTimerRef.current) {
+                window.clearTimeout(stableAliveTimerRef.current);
+                stableAliveTimerRef.current = null;
+            }
+            return;
+        }
+        if (stableAliveTimerRef.current) {
+            window.clearTimeout(stableAliveTimerRef.current);
+        }
+        stableAliveTimerRef.current = window.setTimeout(() => {
+            setProcessingReady(true);
+        }, 3000);
+        return () => {
+            if (stableAliveTimerRef.current) {
+                window.clearTimeout(stableAliveTimerRef.current);
+                stableAliveTimerRef.current = null;
+            }
+        };
+    }, [stableAliveSince]);
     const showPreview = useMemo(() => previewVisibleStates.has(state.value), [state.value]);
     const heartbeatAgeSeconds = useMemo(() => {
         if (!lastHeartbeatTs)
@@ -212,5 +268,5 @@ export default function App() {
             appendLog('QR code displayed – waiting for mobile activation');
         }
     }, [state, appendLog]);
-    return (_jsx("div", { className: "app-shell", children: _jsxs("div", { className: "visual-area", children: [_jsx(StageRouter, { state: state, qrPayload: qrPayloadOverride ?? state.context.qrPayload }), _jsx("iframe", { title: "RealSense preview", className: `preview-frame ${showPreview ? 'visible' : 'hidden'}`, src: previewUrl, allow: "autoplay" })] }) }));
+    return (_jsxs("div", { className: "app-shell", children: [_jsxs("div", { className: "visual-area", children: [_jsx(StageRouter, { state: state, qrPayload: qrPayloadOverride ?? state.context.qrPayload, onMockTof: triggerTof }), _jsx(PreviewSurface, { visible: showPreview, previewUrl: previewUrl })] }), _jsx(ControlPanel, { deviceId: deviceId, deviceAddress: deviceAddress, backendUrl: backendUrl, controllerUrl: controllerUrl, connectionStatus: connectionStatus, currentPhase: String(state.value), pairingToken: pairingToken, qrPayload: qrPayloadOverride ?? state.context.qrPayload, expiresInSeconds: expiresInSeconds, lastHeartbeatSeconds: heartbeatAgeSeconds, metrics: metrics, logs: logs, onTrigger: triggerSession, triggerDisabled: !state.matches('idle') || isTriggering, isTriggering: isTriggering, onTofTrigger: triggerTof, tofTriggerDisabled: !state.matches('idle') || isTofTriggering, isTofTriggering: isTofTriggering })] }));
 }

@@ -1,3 +1,4 @@
+import { jsx as _jsx } from "react/jsx-runtime";
 import { useMemo } from 'react';
 import { QRCodeSVG } from 'qrcode.react';
 export default function QRCodeStage({ token, qrPayload, expiresIn, status }) {
@@ -6,23 +7,8 @@ export default function QRCodeStage({ token, qrPayload, expiresIn, status }) {
     const subtitle = status
         ? 'Scan the QR code to continue on mobile; waiting for activation.'
         : 'Use the mobile app to scan the QR code and continue.';
-    const wsApp = typeof (qrPayload === null || qrPayload === void 0 ? void 0 : qrPayload.ws_app_url) === 'string' ? qrPayload.ws_app_url : undefined;
-    const wsHardware = typeof (qrPayload === null || qrPayload === void 0 ? void 0 : qrPayload.ws_hardware_url) === 'string' ? qrPayload.ws_hardware_url : undefined;
-    const serverHost = typeof (qrPayload === null || qrPayload === void 0 ? void 0 : qrPayload.server_host) === 'string' ? qrPayload.server_host : undefined;
-    return (<div className="overlay">
-      <div className="overlay-card">
-        <h1>{heading}</h1>
-        <p>{subtitle}</p>
-        <div className="qr-wrapper">
-          <QRCodeSVG value={qrValue} size={240} includeMargin fgColor="#111" bgColor="#fff"/>
-        </div>
-        {token ? <p className="token-hint">Token: {token}</p> : null}
-        {serverHost ? (<p className="token-hint">Bridge host: {serverHost}</p>) : null}
-        <div className="qr-metadata">
-          {wsApp ? (<p className="qr-endpoint"><span>App WS:</span><code>{wsApp}</code></p>) : null}
-          {wsHardware ? (<p className="qr-endpoint"><span>Hardware WS:</span><code>{wsHardware}</code></p>) : null}
-        </div>
-        {typeof expiresIn === 'number' ? (<p className="expires">Expires in {Math.round(expiresIn)} seconds</p>) : null}
-      </div>
-    </div>);
+    const wsApp = typeof qrPayload?.ws_app_url === 'string' ? qrPayload.ws_app_url : undefined;
+    const wsHardware = typeof qrPayload?.ws_hardware_url === 'string' ? qrPayload.ws_hardware_url : undefined;
+    const serverHost = typeof qrPayload?.server_host === 'string' ? qrPayload.server_host : undefined;
+    return (_jsx("div", { className: "overlay", children: _jsx("div", { className: "overlay-card", children: _jsx("div", { className: "qr-wrapper", children: _jsx(QRCodeSVG, { value: qrValue, size: 350, fgColor: "#111", bgColor: "#fff" }) }) }) }));
 }

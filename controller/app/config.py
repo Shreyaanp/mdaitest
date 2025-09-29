@@ -38,27 +38,22 @@ class Settings(BaseSettings):
 
     preview_frame_width: int = Field(640, description="Preview width for MJPEG streaming")
     preview_frame_height: int = Field(480, description="Preview height for MJPEG streaming")
-    preview_fps: int = Field(24, description="Target FPS for preview stream")
+    preview_fps: int = Field(15, description="Target FPS for preview stream")
 
     mediapipe_stride: int = Field(3, description="Stride used by MediaPipe liveness worker")
     mediapipe_confidence: float = Field(0.6, description="Minimum face detector confidence")
     stability_seconds: float = Field(4.0, description="Duration the user must stay stable")
+    mediapipe_max_horizontal_asymmetry_m: float = Field(
+        0.12, description="Cheek asymmetry tolerance passed to the liveness worker"
+    )
 
     realsense_enable_hardware: bool = Field(
         False, description="Enable RealSense hardware pipeline (set True on Jetson with camera attached)"
     )
 
     log_level: str = Field("INFO", description="Logging level for controller")
-    log_directory: Path = Field(
-        ROOT_DIR / "logs",
-        description="Directory where controller runtime logs are written",
-    )
-    log_retention_days: int = Field(14, description="How many rotated log files to retain")
-
-    mediapipe_max_horizontal_asymmetry_m: float = Field(
-        0.35,
-        description="Maximum tolerated left/right depth delta (meters) before declaring cheeks unbalanced",
-    )
+    log_directory: Path = Field(ROOT_DIR / "logs", description="Directory where controller logs are written")
+    log_retention_days: int = Field(14, description="Number of rotated log files (days) to retain")
 
     model_config = SettingsConfigDict(
         env_file=str(DEFAULT_ENV_FILE),
