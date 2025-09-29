@@ -171,6 +171,14 @@ class SessionManager:
             return True
         return False
 
+    async def set_preview_enabled(self, enabled: bool) -> bool:
+        result = await self._realsense.set_preview_enabled(enabled)
+        if enabled:
+            logger.info("Preview stream enabled")
+        else:
+            logger.info("Preview stream disabled")
+        return result
+
     async def preview_frames(self) -> AsyncIterator[bytes]:
         async for frame in self._realsense.preview_stream():
             yield frame
@@ -250,7 +258,7 @@ class SessionManager:
 
             await self._await_app_ready()
             await self._set_phase(SessionPhase.HUMAN_DETECT)
-            await self._realsense.set_hardware_active(True)
+            await self._realsense.set_hardware_active(True, source="session")
             await self._ensure_phase_duration(3.0)
             await self._collect_best_frame()
             await self._upload_frame()
@@ -266,7 +274,7 @@ class SessionManager:
             await self._set_phase(SessionPhase.ERROR, error=str(exc))
             await self._ensure_phase_duration(3.0)
         finally:
-            await self._realsense.set_hardware_active(False)
+            await self._realsense.set_hardware_active(False, source="session")
             await self._ws_client.disconnect()
             await self._set_phase(SessionPhase.IDLE)
             self._session_task = None
@@ -293,6 +301,7 @@ class SessionManager:
         await self._set_phase(SessionPhase.STABILIZING)
         results = await self._realsense.gather_results(self.settings.stability_seconds)
         if not results:
+            logger.warning("RealSense gather_results returned no samples during stabilization")
             raise RuntimeError("liveness_capture_failed")
 
         best_bytes: Optional[bytes] = None

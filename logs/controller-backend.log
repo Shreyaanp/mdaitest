@@ -1,87 +1,12 @@
-INFO:     Started server process [2243227]
+INFO:     Started server process [2419220]
 INFO:     Waiting for application startup.
-2025-09-29 15:44:24,951 | INFO | app.session_manager | Starting session manager
-2025-09-29 15:44:24,951 | INFO | app.sensors.realsense | RealSense hardware idle until session start
-2025-09-29 15:44:24,951 | INFO | app.sensors.tof | Starting ToF polling threshold=450 debounce_ms=200 interval_ms=50
+2025-09-29 18:11:20,025 | INFO | app.session_manager | Starting session manager
+2025-09-29 18:11:20,026 | INFO | app.sensors.tof | Starting ToF polling threshold=450 debounce_ms=200 interval_ms=50
 INFO:     Application startup complete.
 INFO:     Uvicorn running on http://0.0.0.0:5000 (Press CTRL+C to quit)
-INFO:     ('127.0.0.1', 32892) - "WebSocket /ws/ui" [accepted]
+INFO:     ('127.0.0.1', 54524) - "WebSocket /ws/ui" [accepted]
 INFO:     connection open
-INFO:     127.0.0.1:34688 - "GET / HTTP/1.1" 404 Not Found
-INFO:     127.0.0.1:34696 - "GET /favicon.ico HTTP/1.1" 404 Not Found
-INFO:     127.0.0.1:46378 - "GET /favicon.ico HTTP/1.1" 404 Not Found
-INFO:     127.0.0.1:57934 - "OPTIONS /debug/tof-trigger HTTP/1.1" 200 OK
-2025-09-29 15:47:00,596 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.IDLE
-INFO:     127.0.0.1:57934 - "POST /debug/tof-trigger HTTP/1.1" 200 OK
-2025-09-29 15:47:00,596 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
-2025-09-29 15:47:00,600 | ERROR | app.session_manager | Session failed: [Errno -3] Temporary failure in name resolution
-Traceback (most recent call last):
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/httpx/_transports/default.py", line 66, in map_httpcore_exceptions
-    yield
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/httpx/_transports/default.py", line 366, in handle_async_request
-    resp = await self._pool.handle_async_request(req)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/httpcore/_async/connection_pool.py", line 256, in handle_async_request
-    raise exc from None
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/httpcore/_async/connection_pool.py", line 236, in handle_async_request
-    response = await connection.handle_async_request(
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/httpcore/_async/connection.py", line 101, in handle_async_request
-    raise exc
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/httpcore/_async/connection.py", line 78, in handle_async_request
-    stream = await self._connect(request)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/httpcore/_async/connection.py", line 124, in _connect
-    stream = await self._network_backend.connect_tcp(**kwargs)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/httpcore/_backends/auto.py", line 31, in connect_tcp
-    return await self._backend.connect_tcp(
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/httpcore/_backends/anyio.py", line 113, in connect_tcp
-    with map_exceptions(exc_map):
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/contextlib.py", line 158, in __exit__
-    self.gen.throw(typ, value, traceback)
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/httpcore/_exceptions.py", line 14, in map_exceptions
-    raise to_exc(exc) from exc
-httpcore.ConnectError: [Errno -3] Temporary failure in name resolution
-
-The above exception was the direct cause of the following exception:
-
-Traceback (most recent call last):
-  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 216, in _run_session
-    token_info = await self._http_client.issue_token()
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/backend/http_client.py", line 25, in issue_token
-    response = await self._client.post("/auth", json=payload)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/httpx/_client.py", line 1848, in post
-    return await self.request(
-           ^^^^^^^^^^^^^^^^^^^
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/httpx/_client.py", line 1530, in request
-    return await self.send(request, auth=auth, follow_redirects=follow_redirects)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/httpx/_client.py", line 1617, in send
-    response = await self._send_handling_auth(
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/httpx/_client.py", line 1645, in _send_handling_auth
-    response = await self._send_handling_redirects(
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/httpx/_client.py", line 1682, in _send_handling_redirects
-    response = await self._send_single_request(request)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/httpx/_client.py", line 1719, in _send_single_request
-    response = await transport.handle_async_request(request)
-               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/httpx/_transports/default.py", line 365, in handle_async_request
-    with map_httpcore_exceptions():
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/contextlib.py", line 158, in __exit__
-    self.gen.throw(typ, value, traceback)
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/httpx/_transports/default.py", line 83, in map_httpcore_exceptions
-    raise mapped_exc(message) from exc
-httpx.ConnectError: [Errno -3] Temporary failure in name resolution
 INFO:     connection closed
-INFO:     ('127.0.0.1', 57942) - "WebSocket /ws/ui" [accepted]
-INFO:     connection open
 ERROR:    Exception in ASGI application
 Traceback (most recent call last):
   File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/uvicorn/protocols/websockets/websockets_impl.py", line 247, in run_asgi
@@ -114,7 +39,7 @@ Traceback (most recent call last):
     await func(session)
   File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/fastapi/routing.py", line 325, in app
     await dependant.call(**values)
-  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/main.py", line 112, in ui_socket
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/main.py", line 122, in ui_socket
     await ws.send_json(payload)
   File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/starlette/websockets.py", line 173, in send_json
     await self.send({"type": "websocket.send", "text": text})
@@ -130,105 +55,3 @@ Traceback (most recent call last):
   File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/websockets/legacy/protocol.py", line 921, in ensure_open
     raise self.connection_closed_exc()
 websockets.exceptions.ConnectionClosedOK: received 1001 (going away); then sent 1001 (going away)
-INFO:     connection closed
-INFO:     ('127.0.0.1', 36726) - "WebSocket /ws/ui" [accepted]
-INFO:     connection open
-ERROR:    Exception in ASGI application
-Traceback (most recent call last):
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/uvicorn/protocols/websockets/websockets_impl.py", line 247, in run_asgi
-    result = await self.app(self.scope, self.asgi_receive, self.asgi_send)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/uvicorn/middleware/proxy_headers.py", line 84, in __call__
-    return await self.app(scope, receive, send)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/fastapi/applications.py", line 1106, in __call__
-    await super().__call__(scope, receive, send)
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/starlette/applications.py", line 122, in __call__
-    await self.middleware_stack(scope, receive, send)
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/starlette/middleware/errors.py", line 149, in __call__
-    await self.app(scope, receive, send)
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/starlette/middleware/cors.py", line 75, in __call__
-    await self.app(scope, receive, send)
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 79, in __call__
-    raise exc
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 68, in __call__
-    await self.app(scope, receive, sender)
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/fastapi/middleware/asyncexitstack.py", line 20, in __call__
-    raise e
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/fastapi/middleware/asyncexitstack.py", line 17, in __call__
-    await self.app(scope, receive, send)
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/starlette/routing.py", line 718, in __call__
-    await route.handle(scope, receive, send)
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/starlette/routing.py", line 341, in handle
-    await self.app(scope, receive, send)
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/starlette/routing.py", line 82, in app
-    await func(session)
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/fastapi/routing.py", line 325, in app
-    await dependant.call(**values)
-  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/main.py", line 112, in ui_socket
-    await ws.send_json(payload)
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/starlette/websockets.py", line 173, in send_json
-    await self.send({"type": "websocket.send", "text": text})
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/starlette/websockets.py", line 85, in send
-    await self._send(message)
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 65, in sender
-    await send(message)
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/uvicorn/protocols/websockets/websockets_impl.py", line 320, in asgi_send
-    await self.send(data)  # type: ignore[arg-type]
-    ^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/websockets/legacy/protocol.py", line 620, in send
-    await self.ensure_open()
-  File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/websockets/legacy/protocol.py", line 921, in ensure_open
-    raise self.connection_closed_exc()
-websockets.exceptions.ConnectionClosedOK: received 1001 (going away); then sent 1001 (going away)
-INFO:     127.0.0.1:36052 - "OPTIONS /debug/tof-trigger HTTP/1.1" 200 OK
-2025-09-29 15:48:44,272 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.IDLE
-INFO:     127.0.0.1:36052 - "POST /debug/tof-trigger HTTP/1.1" 200 OK
-2025-09-29 15:48:44,272 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
-2025-09-29 15:48:45,241 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
-2025-09-29 15:48:47,272 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiODYxYzk0MjU2ZmNhNDQyMjlkYWRjNDk4YzEyOTRmOGUiLCJleHAiOjE3NTkxNDA0MDV9.iJOzCAbgE4wXEb-jpxxdhi5wFbhnaGzy7xt74WEENLs
-2025-09-29 15:48:48,173 | INFO | app.session_manager | Bridge message received: joined
-2025-09-29 15:48:50,272 | INFO | app.session_manager | Waiting for app connection with timeout=175.0s
-2025-09-29 15:49:05,556 | INFO | app.session_manager | Bridge message received: from_app
-2025-09-29 15:49:06,994 | INFO | app.session_manager | Bridge message received: from_app
-2025-09-29 15:49:06,995 | INFO | app.sensors.realsense | Activating RealSense hardware pipeline
-WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
-I0000 00:00:1759140247.016133 2247468 gl_context_egl.cc:85] Successfully initialized EGL. Major : 1 Minor: 5
-I0000 00:00:1759140247.049460 2247476 gl_context.cc:357] GL version: 3.2 (OpenGL ES 3.2 NVIDIA 535.261.03), renderer: NVIDIA GeForce RTX 3050 Laptop GPU/PCIe/SSE2
-INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
-I0000 00:00:1759140247.053806 2247468 gl_context_egl.cc:85] Successfully initialized EGL. Major : 1 Minor: 5
-W0000 00:00:1759140247.060746 2247470 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
-I0000 00:00:1759140247.069026 2247493 gl_context.cc:357] GL version: 3.2 (OpenGL ES 3.2 NVIDIA 535.261.03), renderer: NVIDIA GeForce RTX 3050 Laptop GPU/PCIe/SSE2
-W0000 00:00:1759140247.071095 2247479 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
-INFO:     127.0.0.1:44360 - "GET /preview HTTP/1.1" 200 OK
-W0000 00:00:1759140247.082977 2247481 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
-2025-09-29 15:49:07,248 | INFO | root | Connected to Intel RealSense D435I (S/N 215322072881)
-2025-09-29 15:49:07,634 | INFO | app.session_manager | Bridge message received: from_app
-2025-09-29 15:49:08,248 | WARNING | app.sensors.realsense | RealSense frame timeout; retrying
-2025-09-29 15:49:09,249 | WARNING | app.sensors.realsense | RealSense frame timeout; retrying
-2025-09-29 15:49:10,250 | WARNING | app.sensors.realsense | RealSense frame timeout; retrying
-2025-09-29 15:49:11,250 | WARNING | app.sensors.realsense | RealSense frame timeout; retrying
-2025-09-29 15:49:12,251 | WARNING | app.sensors.realsense | RealSense frame timeout; retrying
-2025-09-29 15:49:13,252 | WARNING | app.sensors.realsense | RealSense frame timeout; retrying
-2025-09-29 15:49:13,995 | ERROR | app.session_manager | Session failed: liveness_capture_failed
-Traceback (most recent call last):
-  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 255, in _run_session
-    await self._collect_best_frame()
-  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 296, in _collect_best_frame
-    raise RuntimeError("liveness_capture_failed")
-RuntimeError: liveness_capture_failed
-2025-09-29 15:49:14,253 | WARNING | app.sensors.realsense | RealSense frame timeout; retrying
-2025-09-29 15:49:15,254 | WARNING | app.sensors.realsense | RealSense frame timeout; retrying
-2025-09-29 15:49:16,254 | WARNING | app.sensors.realsense | RealSense frame timeout; retrying
-2025-09-29 15:49:17,255 | WARNING | app.sensors.realsense | RealSense frame timeout; retrying
-2025-09-29 15:49:17,255 | INFO | app.sensors.realsense | Deactivating RealSense hardware pipeline
-2025-09-29 15:49:17,885 | ERROR | app.sensors.realsense | RealSense preview loop crashed
-Traceback (most recent call last):
-  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/sensors/realsense.py", line 107, in _preview_loop
-    result = await self._run_process()
-             ^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/sensors/realsense.py", line 132, in _run_process
-    return await loop.run_in_executor(None, self._instance.process)
-                                            ^^^^^^^^^^^^^^^^^^^^^^
-AttributeError: 'NoneType' object has no attribute 'process'
-2025-09-29 15:49:17,886 | INFO | app.sensors.realsense | RealSense preview loop stopped
