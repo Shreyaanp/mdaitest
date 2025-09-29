@@ -38,7 +38,7 @@ class Settings(BaseSettings):
 
     preview_frame_width: int = Field(640, description="Preview width for MJPEG streaming")
     preview_frame_height: int = Field(480, description="Preview height for MJPEG streaming")
-    preview_fps: int = Field(15, description="Target FPS for preview stream")
+    preview_fps: int = Field(24, description="Target FPS for preview stream")
 
     mediapipe_stride: int = Field(3, description="Stride used by MediaPipe liveness worker")
     mediapipe_confidence: float = Field(0.6, description="Minimum face detector confidence")
