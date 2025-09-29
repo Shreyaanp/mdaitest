@@ -68,7 +68,19 @@ class SessionManager:
         )
         self._tof.register_callback(self._handle_tof_trigger)
 
-        self._realsense = RealSenseService(enable_hardware=self.settings.realsense_enable_hardware)
+        liveness_config = {
+            "confidence": self.settings.mediapipe_confidence,
+            "stride": self.settings.mediapipe_stride,
+            "display": False,
+        }
+        threshold_overrides = {
+            "max_horizontal_asymmetry_m": self.settings.mediapipe_max_horizontal_asymmetry_m
+        }
+        self._realsense = RealSenseService(
+            enable_hardware=self.settings.realsense_enable_hardware,
+            liveness_config=liveness_config,
+            threshold_overrides=threshold_overrides,
+        )
         self._http_client = BridgeHttpClient(self.settings)
         self._ws_client = BackendWebSocketClient(self.settings)
 

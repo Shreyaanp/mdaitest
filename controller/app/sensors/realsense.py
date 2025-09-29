@@ -10,23 +10,27 @@ from typing import AsyncIterator, List, Optional
 logger = logging.getLogger(__name__)
 
 try:  # pragma: no cover - optional dependency
-    from d435i.mediapipe_liveness import LivenessConfig, LivenessResult, MediaPipeLiveness
+    from d435i.mediapipe_liveness import LivenessConfig, LivenessResult, LivenessThresholds, MediaPipeLiveness
 except Exception:  # noqa: BLE001 - broad to avoid hardware import failures during dev
     MediaPipeLiveness = None
     LivenessConfig = None
     LivenessResult = None
-
-_PLACEHOLDER_JPEG = base64.b64decode(
-    b"/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/2wBDAQkJCQwLDBgNDRgyIRwhMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjL/wAARCAABAAEDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD5/ooooA//2Q=="
-)
+    LivenessThresholds = None
 
 
 class RealSenseService:
     """Coordinates preview streaming and liveness evaluation."""
 
-    def __init__(self, *, enable_hardware: bool = True, liveness_config: Optional[dict] = None) -> None:
+    def __init__(
+        self,
+        *,
+        enable_hardware: bool = True,
+        liveness_config: Optional[dict] = None,
+        threshold_overrides: Optional[dict] = None,
+    ) -> None:
         self.enable_hardware = enable_hardware and MediaPipeLiveness is not None
         self._liveness_config = liveness_config or {}
+        self._threshold_overrides = threshold_overrides or {}
         self._instance: Optional[MediaPipeLiveness] = None
         self._hardware_active = False
         self._lock = asyncio.Lock()
@@ -165,9 +169,13 @@ class RealSenseService:
                 logger.info("Activating RealSense hardware pipeline")
 
                 def _create() -> MediaPipeLiveness:
-                    return MediaPipeLiveness(
-                        config=LivenessConfig(**self._liveness_config) if self._liveness_config else None
+                    config = LivenessConfig(**self._liveness_config) if self._liveness_config else None
+                    thresholds = (
+                        LivenessThresholds(**self._threshold_overrides)
+                        if self._threshold_overrides and LivenessThresholds is not None
+                        else None
                     )
+                    return MediaPipeLiveness(config=config, thresholds=thresholds)
 
                 loop = asyncio.get_running_loop()
                 self._instance = await loop.run_in_executor(None, _create)

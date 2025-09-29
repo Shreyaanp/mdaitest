@@ -49,6 +49,16 @@ class Settings(BaseSettings):
     )
 
     log_level: str = Field("INFO", description="Logging level for controller")
+    log_directory: Path = Field(
+        ROOT_DIR / "logs",
+        description="Directory where controller runtime logs are written",
+    )
+    log_retention_days: int = Field(14, description="How many rotated log files to retain")
+
+    mediapipe_max_horizontal_asymmetry_m: float = Field(
+        0.35,
+        description="Maximum tolerated left/right depth delta (meters) before declaring cheeks unbalanced",
+    )
 
     model_config = SettingsConfigDict(
         env_file=str(DEFAULT_ENV_FILE),

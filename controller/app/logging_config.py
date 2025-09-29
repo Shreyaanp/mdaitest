@@ -4,14 +4,16 @@ from __future__ import annotations
 import logging
 from logging.config import dictConfig
 from pathlib import Path
+from typing import Optional
 
 
-LOG_DIR = Path(__file__).resolve().parents[2] / "logs"
-LOG_DIR.mkdir(parents=True, exist_ok=True)
-
-
-def configure_logging(level: str = "INFO") -> None:
+def configure_logging(level: str = "INFO", log_dir: Optional[Path] = None, retention_days: int = 14) -> None:
     """Apply opinionated logging defaults for kiosk deployment."""
+
+    if log_dir is None:
+        log_dir = Path(__file__).resolve().parents[2] / "logs"
+    log_dir = Path(log_dir).expanduser()
+    log_dir.mkdir(parents=True, exist_ok=True)
 
     dictConfig(
         {
@@ -29,12 +31,14 @@ def configure_logging(level: str = "INFO") -> None:
                     "level": level,
                 },
                 "runtime_file": {
-                    "class": "logging.handlers.RotatingFileHandler",
+                    "class": "logging.handlers.TimedRotatingFileHandler",
                     "formatter": "default",
                     "level": level,
-                    "filename": str(LOG_DIR / "controller-runtime.log"),
-                    "maxBytes": 2 * 1024 * 1024,
-                    "backupCount": 5,
+                    "filename": str(log_dir / "controller-runtime.log"),
+                    "when": "midnight",
+                    "backupCount": max(int(retention_days), 1),
+                    "utc": True,
+                    "delay": True,
                     "encoding": "utf-8",
                 },
             },

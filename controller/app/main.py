@@ -13,7 +13,7 @@ from .logging_config import configure_logging
 from .session_manager import SessionManager
 
 settings: Settings = get_settings()
-configure_logging(settings.log_level)
+configure_logging(settings.log_level, settings.log_directory, settings.log_retention_days)
 app = FastAPI(title="mdai-controller", version="0.1.0")
 manager = SessionManager(settings=settings)
 
