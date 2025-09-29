@@ -172,6 +172,10 @@ body {
   display: block;
 }
 
+.preview-surface__canvas {
+  background-color: #000;
+}
+
 .preview-surface__placeholder {
   object-fit: cover;
   background-color: #000;
@@ -179,6 +183,15 @@ body {
 
 .preview-surface__iframe {
   background-color: #000;
+}
+
+.preview-surface__img {
+  background-color: #000;
+  object-fit: cover;
+}
+
+.preview-surface__source {
+  display: none;
 }
 
 .idle-screen {

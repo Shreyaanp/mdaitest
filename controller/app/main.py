@@ -1,6 +1,7 @@
 """FastAPI entry-point for the mdai controller."""
 from __future__ import annotations
 
+import logging
 from typing import AsyncIterator
 
 from fastapi import Body, FastAPI, WebSocket, WebSocketDisconnect
@@ -11,6 +12,8 @@ from fastapi.responses import JSONResponse, StreamingResponse
 from .config import Settings, get_settings
 from .logging_config import configure_logging
 from .session_manager import SessionManager
+
+logger = logging.getLogger(__name__)
 
 settings: Settings = get_settings()
 configure_logging(settings.log_level, settings.log_directory, settings.log_retention_days)
@@ -119,9 +122,17 @@ async def ui_socket(ws: WebSocket) -> None:
             }
             if event.error:
                 payload["error"] = event.error
-            await ws.send_json(payload)
+            try:
+                await ws.send_json(payload)
+            except Exception as e:
+                # WebSocket closed, break out of loop
+                logger.warning(f"WebSocket send failed: {e}")
+                break
     except WebSocketDisconnect:
         pass
     finally:
         manager.unregister_ui(queue)
-        await ws.close()
+        try:
+            await ws.close()
+        except Exception:
+            pass

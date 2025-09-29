@@ -1924,3 +1924,163 @@ RuntimeError: no_viable_frame
 2025-09-29 18:11:24,307 | INFO | app.sensors.tof | ToF polling stopped
 2025-09-29 18:11:24,330 | INFO | d435i_liveness | preview loop stopped
 2025-09-29 18:11:24,330 | INFO | d435i_liveness | Deactivating RealSense pipeline (shutdown)
+2025-09-29 18:36:11,095 | INFO | d435i_liveness | RealSense hardware request acquired: preview (total=1)
+2025-09-29 18:36:11,096 | INFO | d435i_liveness | Activating RealSense pipeline (requests={'preview': 1})
+2025-09-29 18:36:11,367 | INFO | d435i_liveness | Connected to Intel RealSense D435I (S/N 215322072881) depth_scale=0.001000 m
+2025-09-29 18:38:50,496 | INFO | app.session_manager | Starting session manager
+2025-09-29 18:38:50,497 | INFO | app.sensors.tof | Starting ToF polling threshold=450 debounce_ms=200 interval_ms=50
+2025-09-29 18:38:50,498 | INFO | app.session_manager | Stopping session manager
+2025-09-29 18:38:50,548 | INFO | app.sensors.tof | ToF polling stopped
+2025-09-29 18:38:50,596 | INFO | d435i_liveness | preview loop stopped
+2025-09-29 18:39:31,333 | INFO | app.session_manager | Starting session manager
+2025-09-29 18:39:31,333 | INFO | app.sensors.tof | Starting ToF polling threshold=450 debounce_ms=200 interval_ms=50
+2025-09-29 18:40:41,117 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.IDLE
+2025-09-29 18:40:41,118 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 18:40:42,428 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-09-29 18:40:44,119 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiMWNhMjYwNTdlNzlhNDNiMTg2OGRiMTJmNDU0ZjVkNzQiLCJleHAiOjE3NTkxNTA3MjJ9.Ndm-AAIA7jueqWgv2KMjRsi7m5sE9pIwFJUbRlTHV3A
+2025-09-29 18:40:45,466 | INFO | app.session_manager | Bridge message received: joined
+2025-09-29 18:40:47,118 | INFO | app.session_manager | Waiting for app connection with timeout=175.0s
+2025-09-29 18:41:08,501 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-29 18:41:09,632 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-29 18:41:09,632 | INFO | d435i_liveness | RealSense hardware request acquired: session (total=1)
+2025-09-29 18:41:09,632 | INFO | d435i_liveness | Activating RealSense pipeline (requests={'session': 1})
+2025-09-29 18:41:09,720 | INFO | d435i_liveness | RealSense hardware request acquired: preview (total=2)
+2025-09-29 18:41:09,934 | INFO | d435i_liveness | Connected to Intel RealSense D435I (S/N 215322072881) depth_scale=0.001000 m
+2025-09-29 18:41:10,246 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-29 18:41:13,422 | WARNING | d435i_liveness | RealSense processing block failure; dropping frame (consecutive=1)
+2025-09-29 18:41:13,455 | WARNING | d435i_liveness | RealSense processing block failure; dropping frame (consecutive=2)
+2025-09-29 18:41:13,489 | WARNING | d435i_liveness | RealSense processing block failure; restarting pipeline
+2025-09-29 18:41:14,631 | INFO | d435i_liveness | Connected to Intel RealSense D435I (S/N 215322072881) depth_scale=0.001000 m
+2025-09-29 18:41:16,634 | ERROR | app.session_manager | Session failed: no_viable_frame
+Traceback (most recent call last):
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 263, in _run_session
+    await self._collect_best_frame()
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 343, in _collect_best_frame
+    raise RuntimeError("no_viable_frame")
+RuntimeError: no_viable_frame
+2025-09-29 18:41:16,793 | WARNING | d435i_liveness | RealSense processing block failure; dropping frame (consecutive=1)
+2025-09-29 18:41:16,794 | WARNING | d435i_liveness | RealSense processing block failure; dropping frame (consecutive=2)
+2025-09-29 18:41:16,827 | WARNING | d435i_liveness | RealSense processing block failure; restarting pipeline
+2025-09-29 18:41:17,031 | INFO | d435i_liveness | Connected to Intel RealSense D435I (S/N 215322072881) depth_scale=0.001000 m
+2025-09-29 18:41:19,655 | INFO | d435i_liveness | RealSense hardware request released: session (remaining=1)
+2025-09-29 18:41:21,592 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.IDLE
+2025-09-29 18:41:21,592 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 18:41:22,748 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-09-29 18:41:24,593 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiMDhmM2MyNjQ4ZWM1NDZkNDk4ZjRlN2RiZTVjM2QyOTEiLCJleHAiOjE3NTkxNTA3NjJ9.5u1wBcim-QvBJzJ0q4rO00IicAuPXcG1dbmprppdwlQ
+2025-09-29 18:41:25,478 | INFO | app.session_manager | Bridge message received: joined
+2025-09-29 18:41:27,593 | INFO | app.session_manager | Waiting for app connection with timeout=175.0s
+2025-09-29 18:41:37,791 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-29 18:41:38,698 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-29 18:41:38,703 | INFO | d435i_liveness | RealSense hardware request acquired: session (total=2)
+2025-09-29 18:41:39,487 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-29 18:41:42,468 | WARNING | d435i_liveness | RealSense processing block failure; dropping frame (consecutive=1)
+2025-09-29 18:41:42,501 | WARNING | d435i_liveness | RealSense processing block failure; dropping frame (consecutive=2)
+2025-09-29 18:41:42,537 | WARNING | d435i_liveness | RealSense processing block failure; restarting pipeline
+2025-09-29 18:41:42,889 | INFO | d435i_liveness | Connected to Intel RealSense D435I (S/N 215322072881) depth_scale=0.001000 m
+2025-09-29 18:41:44,276 | WARNING | d435i_liveness | RealSense processing block failure; dropping frame (consecutive=1)
+2025-09-29 18:41:44,309 | WARNING | d435i_liveness | RealSense processing block failure; dropping frame (consecutive=2)
+2025-09-29 18:41:44,343 | WARNING | d435i_liveness | RealSense processing block failure; restarting pipeline
+2025-09-29 18:41:44,487 | INFO | d435i_liveness | Connected to Intel RealSense D435I (S/N 215322072881) depth_scale=0.001000 m
+2025-09-29 18:41:45,697 | ERROR | app.session_manager | Session failed: no_viable_frame
+Traceback (most recent call last):
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 263, in _run_session
+    await self._collect_best_frame()
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 343, in _collect_best_frame
+    raise RuntimeError("no_viable_frame")
+RuntimeError: no_viable_frame
+2025-09-29 18:41:45,806 | WARNING | d435i_liveness | RealSense processing block failure; dropping frame (consecutive=1)
+2025-09-29 18:41:45,840 | WARNING | d435i_liveness | RealSense processing block failure; dropping frame (consecutive=2)
+2025-09-29 18:41:45,873 | WARNING | d435i_liveness | RealSense processing block failure; restarting pipeline
+2025-09-29 18:41:46,090 | INFO | d435i_liveness | Connected to Intel RealSense D435I (S/N 215322072881) depth_scale=0.001000 m
+2025-09-29 18:41:48,717 | INFO | d435i_liveness | RealSense hardware request released: session (remaining=1)
+2025-09-29 18:42:42,521 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.IDLE
+2025-09-29 18:42:42,521 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 18:42:43,423 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-09-29 18:42:45,521 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiMmZkMWIzOGRhNzY4NDM5Y2JiMGFkNTZjNTMzYmQ5ZTciLCJleHAiOjE3NTkxNTA4NDN9.vPpuTsdiBswMeL0SaVbcmwoZtzqX7kd_v4SPCRsFCg8
+2025-09-29 18:42:46,599 | INFO | app.session_manager | Bridge message received: joined
+2025-09-29 18:42:48,522 | INFO | app.session_manager | Waiting for app connection with timeout=175.0s
+2025-09-29 18:43:09,290 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-29 18:43:10,353 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-29 18:43:10,380 | INFO | d435i_liveness | RealSense hardware request acquired: session (total=2)
+2025-09-29 18:43:11,070 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-29 18:43:14,107 | WARNING | d435i_liveness | RealSense processing block failure; dropping frame (consecutive=1)
+2025-09-29 18:43:14,140 | WARNING | d435i_liveness | RealSense processing block failure; dropping frame (consecutive=2)
+2025-09-29 18:43:14,174 | WARNING | d435i_liveness | RealSense processing block failure; restarting pipeline
+2025-09-29 18:43:15,137 | INFO | d435i_liveness | Connected to Intel RealSense D435I (S/N 215322072881) depth_scale=0.001000 m
+2025-09-29 18:43:17,325 | WARNING | d435i_liveness | RealSense processing block failure; dropping frame (consecutive=1)
+2025-09-29 18:43:17,325 | WARNING | d435i_liveness | RealSense processing block failure; dropping frame (consecutive=2)
+2025-09-29 18:43:17,354 | ERROR | app.session_manager | Session failed: no_viable_frame
+Traceback (most recent call last):
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 263, in _run_session
+    await self._collect_best_frame()
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 343, in _collect_best_frame
+    raise RuntimeError("no_viable_frame")
+RuntimeError: no_viable_frame
+2025-09-29 18:43:17,358 | WARNING | d435i_liveness | RealSense processing block failure; restarting pipeline
+2025-09-29 18:43:17,539 | INFO | d435i_liveness | Connected to Intel RealSense D435I (S/N 215322072881) depth_scale=0.001000 m
+2025-09-29 18:43:20,364 | INFO | d435i_liveness | RealSense hardware request released: session (remaining=1)
+2025-09-29 18:43:28,521 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.IDLE
+2025-09-29 18:43:28,521 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-29 18:43:29,503 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-09-29 18:43:31,521 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiNDQzMWRhN2NiY2ZjNDU3ZGI4ZmM0ZmI3NGNjNjE1NDMiLCJleHAiOjE3NTkxNTA4ODl9.5x3BB7Q39HC8BmuVgFi000WjA6AdYvQDKT1zHZb6Ro8
+2025-09-29 18:43:32,470 | INFO | app.session_manager | Bridge message received: joined
+2025-09-29 18:43:32,973 | INFO | d435i_liveness | face score=0.730 bbox=(161, 292, 378, 480) live=False depth={'range': 1.467000037431717, 'stdev': 0.19643758237361908, 'center_mean': 0.37530791759490967, 'outer_mean': 0.42420750856399536, 'left_mean': 0.37472963333129883, 'right_mean': 0.4522411823272705, 'prominence': 0.04889959096908569, 'prominence_ratio': 0.03333305366146712, 'reason': 'nose_not_prominent'} ir={'mean': 171.3831024169922, 'stdev': 76.0714111328125, 'saturation_fraction': 0.306023408506994, 'dark_fraction': 0.0, 'flicker_pp': 0.0, 'reason': 'clear'} move={'reason': 'insufficient_samples', 'samples': 1}
+2025-09-29 18:43:33,009 | INFO | d435i_liveness | face score=0.604 bbox=(171, 289, 369, 480) live=False depth={'range': 0.10900002717971802, 'stdev': 0.025508034974336624, 'center_mean': 0.3741937577724457, 'outer_mean': 0.38480255007743835, 'left_mean': 0.37641656398773193, 'right_mean': 0.38784798979759216, 'prominence': 0.010608792304992676, 'prominence_ratio': 0.09732834550124486, 'asymmetry': 0.01143142580986023, 'reason': 'depth_ok'} ir={'mean': 176.3656463623047, 'stdev': 70.00733947753906, 'saturation_fraction': 0.2927057356608479, 'dark_fraction': 0.0, 'flicker_pp': 4.9825439453125, 'reason': 'clear'} move={'reason': 'insufficient_samples', 'samples': 2}
+2025-09-29 18:43:34,521 | INFO | app.session_manager | Waiting for app connection with timeout=175.0s
+2025-09-29 18:43:34,544 | INFO | d435i_liveness | face score=0.801 bbox=(130, 109, 324, 304) live=False depth={'range': 1.6710001528263092, 'stdev': 0.5170578956604004, 'center_mean': 0.360535204410553, 'outer_mean': 0.6328423619270325, 'left_mean': 0.34938713908195496, 'right_mean': 0.7957078814506531, 'prominence': 0.2723071575164795, 'prominence_ratio': 0.16296058205374936, 'asymmetry': 0.4463207423686981, 'reason': 'cheeks_unbalanced'} ir={'mean': 177.607666015625, 'stdev': 72.9116439819336, 'saturation_fraction': 0.32471174820816456, 'dark_fraction': 0.0, 'flicker_pp': 6.2245635986328125, 'reason': 'clear'} move={'eye_var': 0.0, 'mouth_var': 0.0, 'nose_var': 0.0, 'center_shift': 184.5785740545202, 'reason': 'movement_ok'}
+2025-09-29 18:43:51,729 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-29 18:43:52,793 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-29 18:43:52,829 | INFO | d435i_liveness | RealSense hardware request acquired: session (total=2)
+2025-09-29 18:43:53,377 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-29 18:43:56,586 | WARNING | d435i_liveness | RealSense processing block failure; dropping frame (consecutive=1)
+2025-09-29 18:43:56,586 | WARNING | d435i_liveness | RealSense processing block failure; dropping frame (consecutive=2)
+2025-09-29 18:43:56,619 | WARNING | d435i_liveness | RealSense processing block failure; restarting pipeline
+2025-09-29 18:43:57,336 | INFO | d435i_liveness | Connected to Intel RealSense D435I (S/N 215322072881) depth_scale=0.001000 m
+2025-09-29 18:43:58,589 | WARNING | d435i_liveness | RealSense processing block failure; dropping frame (consecutive=1)
+2025-09-29 18:43:58,622 | WARNING | d435i_liveness | RealSense processing block failure; dropping frame (consecutive=2)
+2025-09-29 18:43:58,656 | WARNING | d435i_liveness | RealSense processing block failure; restarting pipeline
+2025-09-29 18:43:58,820 | INFO | d435i_liveness | Connected to Intel RealSense D435I (S/N 215322072881) depth_scale=0.001000 m
+2025-09-29 18:43:59,793 | ERROR | app.session_manager | Session failed: no_viable_frame
+Traceback (most recent call last):
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 263, in _run_session
+    await self._collect_best_frame()
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 343, in _collect_best_frame
+    raise RuntimeError("no_viable_frame")
+RuntimeError: no_viable_frame
+2025-09-29 18:44:02,814 | INFO | d435i_liveness | RealSense hardware request released: session (remaining=1)
+2025-09-29 18:49:35,321 | INFO | app.session_manager | Starting session manager
+2025-09-29 18:49:35,321 | INFO | app.sensors.tof | Starting ToF polling threshold=450 debounce_ms=200 interval_ms=50
+2025-09-29 19:05:35,411 | INFO | app.session_manager | Stopping session manager
+2025-09-29 19:05:35,414 | INFO | app.sensors.tof | ToF polling stopped
+2025-09-29 19:05:35,431 | INFO | d435i_liveness | preview loop stopped
+2025-09-29 19:05:42,393 | INFO | app.session_manager | Starting session manager
+2025-09-29 19:05:42,394 | INFO | app.sensors.tof | Starting ToF polling threshold=450 debounce_ms=200 interval_ms=50
+2025-09-30 02:04:09,004 | INFO | app.session_manager | ToF trigger=True distance=400 phase=SessionPhase.IDLE
+2025-09-30 02:04:09,005 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-30 02:04:10,368 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-09-30 02:04:12,005 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiODM1OTlkZDg4MTc2NDY2M2I2ZDc5YTIwOWZjMTVlYmMiLCJleHAiOjE3NTkxNzczMzB9.9SWGV8d0AwBkAqNuKiBDAYNVtsYs1DebmbQY6mSeXyA
+2025-09-30 02:04:13,245 | INFO | app.session_manager | Bridge message received: joined
+2025-09-30 02:04:15,005 | INFO | app.session_manager | Waiting for app connection with timeout=175.0s
+2025-09-30 02:04:42,646 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-30 02:04:44,570 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-30 02:04:44,570 | INFO | d435i_liveness | RealSense hardware request acquired: session (total=1)
+2025-09-30 02:04:44,570 | INFO | d435i_liveness | Activating RealSense pipeline (requests={'session': 1})
+2025-09-30 02:04:44,682 | INFO | d435i_liveness | RealSense hardware request acquired: preview (total=2)
+2025-09-30 02:04:44,864 | INFO | d435i_liveness | Connected to Intel RealSense D435I (S/N 215322072881) depth_scale=0.001000 m
+2025-09-30 02:04:45,460 | INFO | app.session_manager | Bridge message received: from_app
+2025-09-30 02:04:48,356 | WARNING | d435i_liveness | RealSense processing block failure; dropping frame (consecutive=1)
+2025-09-30 02:04:48,389 | WARNING | d435i_liveness | RealSense processing block failure; dropping frame (consecutive=2)
+2025-09-30 02:04:48,423 | WARNING | d435i_liveness | RealSense processing block failure; restarting pipeline
+2025-09-30 02:04:49,491 | INFO | d435i_liveness | Connected to Intel RealSense D435I (S/N 215322072881) depth_scale=0.001000 m
+2025-09-30 02:04:50,744 | WARNING | d435i_liveness | RealSense processing block failure; dropping frame (consecutive=1)
+2025-09-30 02:04:50,746 | WARNING | d435i_liveness | RealSense processing block failure; dropping frame (consecutive=2)
+2025-09-30 02:04:50,777 | WARNING | d435i_liveness | RealSense processing block failure; restarting pipeline
+2025-09-30 02:04:50,993 | INFO | d435i_liveness | Connected to Intel RealSense D435I (S/N 215322072881) depth_scale=0.001000 m
+2025-09-30 02:04:51,570 | ERROR | app.session_manager | Session failed: no_viable_frame
+Traceback (most recent call last):
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 263, in _run_session
+    await self._collect_best_frame()
+  File "/home/ichiro/Desktop/mercleapp/mDai/frontend/mdaitest/controller/app/session_manager.py", line 343, in _collect_best_frame
+    raise RuntimeError("no_viable_frame")
+RuntimeError: no_viable_frame
+2025-09-30 02:04:54,590 | INFO | d435i_liveness | RealSense hardware request released: session (remaining=1)

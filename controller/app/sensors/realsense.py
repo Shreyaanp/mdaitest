@@ -666,7 +666,12 @@ class MediaPipeLiveness:
 # ----------------------------
 
 class RealSenseService:
-    """Coordinates preview streaming and liveness evaluation."""
+    """Coordinates preview streaming and liveness evaluation.
+    
+    Important: Camera hardware activation is controlled ONLY by the session manager
+    via set_hardware_active(). Preview subscribers do NOT activate the camera - they
+    only receive frames when the camera is already active.
+    """
 
     def __init__(
         self,
@@ -723,34 +728,18 @@ class RealSenseService:
 
     async def set_preview_enabled(self, enabled: bool) -> bool:
         self._preview_enabled = enabled
-        await self._ensure_preview_active()
         return self._preview_enabled
 
     async def preview_stream(self) -> AsyncIterator[bytes]:
+        """Stream preview frames. Does NOT activate camera - session controls that."""
         q: asyncio.Queue[bytes] = asyncio.Queue(maxsize=2)
         self._preview_subscribers.append(q)
-        await self._ensure_preview_active()
         try:
             while True:
                 frame = await q.get()
                 yield frame
         finally:
             self._preview_subscribers.remove(q)
-            await self._ensure_preview_active()
-
-    async def _ensure_preview_active(self) -> None:
-        preview_subscribers = len(self._preview_subscribers)
-        preview_requested = self._hardware_requests.get("preview", 0)
-
-        if not self._preview_enabled:
-            if preview_requested > 0:
-                await self.set_hardware_active(False, source="preview")
-            return
-
-        if preview_subscribers > 0 and preview_requested == 0:
-            await self.set_hardware_active(True, source="preview")
-        elif preview_subscribers == 0 and preview_requested > 0:
-            await self.set_hardware_active(False, source="preview")
 
     async def gather_results(self, duration: float) -> List[LivenessResult]:
         if not self.enable_hardware or not self._hardware_active or not self._instance:
@@ -817,13 +806,14 @@ class RealSenseService:
                 lowered = message.lower()
                 if "processing block" in lowered:
                     self._consecutive_processing_failures += 1
-                    if self._consecutive_processing_failures < 3:
+                    if self._consecutive_processing_failures < 5:  # Increased from 3 to 5
                         logger.warning(
                             "RealSense processing block failure; dropping frame (consecutive=%s)",
                             self._consecutive_processing_failures,
                         )
                         return None
-                    logger.warning("RealSense processing block failure; restarting pipeline")
+                    logger.warning("RealSense processing block failure after %s attempts; restarting pipeline", 
+                                  self._consecutive_processing_failures)
                     await self._restart_pipeline_unlocked(loop)
                     self._consecutive_timeouts = 0
                     self._consecutive_processing_failures = 0
@@ -835,7 +825,7 @@ class RealSenseService:
                         "RealSense frame timeout (%s consecutive); retrying",
                         self._consecutive_timeouts,
                     )
-                    if self._consecutive_timeouts >= 5:
+                    if self._consecutive_timeouts >= 8:  # Increased from 5 to 8
                         logger.warning(
                             "RealSense consecutive timeouts reached %s; restarting pipeline",
                             self._consecutive_timeouts,
@@ -896,19 +886,22 @@ class RealSenseService:
                 self._hardware_requests[source] += 1
                 total = sum(self._hardware_requests.values())
                 logger.info(
-                    "RealSense hardware request acquired: %s (total=%s)",
+                    "RealSense hardware request acquired: %s (count=%s, total=%s)",
                     source,
+                    self._hardware_requests[source],
                     total,
                 )
             else:
-                if self._hardware_requests.get(source):
+                current_count = self._hardware_requests.get(source, 0)
+                if current_count > 0:
                     self._hardware_requests[source] -= 1
                     if self._hardware_requests[source] <= 0:
                         del self._hardware_requests[source]
                     total = sum(self._hardware_requests.values())
                     logger.info(
-                        "RealSense hardware request released: %s (remaining=%s)",
+                        "RealSense hardware request released: %s (was=%s, remaining=%s)",
                         source,
+                        current_count,
                         total,
                     )
                 else:

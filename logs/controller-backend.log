@@ -55,3 +55,19 @@ Traceback (most recent call last):
   File "/home/ichiro/.pyenv/versions/3.11.13/lib/python3.11/site-packages/websockets/legacy/protocol.py", line 921, in ensure_open
     raise self.connection_closed_exc()
 websockets.exceptions.ConnectionClosedOK: received 1001 (going away); then sent 1001 (going away)
+INFO:     127.0.0.1:47922 - "HEAD /preview HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:44006 - "GET /preview HTTP/1.1" 200 OK
+2025-09-29 18:36:11,095 | INFO | d435i_liveness | RealSense hardware request acquired: preview (total=1)
+2025-09-29 18:36:11,096 | INFO | d435i_liveness | Activating RealSense pipeline (requests={'preview': 1})
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1759150271.119390 2445966 gl_context_egl.cc:85] Successfully initialized EGL. Major : 1 Minor: 5
+I0000 00:00:1759150271.145596 2445974 gl_context.cc:357] GL version: 3.2 (OpenGL ES 3.2 NVIDIA 535.261.03), renderer: NVIDIA GeForce RTX 3050 Laptop GPU/PCIe/SSE2
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+I0000 00:00:1759150271.152638 2445966 gl_context_egl.cc:85] Successfully initialized EGL. Major : 1 Minor: 5
+W0000 00:00:1759150271.156446 2445969 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+I0000 00:00:1759150271.170342 2445991 gl_context.cc:357] GL version: 3.2 (OpenGL ES 3.2 NVIDIA 535.261.03), renderer: NVIDIA GeForce RTX 3050 Laptop GPU/PCIe/SSE2
+W0000 00:00:1759150271.172516 2445978 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1759150271.181595 2445979 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+2025-09-29 18:36:11,367 | INFO | d435i_liveness | Connected to Intel RealSense D435I (S/N 215322072881) depth_scale=0.001000 m
+INFO:     127.0.0.1:60320 - "HEAD /preview HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:39524 - "HEAD /preview HTTP/1.1" 405 Method Not Allowed
