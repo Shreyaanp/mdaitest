@@ -52,12 +52,8 @@ class ToFSensor:
         self._task = None
 
     async def _run_loop(self) -> None:
-        logger.info(
-            "Starting ToF polling threshold=%s debounce_ms=%s interval_ms=%s",
-            self.threshold_mm,
-            self.debounce_ms,
-            self.poll_interval_ms,
-        )
+        logger.info("ToF sensor active (threshold=%dmm, debounce=%dms)", 
+                   self.threshold_mm, self.debounce_ms)
         try:
             while not self._stop_event.is_set():
                 distance = await self.distance_provider()
@@ -74,26 +70,18 @@ class ToFSensor:
                         await self._emit(triggered, distance)
                 await asyncio.sleep(self.poll_interval_ms / 1000)
         except asyncio.CancelledError:
-            logger.info("ToF polling cancelled")
             raise
-        except Exception as exc:  # pragma: no cover - defensive guard
-            logger.exception("ToF polling loop failed: %s", exc)
+        except Exception as exc:
+            logger.exception("ToF sensor error: %s", exc)
+            raise
         finally:
             self._stop_event.clear()
-            logger.info("ToF polling stopped")
 
     async def _emit(self, triggered: bool, distance: int) -> None:
-        logger.debug("ToF trigger changed triggered=%s distance=%s", triggered, distance)
+        """Emit trigger event to registered callbacks."""
         for callback in self._callbacks:
             try:
                 await callback(triggered, distance)
-            except Exception:  # pragma: no cover - defensive guard
+            except Exception:
                 logger.exception("ToF callback failed")
-
-
-async def mock_distance_provider() -> Optional[int]:
-    """Simple stub that always returns None. Replace in tests/dev."""
-
-    await asyncio.sleep(0)
-    return None
 

@@ -12,7 +12,6 @@ import UploadingScreen from './UploadingScreen'
 interface StageRouterProps {
   state: StateFrom<typeof sessionMachine>
   qrPayload?: Record<string, unknown> | null
-  onMockTof?: () => void
   processingReady?: boolean
 }
 
@@ -34,7 +33,7 @@ type ViewState =
   | 'scanComplete'
   | 'default'
 
-export default function StageRouter({ state, qrPayload, onMockTof, processingReady = false }: StageRouterProps) {
+export default function StageRouter({ state, qrPayload, processingReady = false }: StageRouterProps) {
   const [idleMode, setIdleMode] = useState<'idle' | 'exit'>(state.matches('idle') ? 'idle' : 'exit')
   const [showIdleBars, setShowIdleBars] = useState<boolean>(true)
   const [viewState, setViewState] = useState<ViewState>(state.matches('idle') ? 'idle' : 'default')
@@ -151,7 +150,7 @@ export default function StageRouter({ state, qrPayload, onMockTof, processingRea
   }, [])
 
   if (viewState === 'idle' || viewState === 'idleExit' || viewState === 'heroHold') {
-    return <IdleScreen mode={idleMode} showBars={showIdleBars} onMockTof={onMockTof} />
+    return <IdleScreen mode={idleMode} showBars={showIdleBars} />
   }
 
   if (viewState === 'scanPrompt') {
@@ -274,5 +273,5 @@ export default function StageRouter({ state, qrPayload, onMockTof, processingRea
     )
   }
 
-  return <IdleScreen mode="idle" onMockTof={onMockTof} />
+  return <IdleScreen mode="idle" />
 }

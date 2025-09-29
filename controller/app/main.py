@@ -50,29 +50,8 @@ async def debug_trigger() -> JSONResponse:
     return JSONResponse({"status": "scheduled"})
 
 
-class TofTriggerRequest(BaseModel):
-    triggered: bool = True
-    distance_mm: int | None = None
-
-
-class TofBypassRequest(BaseModel):
-    enabled: bool = True
-
-
 class PreviewToggleRequest(BaseModel):
     enabled: bool = True
-
-
-@app.post("/debug/tof-trigger")
-async def debug_tof_trigger(payload: TofTriggerRequest) -> JSONResponse:
-    await manager.simulate_tof_trigger(triggered=payload.triggered, distance_mm=payload.distance_mm)
-    return JSONResponse({"status": "ok"})
-
-
-@app.post("/debug/tof-bypass")
-async def debug_tof_bypass(payload: TofBypassRequest) -> JSONResponse:
-    await manager.set_tof_bypass(payload.enabled)
-    return JSONResponse({"status": "enabled" if payload.enabled else "disabled"})
 
 
 @app.post("/debug/preview")

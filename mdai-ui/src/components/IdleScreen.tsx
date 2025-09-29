@@ -10,10 +10,9 @@ export const IDLE_EXIT_DURATION_MS = TV_BARS_FALL_DURATION_MS
 interface IdleScreenProps {
   mode: TVBarsMode
   showBars?: boolean
-  onMockTof?: () => void
 }
 
-export default function IdleScreen({ mode, showBars = true, onMockTof }: IdleScreenProps) {
+export default function IdleScreen({ mode, showBars = true }: IdleScreenProps) {
   return (
     <div className="idle-screen" data-mode={mode}>
       <HelloHumanHero />
@@ -25,11 +24,6 @@ export default function IdleScreen({ mode, showBars = true, onMockTof }: IdleScr
             marqueeMs={TV_BARS_MARQUEE_DURATION_MS}
           />
         </div>
-      ) : null}
-      {onMockTof ? (
-        <button type="button" className="idle-screen__mock-button" onClick={onMockTof}>
-          Mock ToF
-        </button>
       ) : null}
     </div>
   )

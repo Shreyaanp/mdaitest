@@ -47,8 +47,7 @@ class ToFReaderProcess:
 
             path = Path(self.binary_path)
             if not path.exists():
-                logger.error("tof-reader binary not found at %s", path)
-                return
+                raise FileNotFoundError(f"ToF reader binary not found: {path}")
 
             cmd = [
                 str(path),
@@ -62,7 +61,7 @@ class ToFReaderProcess:
             if self.xshut_path:
                 cmd.extend(["--xshut", self.xshut_path])
 
-            logger.info("Starting tof-reader process: %s", " ".join(cmd))
+            logger.info("ToF reader starting on %s @ %dHz", self.i2c_bus, self.output_hz)
             self._proc = await asyncio.create_subprocess_exec(
                 *cmd,
                 stdout=asyncio.subprocess.PIPE,
@@ -91,7 +90,6 @@ class ToFReaderProcess:
             try:
                 await asyncio.wait_for(self._proc.wait(), timeout=2)
             except asyncio.TimeoutError:
-                logger.warning("tof-reader did not exit cleanly; killing")
                 self._proc.kill()
                 await self._proc.wait()
         self._proc = None
@@ -128,11 +126,9 @@ class ToFReaderProcess:
                 if not line:
                     continue
                 distance = self._parse_distance(line)
-                if distance is None:
-                    logger.debug("Unexpected tof-reader payload: %s", line)
-                    continue
-                self._latest_distance = distance
-                self._ready_event.set()
+                if distance is not None:
+                    self._latest_distance = distance
+                    self._ready_event.set()
         except asyncio.CancelledError:
             raise
         except Exception as exc:  # pragma: no cover - defensive guard
@@ -140,7 +136,8 @@ class ToFReaderProcess:
         finally:
             if self._proc:
                 returncode = await self._proc.wait()
-                logger.warning("tof-reader exited with code %s", returncode)
+                if returncode != 0:
+                    logger.error("ToF reader crashed (exit code %d)", returncode)
             self._ready_event.clear()
             self._latest_distance = None
 
@@ -153,7 +150,7 @@ class ToFReaderProcess:
                     break
                 line = raw_line.decode("utf-8", "ignore").strip()
                 if line:
-                    logger.warning("tof-reader stderr: %s", line)
+                    logger.error("ToF sensor error: %s", line)
         except asyncio.CancelledError:
             raise
         except Exception as exc:  # pragma: no cover - defensive guard

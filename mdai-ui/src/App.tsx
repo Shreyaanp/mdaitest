@@ -65,7 +65,6 @@ export default function App() {
   const [connectionStatus, setConnectionStatus] = useState<SocketStatus>('connecting')
   const [lastHeartbeatTs, setLastHeartbeatTs] = useState<number | null>(null)
   const [isTriggering, setIsTriggering] = useState(false)
-  const [isTofTriggering, setIsTofTriggering] = useState(false)
   const [tokenExpiryTs, setTokenExpiryTs] = useState<number | null>(null)
   const [now, setNow] = useState(Date.now())
   const [qrPayloadOverride, setQrPayloadOverride] = useState<ControllerData | null>(null)
@@ -282,28 +281,6 @@ export default function App() {
     }
   }, [appendLog, controllerHttpBase])
 
-  const triggerTof = useCallback(async () => {
-    setIsTofTriggering(true)
-    try {
-      const url = buildControllerUrl(controllerHttpBase, '/debug/tof-trigger')
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ triggered: true })
-      })
-      if (!response.ok) {
-        const text = await response.text().catch(() => '')
-        throw new Error(text || `HTTP ${response.status}`)
-      }
-      appendLog('Simulated ToF trigger')
-    } catch (error) {
-      const reason = error instanceof Error ? error.message : String(error)
-      appendLog(`ToF trigger failed: ${reason}`, 'error')
-    } finally {
-      setIsTofTriggering(false)
-    }
-  }, [appendLog, controllerHttpBase])
-
   useEffect(() => {
     if (state.matches('qr_display')) {
       appendLog('QR code displayed – waiting for mobile activation')
@@ -316,7 +293,6 @@ export default function App() {
         <StageRouter
           state={state}
           qrPayload={qrPayloadOverride ?? (state.context.qrPayload as ControllerData | undefined)}
-          onMockTof={triggerTof}
         />
         <PreviewSurface
           visible={showPreview}
@@ -339,9 +315,6 @@ export default function App() {
         onTrigger={triggerSession}
         triggerDisabled={!state.matches('idle') || isTriggering}
         isTriggering={isTriggering}
-        onTofTrigger={triggerTof}
-        tofTriggerDisabled={!state.matches('idle') || isTofTriggering}
-        isTofTriggering={isTofTriggering}
       />
     </div>
   )

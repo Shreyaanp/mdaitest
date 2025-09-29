@@ -14,7 +14,7 @@ from .backend.http_client import BridgeHttpClient
 from .backend.ws_client import BackendWebSocketClient
 from .config import Settings, get_settings
 from .sensors.realsense import RealSenseService
-from .sensors.tof import DistanceProvider, ToFSensor, mock_distance_provider
+from .sensors.tof import DistanceProvider, ToFSensor
 from .sensors.tof_process import ToFReaderProcess
 from .state import ControllerEvent, SessionPhase
 
@@ -47,21 +47,21 @@ class SessionManager:
         self._phase_started_at: float = time.time()
         self._ui_subscribers: List[asyncio.Queue[ControllerEvent]] = []
         self._current_session = SessionContext()
-        self._tof_bypass: bool = False
 
+        # ToF sensor is required for production
         self._tof_process: Optional[ToFReaderProcess] = None
         if tof_distance_provider is None:
-            if self.settings.tof_reader_binary:
-                self._tof_process = ToFReaderProcess(
-                    binary_path=self.settings.tof_reader_binary,
-                    i2c_bus=self.settings.tof_i2c_bus,
-                    i2c_address=self.settings.tof_i2c_address,
-                    xshut_path=self.settings.tof_xshut_path,
-                    output_hz=self.settings.tof_output_hz,
-                )
-                tof_distance_provider = self._tof_process.get_distance
-            else:
-                tof_distance_provider = mock_distance_provider
+            if not self.settings.tof_reader_binary:
+                raise RuntimeError("ToF reader binary path not configured. Set TOF_READER_BINARY in .env")
+            
+            self._tof_process = ToFReaderProcess(
+                binary_path=self.settings.tof_reader_binary,
+                i2c_bus=self.settings.tof_i2c_bus,
+                i2c_address=self.settings.tof_i2c_address,
+                xshut_path=self.settings.tof_xshut_path,
+                output_hz=self.settings.tof_output_hz,
+            )
+            tof_distance_provider = self._tof_process.get_distance
 
         self._tof = ToFSensor(
             threshold_mm=self.settings.tof_threshold_mm,
@@ -145,27 +145,9 @@ class SessionManager:
             self._ui_subscribers.remove(queue)
 
     async def trigger_debug_session(self) -> None:
+        """Manual session trigger for testing (bypasses ToF sensor)."""
         logger.info("Debug session trigger invoked")
         self._schedule_session()
-
-    async def simulate_tof_trigger(self, *, triggered: bool, distance_mm: Optional[int] = None) -> None:
-        """Public hook to emulate ToF sensor transitions for debugging."""
-
-        if distance_mm is None:
-            distance_mm = max(0, self.settings.tof_threshold_mm - 50)
-        await self._handle_tof_trigger(triggered, distance_mm)
-
-    async def set_tof_bypass(self, enabled: bool) -> None:
-        if enabled == self._tof_bypass:
-            return
-        self._tof_bypass = enabled
-        event_data = {"event": "tof_bypass", "enabled": enabled}
-        logger.info("ToF bypass %s", "enabled" if enabled else "disabled")
-        await self._broadcast(
-            ControllerEvent(type="backend", phase=self._phase, data=event_data)
-        )
-        if enabled and self.phase == SessionPhase.IDLE:
-            self._schedule_session()
 
     async def mark_app_ready(self, *, platform_id: Optional[str] = None) -> bool:
         """Manually shortcut the app-ready handshake for local testing."""
@@ -213,16 +195,16 @@ class SessionManager:
         self._phase_started_at = time.time()
 
     async def _handle_tof_trigger(self, triggered: bool, distance: int) -> None:
-        logger.info("ToF trigger=%s distance=%s phase=%s", triggered, distance, self.phase)
+        """Handle ToF sensor trigger events."""
+        logger.info("ToF %s (distance=%dmm, phase=%s)", 
+                   "TRIGGERED" if triggered else "released", distance, self.phase.value)
         self._current_session.latest_distance_mm = distance
-        if self._tof_bypass:
-            if triggered and self.phase == SessionPhase.IDLE:
-                self._schedule_session()
-            return
+        
         if triggered and self.phase == SessionPhase.IDLE:
+            logger.info("Starting session from ToF trigger")
             self._schedule_session()
         elif not triggered and self.phase not in {SessionPhase.IDLE, SessionPhase.COMPLETE}:
-            logger.info("ToF reset detected mid-session; cancelling active session")
+            logger.warning("ToF sensor released mid-session - cancelling")
             if self._session_task:
                 self._session_task.cancel()
 
