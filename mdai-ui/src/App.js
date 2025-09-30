@@ -26,7 +26,6 @@ export default function App() {
     const [logs, setLogs] = useState([]);
     const [connectionStatus, setConnectionStatus] = useState('connecting');
     const [lastHeartbeatTs, setLastHeartbeatTs] = useState(null);
-    const [isTriggering, setIsTriggering] = useState(false);
     const [tokenExpiryTs, setTokenExpiryTs] = useState(null);
     const [now, setNow] = useState(Date.now());
     const [qrPayloadOverride, setQrPayloadOverride] = useState(null);
@@ -137,7 +136,9 @@ export default function App() {
         };
     }, []);
     const showPreview = useMemo(() => {
-        return previewVisiblePhases.has(state.value);
+        const shouldShow = previewVisiblePhases.has(state.value);
+        console.log('🎥 [APP PREVIEW] Phase:', state.value, '| Should show:', shouldShow, '| Phases:', Array.from(previewVisiblePhases));
+        return shouldShow;
     }, [previewVisiblePhases, state.value]);
     const heartbeatAgeSeconds = useMemo(() => {
         if (!lastHeartbeatTs)
@@ -156,37 +157,10 @@ export default function App() {
         }
         return undefined;
     }, [state.context.expiresIn, tokenExpiryTs, now]);
-    const buildControllerUrl = useCallback((path) => {
-        try {
-            return new URL(path, `${controllerHttpBase}/`).toString();
-        }
-        catch (error) {
-            return `${controllerHttpBase}${path}`;
-        }
-    }, [controllerHttpBase]);
-    const triggerSession = useCallback(async () => {
-        setIsTriggering(true);
-        try {
-            const url = buildControllerUrl('/debug/trigger');
-            const response = await fetch(url, { method: 'POST' });
-            if (!response.ok) {
-                const text = await response.text().catch(() => '');
-                throw new Error(text || `HTTP ${response.status}`);
-            }
-            appendLog('Manual trigger sent to controller');
-        }
-        catch (error) {
-            const reason = error instanceof Error ? error.message : String(error);
-            appendLog(`Trigger failed: ${reason}`, 'error');
-        }
-        finally {
-            setIsTriggering(false);
-        }
-    }, [appendLog, buildControllerUrl]);
     useEffect(() => {
         if (state.matches('qr_display')) {
             appendLog('QR code displayed – waiting for mobile activation');
         }
     }, [state, appendLog]);
-    return (_jsxs("div", { className: "app-shell", children: [_jsxs("div", { className: "visual-area", children: [_jsx(StageRouter, { state: state, qrPayload: qrPayloadOverride ?? qrPayload }), _jsx(PreviewSurface, { visible: showPreview, previewUrl: previewUrl })] }), _jsx(ControlPanel, { deviceId: deviceId, deviceAddress: deviceAddress, backendUrl: backendApiBase, controllerUrl: controllerUrl, connectionStatus: connectionStatus, currentPhase: String(state.value), pairingToken: pairingToken, qrPayload: qrPayloadOverride ?? qrPayload, expiresInSeconds: expiresInSeconds, lastHeartbeatSeconds: heartbeatAgeSeconds, metrics: metrics, logs: logs, onTrigger: triggerSession, triggerDisabled: !state.matches('idle') || isTriggering, isTriggering: isTriggering })] }));
+    return (_jsxs("div", { className: "app-shell", children: [_jsxs("div", { className: "visual-area", children: [_jsx(StageRouter, { state: state, qrPayload: qrPayloadOverride ?? qrPayload }), _jsx(PreviewSurface, { visible: showPreview, previewUrl: previewUrl })] }), _jsx(ControlPanel, { deviceId: deviceId, deviceAddress: deviceAddress, backendUrl: backendApiBase, controllerUrl: controllerUrl, connectionStatus: connectionStatus, currentPhase: String(state.value), pairingToken: pairingToken, qrPayload: qrPayloadOverride ?? qrPayload, expiresInSeconds: expiresInSeconds, lastHeartbeatSeconds: heartbeatAgeSeconds, metrics: metrics, logs: logs })] }));
 }

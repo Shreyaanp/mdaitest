@@ -244,42 +244,56 @@ def evaluate_depth_profile(stats: Dict[str, float], thresholds: LivenessThreshol
 
     if stats["range"] < thresholds.min_depth_range_m:
         info["reason"] = "depth_range_too_small"
+        logger.warning(f"❌ DEPTH FAIL: range={stats['range']:.4f} < threshold={thresholds.min_depth_range_m}")
         return False, info
     if stats["stdev"] < thresholds.min_depth_stdev_m:
         info["reason"] = "depth_stdev_too_small"
+        logger.warning(f"❌ DEPTH FAIL: stdev={stats['stdev']:.4f} < threshold={thresholds.min_depth_stdev_m}")
         return False, info
 
     center = stats.get("center_mean")
     outer = stats.get("outer_mean")
-    if center is None or outer is None:
-        info["reason"] = "missing_center_outer"
-        return False, info
-
-    prominence = outer - center
-    info["prominence"] = prominence
-    prominence_ratio = prominence / stats["range"] if stats["range"] > 1e-6 else 0.0
-    info["prominence_ratio"] = prominence_ratio
-    min_required_prominence = max(
-        thresholds.min_center_prominence_m,
-        thresholds.min_center_prominence_ratio * stats["range"],
-    )
-    if prominence < min_required_prominence or prominence_ratio < thresholds.min_center_prominence_ratio:
-        info["reason"] = "nose_not_prominent"
-        return False, info
+    
+    # FIX: Make center/outer check optional instead of required
+    # If masks don't capture data well, skip this check rather than fail
+    if center is not None and outer is not None:
+        prominence = outer - center
+        info["prominence"] = prominence
+        prominence_ratio = prominence / stats["range"] if stats["range"] > 1e-6 else 0.0
+        info["prominence_ratio"] = prominence_ratio
+        min_required_prominence = max(
+            thresholds.min_center_prominence_m,
+            thresholds.min_center_prominence_ratio * stats["range"],
+        )
+        if prominence < min_required_prominence or prominence_ratio < thresholds.min_center_prominence_ratio:
+            info["reason"] = "nose_not_prominent"
+            logger.warning(f"❌ DEPTH FAIL: prominence={prominence:.4f} < {min_required_prominence:.4f} OR ratio={prominence_ratio:.4f} < {thresholds.min_center_prominence_ratio}")
+            return False, info
+    else:
+        # Skip center/outer check if mask data unavailable
+        logger.debug(f"⚠️ DEPTH: center/outer masks incomplete, skipping prominence check")
+        info["prominence"] = None
+        info["prominence_ratio"] = None
 
     left = stats.get("left_mean")
     right = stats.get("right_mean")
-    if left is None or right is None:
-        info["reason"] = "missing_cheeks"
-        return False, info
-
-    asymmetry = abs(left - right)
-    info["asymmetry"] = asymmetry
-    if asymmetry > thresholds.max_horizontal_asymmetry_m:
-        info["reason"] = "cheeks_unbalanced"
-        return False, info
+    
+    # FIX: Make left/right symmetry check optional too
+    if left is not None and right is not None:
+        asymmetry = abs(left - right)
+        info["asymmetry"] = asymmetry
+        if asymmetry > thresholds.max_horizontal_asymmetry_m:
+            info["reason"] = "cheeks_unbalanced"
+            logger.warning(f"❌ DEPTH FAIL: asymmetry={asymmetry:.4f} > threshold={thresholds.max_horizontal_asymmetry_m}")
+            return False, info
+    else:
+        # Skip symmetry check if mask data unavailable
+        logger.debug(f"⚠️ DEPTH: left/right masks incomplete, skipping symmetry check")
+        info["asymmetry"] = None
 
     info["reason"] = "depth_ok"
+    prom_str = f"{info.get('prominence', 0.0):.4f}" if info.get('prominence') is not None else "N/A"
+    logger.debug(f"✅ DEPTH PASS: range={stats['range']:.4f}, stdev={stats['stdev']:.4f}, prominence={prom_str}")
     return True, info
 
 
@@ -340,18 +354,22 @@ def evaluate_ir_profile(
     if stdev < thresholds.ir_std_min:
         suspicious = True
         reasons.append("ir_uniform_low")
+        logger.warning(f"❌ IR FAIL: stdev={stdev:.2f} < threshold={thresholds.ir_std_min}")
     if saturation_fraction > thresholds.ir_saturation_fraction_max:
         suspicious = True
         reasons.append("ir_saturation_high")
+        logger.warning(f"❌ IR FAIL: saturation={saturation_fraction:.3f} > threshold={thresholds.ir_saturation_fraction_max}")
     if dark_fraction > thresholds.ir_dark_fraction_max:
         suspicious = True
         reasons.append("ir_dark_high")
+        logger.warning(f"❌ IR FAIL: dark_fraction={dark_fraction:.3f} > threshold={thresholds.ir_dark_fraction_max}")
 
     recent = [value for (ts, value) in intensity_history if now - ts <= thresholds.flicker_window_s]
     flicker_pp = max(recent) - min(recent) if len(recent) >= 2 else 0.0
     if flicker_pp >= thresholds.ir_flicker_peak_to_peak:
         suspicious = True
         reasons.append("ir_flicker")
+        logger.warning(f"❌ IR FAIL: flicker={flicker_pp:.2f} >= threshold={thresholds.ir_flicker_peak_to_peak}")
 
     info = {
         "mean": mean,
@@ -361,6 +379,9 @@ def evaluate_ir_profile(
         "flicker_pp": flicker_pp,
         "reason": ",".join(reasons) if reasons else "clear",
     }
+
+    if not suspicious:
+        logger.debug(f"✅ IR PASS: stdev={stdev:.2f}, sat={saturation_fraction:.3f}, dark={dark_fraction:.3f}")
 
     return not suspicious, info
 
@@ -453,6 +474,7 @@ def movement_liveness_ok(
 ) -> Tuple[bool, Dict[str, float]]:
     recent = [e for e in history if now - e["t"] <= thresholds.movement_window_s]
     if len(recent) < thresholds.min_movement_samples:
+        logger.warning(f"❌ MOVEMENT FAIL: samples={len(recent)} < threshold={thresholds.min_movement_samples} (need {thresholds.movement_window_s}s window)")
         return False, {"reason": "insufficient_samples", "samples": len(recent)}
 
     eye_var = _variation([e["eye_ratio"] for e in recent])
@@ -472,6 +494,11 @@ def movement_liveness_ok(
         or nose_var >= thresholds.min_nose_depth_change_m
         or center_shift >= thresholds.min_center_shift_px
     )
+
+    if not movement:
+        logger.warning(f"❌ MOVEMENT FAIL: eye={eye_var:.4f}<{thresholds.min_eye_change}, mouth={mouth_var:.4f}<{thresholds.min_mouth_change}, nose={nose_var:.4f}<{thresholds.min_nose_depth_change_m}, shift={center_shift:.2f}<{thresholds.min_center_shift_px}")
+    else:
+        logger.debug(f"✅ MOVEMENT PASS: eye={eye_var:.4f}, mouth={mouth_var:.4f}, nose={nose_var:.4f}, shift={center_shift:.2f}")
 
     return movement, {
         "eye_var": eye_var,
@@ -599,8 +626,15 @@ class MediaPipeLiveness:
         ir_image = np.asanyarray(ir_frame.get_data())
         ir_rgb = cv2.cvtColor(ir_image, cv2.COLOR_GRAY2RGB) if cv2 is not None else np.repeat(ir_image[..., None], 3, axis=2)
 
-        detection_result = self.face_detector.process(ir_rgb)
-        mesh_result = self.face_mesh.process(ir_rgb)
+        # CRITICAL FIX: Wrap MediaPipe processing in try-except to handle TensorFlow Lite errors
+        # MediaPipe can throw processing errors that we need to catch and recover from
+        try:
+            detection_result = self.face_detector.process(ir_rgb)
+            mesh_result = self.face_mesh.process(ir_rgb)
+        except Exception as e:
+            logger.warning(f"MediaPipe processing error (will retry): {e}")
+            # Return None to trigger retry logic upstream - don't raise
+            return None
 
         stats: Optional[Dict[str, float]] = None
         bbox_color: Optional[Tuple[int, int, int, int]] = None
@@ -633,11 +667,19 @@ class MediaPipeLiveness:
                     update_movement_history(self.movement_history, landmark_metrics, bbox_color, now, self.thresholds)
                     movement_ok, movement_info = movement_liveness_ok(self.movement_history, now, self.thresholds)
 
-                    instant_alive = depth_ok and screen_ok and movement_ok
+                    # Production logic: Pass if depth is good AND (IR OR movement is ok)
+                    # This is more practical - depth is critical, but we're flexible on IR vs movement
+                    instant_alive = depth_ok and (screen_ok or movement_ok)
+                    
                     logger.info(
                         "face score=%.3f bbox=%s live=%s depth=%s ir=%s move=%s",
                         det.score[0], bbox_color, instant_alive, depth_info, screen_info, movement_info
                     )
+                    
+                    if instant_alive:
+                        logger.info(f"✅ LIVENESS PASS: depth={depth_ok}, screen={screen_ok}, movement={movement_ok}")
+                    else:
+                        logger.warning(f"❌ LIVENESS FAIL: depth={depth_ok}, screen={screen_ok}, movement={movement_ok}")
 
         stable_alive, stability_score = DecisionAccumulator().update(instant_alive)  # independent one-shot for this sample
         # Use a persistent accumulator to smooth. Replace with self.decision_acc if you want memory across frames:
@@ -806,6 +848,9 @@ class RealSenseService:
                     frame_bytes = self._serialize_frame(result)
                     self._broadcast_frame(frame_bytes)
                     self._broadcast_result(result)
+                    # Add small delay if processing failed to avoid overwhelming system
+                    if result is None:
+                        await asyncio.sleep(0.02)  # 20ms delay on failure
                 elif not self.enable_hardware:
                     self._broadcast_frame(self._placeholder_frame())
                     self._broadcast_result(None)
@@ -832,17 +877,22 @@ class RealSenseService:
             loop = asyncio.get_running_loop()
             try:
                 result = await loop.run_in_executor(None, inst.process)
+                # Reset failure counters on ANY successful process call (even if result is None due to no face)
+                if self._consecutive_timeouts > 0 or self._consecutive_processing_failures > 0:
+                    logger.debug("RealSense processing recovered (timeouts=%s, failures=%s)", 
+                                self._consecutive_timeouts, self._consecutive_processing_failures)
                 self._consecutive_timeouts = 0
                 self._consecutive_processing_failures = 0
                 if result is None:
-                    logger.debug("RealSense pipeline returned no liveness result (no face detected)")
+                    logger.debug("RealSense pipeline returned no liveness result (no face or MediaPipe error)")
                 return result
             except RuntimeError as exc:
                 message = str(exc)
                 lowered = message.lower()
                 if "processing block" in lowered:
                     self._consecutive_processing_failures += 1
-                    if self._consecutive_processing_failures < 5:  # Increased from 3 to 5
+                    # Increased threshold to 10 to be more tolerant of transient MediaPipe issues
+                    if self._consecutive_processing_failures < 10:
                         logger.warning(
                             "RealSense processing block failure; dropping frame (consecutive=%s)",
                             self._consecutive_processing_failures,

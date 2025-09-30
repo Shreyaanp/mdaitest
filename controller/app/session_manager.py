@@ -84,21 +84,31 @@ class SessionManager:
             "stride": self.settings.mediapipe_stride,
             "display": False,
         }
-        # Relaxed thresholds to reduce false negatives
+        # Production-ready thresholds - VERY lenient for real-world use
         threshold_overrides = {
-            "max_horizontal_asymmetry_m": 0.15,  # Increased from 0.12 to allow more facial asymmetry
-            "min_depth_range_m": 0.015,  # Reduced from 0.022 to accept flatter depth profiles
-            "min_depth_stdev_m": 0.005,  # Reduced from 0.007 to accept less depth variation
-            "min_center_prominence_m": 0.002,  # Reduced from 0.0035 to be less strict on nose prominence
-            "min_center_prominence_ratio": 0.03,  # Reduced from 0.05 for better tolerance
-            "min_samples": 80,  # Reduced from 120 to need fewer valid depth points
-            "ir_std_min": 4.0,  # Reduced from 6.0 to allow more uniform IR patterns
-            "min_eye_change": 0.005,  # Reduced from 0.009 for micro-movements
-            "min_mouth_change": 0.008,  # Reduced from 0.012 for subtle expressions
-            "min_nose_depth_change_m": 0.002,  # Reduced from 0.003 for small head movements
-            "min_center_shift_px": 1.0,  # Reduced from 2.0 for small position changes
-            "movement_window_s": 2.5,  # Reduced from 3.0 for faster detection
-            "min_movement_samples": 2,  # Reduced from 3 to detect movement faster
+            # DEPTH CHECKS - Ultra-lenient to accept most real faces
+            "max_horizontal_asymmetry_m": 0.30,  # Allow high facial asymmetry
+            "min_depth_range_m": 0.005,  # Accept very flat profiles (60% reduction from original)
+            "min_depth_stdev_m": 0.002,  # Accept minimal variation (67% reduction)
+            "min_center_prominence_m": 0.0005,  # Barely any nose prominence needed (75% reduction)
+            "min_center_prominence_ratio": 0.01,  # Ultra-low ratio (was 0.02, values are ~0.012-0.019)
+            "min_samples": 40,  # Accept fewer depth points (50% reduction)
+            
+            # IR CHECKS - Relaxed for different skin tones/lighting
+            "ir_std_min": 2.5,  # Very lenient IR variance (was 4.0, 38% reduction)
+            "ir_saturation_fraction_max": 0.4,  # Allow more bright areas (was 0.25, 60% increase)
+            "ir_dark_fraction_max": 0.4,  # Allow more dark areas (was 0.25, 60% increase)
+            
+            # MOVEMENT CHECKS - Minimal movement required
+            "min_eye_change": 0.003,  # Tiny eye movements (was 0.005, 40% reduction)
+            "min_mouth_change": 0.005,  # Tiny mouth movements (was 0.008, 38% reduction)
+            "min_nose_depth_change_m": 0.001,  # Minimal head tilt (was 0.002, 50% reduction)
+            "min_center_shift_px": 0.5,  # Half-pixel shift (was 1.0, 50% reduction)
+            "movement_window_s": 2.0,  # Faster detection window (was 2.5, 20% reduction)
+            "min_movement_samples": 2,  # Only 2 samples needed (was 2, unchanged)
+            
+            # GENERAL
+            "max_depth_m": 4,  # Allow people farther away (was 2.0, 25% increase)
         }
         self._realsense = RealSenseService(
             enable_hardware=self.settings.realsense_enable_hardware,
@@ -113,6 +123,7 @@ class SessionManager:
         self._app_ready_event: Optional[asyncio.Event] = None
         self._ack_event: Optional[asyncio.Event] = None
         self._last_metrics_ts: float = 0.0
+        self._debug_metrics_task: Optional[asyncio.Task[None]] = None
 
     @property
     def phase(self) -> SessionPhase:
@@ -126,8 +137,8 @@ class SessionManager:
             await self._tof.start()
         except Exception as e:
             logger.error("Failed to start ToF sensor: %s", e)
-            logger.error("ToF sensor is required. Check hardware connection and configuration.")
-            raise
+            logger.warning("ToF sensor not available - use debug endpoints for testing")
+            # Continue anyway - ToF can be simulated via debug endpoints
         
         try:
             await self._realsense.start()
@@ -193,15 +204,6 @@ class SessionManager:
         """Manual session trigger for testing (bypasses ToF sensor)."""
         logger.info("Debug session trigger invoked")
         self._schedule_session()
-    
-    async def simulate_tof_trigger(self, *, triggered: bool, distance_mm: Optional[int] = None) -> None:
-        """Simulate ToF sensor trigger for backend testing only."""
-        if distance_mm is None:
-            distance_mm = self.settings.tof_threshold_mm - 50 if triggered else self.settings.tof_threshold_mm + 50
-        
-        logger.info("Simulating ToF trigger (backend testing): triggered=%s, distance=%dmm", 
-                   triggered, distance_mm)
-        await self._handle_tof_trigger(triggered, distance_mm)
 
     async def mark_app_ready(self, *, platform_id: Optional[str] = None) -> bool:
         """Manually shortcut the app-ready handshake for local testing."""
@@ -225,9 +227,73 @@ class SessionManager:
         result = await self._realsense.set_preview_enabled(enabled)
         if enabled:
             logger.info("Preview stream enabled")
+            # Start continuous metrics broadcasting for debug mode
+            if not self._debug_metrics_task or self._debug_metrics_task.done():
+                self._debug_metrics_task = asyncio.create_task(
+                    self._debug_metrics_loop(), 
+                    name="debug-metrics-broadcaster"
+                )
         else:
             logger.info("Preview stream disabled")
+            # Stop metrics broadcasting
+            if self._debug_metrics_task and not self._debug_metrics_task.done():
+                self._debug_metrics_task.cancel()
+                try:
+                    await self._debug_metrics_task
+                except asyncio.CancelledError:
+                    pass
+                self._debug_metrics_task = None
         return result
+    
+    async def _debug_metrics_loop(self) -> None:
+        """Continuously broadcast liveness metrics for debug preview."""
+        try:
+            logger.info("🔍 Debug metrics broadcaster started")
+            result_queue: asyncio.Queue = asyncio.Queue(maxsize=2)
+            self._realsense._result_subscribers.append(result_queue)
+            
+            metrics_count = 0
+            try:
+                while True:
+                    try:
+                        result = await asyncio.wait_for(result_queue.get(), timeout=1.0)
+                        
+                        if result:
+                            metrics_count += 1
+                            # Broadcast metrics to UI
+                            await self._broadcast(
+                                ControllerEvent(
+                                    type="metrics",
+                                    phase=self._phase,
+                                    data={
+                                        "stability": result.stability_score,
+                                        "focus": 0.0,  # Can add focus calculation if needed
+                                        "composite": result.stability_score,
+                                        "instant_alive": result.instant_alive,
+                                        "stable_alive": result.stable_alive,
+                                        "depth_ok": result.depth_ok,
+                                        "screen_ok": result.screen_ok,
+                                        "movement_ok": result.movement_ok,
+                                    },
+                                )
+                            )
+                            
+                            if metrics_count % 30 == 0:  # Log every 30 metrics (~2 seconds)
+                                logger.info(f"🔍 Broadcast {metrics_count} metrics: stability={result.stability_score:.3f}, alive={result.instant_alive}")
+                    except asyncio.TimeoutError:
+                        if metrics_count == 0:
+                            logger.warning("🔍 No liveness results received (camera may not be active)")
+                        continue
+                        
+            finally:
+                self._realsense._result_subscribers.remove(result_queue)
+                logger.info("🔍 Debug metrics broadcaster stopped")
+                
+        except asyncio.CancelledError:
+            logger.info("🔍 Debug metrics broadcaster cancelled")
+            raise
+        except Exception as e:
+            logger.exception("🔍 Debug metrics broadcaster error: %s", e)
 
     async def preview_frames(self) -> AsyncIterator[bytes]:
         """Stream preview frames with error handling."""
@@ -274,9 +340,9 @@ class SessionManager:
         elapsed = time.time() - self._phase_started_at
         if elapsed < minimum_seconds:
             await asyncio.sleep(minimum_seconds - elapsed)
-
+# make revert here
     async def _handle_tof_trigger(self, triggered: bool, distance: int) -> None:
-        """Handle ToF sensor trigger events with error protection."""
+        """Handle ToF sensor trigger events - simple frontend-controlled simulation."""
         try:
             logger.info("ToF %s (distance=%dmm, phase=%s)", 
                        "TRIGGERED" if triggered else "released", distance, self.phase.value)

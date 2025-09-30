@@ -16,9 +16,6 @@ interface ControlPanelProps {
   lastHeartbeatSeconds?: number
   metrics: MetricsSnapshot | null
   logs: LogEntry[]
-  onTrigger: () => void
-  triggerDisabled: boolean
-  isTriggering: boolean
 }
 
 const statusLabels: Record<SocketStatus, string> = {
@@ -40,10 +37,7 @@ export default function ControlPanel(props: ControlPanelProps) {
     expiresInSeconds,
     lastHeartbeatSeconds,
     metrics,
-    logs,
-    onTrigger,
-    triggerDisabled,
-    isTriggering
+    logs
   } = props
 
   const heartbeatLabel = useMemo(() => {
@@ -147,17 +141,6 @@ export default function ControlPanel(props: ControlPanelProps) {
             </div>
             <pre>{qrPayloadJson}</pre>
           </div>
-        )}
-        <button
-          type="button"
-          className="trigger-button"
-          onClick={onTrigger}
-          disabled={triggerDisabled}
-        >
-          {isTriggering ? 'Triggering…' : 'Trigger Session'}
-        </button>
-        {triggerDisabled && !isTriggering && (
-          <p className="trigger-hint">Trigger is available only while idle.</p>
         )}
       </section>
 

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { useMachine } from '@xstate/react'
 
 import StageRouter from './components/StageRouter'
@@ -36,7 +36,6 @@ export default function App() {
   const [logs, setLogs] = useState<LogEntry[]>([])
   const [connectionStatus, setConnectionStatus] = useState<SocketStatus>('connecting')
   const [lastHeartbeatTs, setLastHeartbeatTs] = useState<number | null>(null)
-  const [isTriggering, setIsTriggering] = useState(false)
   const [tokenExpiryTs, setTokenExpiryTs] = useState<number | null>(null)
   const [now, setNow] = useState(Date.now())
   const [qrPayloadOverride, setQrPayloadOverride] = useState<ControllerData | null>(null)
@@ -175,7 +174,9 @@ export default function App() {
   }, [])
 
   const showPreview = useMemo(() => {
-    return previewVisiblePhases.has(state.value as SessionPhase)
+    const shouldShow = previewVisiblePhases.has(state.value as SessionPhase)
+    console.log('🎥 [APP PREVIEW] Phase:', state.value, '| Should show:', shouldShow, '| Phases:', Array.from(previewVisiblePhases))
+    return shouldShow
   }, [previewVisiblePhases, state.value])
 
   const heartbeatAgeSeconds = useMemo(() => {
@@ -195,35 +196,6 @@ export default function App() {
     }
     return undefined
   }, [state.context.expiresIn, tokenExpiryTs, now])
-
-  const buildControllerUrl = useCallback(
-    (path: string) => {
-      try {
-        return new URL(path, `${controllerHttpBase}/`).toString()
-      } catch (error) {
-        return `${controllerHttpBase}${path}`
-      }
-    },
-    [controllerHttpBase]
-  )
-
-  const triggerSession = useCallback(async () => {
-    setIsTriggering(true)
-    try {
-      const url = buildControllerUrl('/debug/trigger')
-      const response = await fetch(url, { method: 'POST' })
-      if (!response.ok) {
-        const text = await response.text().catch(() => '')
-        throw new Error(text || `HTTP ${response.status}`)
-      }
-      appendLog('Manual trigger sent to controller')
-    } catch (error) {
-      const reason = error instanceof Error ? error.message : String(error)
-      appendLog(`Trigger failed: ${reason}`, 'error')
-    } finally {
-      setIsTriggering(false)
-    }
-  }, [appendLog, buildControllerUrl])
 
   useEffect(() => {
     if (state.matches('qr_display')) {
@@ -256,9 +228,6 @@ export default function App() {
         lastHeartbeatSeconds={heartbeatAgeSeconds}
         metrics={metrics}
         logs={logs}
-        onTrigger={triggerSession}
-        triggerDisabled={!state.matches('idle') || isTriggering}
-        isTriggering={isTriggering}
       />
     </div>
   )

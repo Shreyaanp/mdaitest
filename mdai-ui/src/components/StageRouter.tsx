@@ -13,25 +13,30 @@ interface StageRouterProps {
 
 export default function StageRouter({ state, qrPayload }: StageRouterProps) {
   const currentPhase = state.value as SessionPhase
+  console.log('🎬 [STAGE ROUTER] Phase:', currentPhase)
 
+  // Error state
   if (state.matches('error')) {
     return <ErrorOverlay message={state.context.error ?? 'Unknown error'} />
   }
 
+  // Idle state
   if (state.matches('idle')) {
-    return <IdleScreen mode="idle" />
+    return <IdleScreen mode="idle" showBars={true} />
   }
 
+  // Pairing/requesting token
+  if (state.matches('pairing_request')) {
+    return <InstructionStage title="Preparing session" subtitle="Contacting server" />
+  }
+
+  // QR code display
   if (state.matches('qr_display') || state.matches('waiting_activation')) {
     const payload = qrPayload ?? (state.context.qrPayload as Record<string, unknown> | undefined)
     const status = state.matches('waiting_activation') ? 'Waiting for activation' : undefined
 
     if (!payload) {
-      const message = frontendConfig.stageMessages.waiting_activation ?? frontendConfig.stageMessages.qr_display
-      if (message) {
-        return <InstructionStage {...message} />
-      }
-      return <InstructionStage title="Preparing session" subtitle="Awaiting QR data" />
+      return <InstructionStage title="Preparing session" subtitle="Loading QR code" />
     }
 
     return (
@@ -44,14 +49,22 @@ export default function StageRouter({ state, qrPayload }: StageRouterProps) {
     )
   }
 
-  const message = frontendConfig.stageMessages[currentPhase]
-  if (message) {
-    return <InstructionStage {...message} />
+  // Camera/preview phases - render nothing so preview is visible
+  // Backend controls timing via phase durations
+  if (state.matches('human_detect') || 
+      state.matches('stabilizing') || 
+      state.matches('uploading') || 
+      state.matches('waiting_ack')) {
+    console.log('🎬 [STAGE ROUTER] Camera phase - preview visible')
+    return null
   }
 
-  if (state.matches('pairing_request')) {
-    return <InstructionStage title="Preparing session" subtitle="Contacting the server" />
+  // Complete state
+  if (state.matches('complete')) {
+    return <InstructionStage title="Complete" subtitle="Thank you!" className="instruction-stage--tall" />
   }
 
-  return <IdleScreen mode="idle" />
+  // Fallback
+  console.log('🎬 [STAGE ROUTER] Unknown phase, showing idle')
+  return <IdleScreen mode="idle" showBars={false} />
 }

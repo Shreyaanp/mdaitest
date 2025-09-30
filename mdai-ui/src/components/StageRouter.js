@@ -3,33 +3,44 @@ import ErrorOverlay from './ErrorOverlay';
 import IdleScreen from './IdleScreen';
 import InstructionStage from './InstructionStage';
 import QRCodeStage from './QRCodeStage';
-import { frontendConfig } from '../config';
 export default function StageRouter({ state, qrPayload }) {
     const currentPhase = state.value;
+    console.log('🎬 [STAGE ROUTER] Phase:', currentPhase);
+    // Error state
     if (state.matches('error')) {
         return _jsx(ErrorOverlay, { message: state.context.error ?? 'Unknown error' });
     }
+    // Idle state
     if (state.matches('idle')) {
-        return _jsx(IdleScreen, { mode: "idle" });
+        return _jsx(IdleScreen, { mode: "idle", showBars: true });
     }
+    // Pairing/requesting token
+    if (state.matches('pairing_request')) {
+        return _jsx(InstructionStage, { title: "Preparing session", subtitle: "Contacting server" });
+    }
+    // QR code display
     if (state.matches('qr_display') || state.matches('waiting_activation')) {
         const payload = qrPayload ?? state.context.qrPayload;
         const status = state.matches('waiting_activation') ? 'Waiting for activation' : undefined;
         if (!payload) {
-            const message = frontendConfig.stageMessages.waiting_activation ?? frontendConfig.stageMessages.qr_display;
-            if (message) {
-                return _jsx(InstructionStage, { ...message });
-            }
-            return _jsx(InstructionStage, { title: "Preparing session", subtitle: "Awaiting QR data" });
+            return _jsx(InstructionStage, { title: "Preparing session", subtitle: "Loading QR code" });
         }
         return (_jsx(QRCodeStage, { token: state.context.token, qrPayload: payload, expiresIn: state.context.expiresIn, status: status }));
     }
-    const message = frontendConfig.stageMessages[currentPhase];
-    if (message) {
-        return _jsx(InstructionStage, { ...message });
+    // Camera/preview phases - render nothing so preview is visible
+    // Backend controls timing via phase durations
+    if (state.matches('human_detect') ||
+        state.matches('stabilizing') ||
+        state.matches('uploading') ||
+        state.matches('waiting_ack')) {
+        console.log('🎬 [STAGE ROUTER] Camera phase - preview visible');
+        return null;
     }
-    if (state.matches('pairing_request')) {
-        return _jsx(InstructionStage, { title: "Preparing session", subtitle: "Contacting the server" });
+    // Complete state
+    if (state.matches('complete')) {
+        return _jsx(InstructionStage, { title: "Complete", subtitle: "Thank you!", className: "instruction-stage--tall" });
     }
-    return _jsx(IdleScreen, { mode: "idle" });
+    // Fallback
+    console.log('🎬 [STAGE ROUTER] Unknown phase, showing idle');
+    return _jsx(IdleScreen, { mode: "idle", showBars: false });
 }

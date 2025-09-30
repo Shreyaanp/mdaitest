@@ -75,39 +75,31 @@ async def healthcheck() -> JSONResponse:
     return JSONResponse({"status": "ok", "phase": manager.phase.value})
 
 
-@app.post("/debug/trigger")
-async def debug_trigger() -> JSONResponse:
-    try:
-        await manager.trigger_debug_session()
-        return JSONResponse({"status": "scheduled"})
-    except Exception as e:
-        logger.error(f"Failed to trigger session: {e}")
-        return JSONResponse(
-            {"status": "error", "message": str(e)}, 
-            status_code=500
-        )
-
-
 class PreviewToggleRequest(BaseModel):
     enabled: bool = True
 
 
-class TofTriggerRequest(BaseModel):
+class TofMockRequest(BaseModel):
     triggered: bool = True
-    distance_mm: int | None = None
+    distance_mm: int = 345
 
 
-@app.post("/debug/tof-trigger")
-async def debug_tof_trigger(payload: TofTriggerRequest) -> JSONResponse:
-    """Backend-only ToF trigger for testing. NOT exposed in UI."""
+@app.post("/debug/mock-tof")
+async def mock_tof(payload: TofMockRequest) -> JSONResponse:
+    """Mock ToF sensor for testing full session flow."""
     try:
-        await manager.simulate_tof_trigger(
-            triggered=payload.triggered, 
-            distance_mm=payload.distance_mm
-        )
-        return JSONResponse({"status": "ok"})
+        # Call the internal ToF trigger handler directly
+        await manager._handle_tof_trigger(payload.triggered, payload.distance_mm)
+        
+        logger.info(f"🔧 Mock ToF: triggered={payload.triggered}, distance={payload.distance_mm}mm")
+        return JSONResponse({
+            "status": "ok",
+            "triggered": payload.triggered,
+            "distance_mm": payload.distance_mm,
+            "current_phase": manager.phase.value
+        })
     except Exception as e:
-        logger.error(f"Failed to simulate ToF trigger: {e}")
+        logger.error(f"Failed to mock ToF: {e}")
         return JSONResponse(
             {"status": "error", "message": str(e)},
             status_code=500
@@ -116,8 +108,28 @@ async def debug_tof_trigger(payload: TofTriggerRequest) -> JSONResponse:
 
 @app.post("/debug/preview")
 async def debug_preview_toggle(payload: PreviewToggleRequest) -> JSONResponse:
-    enabled = await manager.set_preview_enabled(payload.enabled)
-    return JSONResponse({"status": "enabled" if enabled else "disabled"})
+    """Enable/disable preview AND activate camera hardware for debugging."""
+    try:
+        # Set preview enabled
+        preview_enabled = await manager.set_preview_enabled(payload.enabled)
+        
+        # ALSO activate/deactivate camera hardware (this starts liveness checks too!)
+        await manager._realsense.set_hardware_active(payload.enabled, source="debug_preview")
+        
+        logger.info(f"🎥 Debug preview: camera hardware {'activated' if payload.enabled else 'deactivated'}")
+        logger.info(f"🎥 Liveness heuristics will run automatically when camera is ON")
+        
+        return JSONResponse({
+            "status": "enabled" if preview_enabled else "disabled",
+            "hardware_active": payload.enabled,
+            "liveness_active": payload.enabled
+        })
+    except Exception as e:
+        logger.error(f"Failed to toggle preview: {e}")
+        return JSONResponse(
+            {"status": "error", "message": str(e)},
+            status_code=500
+        )
 
 
 @app.post("/debug/app-ready")
@@ -194,3 +206,4 @@ async def ui_socket(ws: WebSocket) -> None:
             await ws.close()
         except Exception:
             pass
+

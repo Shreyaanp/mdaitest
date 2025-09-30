@@ -1,10 +1,21 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
+import DebugPreview from './components/DebugPreview'
 import './styles/index.css'
+
+const AppRouter = () => {
+  const path = window.location.pathname
+  
+  if (path === '/debug-preview') {
+    return <DebugPreview />
+  }
+  
+  return <App />
+}
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <App />
+    <AppRouter />
   </React.StrictMode>
 )
