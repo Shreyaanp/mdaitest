@@ -1,30 +1,12 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useMachine } from '@xstate/react';
 import StageRouter from './components/StageRouter';
 import PreviewSurface from './components/PreviewSurface';
 import ControlPanel from './components/ControlPanel';
 import { sessionMachine } from './app-state/sessionMachine';
 import { useControllerSocket } from './hooks/useControllerSocket';
-const previewVisibleStates = new Set([
-    'human_detect',
-    'stabilizing',
-    'uploading',
-    'waiting_ack'
-]);
-const DEFAULT_CONTROLLER_HTTP_URL = 'http://127.0.0.1:5000';
-const DEFAULT_BACKEND_URL = 'https://mdai.mercle.ai';
-const DEFAULT_DEVICE_ID = 'alpha';
-const readEnv = (...keys) => {
-    const env = import.meta.env;
-    for (const key of keys) {
-        const value = env[key];
-        if (typeof value === 'string' && value.length > 0) {
-            return value;
-        }
-    }
-    return undefined;
-};
+import { backendConfig, frontendConfig } from './config';
 function getNumberField(data, key) {
     if (!data)
         return undefined;
@@ -37,12 +19,6 @@ function getBooleanField(data, key) {
     const value = data[key];
     return typeof value === 'boolean' ? value : undefined;
 }
-function normaliseBaseUrl(url) {
-    return url.endsWith('/') ? url.slice(0, -1) : url;
-}
-function buildControllerUrl(baseUrl, path) {
-    return `${normaliseBaseUrl(baseUrl)}${path.startsWith('/') ? path : `/${path}`}`;
-}
 const nowId = () => `${Date.now()}-${Math.random().toString(16).slice(2, 8)}`;
 export default function App() {
     const [state, send] = useMachine(sessionMachine);
@@ -51,19 +27,12 @@ export default function App() {
     const [connectionStatus, setConnectionStatus] = useState('connecting');
     const [lastHeartbeatTs, setLastHeartbeatTs] = useState(null);
     const [isTriggering, setIsTriggering] = useState(false);
-    const [isTofTriggering, setIsTofTriggering] = useState(false);
     const [tokenExpiryTs, setTokenExpiryTs] = useState(null);
     const [now, setNow] = useState(Date.now());
     const [qrPayloadOverride, setQrPayloadOverride] = useState(null);
-    const [processingReady, setProcessingReady] = useState(false);
-    const [stableAliveSince, setStableAliveSince] = useState(null);
-    const stableAliveTimerRef = useRef(null);
-    const controllerHttpBase = readEnv('VITE_CONTROLLER_HTTP_URL') ?? DEFAULT_CONTROLLER_HTTP_URL;
-    const controllerUrl = normaliseBaseUrl(controllerHttpBase);
-    const previewUrl = readEnv('VITE_PREVIEW_URL') ?? `${controllerUrl}/preview`;
-    const backendUrl = readEnv('VITE_BACKEND_URL', 'VITE_BACKEND_API_URL') ?? DEFAULT_BACKEND_URL;
-    const deviceId = readEnv('VITE_DEVICE_ID') ?? DEFAULT_DEVICE_ID;
-    const deviceAddress = readEnv('VITE_DEVICE_ADDRESS');
+    const { controllerHttpBase, controllerWsUrl, previewUrl, backendApiBase, deviceId, deviceAddress } = backendConfig;
+    const previewVisiblePhases = frontendConfig.previewVisiblePhases;
+    const controllerUrl = controllerHttpBase;
     const appendLog = useCallback((message, level = 'info') => {
         setLogs((prev) => {
             const entry = { id: nowId(), ts: Date.now(), message, level };
@@ -103,16 +72,6 @@ export default function App() {
                 instantAlive,
                 stableAlive
             });
-            const stableFlag = stableAlive === true;
-            setStableAliveSince((previous) => {
-                if (stableFlag) {
-                    return previous ?? Date.now();
-                }
-                return null;
-            });
-            if (!stableFlag) {
-                setProcessingReady(false);
-            }
             return;
         }
         if (type === 'state') {
@@ -132,12 +91,6 @@ export default function App() {
             }
             if (phase === 'idle') {
                 setQrPayloadOverride(null);
-                setProcessingReady(false);
-                setStableAliveSince(null);
-                if (stableAliveTimerRef.current) {
-                    window.clearTimeout(stableAliveTimerRef.current);
-                    stableAliveTimerRef.current = null;
-                }
             }
             const expires = getNumberField(payload, 'expires_in');
             if (typeof expires === 'number') {
@@ -168,9 +121,10 @@ export default function App() {
         appendLog(`Event → ${type}`);
     }, [appendLog]);
     const socketOptions = useMemo(() => ({
+        wsUrl: controllerWsUrl,
         onEvent: handleControllerEvent,
         onStatusChange: handleStatusChange
-    }), [handleControllerEvent, handleStatusChange]);
+    }), [controllerWsUrl, handleControllerEvent, handleStatusChange]);
     useControllerSocket(send, socketOptions);
     useEffect(() => {
         const id = window.setInterval(() => setNow(Date.now()), 1000);
@@ -182,28 +136,9 @@ export default function App() {
             document.body.style.backgroundColor = '';
         };
     }, []);
-    useEffect(() => {
-        if (stableAliveSince === null) {
-            if (stableAliveTimerRef.current) {
-                window.clearTimeout(stableAliveTimerRef.current);
-                stableAliveTimerRef.current = null;
-            }
-            return;
-        }
-        if (stableAliveTimerRef.current) {
-            window.clearTimeout(stableAliveTimerRef.current);
-        }
-        stableAliveTimerRef.current = window.setTimeout(() => {
-            setProcessingReady(true);
-        }, 3000);
-        return () => {
-            if (stableAliveTimerRef.current) {
-                window.clearTimeout(stableAliveTimerRef.current);
-                stableAliveTimerRef.current = null;
-            }
-        };
-    }, [stableAliveSince]);
-    const showPreview = useMemo(() => previewVisibleStates.has(state.value), [state.value]);
+    const showPreview = useMemo(() => {
+        return previewVisiblePhases.has(state.value);
+    }, [previewVisiblePhases, state.value]);
     const heartbeatAgeSeconds = useMemo(() => {
         if (!lastHeartbeatTs)
             return undefined;
@@ -221,10 +156,18 @@ export default function App() {
         }
         return undefined;
     }, [state.context.expiresIn, tokenExpiryTs, now]);
+    const buildControllerUrl = useCallback((path) => {
+        try {
+            return new URL(path, `${controllerHttpBase}/`).toString();
+        }
+        catch (error) {
+            return `${controllerHttpBase}${path}`;
+        }
+    }, [controllerHttpBase]);
     const triggerSession = useCallback(async () => {
         setIsTriggering(true);
         try {
-            const url = buildControllerUrl(controllerHttpBase, '/debug/trigger');
+            const url = buildControllerUrl('/debug/trigger');
             const response = await fetch(url, { method: 'POST' });
             if (!response.ok) {
                 const text = await response.text().catch(() => '');
@@ -239,34 +182,11 @@ export default function App() {
         finally {
             setIsTriggering(false);
         }
-    }, [appendLog, controllerHttpBase]);
-    const triggerTof = useCallback(async () => {
-        setIsTofTriggering(true);
-        try {
-            const url = buildControllerUrl(controllerHttpBase, '/debug/tof-trigger');
-            const response = await fetch(url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ triggered: true })
-            });
-            if (!response.ok) {
-                const text = await response.text().catch(() => '');
-                throw new Error(text || `HTTP ${response.status}`);
-            }
-            appendLog('Simulated ToF trigger');
-        }
-        catch (error) {
-            const reason = error instanceof Error ? error.message : String(error);
-            appendLog(`ToF trigger failed: ${reason}`, 'error');
-        }
-        finally {
-            setIsTofTriggering(false);
-        }
-    }, [appendLog, controllerHttpBase]);
+    }, [appendLog, buildControllerUrl]);
     useEffect(() => {
         if (state.matches('qr_display')) {
             appendLog('QR code displayed – waiting for mobile activation');
         }
     }, [state, appendLog]);
-    return (_jsxs("div", { className: "app-shell", children: [_jsxs("div", { className: "visual-area", children: [_jsx(StageRouter, { state: state, qrPayload: qrPayloadOverride ?? state.context.qrPayload, onMockTof: triggerTof }), _jsx(PreviewSurface, { visible: showPreview, previewUrl: previewUrl })] }), _jsx(ControlPanel, { deviceId: deviceId, deviceAddress: deviceAddress, backendUrl: backendUrl, controllerUrl: controllerUrl, connectionStatus: connectionStatus, currentPhase: String(state.value), pairingToken: pairingToken, qrPayload: qrPayloadOverride ?? state.context.qrPayload, expiresInSeconds: expiresInSeconds, lastHeartbeatSeconds: heartbeatAgeSeconds, metrics: metrics, logs: logs, onTrigger: triggerSession, triggerDisabled: !state.matches('idle') || isTriggering, isTriggering: isTriggering, onTofTrigger: triggerTof, tofTriggerDisabled: !state.matches('idle') || isTofTriggering, isTofTriggering: isTofTriggering })] }));
+    return (_jsxs("div", { className: "app-shell", children: [_jsxs("div", { className: "visual-area", children: [_jsx(StageRouter, { state: state, qrPayload: qrPayloadOverride ?? qrPayload }), _jsx(PreviewSurface, { visible: showPreview, previewUrl: previewUrl })] }), _jsx(ControlPanel, { deviceId: deviceId, deviceAddress: deviceAddress, backendUrl: backendApiBase, controllerUrl: controllerUrl, connectionStatus: connectionStatus, currentPhase: String(state.value), pairingToken: pairingToken, qrPayload: qrPayloadOverride ?? qrPayload, expiresInSeconds: expiresInSeconds, lastHeartbeatSeconds: heartbeatAgeSeconds, metrics: metrics, logs: logs, onTrigger: triggerSession, triggerDisabled: !state.matches('idle') || isTriggering, isTriggering: isTriggering })] }));
 }

@@ -13,6 +13,7 @@ export interface ControllerMessage {
 export type SocketStatus = 'connecting' | 'open' | 'closed'
 
 interface ControllerSocketOptions {
+  wsUrl?: string
   onEvent?: (message: ControllerMessage) => void
   onStatusChange?: (status: SocketStatus) => void
 }
@@ -20,31 +21,28 @@ interface ControllerSocketOptions {
 type SendEvent = (event: SessionEvent) => void
 
 export function useControllerSocket(send: SendEvent, options?: ControllerSocketOptions) {
-  const retryRef = useRef<number | null>(null)
   const socketRef = useRef<WebSocket | null>(null)
 
   useEffect(() => {
-    const wsUrl = (import.meta.env.VITE_CONTROLLER_WS_URL as string | undefined) ?? DEFAULT_WS_URL
+    const wsUrl = options?.wsUrl ?? DEFAULT_WS_URL
+    const onEvent = options?.onEvent
+    const onStatusChange = options?.onStatusChange
     let cancelled = false
 
     const connect = () => {
       if (cancelled) return
-      options?.onStatusChange?.('connecting')
+      onStatusChange?.('connecting')
       const socket = new WebSocket(wsUrl)
       socketRef.current = socket
 
       socket.onopen = () => {
-        if (retryRef.current) {
-          window.clearTimeout(retryRef.current)
-          retryRef.current = null
-        }
-        options?.onStatusChange?.('open')
+        onStatusChange?.('open')
       }
 
       socket.onmessage = (event) => {
         try {
           const message: ControllerMessage = JSON.parse(event.data)
-          options?.onEvent?.(message)
+          onEvent?.(message)
           if (message.type === 'heartbeat') {
             send({ type: 'HEARTBEAT' })
             return
@@ -64,8 +62,7 @@ export function useControllerSocket(send: SendEvent, options?: ControllerSocketO
 
       socket.onclose = () => {
         if (cancelled) return
-        retryRef.current = window.setTimeout(connect, 2000)
-        options?.onStatusChange?.('closed')
+        onStatusChange?.('closed')
       }
 
       socket.onerror = () => {
@@ -77,12 +74,9 @@ export function useControllerSocket(send: SendEvent, options?: ControllerSocketO
 
     return () => {
       cancelled = true
-      if (retryRef.current) {
-        window.clearTimeout(retryRef.current)
-      }
       socketRef.current?.close()
       socketRef.current = null
-      options?.onStatusChange?.('closed')
+      onStatusChange?.('closed')
     }
-  }, [send, options])
+  }, [send, options?.wsUrl, options?.onEvent, options?.onStatusChange])
 }

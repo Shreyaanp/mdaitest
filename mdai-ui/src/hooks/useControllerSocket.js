@@ -1,28 +1,25 @@
 import { useEffect, useRef } from 'react';
 const DEFAULT_WS_URL = 'ws://127.0.0.1:5000/ws/ui';
 export function useControllerSocket(send, options) {
-    const retryRef = useRef(null);
     const socketRef = useRef(null);
     useEffect(() => {
-        const wsUrl = import.meta.env.VITE_CONTROLLER_WS_URL ?? DEFAULT_WS_URL;
+        const wsUrl = options?.wsUrl ?? DEFAULT_WS_URL;
+        const onEvent = options?.onEvent;
+        const onStatusChange = options?.onStatusChange;
         let cancelled = false;
         const connect = () => {
             if (cancelled)
                 return;
-            options?.onStatusChange?.('connecting');
+            onStatusChange?.('connecting');
             const socket = new WebSocket(wsUrl);
             socketRef.current = socket;
             socket.onopen = () => {
-                if (retryRef.current) {
-                    window.clearTimeout(retryRef.current);
-                    retryRef.current = null;
-                }
-                options?.onStatusChange?.('open');
+                onStatusChange?.('open');
             };
             socket.onmessage = (event) => {
                 try {
                     const message = JSON.parse(event.data);
-                    options?.onEvent?.(message);
+                    onEvent?.(message);
                     if (message.type === 'heartbeat') {
                         send({ type: 'HEARTBEAT' });
                         return;
@@ -43,8 +40,7 @@ export function useControllerSocket(send, options) {
             socket.onclose = () => {
                 if (cancelled)
                     return;
-                retryRef.current = window.setTimeout(connect, 2000);
-                options?.onStatusChange?.('closed');
+                onStatusChange?.('closed');
             };
             socket.onerror = () => {
                 socket.close();
@@ -53,12 +49,9 @@ export function useControllerSocket(send, options) {
         connect();
         return () => {
             cancelled = true;
-            if (retryRef.current) {
-                window.clearTimeout(retryRef.current);
-            }
             socketRef.current?.close();
             socketRef.current = null;
-            options?.onStatusChange?.('closed');
+            onStatusChange?.('closed');
         };
-    }, [send, options]);
+    }, [send, options?.wsUrl, options?.onEvent, options?.onStatusChange]);
 }

@@ -6,6 +6,7 @@ from asyncio import QueueEmpty
 import base64
 import logging
 import time
+from contextlib import asynccontextmanager
 from dataclasses import dataclass, field
 from typing import Any, AsyncIterator, Dict, List, Optional
 from urllib.parse import urlparse
@@ -30,6 +31,14 @@ class SessionContext:
     latest_distance_mm: Optional[int] = None
     best_frame_b64: Optional[str] = None
     metadata: Dict[str, Any] = field(default_factory=dict)
+
+
+class SessionFlowError(RuntimeError):
+    """Raised when a recoverable session step fails."""
+
+    def __init__(self, user_message: str, *, log_message: Optional[str] = None) -> None:
+        super().__init__(log_message or user_message)
+        self.user_message = user_message
 
 
 class SessionManager:
@@ -242,10 +251,29 @@ class SessionManager:
             except Exception as e:
                 logger.warning("Failed to broadcast event to subscriber: %s", e)
 
-    async def _set_phase(self, phase: SessionPhase, *, data: Optional[Dict[str, Any]] = None, error: Optional[str] = None) -> None:
+    async def _advance_phase(
+        self,
+        phase: SessionPhase,
+        *,
+        data: Optional[Dict[str, Any]] = None,
+        error: Optional[str] = None,
+        min_duration: float = 0.0,
+    ) -> None:
+        if min_duration > 0:
+            elapsed = time.time() - self._phase_started_at
+            if elapsed < min_duration:
+                await asyncio.sleep(min_duration - elapsed)
+
         self._phase = phase
-        await self._broadcast(ControllerEvent(type="state", data=data or {}, phase=phase, error=error))
         self._phase_started_at = time.time()
+        await self._broadcast(ControllerEvent(type="state", data=data or {}, phase=phase, error=error))
+
+    async def _ensure_current_phase_duration(self, minimum_seconds: float) -> None:
+        if minimum_seconds <= 0:
+            return
+        elapsed = time.time() - self._phase_started_at
+        if elapsed < minimum_seconds:
+            await asyncio.sleep(minimum_seconds - elapsed)
 
     async def _handle_tof_trigger(self, triggered: bool, distance: int) -> None:
         """Handle ToF sensor trigger events with error protection."""
@@ -271,168 +299,82 @@ class SessionManager:
         self._session_task = asyncio.create_task(self._run_session(), name="controller-session")
 
     async def _run_session(self) -> None:
-        """Run complete session flow with comprehensive error handling."""
-        camera_activated = False
+        """Run the full kiosk workflow with structured error handling."""
         try:
-            # Phase 1: Get pairing token
-            await self._set_phase(SessionPhase.PAIRING_REQUEST)
-            token_info = await self._http_client.issue_token()
-            if not token_info:
-                await self._set_phase(SessionPhase.ERROR, error="Failed to get pairing token")
-                await self._ensure_phase_duration(5.0)
-                return
+            token = await self._initialize_session()
+            await self._connect_bridge(token)
+            await self._await_app_ready()
 
-            token = token_info.get("token")
-            expires_in = token_info.get("expires_in")
-            if not token:
-                await self._set_phase(SessionPhase.ERROR, error="Invalid token response")
-                await self._ensure_phase_duration(5.0)
-                return
-
-            await self._ensure_phase_duration(3.0)
-            
-            # Phase 2: Display QR code
-            qr_payload = self._build_qr_payload(token)
-            self._current_session = SessionContext(
-                token=token,
-                expires_in=expires_in,
-                issued_at=time.time(),
-                metadata={"qr_payload": qr_payload},
-            )
-            self._last_metrics_ts = 0.0
-
-            await self._set_phase(
-                SessionPhase.QR_DISPLAY,
-                data={
-                    "token": token,
-                    "expires_in": expires_in,
-                    "qr_payload": qr_payload,
-                },
-            )
-
-            # Phase 3: Connect and wait for mobile app
-            self._app_ready_event = asyncio.Event()
-            self._ack_event = asyncio.Event()
-            
-            try:
-                await self._ws_client.connect(token, self._handle_bridge_message)
-            except Exception as e:
-                logger.error("Failed to connect to bridge: %s", e)
-                await self._set_phase(SessionPhase.ERROR, error="Bridge connection failed")
-                await self._ensure_phase_duration(5.0)
-                return
-            
-            await self._ensure_phase_duration(3.0)
-
-            try:
-                await self._await_app_ready()
-            except asyncio.TimeoutError:
-                logger.error("Mobile app did not connect in time")
-                await self._set_phase(SessionPhase.ERROR, error="Mobile app connection timeout")
-                await self._ensure_phase_duration(5.0)
-                return
-            except Exception as e:
-                logger.error("Error waiting for app: %s", e)
-                await self._set_phase(SessionPhase.ERROR, error="App connection error")
-                await self._ensure_phase_duration(5.0)
-                return
-            
-            # Phase 4: Activate camera and capture
-            await self._set_phase(SessionPhase.HUMAN_DETECT)
-            
-            try:
-                await self._realsense.set_hardware_active(True, source="session")
-                camera_activated = True
-                logger.info("Camera activated for biometric capture")
-            except Exception as e:
-                logger.error("Failed to activate camera: %s", e)
-                await self._set_phase(SessionPhase.ERROR, error="Camera activation failed")
-                await self._ensure_phase_duration(5.0)
-                return
-            
-            await self._ensure_phase_duration(3.0)
-            
-            # Phase 5: Collect best frame with liveness checks
-            try:
+            async with self._camera_session():
+                await self._advance_phase(SessionPhase.HUMAN_DETECT)
                 await self._collect_best_frame()
-            except Exception as e:
-                logger.error("Failed to collect frame: %s", e)
-                await self._set_phase(SessionPhase.ERROR, error="Frame capture failed")
-                await self._ensure_phase_duration(5.0)
-                return
-            
-            # Phase 6: Upload frame
-            try:
-                await self._upload_frame()
-            except Exception as e:
-                logger.error("Failed to upload frame: %s", e)
-                await self._set_phase(SessionPhase.ERROR, error="Upload failed")
-                await self._ensure_phase_duration(5.0)
-                return
-            
-            # Phase 7: Wait for backend acknowledgment
-            try:
-                await self._wait_for_ack()
-            except asyncio.TimeoutError:
-                logger.error("Backend acknowledgment timeout")
-                await self._set_phase(SessionPhase.ERROR, error="Backend timeout")
-                await self._ensure_phase_duration(5.0)
-                return
-            except Exception as e:
-                logger.error("Error waiting for ack: %s", e)
-                await self._set_phase(SessionPhase.ERROR, error="Backend error")
-                await self._ensure_phase_duration(5.0)
-                return
-            
-            # Phase 8: Success
-            await self._set_phase(SessionPhase.COMPLETE)
-            await self._ensure_phase_duration(3.0)
+
+            await self._upload_frame()
+            await self._wait_for_ack()
             logger.info("Session completed successfully")
-            
+
         except asyncio.CancelledError:
             logger.info("Session cancelled by user or ToF reset")
             raise
-        except Exception as exc:
-            # Catch-all for unexpected errors
+        except SessionFlowError as exc:
+            logger.error("Session failed: %s", exc)
+            await self._advance_phase(SessionPhase.ERROR, error=exc.user_message, min_duration=5.0)
+        except Exception as exc:  # pragma: no cover - defensive guard
             logger.exception("Unexpected session error: %s", exc)
-            try:
-                await self._set_phase(SessionPhase.ERROR, error=f"Unexpected error: {str(exc)}")
-                await self._ensure_phase_duration(5.0)
-            except Exception:
-                pass  # Don't fail on error handling
+            await self._advance_phase(SessionPhase.ERROR, error=f"Unexpected error: {exc}", min_duration=5.0)
         finally:
-            # Cleanup - must not fail
-            try:
-                if camera_activated:
-                    await self._realsense.set_hardware_active(False, source="session")
-                    logger.info("Camera deactivated after session")
-            except Exception as e:
-                logger.warning("Error deactivating camera: %s", e)
-            
-            try:
-                await self._ws_client.disconnect()
-            except Exception as e:
-                logger.warning("Error disconnecting websocket: %s", e)
-            
-            try:
-                await self._set_phase(SessionPhase.IDLE)
-            except Exception as e:
-                logger.warning("Error setting IDLE phase: %s", e)
-                self._phase = SessionPhase.IDLE  # Force it
-            
-            self._session_task = None
-            self._app_ready_event = None
-            self._ack_event = None
-            self._current_session = SessionContext()
+            await self._cleanup_after_session()
+
+    async def _initialize_session(self) -> str:
+        await self._advance_phase(SessionPhase.PAIRING_REQUEST)
+        token_info = await self._http_client.issue_token()
+        if not token_info:
+            raise SessionFlowError("Failed to get pairing token")
+
+        token = token_info.get("token")
+        if not token:
+            raise SessionFlowError("Invalid token response from backend")
+
+        expires_in = token_info.get("expires_in")
+        qr_payload = self._build_qr_payload(token)
+        self._current_session = SessionContext(
+            token=token,
+            expires_in=expires_in,
+            issued_at=time.time(),
+            metadata={"qr_payload": qr_payload},
+        )
+        self._last_metrics_ts = 0.0
+
+        await self._advance_phase(
+            SessionPhase.QR_DISPLAY,
+            min_duration=3.0,
+            data={
+                "token": token,
+                "expires_in": expires_in,
+                "qr_payload": qr_payload,
+            },
+        )
+        return token
+
+    async def _connect_bridge(self, token: str) -> None:
+        self._app_ready_event = asyncio.Event()
+        self._ack_event = asyncio.Event()
+        try:
+            await self._ws_client.connect(token, self._handle_bridge_message)
+        except Exception as exc:  # pragma: no cover - depends on network
+            raise SessionFlowError("Bridge connection failed") from exc
+
+        await self._advance_phase(SessionPhase.WAITING_ACTIVATION, min_duration=3.0)
 
     async def _await_app_ready(self) -> None:
-        await self._set_phase(SessionPhase.WAITING_ACTIVATION)
         if not self._app_ready_event:
             raise RuntimeError("app_ready_event_not_initialized")
         timeout = self._token_timeout()
         logger.info("Waiting for app connection with timeout=%ss", timeout)
-        await asyncio.wait_for(self._app_ready_event.wait(), timeout=timeout)
-        await self._ensure_phase_duration(3.0)
+        try:
+            await asyncio.wait_for(self._app_ready_event.wait(), timeout=timeout)
+        except asyncio.TimeoutError as exc:
+            raise SessionFlowError("Mobile app connection timeout") from exc
 
     def _token_timeout(self) -> float:
         expires_in = self._current_session.expires_in
@@ -441,7 +383,7 @@ class SessionManager:
         return max(10.0, expires_in - 5.0)
 
     async def _collect_best_frame(self) -> None:
-        await self._set_phase(SessionPhase.STABILIZING)
+        await self._advance_phase(SessionPhase.STABILIZING, min_duration=3.0)
 
         max_attempts = 3
         attempt = 0
@@ -529,19 +471,19 @@ class SessionManager:
             logger.warning(f"No frames passed liveness checks. Using best frame anyway (score={best_score:.3f})")
 
         self._current_session.best_frame_b64 = base64.b64encode(best_bytes).decode()
-        
+
         # Save best frame and wait for all debug frames to complete
         await self._save_best_frame_to_captures(best_bytes, best_result)
-        
+
         # Wait for all debug frame saves to complete (parallel)
         if save_tasks:
             await asyncio.gather(*save_tasks, return_exceptions=True)
             logger.info(f"Saved {len(save_tasks)} debug frames")
-        
-        await self._ensure_phase_duration(3.0)
+
+        await self._ensure_current_phase_duration(3.0)
 
     async def _upload_frame(self) -> None:
-        await self._set_phase(SessionPhase.UPLOADING)
+        await self._advance_phase(SessionPhase.UPLOADING, min_duration=3.0)
         if not self._current_session.best_frame_b64:
             raise RuntimeError("no_frame_to_upload")
         if not self._current_session.platform_id:
@@ -555,14 +497,16 @@ class SessionManager:
             },
         }
         await self._ws_client.send(payload)
-        await self._ensure_phase_duration(3.0)
+        await self._advance_phase(SessionPhase.WAITING_ACK, min_duration=3.0)
 
     async def _wait_for_ack(self) -> None:
-        await self._set_phase(SessionPhase.WAITING_ACK)
         if not self._ack_event:
             raise RuntimeError("ack_event_not_initialized")
-        await asyncio.wait_for(self._ack_event.wait(), timeout=120.0)
-        await self._ensure_phase_duration(3.0)
+        try:
+            await asyncio.wait_for(self._ack_event.wait(), timeout=120.0)
+        except asyncio.TimeoutError as exc:
+            raise SessionFlowError("Backend acknowledgment timeout") from exc
+        await self._advance_phase(SessionPhase.COMPLETE, min_duration=3.0)
 
     async def _heartbeat_loop(self) -> None:
         """Send periodic heartbeat to UI clients."""
@@ -800,8 +744,41 @@ class SessionManager:
             
         except Exception:
             logger.exception("Failed to save best frame to captures directory")
-    async def _ensure_phase_duration(self, minimum_seconds: float) -> None:
-        elapsed = time.time() - self._phase_started_at
-        remaining = minimum_seconds - elapsed
-        if remaining > 0:
-            await asyncio.sleep(remaining)
+    @asynccontextmanager
+    async def _camera_session(self) -> AsyncIterator[None]:
+        try:
+            await self._realsense.set_hardware_active(True, source="session")
+            logger.info("Camera activated for biometric capture")
+        except Exception as exc:
+            raise SessionFlowError("Camera activation failed") from exc
+        try:
+            yield
+        finally:
+            try:
+                await self._realsense.set_hardware_active(False, source="session")
+                logger.info("Camera deactivated after session")
+            except Exception as exc:
+                logger.warning("Error deactivating camera: %s", exc)
+
+    async def _cleanup_after_session(self) -> None:
+        try:
+            await self._ws_client.disconnect()
+        except Exception as exc:
+            logger.warning("Error disconnecting websocket: %s", exc)
+
+        try:
+            if self._phase == SessionPhase.ERROR:
+                await self._ensure_current_phase_duration(5.0)
+            elif self._phase == SessionPhase.COMPLETE:
+                await self._ensure_current_phase_duration(3.0)
+
+            await self._advance_phase(SessionPhase.IDLE)
+        except Exception as exc:
+            logger.warning("Error setting IDLE phase: %s", exc)
+            self._phase = SessionPhase.IDLE
+            self._phase_started_at = time.time()
+
+        self._session_task = None
+        self._app_ready_event = None
+        self._ack_event = None
+        self._current_session = SessionContext()

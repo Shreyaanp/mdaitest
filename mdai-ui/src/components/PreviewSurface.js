@@ -2,8 +2,8 @@ import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-run
 import { useEffect, useRef } from 'react';
 import { SelfieSegmentation } from '@mediapipe/selfie_segmentation';
 const DEFAULT_TITLE = 'Camera preview';
-const DEFAULT_BLOCK_SIZE = 20;
-const KEEP_THRESHOLD = 0.55;
+const DEFAULT_BLOCK_SIZE = 24; // Increased from 20 for better performance (fewer tiles)
+const KEEP_THRESHOLD = 0.50; // Reduced from 0.55 for more permissive masking
 const LOCATE_FILE_BASE = 'https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation/';
 function getCanvasImageSourceDimensions(source) {
     if ('videoWidth' in source && 'videoHeight' in source) {
@@ -95,7 +95,7 @@ function renderTileSnappedPixelation(results, outputCanvas, blockSize, keepThres
     maskCtx.drawImage(results.segmentationMask, 0, 0, width, height);
     frameCtx.clearRect(0, 0, width, height);
     frameCtx.drawImage(results.image, 0, 0, width, height);
-    downsampleCtx.imageSmoothingEnabled = true;
+    downsampleCtx.imageSmoothingEnabled = false; // Faster rendering
     downsampleCtx.clearRect(0, 0, columns, rows);
     downsampleCtx.drawImage(frame, 0, 0, useWidth, useHeight, 0, 0, columns, rows);
     pixelCtx.imageSmoothingEnabled = false;
@@ -128,12 +128,15 @@ function renderTileSnappedPixelation(results, outputCanvas, blockSize, keepThres
         }
     }
 }
+const TARGET_FPS = 15; // Throttle to 15 FPS to match camera and reduce CPU
+const FRAME_INTERVAL_MS = 1000 / TARGET_FPS;
 export default function PreviewSurface({ visible, previewUrl, title = DEFAULT_TITLE }) {
     const canvasRef = useRef(null);
     const imageRef = useRef(null);
     const animationFrameRef = useRef(null);
     const processingRef = useRef(false);
     const offscreenRef = useRef(null);
+    const lastFrameTimeRef = useRef(0);
     useEffect(() => {
         const canvasEl = canvasRef.current;
         const imageEl = imageRef.current;
@@ -155,8 +158,8 @@ export default function PreviewSurface({ visible, previewUrl, title = DEFAULT_TI
             locateFile: (file) => `${LOCATE_FILE_BASE}${file}`
         });
         segmentation.setOptions({
-            modelSelection: 1,
-            selfieMode: true
+            modelSelection: 0, // Use faster general model (was 1 = landscape)
+            selfieMode: false // Disable selfie mode for better performance
         });
         let isActive = true;
         segmentation.onResults((results) => {
@@ -177,14 +180,24 @@ export default function PreviewSurface({ visible, previewUrl, title = DEFAULT_TI
             if (!isActive) {
                 return;
             }
+            // Throttle to target FPS
+            const now = performance.now();
+            const timeSinceLastFrame = now - lastFrameTimeRef.current;
+            if (timeSinceLastFrame < FRAME_INTERVAL_MS) {
+                // Too soon, schedule for later
+                setTimeout(scheduleNext, FRAME_INTERVAL_MS - timeSinceLastFrame);
+                return;
+            }
             if (!imageEl.complete || imageEl.naturalWidth === 0 || imageEl.naturalHeight === 0) {
                 scheduleNext();
                 return;
             }
             if (processingRef.current) {
+                // Skip this frame if still processing previous one
                 scheduleNext();
                 return;
             }
+            lastFrameTimeRef.current = now;
             processingRef.current = true;
             try {
                 await segmentation.send({ image: imageEl });
@@ -192,6 +205,7 @@ export default function PreviewSurface({ visible, previewUrl, title = DEFAULT_TI
             catch (error) {
                 console.error('PreviewSurface: segmentation failed', error);
                 isActive = false;
+                // Fallback: show raw image without segmentation
                 if (imageEl.naturalWidth > 0 && imageEl.naturalHeight > 0) {
                     canvasEl.width = imageEl.naturalWidth;
                     canvasEl.height = imageEl.naturalHeight;

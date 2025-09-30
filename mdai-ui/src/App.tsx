@@ -1,37 +1,17 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { useMachine } from '@xstate/react'
 
 import StageRouter from './components/StageRouter'
 import PreviewSurface from './components/PreviewSurface'
 import ControlPanel from './components/ControlPanel'
-import { sessionMachine } from './app-state/sessionMachine'
+import { sessionMachine, type SessionPhase } from './app-state/sessionMachine'
 import {
   ControllerMessage,
   SocketStatus,
   useControllerSocket
 } from './hooks/useControllerSocket'
 import { LogEntry, LogLevel, MetricsSnapshot } from './types/dashboard'
-
-const previewVisibleStates = new Set([
-  'human_detect',
-  'stabilizing',
-  'uploading',
-  'waiting_ack'
-])
-
-const DEFAULT_CONTROLLER_HTTP_URL = 'http://127.0.0.1:5000'
-const DEFAULT_BACKEND_URL = 'https://mdai.mercle.ai'
-const DEFAULT_DEVICE_ID = 'alpha'
-const readEnv = (...keys: string[]): string | undefined => {
-  const env = import.meta.env as Record<string, string | undefined>
-  for (const key of keys) {
-    const value = env[key]
-    if (typeof value === 'string' && value.length > 0) {
-      return value
-    }
-  }
-  return undefined
-}
+import { backendConfig, frontendConfig } from './config'
 
 type ControllerData = Record<string, unknown>
 
@@ -47,14 +27,6 @@ function getBooleanField(data: ControllerData | undefined, key: string): boolean
   return typeof value === 'boolean' ? value : undefined
 }
 
-function normaliseBaseUrl(url: string) {
-  return url.endsWith('/') ? url.slice(0, -1) : url
-}
-
-function buildControllerUrl(baseUrl: string, path: string) {
-  return `${normaliseBaseUrl(baseUrl)}${path.startsWith('/') ? path : `/${path}`}`
-}
-
 const nowId = () => `${Date.now()}-${Math.random().toString(16).slice(2, 8)}`
 
 export default function App() {
@@ -68,16 +40,17 @@ export default function App() {
   const [tokenExpiryTs, setTokenExpiryTs] = useState<number | null>(null)
   const [now, setNow] = useState(Date.now())
   const [qrPayloadOverride, setQrPayloadOverride] = useState<ControllerData | null>(null)
-  const [processingReady, setProcessingReady] = useState(false)
-  const [stableAliveSince, setStableAliveSince] = useState<number | null>(null)
-  const stableAliveTimerRef = useRef<number | null>(null)
 
-  const controllerHttpBase = readEnv('VITE_CONTROLLER_HTTP_URL') ?? DEFAULT_CONTROLLER_HTTP_URL
-  const controllerUrl = normaliseBaseUrl(controllerHttpBase)
-  const previewUrl = readEnv('VITE_PREVIEW_URL') ?? `${controllerUrl}/preview`
-  const backendUrl = readEnv('VITE_BACKEND_URL', 'VITE_BACKEND_API_URL') ?? DEFAULT_BACKEND_URL
-  const deviceId = readEnv('VITE_DEVICE_ID') ?? DEFAULT_DEVICE_ID
-  const deviceAddress = readEnv('VITE_DEVICE_ADDRESS')
+  const {
+    controllerHttpBase,
+    controllerWsUrl,
+    previewUrl,
+    backendApiBase,
+    deviceId,
+    deviceAddress
+  } = backendConfig
+  const previewVisiblePhases = frontendConfig.previewVisiblePhases
+  const controllerUrl = controllerHttpBase
 
   const appendLog = useCallback((message: string, level: LogLevel = 'info') => {
     setLogs((prev) => {
@@ -125,49 +98,31 @@ export default function App() {
           instantAlive,
           stableAlive
         })
-
-        const stableFlag = stableAlive === true
-        setStableAliveSince((previous) => {
-          if (stableFlag) {
-            return previous ?? Date.now()
-          }
-          return null
-        })
-
-        if (!stableFlag) {
-          setProcessingReady(false)
-        }
         return
       }
 
-     if (type === 'state') {
-       const payload = message.data as ControllerData | undefined
-       const phase = message.phase ?? 'unknown'
-       if (message.error) {
-         appendLog(`Phase → ${phase} (${message.error})`, 'error')
-       } else {
-         appendLog(`Phase → ${phase}`)
-       }
-       if (payload && typeof payload.token === 'string') {
-         appendLog(`Token issued: ${payload.token.slice(0, 12)}…`)
-       }
-       if (phase === 'qr_display' && payload && payload.qr_payload && typeof payload.qr_payload === 'object') {
+      if (type === 'state') {
+        const payload = message.data as ControllerData | undefined
+        const phase = message.phase ?? 'unknown'
+        if (message.error) {
+          appendLog(`Phase → ${phase} (${message.error})`, 'error')
+        } else {
+          appendLog(`Phase → ${phase}`)
+        }
+        if (payload && typeof payload.token === 'string') {
+          appendLog(`Token issued: ${payload.token.slice(0, 12)}…`)
+        }
+        if (phase === 'qr_display' && payload && payload.qr_payload && typeof payload.qr_payload === 'object') {
           setQrPayloadOverride(payload.qr_payload as ControllerData)
         }
         if (phase === 'idle') {
           setQrPayloadOverride(null)
-          setProcessingReady(false)
-          setStableAliveSince(null)
-          if (stableAliveTimerRef.current) {
-            window.clearTimeout(stableAliveTimerRef.current)
-            stableAliveTimerRef.current = null
-          }
         }
-       const expires = getNumberField(payload, 'expires_in')
-       if (typeof expires === 'number') {
-         setTokenExpiryTs(Date.now() + expires * 1000)
-       } else {
-         setTokenExpiryTs(null)
+        const expires = getNumberField(payload, 'expires_in')
+        if (typeof expires === 'number') {
+          setTokenExpiryTs(Date.now() + expires * 1000)
+        } else {
+          setTokenExpiryTs(null)
         }
         return
       }
@@ -198,10 +153,11 @@ export default function App() {
 
   const socketOptions = useMemo(
     () => ({
+      wsUrl: controllerWsUrl,
       onEvent: handleControllerEvent,
       onStatusChange: handleStatusChange
     }),
-    [handleControllerEvent, handleStatusChange]
+    [controllerWsUrl, handleControllerEvent, handleStatusChange]
   )
 
   useControllerSocket(send, socketOptions)
@@ -218,32 +174,9 @@ export default function App() {
     }
   }, [])
 
-  useEffect(() => {
-    if (stableAliveSince === null) {
-      if (stableAliveTimerRef.current) {
-        window.clearTimeout(stableAliveTimerRef.current)
-        stableAliveTimerRef.current = null
-      }
-      return
-    }
-
-    if (stableAliveTimerRef.current) {
-      window.clearTimeout(stableAliveTimerRef.current)
-    }
-
-    stableAliveTimerRef.current = window.setTimeout(() => {
-      setProcessingReady(true)
-    }, 3000)
-
-    return () => {
-      if (stableAliveTimerRef.current) {
-        window.clearTimeout(stableAliveTimerRef.current)
-        stableAliveTimerRef.current = null
-      }
-    }
-  }, [stableAliveSince])
-
-  const showPreview = useMemo(() => previewVisibleStates.has(state.value as string), [state.value])
+  const showPreview = useMemo(() => {
+    return previewVisiblePhases.has(state.value as SessionPhase)
+  }, [previewVisiblePhases, state.value])
 
   const heartbeatAgeSeconds = useMemo(() => {
     if (!lastHeartbeatTs) return undefined
@@ -263,10 +196,21 @@ export default function App() {
     return undefined
   }, [state.context.expiresIn, tokenExpiryTs, now])
 
+  const buildControllerUrl = useCallback(
+    (path: string) => {
+      try {
+        return new URL(path, `${controllerHttpBase}/`).toString()
+      } catch (error) {
+        return `${controllerHttpBase}${path}`
+      }
+    },
+    [controllerHttpBase]
+  )
+
   const triggerSession = useCallback(async () => {
     setIsTriggering(true)
     try {
-      const url = buildControllerUrl(controllerHttpBase, '/debug/trigger')
+      const url = buildControllerUrl('/debug/trigger')
       const response = await fetch(url, { method: 'POST' })
       if (!response.ok) {
         const text = await response.text().catch(() => '')
@@ -279,7 +223,7 @@ export default function App() {
     } finally {
       setIsTriggering(false)
     }
-  }, [appendLog, controllerHttpBase])
+  }, [appendLog, buildControllerUrl])
 
   useEffect(() => {
     if (state.matches('qr_display')) {
@@ -292,7 +236,7 @@ export default function App() {
       <div className="visual-area">
         <StageRouter
           state={state}
-          qrPayload={qrPayloadOverride ?? (state.context.qrPayload as ControllerData | undefined)}
+          qrPayload={qrPayloadOverride ?? qrPayload}
         />
         <PreviewSurface
           visible={showPreview}
@@ -302,12 +246,12 @@ export default function App() {
       <ControlPanel
         deviceId={deviceId}
         deviceAddress={deviceAddress}
-        backendUrl={backendUrl}
+        backendUrl={backendApiBase}
         controllerUrl={controllerUrl}
         connectionStatus={connectionStatus}
         currentPhase={String(state.value)}
         pairingToken={pairingToken}
-        qrPayload={qrPayloadOverride ?? (state.context.qrPayload as ControllerData | undefined)}
+        qrPayload={qrPayloadOverride ?? qrPayload}
         expiresInSeconds={expiresInSeconds}
         lastHeartbeatSeconds={heartbeatAgeSeconds}
         metrics={metrics}
