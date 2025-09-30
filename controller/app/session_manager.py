@@ -442,71 +442,84 @@ class SessionManager:
 
     async def _collect_best_frame(self) -> None:
         await self._set_phase(SessionPhase.STABILIZING)
-        results = await self._realsense.gather_results(self.settings.stability_seconds)
-        if not results:
-            logger.warning("RealSense gather_results returned no samples during stabilization")
-            raise RuntimeError("liveness_capture_failed")
 
+        max_attempts = 3
+        attempt = 0
+        frame_offset = 0
         best_bytes: Optional[bytes] = None
         best_score = -1.0
         best_result = None
         frame_count = 0
         alive_count = 0
-        
-        # Collect save tasks to run in parallel at the end
         save_tasks = []
 
-        # Process all frames
-        for idx, result in enumerate(results):
-            frame_count += 1
-            
-            # Queue frame save (non-blocking)
-            encoded = self._encode_jpeg(result.color_image)
-            if encoded:
-                save_tasks.append(self._save_debug_frame(encoded, idx, result))
-            
-            # Check if frame passes liveness
-            passes_liveness = result.instant_alive or result.stable_alive
-            if passes_liveness:
-                alive_count += 1
-                
-            focus_score = self._compute_focus(result.color_image)
-            normalized_focus = min(focus_score / 800.0, 1.0)
-            stability = result.stability_score
-            composite = (stability * 0.7) + (normalized_focus * 0.3)
-            if result.stable_alive:
-                composite += 0.05
-            
-            # Keep best frame regardless of liveness for fallback
-            if composite > best_score:
-                if encoded is None:
-                    encoded = self._encode_jpeg(result.color_image)
-                if encoded:
-                    best_bytes = encoded
-                    best_score = composite
-                    best_result = result
-            
-            now = time.time()
-            if now - self._last_metrics_ts >= 0.2:
-                self._last_metrics_ts = now
-                await self._broadcast(
-                    ControllerEvent(
-                        type="metrics",
-                        phase=self._phase,
-                        data={
-                            "stability": stability,
-                            "focus": focus_score,
-                            "composite": composite,
-                            "instant_alive": result.instant_alive,
-                            "stable_alive": result.stable_alive,
-                            "depth_ok": result.depth_ok,
-                            "screen_ok": result.screen_ok,
-                            "movement_ok": result.movement_ok,
-                        },
-                    )
+        while attempt < max_attempts and not best_bytes:
+            attempt += 1
+            results = await self._realsense.gather_results(self.settings.stability_seconds)
+            if not results:
+                logger.warning(
+                    "RealSense gather_results returned no samples during stabilization (attempt=%s/%s)",
+                    attempt,
+                    max_attempts,
                 )
+                if attempt < max_attempts:
+                    await asyncio.sleep(0.5)
+                    continue
+                raise RuntimeError("liveness_capture_failed")
 
-        logger.info(f"Frame collection complete: {frame_count} total, {alive_count} passed liveness, best_score={best_score:.3f}")
+            for idx, result in enumerate(results):
+                frame_count += 1
+
+                encoded = self._encode_jpeg(result.color_image)
+                if encoded:
+                    save_tasks.append(self._save_debug_frame(encoded, frame_offset + idx, result))
+
+                if result.instant_alive or result.stable_alive:
+                    alive_count += 1
+
+                focus_score = self._compute_focus(result.color_image)
+                normalized_focus = min(focus_score / 800.0, 1.0)
+                stability = result.stability_score
+                composite = (stability * 0.7) + (normalized_focus * 0.3)
+                if result.stable_alive:
+                    composite += 0.05
+
+                if composite > best_score:
+                    candidate = encoded or self._encode_jpeg(result.color_image)
+                    if candidate:
+                        best_bytes = candidate
+                        best_score = composite
+                        best_result = result
+
+                now = time.time()
+                if now - self._last_metrics_ts >= 0.2:
+                    self._last_metrics_ts = now
+                    await self._broadcast(
+                        ControllerEvent(
+                            type="metrics",
+                            phase=self._phase,
+                            data={
+                                "stability": stability,
+                                "focus": focus_score,
+                                "composite": composite,
+                                "instant_alive": result.instant_alive,
+                                "stable_alive": result.stable_alive,
+                                "depth_ok": result.depth_ok,
+                                "screen_ok": result.screen_ok,
+                                "movement_ok": result.movement_ok,
+                            },
+                        )
+                    )
+
+            frame_offset += len(results)
+
+        logger.info(
+            "Frame collection complete after %s attempt(s): %s total, %s passed liveness, best_score=%.3f",
+            attempt,
+            frame_count,
+            alive_count,
+            best_score,
+        )
 
         if not best_bytes:
             raise RuntimeError("no_frames_captured")

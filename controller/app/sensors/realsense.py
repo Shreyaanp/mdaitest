@@ -711,6 +711,39 @@ class RealSenseService:
         self._loop_task = None
         await self._force_hardware_shutdown()
 
+    async def _activate_locked(self) -> None:
+        if self._hardware_active:
+            return
+        total = sum(self._hardware_requests.values())
+        if total <= 0:
+            return
+
+        logger.info("Activating RealSense pipeline (requests=%s)", dict(self._hardware_requests))
+
+        def _create() -> MediaPipeLiveness:
+            cfg = LivenessConfig(**self._liveness_config) if self._liveness_config else None
+            th = LivenessThresholds(**self._threshold_overrides) if self._threshold_overrides else None
+            return MediaPipeLiveness(config=cfg, thresholds=th)
+
+        loop = asyncio.get_running_loop()
+        self._instance = await loop.run_in_executor(None, _create)
+        self._hardware_active = True
+        self._consecutive_timeouts = 0
+        self._consecutive_processing_failures = 0
+
+    async def _deactivate_locked(self) -> None:
+        if not self._hardware_active:
+            return
+
+        logger.info("Deactivating RealSense pipeline (no active requests)")
+
+        inst = self._instance
+        self._instance = None
+        self._hardware_active = False
+        if inst:
+            loop = asyncio.get_running_loop()
+            await loop.run_in_executor(None, inst.close)
+
     async def _force_hardware_shutdown(self) -> None:
         if not self.enable_hardware:
             return
@@ -791,7 +824,10 @@ class RealSenseService:
         async with self._lock:
             inst = self._instance
             if not inst:
-                return None
+                await self._activate_locked()
+                inst = self._instance
+                if not inst:
+                    return None
 
             loop = asyncio.get_running_loop()
             try:
@@ -845,8 +881,14 @@ class RealSenseService:
             await loop.run_in_executor(None, inst.start)
         except Exception:
             logger.exception("Failed to restart RealSense pipeline after timeouts; forcing hardware deactivate")
-            self._hardware_active = False
+            if inst:
+                try:
+                    await loop.run_in_executor(None, inst.close)
+                except Exception:
+                    logger.debug("Error while closing RealSense pipeline during restart", exc_info=True)
             self._instance = None
+            self._hardware_active = False
+            await self._activate_locked()
 
     def _serialize_frame(self, result: Optional[LivenessResult]) -> bytes:
         if result is None or cv2 is None:
@@ -914,26 +956,10 @@ class RealSenseService:
 
             should_run = sum(self._hardware_requests.values()) > 0
 
-            if should_run and not self._hardware_active:
-                logger.info("Activating RealSense pipeline (requests=%s)", dict(self._hardware_requests))
-
-                def _create() -> MediaPipeLiveness:
-                    cfg = LivenessConfig(**self._liveness_config) if self._liveness_config else None
-                    th = LivenessThresholds(**self._threshold_overrides) if self._threshold_overrides else None
-                    return MediaPipeLiveness(config=cfg, thresholds=th)
-
-                loop = asyncio.get_running_loop()
-                self._instance = await loop.run_in_executor(None, _create)
-                self._hardware_active = True
-                self._consecutive_timeouts = 0
-            elif not should_run and self._hardware_active:
-                logger.info("Deactivating RealSense pipeline (no active requests)")
-                inst = self._instance
-                self._instance = None
-                self._hardware_active = False
-                if inst:
-                    loop = asyncio.get_running_loop()
-                    await loop.run_in_executor(None, inst.close)
+            if should_run:
+                await self._activate_locked()
+            else:
+                await self._deactivate_locked()
 
 
 # ----------------------------
