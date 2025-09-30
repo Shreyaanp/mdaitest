@@ -20,5 +20,5 @@ export default function ProcessingScreen({ imageSrc = DEFAULT_IMAGE_SRC, imageAl
             window.clearTimeout(timer);
         };
     }, [durationMs]);
-    return (_jsxs("main", { className: "processing-screen", "data-processing-screen": true, children: [_jsx("img", { className: "processing-screen__hero", src: imageSrc, alt: imageAlt }), _jsx("div", { className: "processing-screen__status", children: statusLines.map((line) => (_jsx("span", { children: line }, line))) }), _jsx("div", { className: "processing-screen__guidance", "aria-hidden": "false", children: guidanceLines.map((line) => (_jsx("span", { children: line }, line))) })] }));
+    return (_jsxs("main", { className: "processing-screen", "data-processing-screen": true, children: [_jsx("img", { className: "processing-screen__hero", src: imageSrc, alt: imageAlt }), _jsx("div", { className: "processing-screen__status", children: statusLines.map((line) => (_jsx("span", { children: line }, line))) })] }));
 }

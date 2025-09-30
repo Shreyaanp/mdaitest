@@ -50,11 +50,6 @@ export default function ProcessingScreen({
           <span key={line}>{line}</span>
         ))}
       </div>
-      <div className="processing-screen__guidance" aria-hidden="false">
-        {guidanceLines.map((line) => (
-          <span key={line}>{line}</span>
-        ))}
-      </div>
     </main>
   )
 }

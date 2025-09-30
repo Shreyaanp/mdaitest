@@ -340,23 +340,57 @@ class SessionManager:
         elapsed = time.time() - self._phase_started_at
         if elapsed < minimum_seconds:
             await asyncio.sleep(minimum_seconds - elapsed)
-# make revert here
+    
     async def _handle_tof_trigger(self, triggered: bool, distance: int) -> None:
-        """Handle ToF sensor trigger events - simple frontend-controlled simulation."""
+        """
+        Handle ToF sensor trigger events.
+        
+        Logic:
+        - Distance ≤ 450mm in IDLE → Start session
+        - Distance > 450mm for 1.2s in active session → Cancel immediately (user walked away)
+        - Monitoring applies to ALL phases except IDLE, COMPLETE, ERROR
+        """
         try:
-            logger.info("ToF %s (distance=%dmm, phase=%s)", 
-                       "TRIGGERED" if triggered else "released", distance, self.phase.value)
+            logger.debug(f"ToF: distance={distance}mm, phase={self.phase.value}")
             self._current_session.latest_distance_mm = distance
             
-            if triggered and self.phase == SessionPhase.IDLE:
-                logger.info("Starting session from ToF trigger")
-                self._schedule_session()
-            elif not triggered and self.phase not in {SessionPhase.IDLE, SessionPhase.COMPLETE}:
-                logger.warning("ToF sensor released mid-session - cancelling")
-                if self._session_task:
-                    self._session_task.cancel()
+            # Behavior depends on current phase
+            current_phase = self.phase
+            
+            # IDLE state: Start session if user is close
+            if current_phase == SessionPhase.IDLE:
+                if distance <= 450:
+                    logger.info(f"👆 ToF triggered (distance={distance}mm) - starting session")
+                    self._schedule_session()
+                return
+            
+            # COMPLETE/ERROR states: Don't monitor distance (session ending anyway)
+            if current_phase in {SessionPhase.COMPLETE, SessionPhase.ERROR}:
+                return
+            
+            # Active session states: Monitor distance and cancel if user walks away
+            # Applies to: PAIRING_REQUEST, HELLO_HUMAN, SCAN_PROMPT, QR_DISPLAY, HUMAN_DETECT, PROCESSING
+            if distance > 450:
+                # User is too far - check if they've been away for 1.2s
+                if not hasattr(self, '_tof_far_since'):
+                    self._tof_far_since = time.time()
+                    logger.debug(f"⚠️ User moved away (distance={distance}mm) - monitoring...")
+                else:
+                    time_away = time.time() - self._tof_far_since
+                    if time_away >= 1.2:
+                        logger.warning(f"🚶 User walked away for {time_away:.1f}s - cancelling session")
+                        if self._session_task and not self._session_task.done():
+                            self._session_task.cancel()
+                        # Reset distance tracking
+                        delattr(self, '_tof_far_since')
+            else:
+                # User is close - reset away timer
+                if hasattr(self, '_tof_far_since'):
+                    logger.debug(f"✅ User returned (distance={distance}mm)")
+                    delattr(self, '_tof_far_since')
+                    
         except Exception as e:
-            logger.exception("Error handling ToF trigger: %s", e)
+            logger.exception(f"Error handling ToF trigger: {e}")
 
     def _schedule_session(self) -> None:
         if self._session_task and not self._session_task.done():
@@ -369,20 +403,24 @@ class SessionManager:
         Main session flow - clean and easy to follow.
         
         Flow:
-        1. Request pairing token (1.5s)
-        2. Show "Hello Human" (2s)
-        3. Show QR code and wait for mobile app
-        4. Validate human with camera (3.5s, need ≥10 passing frames)
-        5. Process and upload best frame (3-15s)
-        6. Show complete screen (3s)
-        7. Return to idle
+        1. Request pairing token (1.2s with exit animation)
+        2. Show "Hello Human" welcome screen (2s)
+        3. Show "Scan this to get started" prompt (3s)
+        4. Show QR code and wait for mobile app (indefinite)
+        5. Validate human with camera (3.5s, need ≥10 passing frames)
+        6. Process and upload best frame (3-15s)
+        7. Show complete screen (3s)
+        8. Return to idle
         """
         try:
-            # Step 1: Request token from backend (PAIRING_REQUEST - 1.5s)
+            # Step 1: Request token from backend (PAIRING_REQUEST - 1.2s)
             token = await self._request_pairing_token()
             
             # Step 2: Show welcome screen (HELLO_HUMAN - 2s)
             await self._show_hello_human()
+            
+            # Step 3: Show scan prompt (SCAN_PROMPT - 3s)
+            await self._show_scan_prompt()
             
             # Step 3: Show QR and wait for mobile connection (QR_DISPLAY - indefinite)
             await self._show_qr_and_connect(token)
@@ -400,7 +438,8 @@ class SessionManager:
             logger.info("✅ Session completed successfully")
 
         except asyncio.CancelledError:
-            logger.info("Session cancelled by user")
+            logger.info("⚠️ Session cancelled (user walked away)")
+            # Immediate reset to idle, no error screen
             raise
             
         except SessionFlowError as exc:
@@ -421,9 +460,9 @@ class SessionManager:
     async def _request_pairing_token(self) -> str:
         """
         Step 1: Request pairing token from backend.
-        Duration: 1.5s (includes fall animation)
+        Duration: 1.2s (matches TV bars exit animation)
         """
-        await self._advance_phase(SessionPhase.PAIRING_REQUEST, min_duration=1.5)
+        await self._advance_phase(SessionPhase.PAIRING_REQUEST, min_duration=1.2)
         
         # Request token from backend
         token_info = await self._http_client.issue_token()
@@ -450,10 +489,22 @@ class SessionManager:
         await self._advance_phase(SessionPhase.HELLO_HUMAN, min_duration=2.0)
         logger.info("👋 Showing hello human screen")
     
+    async def _show_scan_prompt(self) -> None:
+        """
+        Step 3: Show "Scan this to get started" prompt.
+        Duration: 3s
+        Uses HandjetMessage component with text message.
+        """
+        await self._advance_phase(
+            SessionPhase.SCAN_PROMPT, 
+            min_duration=3.0,
+            data={"message": "Scan this to get started"}
+        )
+        logger.info("📱 Showing scan prompt screen")
+    
     async def _show_qr_and_connect(self, token: str) -> None:
         """
-        Step 3: Show QR code with "Scan to get started" message.
-        Connects to websocket bridge.
+        Step 3: Show QR code and connect websocket bridge.
         Duration: Indefinite (waits for mobile app)
         """
         # Build QR payload
@@ -642,18 +693,24 @@ class SessionManager:
         logger.error(f"❌ Error: {message}")
     
     async def _cleanup_session(self) -> None:
-        """Clean up after session (success or failure)."""
+        """
+        Clean up after session (success or failure).
+        Returns to IDLE with entry animation (TV bars falling).
+        """
         try:
             # Disconnect websocket
             await self._ws_client.disconnect()
         except Exception as exc:
             logger.warning(f"Error disconnecting websocket: {exc}")
         
-        # Ensure we're in idle state
+        # Ensure we're in idle state with entry animation
         try:
             if self._phase in {SessionPhase.ERROR, SessionPhase.COMPLETE}:
                 await self._ensure_current_phase_duration(3.0)
+            
+            # Return to idle (UI will show entry animation)
             await self._advance_phase(SessionPhase.IDLE)
+            
         except Exception as exc:
             logger.warning(f"Error setting idle phase: {exc}")
             self._phase = SessionPhase.IDLE
@@ -664,6 +721,10 @@ class SessionManager:
         self._app_ready_event = None
         self._ack_event = None
         self._current_session = SessionContext()
+        
+        # Reset ToF distance tracking
+        if hasattr(self, '_tof_far_since'):
+            delattr(self, '_tof_far_since')
         
         logger.info("🔄 Session cleaned up, returning to idle")
 

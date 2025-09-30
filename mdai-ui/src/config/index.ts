@@ -120,8 +120,7 @@ const stageMessages: StageMessageMap = {
     className: 'instruction-stage--tall'
   },
   complete: {
-    title: 'Complete!',
-    subtitle: 'Thank you',
+    title: 'Scan Complete',
     className: 'instruction-stage--tall'
   }
 }

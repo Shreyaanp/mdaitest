@@ -6,16 +6,18 @@ import { setup } from 'xstate'
  * 1. idle              - Waiting for user (TV bars at 60%)
  * 2. pairing_request   - Requesting token (1.5s, fall animation)
  * 3. hello_human       - Welcome screen (2s)
- * 4. qr_display        - Show QR + "Scan to get started" (indefinite)
- * 5. human_detect      - Validate face (3.5s, need ≥10 passing frames)
- * 6. processing        - Upload + backend processing (3-15s)
- * 7. complete          - Success screen (3s) → idle
- * 8. error             - Error screen (3s) → idle
+ * 4. scan_prompt       - "Scan this to get started" (3s)
+ * 5. qr_display        - Show QR code (indefinite)
+ * 6. human_detect      - Validate face (3.5s, need ≥10 passing frames)
+ * 7. processing        - Upload + backend processing (3-15s)
+ * 8. complete          - Success screen (3s) → idle with entry animation
+ * 9. error             - Error screen (3s) → idle with entry animation
  */
 export type SessionPhase =
   | 'idle'
   | 'pairing_request'
   | 'hello_human'
+  | 'scan_prompt'
   | 'qr_display'
   | 'human_detect'
   | 'processing'
@@ -29,6 +31,7 @@ export interface SessionContext {
   error?: string
   lastHeartbeatTs?: number
 }
+
 
 export type SessionEvent =
   | {
@@ -88,6 +91,7 @@ export const sessionMachine = sessionMachineSetup.createMachine({
       { guard: phaseGuard('idle'), target: '.idle', actions: resetContext },
       { guard: phaseGuard('pairing_request'), target: '.pairing_request' },
       { guard: phaseGuard('hello_human'), target: '.hello_human' },
+      { guard: phaseGuard('scan_prompt'), target: '.scan_prompt' },
       { guard: phaseGuard('qr_display'), target: '.qr_display', actions: assignSessionDetails },
       { guard: phaseGuard('human_detect'), target: '.human_detect' },
       { guard: phaseGuard('processing'), target: '.processing' },
@@ -111,6 +115,7 @@ export const sessionMachine = sessionMachineSetup.createMachine({
     idle: {},
     pairing_request: {},
     hello_human: {},
+    scan_prompt: {},
     qr_display: {},
     human_detect: {},
     processing: {},

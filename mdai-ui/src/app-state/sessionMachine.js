@@ -31,12 +31,11 @@ export const sessionMachine = sessionMachineSetup.createMachine({
         CONTROLLER_STATE: [
             { guard: phaseGuard('idle'), target: '.idle', actions: resetContext },
             { guard: phaseGuard('pairing_request'), target: '.pairing_request' },
+            { guard: phaseGuard('hello_human'), target: '.hello_human' },
+            { guard: phaseGuard('scan_prompt'), target: '.scan_prompt' },
             { guard: phaseGuard('qr_display'), target: '.qr_display', actions: assignSessionDetails },
-            { guard: phaseGuard('waiting_activation'), target: '.waiting_activation' },
             { guard: phaseGuard('human_detect'), target: '.human_detect' },
-            { guard: phaseGuard('stabilizing'), target: '.stabilizing' },
-            { guard: phaseGuard('uploading'), target: '.uploading' },
-            { guard: phaseGuard('waiting_ack'), target: '.waiting_ack' },
+            { guard: phaseGuard('processing'), target: '.processing' },
             { guard: phaseGuard('complete'), target: '.complete' },
             { guard: phaseGuard('error'), target: '.error', actions: assignError }
         ],
@@ -56,12 +55,11 @@ export const sessionMachine = sessionMachineSetup.createMachine({
     states: {
         idle: {},
         pairing_request: {},
+        hello_human: {},
+        scan_prompt: {},
         qr_display: {},
-        waiting_activation: {},
         human_detect: {},
-        stabilizing: {},
-        uploading: {},
-        waiting_ack: {},
+        processing: {},
         complete: {},
         error: {}
     }

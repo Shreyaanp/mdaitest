@@ -1,6 +1,6 @@
 import { jsx as _jsx, Fragment as _Fragment, jsxs as _jsxs } from "react/jsx-runtime";
 import { useMemo } from 'react';
-export const TV_BARS_FALL_DURATION_MS = 4000;
+export const TV_BARS_FALL_DURATION_MS = 1200; // 1.2 seconds for exit/entry animation
 export const TV_BARS_MARQUEE_DURATION_MS = 6000;
 const STYLE_RULES = String.raw `
 @keyframes fall {
