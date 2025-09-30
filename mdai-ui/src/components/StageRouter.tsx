@@ -1,10 +1,12 @@
+import { useState, useEffect, useRef } from 'react'
 import type { StateFrom } from 'xstate'
 import { sessionMachine, type SessionPhase } from '../app-state/sessionMachine'
 import ErrorOverlay from './ErrorOverlay'
-import IdleScreen from './IdleScreen'
+import IdleScreen, { IDLE_EXIT_DURATION_MS } from './IdleScreen'
 import InstructionStage from './InstructionStage'
 import QRCodeStage from './QRCodeStage'
 import { frontendConfig } from '../config'
+import type { TVBarsMode } from './TVBars'
 
 interface StageRouterProps {
   state: StateFrom<typeof sessionMachine>
@@ -13,7 +15,40 @@ interface StageRouterProps {
 
 export default function StageRouter({ state, qrPayload }: StageRouterProps) {
   const currentPhase = state.value as SessionPhase
-  console.log('🎬 [STAGE ROUTER] Phase:', currentPhase)
+  const previousPhaseRef = useRef<SessionPhase>(currentPhase)
+  const [isExiting, setIsExiting] = useState(false)
+  const [exitFromPhase, setExitFromPhase] = useState<SessionPhase | null>(null)
+  
+  console.log('🎬 [STAGE ROUTER] Phase:', currentPhase, '| Exiting:', isExiting)
+  
+  // Detect transitions OUT of idle state and trigger exit animation
+  useEffect(() => {
+    const prev = previousPhaseRef.current
+    const curr = currentPhase
+    
+    // If we're leaving idle state, trigger exit animation
+    if (prev === 'idle' && curr !== 'idle') {
+      console.log('🎬 [STAGE ROUTER] Leaving idle → triggering exit animation')
+      setIsExiting(true)
+      setExitFromPhase('idle')
+      
+      // Clear exit state after animation completes
+      const timer = setTimeout(() => {
+        setIsExiting(false)
+        setExitFromPhase(null)
+      }, IDLE_EXIT_DURATION_MS)
+      
+      return () => clearTimeout(timer)
+    }
+    
+    previousPhaseRef.current = curr
+  }, [currentPhase])
+  
+  // If we're in exit animation, show the exiting screen
+  if (isExiting && exitFromPhase === 'idle') {
+    console.log('🎬 [STAGE ROUTER] Playing exit animation from idle')
+    return <IdleScreen mode="exit" showBars={true} />
+  }
 
   // Error state
   if (state.matches('error')) {
@@ -22,7 +57,7 @@ export default function StageRouter({ state, qrPayload }: StageRouterProps) {
 
   // Idle state
   if (state.matches('idle')) {
-    return <IdleScreen mode="idle" showBars={true} />
+    return <IdleScreen mode="entry" showBars={true} />
   }
 
   // Pairing/requesting token
@@ -66,5 +101,5 @@ export default function StageRouter({ state, qrPayload }: StageRouterProps) {
 
   // Fallback
   console.log('🎬 [STAGE ROUTER] Unknown phase, showing idle')
-  return <IdleScreen mode="idle" showBars={false} />
+  return <IdleScreen mode="entry" showBars={true} />
 }

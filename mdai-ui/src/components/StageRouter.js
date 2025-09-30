@@ -1,18 +1,52 @@
 import { jsx as _jsx } from "react/jsx-runtime";
+import { useState, useEffect, useRef } from 'react';
 import ErrorOverlay from './ErrorOverlay';
-import IdleScreen from './IdleScreen';
+import IdleScreen, { IDLE_EXIT_DURATION_MS } from './IdleScreen';
 import InstructionStage from './InstructionStage';
 import QRCodeStage from './QRCodeStage';
 export default function StageRouter({ state, qrPayload }) {
     const currentPhase = state.value;
-    console.log('🎬 [STAGE ROUTER] Phase:', currentPhase);
+    const previousPhaseRef = useRef(currentPhase);
+    const [isExiting, setIsExiting] = useState(false);
+    const [exitFromPhase, setExitFromPhase] = useState(null);
+    
+    console.log('🎬 [STAGE ROUTER] Phase:', currentPhase, '| Exiting:', isExiting);
+    
+    // Detect transitions OUT of idle state and trigger exit animation
+    useEffect(() => {
+        const prev = previousPhaseRef.current;
+        const curr = currentPhase;
+        
+        // If we're leaving idle state, trigger exit animation
+        if (prev === 'idle' && curr !== 'idle') {
+            console.log('🎬 [STAGE ROUTER] Leaving idle → triggering exit animation');
+            setIsExiting(true);
+            setExitFromPhase('idle');
+            
+            // Clear exit state after animation completes
+            const timer = setTimeout(() => {
+                setIsExiting(false);
+                setExitFromPhase(null);
+            }, IDLE_EXIT_DURATION_MS);
+            
+            return () => clearTimeout(timer);
+        }
+        
+        previousPhaseRef.current = curr;
+    }, [currentPhase]);
+    
+    // If we're in exit animation, show the exiting screen
+    if (isExiting && exitFromPhase === 'idle') {
+        console.log('🎬 [STAGE ROUTER] Playing exit animation from idle');
+        return _jsx(IdleScreen, { mode: "exit", showBars: true });
+    }
     // Error state
     if (state.matches('error')) {
         return _jsx(ErrorOverlay, { message: state.context.error ?? 'Unknown error' });
     }
     // Idle state
     if (state.matches('idle')) {
-        return _jsx(IdleScreen, { mode: "idle", showBars: true });
+        return _jsx(IdleScreen, { mode: "entry", showBars: true });
     }
     // Pairing/requesting token
     if (state.matches('pairing_request')) {
@@ -42,5 +76,5 @@ export default function StageRouter({ state, qrPayload }) {
     }
     // Fallback
     console.log('🎬 [STAGE ROUTER] Unknown phase, showing idle');
-    return _jsx(IdleScreen, { mode: "idle", showBars: false });
+    return _jsx(IdleScreen, { mode: "entry", showBars: true });
 }
