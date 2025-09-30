@@ -365,62 +365,307 @@ class SessionManager:
         self._session_task = asyncio.create_task(self._run_session(), name="controller-session")
 
     async def _run_session(self) -> None:
-        """Run the full kiosk workflow with structured error handling."""
+        """
+        Main session flow - clean and easy to follow.
+        
+        Flow:
+        1. Request pairing token (1.5s)
+        2. Show "Hello Human" (2s)
+        3. Show QR code and wait for mobile app
+        4. Validate human with camera (3.5s, need ≥10 passing frames)
+        5. Process and upload best frame (3-15s)
+        6. Show complete screen (3s)
+        7. Return to idle
+        """
         try:
-            token = await self._initialize_session()
-            await self._connect_bridge(token)
-            await self._await_app_ready()
-
-            async with self._camera_session():
-                await self._advance_phase(SessionPhase.HUMAN_DETECT)
-                await self._collect_best_frame()
-
-            await self._upload_frame()
-            await self._wait_for_ack()
-            logger.info("Session completed successfully")
+            # Step 1: Request token from backend (PAIRING_REQUEST - 1.5s)
+            token = await self._request_pairing_token()
+            
+            # Step 2: Show welcome screen (HELLO_HUMAN - 2s)
+            await self._show_hello_human()
+            
+            # Step 3: Show QR and wait for mobile connection (QR_DISPLAY - indefinite)
+            await self._show_qr_and_connect(token)
+            await self._wait_for_mobile_app()
+            
+            # Step 4: Validate human face (HUMAN_DETECT - 3.5s exactly)
+            best_frame = await self._validate_human_presence()
+            
+            # Step 5: Process and upload (PROCESSING - 3-15s)
+            await self._process_and_upload(best_frame)
+            
+            # Step 6: Show success (COMPLETE - 3s)
+            await self._show_complete()
+            
+            logger.info("✅ Session completed successfully")
 
         except asyncio.CancelledError:
-            logger.info("Session cancelled by user or ToF reset")
+            logger.info("Session cancelled by user")
             raise
+            
         except SessionFlowError as exc:
-            logger.error("Session failed: %s", exc)
-            await self._advance_phase(SessionPhase.ERROR, error=exc.user_message, min_duration=5.0)
-        except Exception as exc:  # pragma: no cover - defensive guard
-            logger.exception("Unexpected session error: %s", exc)
-            await self._advance_phase(SessionPhase.ERROR, error=f"Unexpected error: {exc}", min_duration=5.0)
+            logger.error("❌ Session failed: %s", exc)
+            await self._show_error(exc.user_message)
+            
+        except Exception as exc:
+            logger.exception("❌ Unexpected session error: %s", exc)
+            await self._show_error("Please try again")
+            
         finally:
-            await self._cleanup_after_session()
+            await self._cleanup_session()
 
-    async def _initialize_session(self) -> str:
-        await self._advance_phase(SessionPhase.PAIRING_REQUEST)
+    # ============================================================
+    # SESSION FLOW METHODS - Clean & Easy to Understand
+    # ============================================================
+    
+    async def _request_pairing_token(self) -> str:
+        """
+        Step 1: Request pairing token from backend.
+        Duration: 1.5s (includes fall animation)
+        """
+        await self._advance_phase(SessionPhase.PAIRING_REQUEST, min_duration=1.5)
+        
+        # Request token from backend
         token_info = await self._http_client.issue_token()
-        if not token_info:
+        if not token_info or not token_info.get("token"):
             raise SessionFlowError("Failed to get pairing token")
-
-        token = token_info.get("token")
-        if not token:
-            raise SessionFlowError("Invalid token response from backend")
-
+        
+        # Store session info
+        token = token_info["token"]
         expires_in = token_info.get("expires_in")
-        qr_payload = self._build_qr_payload(token)
         self._current_session = SessionContext(
             token=token,
             expires_in=expires_in,
             issued_at=time.time(),
-            metadata={"qr_payload": qr_payload},
         )
-        self._last_metrics_ts = 0.0
-
+        
+        logger.info(f"📱 Token issued: {token[:12]}... (expires in {expires_in}s)")
+        return token
+    
+    async def _show_hello_human(self) -> None:
+        """
+        Step 2: Show "Hello Human" welcome screen.
+        Duration: 2s
+        """
+        await self._advance_phase(SessionPhase.HELLO_HUMAN, min_duration=2.0)
+        logger.info("👋 Showing hello human screen")
+    
+    async def _show_qr_and_connect(self, token: str) -> None:
+        """
+        Step 3: Show QR code with "Scan to get started" message.
+        Connects to websocket bridge.
+        Duration: Indefinite (waits for mobile app)
+        """
+        # Build QR payload
+        qr_payload = self._build_qr_payload(token)
+        self._current_session.metadata = {"qr_payload": qr_payload}
+        
+        # Initialize events for mobile app connection
+        self._app_ready_event = asyncio.Event()
+        self._ack_event = asyncio.Event()
+        
+        # Connect to websocket bridge
+        try:
+            await self._ws_client.connect(token, self._handle_bridge_message)
+        except Exception as exc:
+            raise SessionFlowError("Failed to connect to bridge") from exc
+        
+        # Show QR code
         await self._advance_phase(
             SessionPhase.QR_DISPLAY,
-            min_duration=3.0,
             data={
                 "token": token,
-                "expires_in": expires_in,
+                "expires_in": self._current_session.expires_in,
                 "qr_payload": qr_payload,
             },
         )
-        return token
+        logger.info("📱 QR code displayed - waiting for mobile app")
+    
+    async def _wait_for_mobile_app(self) -> None:
+        """
+        Wait for mobile app to connect and send platform_id.
+        Timeout based on token expiry.
+        """
+        if not self._app_ready_event:
+            raise RuntimeError("App ready event not initialized")
+        
+        timeout = self._token_timeout()
+        logger.info(f"⏳ Waiting for mobile app connection (timeout={timeout}s)")
+        
+        try:
+            await asyncio.wait_for(self._app_ready_event.wait(), timeout=timeout)
+            logger.info(f"✅ Mobile app connected: {self._current_session.platform_id}")
+        except asyncio.TimeoutError as exc:
+            raise SessionFlowError("Mobile app did not connect in time") from exc
+    
+    async def _validate_human_presence(self) -> bytes:
+        """
+        Step 4: Validate human face with camera.
+        Duration: Exactly 3.5 seconds
+        Requirements: Need at least 10 passing frames (depth check only)
+        
+        Returns: Best frame as JPEG bytes
+        """
+        VALIDATION_DURATION = 3.5  # Strict 3.5 seconds
+        MIN_PASSING_FRAMES = 10    # Need at least 10 good frames
+        
+        await self._advance_phase(SessionPhase.HUMAN_DETECT)
+        logger.info(f"📸 Starting human validation ({VALIDATION_DURATION}s, need ≥{MIN_PASSING_FRAMES} frames)")
+        
+        # Activate camera
+        try:
+            await self._realsense.set_hardware_active(True, source="validation")
+        except Exception as exc:
+            raise SessionFlowError("Camera activation failed") from exc
+        
+        try:
+            # Collect frames for exactly 3.5 seconds
+            start_time = time.time()
+            passing_frames = []
+            best_frame = None
+            best_score = -1.0
+            total_frames = 0
+            
+            while time.time() - start_time < VALIDATION_DURATION:
+                # Get a single result from the camera
+                results = await self._realsense.gather_results(0.1)  # 100ms window
+                
+                for result in results:
+                    total_frames += 1
+                    
+                    # Check if frame passes liveness (depth-only check = hybrid approach)
+                    if result.depth_ok:
+                        passing_frames.append(result)
+                        
+                        # Calculate quality score
+                        focus_score = self._compute_focus(result.color_image)
+                        normalized_focus = min(focus_score / 800.0, 1.0)
+                        composite_score = (result.stability_score * 0.7) + (normalized_focus * 0.3)
+                        
+                        # Track best frame
+                        if composite_score > best_score:
+                            best_score = composite_score
+                            best_frame = result
+                            
+                        logger.debug(f"✅ Frame {total_frames}: PASS (depth_ok=True, score={composite_score:.3f})")
+                    else:
+                        logger.debug(f"❌ Frame {total_frames}: FAIL (depth_ok=False)")
+            
+            # Validation complete - check results
+            logger.info(
+                f"📊 Validation complete: {len(passing_frames)}/{total_frames} frames passed, "
+                f"best_score={best_score:.3f}"
+            )
+            
+            # Check if we have enough passing frames
+            if len(passing_frames) < MIN_PASSING_FRAMES:
+                raise SessionFlowError(
+                    f"Insufficient valid frames: {len(passing_frames)}/{MIN_PASSING_FRAMES}",
+                    user_message="Please position your face in frame"
+                )
+            
+            # Check if we have a best frame
+            if not best_frame:
+                raise SessionFlowError("No valid frame captured", user_message="Please try again")
+            
+            # Encode best frame as JPEG
+            best_bytes = self._encode_jpeg(best_frame.color_image)
+            if not best_bytes:
+                raise SessionFlowError("Failed to encode frame", user_message="Please try again")
+            
+            # Save best frame to captures folder (ONLY the best one)
+            await self._save_best_frame_to_captures(best_bytes, best_frame)
+            
+            logger.info(f"✅ Human validation SUCCESS: {len(passing_frames)} passing frames, score={best_score:.3f}")
+            return best_bytes
+            
+        finally:
+            # Always deactivate camera
+            try:
+                await self._realsense.set_hardware_active(False, source="validation")
+            except Exception as exc:
+                logger.warning(f"Error deactivating camera: {exc}")
+    
+    async def _process_and_upload(self, best_frame_bytes: bytes) -> None:
+        """
+        Step 5: Upload best frame and wait for backend processing.
+        Duration: 3-15 seconds (3s minimum, 15s timeout)
+        """
+        await self._advance_phase(SessionPhase.PROCESSING, min_duration=3.0)
+        logger.info("🚀 Starting processing phase")
+        
+        # Encode frame as base64
+        frame_b64 = base64.b64encode(best_frame_bytes).decode()
+        
+        # Upload to backend via websocket
+        if not self._current_session.platform_id:
+            raise SessionFlowError("Platform ID missing", user_message="Please try again")
+        
+        payload = {
+            "type": "to_backend",
+            "data": {
+                "platform_id": self._current_session.platform_id,
+                "image_base64": frame_b64,
+            },
+        }
+        
+        await self._ws_client.send(payload)
+        logger.info(f"📤 Frame uploaded ({len(frame_b64)} chars base64)")
+        
+        # Wait for backend acknowledgment (max 15s timeout)
+        if not self._ack_event:
+            raise RuntimeError("Ack event not initialized")
+        
+        try:
+            await asyncio.wait_for(self._ack_event.wait(), timeout=15.0)
+            logger.info("✅ Backend acknowledgment received")
+        except asyncio.TimeoutError as exc:
+            raise SessionFlowError("Backend processing timeout (15s)", user_message="Please try again") from exc
+        
+        # Ensure minimum 3s display
+        await self._ensure_current_phase_duration(3.0)
+    
+    async def _show_complete(self) -> None:
+        """
+        Step 6: Show success screen.
+        Duration: 3s
+        """
+        await self._advance_phase(SessionPhase.COMPLETE, min_duration=3.0)
+        logger.info("🎉 Session complete")
+    
+    async def _show_error(self, message: str) -> None:
+        """
+        Show error screen and return to idle.
+        Duration: 3s
+        """
+        await self._advance_phase(SessionPhase.ERROR, error=message, min_duration=3.0)
+        logger.error(f"❌ Error: {message}")
+    
+    async def _cleanup_session(self) -> None:
+        """Clean up after session (success or failure)."""
+        try:
+            # Disconnect websocket
+            await self._ws_client.disconnect()
+        except Exception as exc:
+            logger.warning(f"Error disconnecting websocket: {exc}")
+        
+        # Ensure we're in idle state
+        try:
+            if self._phase in {SessionPhase.ERROR, SessionPhase.COMPLETE}:
+                await self._ensure_current_phase_duration(3.0)
+            await self._advance_phase(SessionPhase.IDLE)
+        except Exception as exc:
+            logger.warning(f"Error setting idle phase: {exc}")
+            self._phase = SessionPhase.IDLE
+            self._phase_started_at = time.time()
+        
+        # Reset session state
+        self._session_task = None
+        self._app_ready_event = None
+        self._ack_event = None
+        self._current_session = SessionContext()
+        
+        logger.info("🔄 Session cleaned up, returning to idle")
 
     async def _connect_bridge(self, token: str) -> None:
         self._app_ready_event = asyncio.Event()

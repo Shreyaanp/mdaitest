@@ -92,47 +92,48 @@ export const backendConfig: BackendConfig = {
   deviceAddress: env.VITE_DEVICE_ADDRESS
 }
 
+/**
+ * Stage messages - displayed for each phase
+ * Note: Most phases use custom components (see StageRouter.tsx)
+ */
 const stageMessages: StageMessageMap = {
   pairing_request: {
     title: 'Preparing session',
-    subtitle: 'Contacting the server'
+    subtitle: 'Requesting token'
+  },
+  hello_human: {
+    title: 'Hello Human',
+    subtitle: ''
   },
   qr_display: {
-    title: 'Scan the QR code',
-    subtitle: 'Use your mobile app to continue'
-  },
-  waiting_activation: {
-    title: 'Waiting for activation',
-    subtitle: 'Complete the setup on your mobile app'
+    title: 'Scan this to get started',
+    subtitle: 'Use your mobile device'
   },
   human_detect: {
     title: 'Center your face',
-    subtitle: 'Move closer until your face fills the frame',
+    subtitle: 'Position yourself in frame',
     className: 'instruction-stage--tall'
   },
-  stabilizing: {
-    title: 'Hold steady',
-    subtitle: 'Stay still while we capture your image',
-    className: 'instruction-stage--tall'
-  },
-  uploading: {
-    title: 'Uploading',
-    subtitle: 'Please hold still',
-    className: 'instruction-stage--tall'
-  },
-  waiting_ack: {
+  processing: {
     title: 'Processing',
-    subtitle: 'This may take a moment',
+    subtitle: 'Please wait',
     className: 'instruction-stage--tall'
   },
   complete: {
-    title: 'Complete',
-    subtitle: 'You may step away',
+    title: 'Complete!',
+    subtitle: 'Thank you',
     className: 'instruction-stage--tall'
   }
 }
 
+/**
+ * Frontend configuration
+ * 
+ * previewVisiblePhases: Phases where camera preview is shown
+ * - ONLY 'human_detect' shows camera now
+ * - Processing phase hides camera and shows animation
+ */
 export const frontendConfig: FrontendConfig = {
-  previewVisiblePhases: new Set<SessionPhase>(['human_detect', 'stabilizing', 'uploading', 'waiting_ack']),
+  previewVisiblePhases: new Set<SessionPhase>(['human_detect']),
   stageMessages
 }

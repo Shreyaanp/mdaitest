@@ -1,14 +1,24 @@
 import { setup } from 'xstate'
 
+/**
+ * Session phases in chronological order:
+ * 
+ * 1. idle              - Waiting for user (TV bars at 60%)
+ * 2. pairing_request   - Requesting token (1.5s, fall animation)
+ * 3. hello_human       - Welcome screen (2s)
+ * 4. qr_display        - Show QR + "Scan to get started" (indefinite)
+ * 5. human_detect      - Validate face (3.5s, need ≥10 passing frames)
+ * 6. processing        - Upload + backend processing (3-15s)
+ * 7. complete          - Success screen (3s) → idle
+ * 8. error             - Error screen (3s) → idle
+ */
 export type SessionPhase =
   | 'idle'
   | 'pairing_request'
+  | 'hello_human'
   | 'qr_display'
-  | 'waiting_activation'
   | 'human_detect'
-  | 'stabilizing'
-  | 'uploading'
-  | 'waiting_ack'
+  | 'processing'
   | 'complete'
   | 'error'
 
@@ -77,12 +87,10 @@ export const sessionMachine = sessionMachineSetup.createMachine({
     CONTROLLER_STATE: [
       { guard: phaseGuard('idle'), target: '.idle', actions: resetContext },
       { guard: phaseGuard('pairing_request'), target: '.pairing_request' },
+      { guard: phaseGuard('hello_human'), target: '.hello_human' },
       { guard: phaseGuard('qr_display'), target: '.qr_display', actions: assignSessionDetails },
-      { guard: phaseGuard('waiting_activation'), target: '.waiting_activation' },
       { guard: phaseGuard('human_detect'), target: '.human_detect' },
-      { guard: phaseGuard('stabilizing'), target: '.stabilizing' },
-      { guard: phaseGuard('uploading'), target: '.uploading' },
-      { guard: phaseGuard('waiting_ack'), target: '.waiting_ack' },
+      { guard: phaseGuard('processing'), target: '.processing' },
       { guard: phaseGuard('complete'), target: '.complete' },
       { guard: phaseGuard('error'), target: '.error', actions: assignError }
     ],
@@ -102,12 +110,10 @@ export const sessionMachine = sessionMachineSetup.createMachine({
   states: {
     idle: {},
     pairing_request: {},
+    hello_human: {},
     qr_display: {},
-    waiting_activation: {},
     human_detect: {},
-    stabilizing: {},
-    uploading: {},
-    waiting_ack: {},
+    processing: {},
     complete: {},
     error: {}
   }

@@ -20010,3 +20010,172 @@ INFO:     127.0.0.1:38344 - "GET /preview?t=1759209313205 HTTP/1.1" 200 OK
 2025-09-30 11:46:44,523 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
 2025-09-30 11:46:44,606 | INFO | d435i_liveness | preview loop stopped
 2025-09-30 11:46:44,607 | INFO | app.session_manager | Stopping session manager
+2025-09-30 13:15:46,844 | INFO | app.session_manager | Starting session manager
+2025-09-30 13:15:46,845 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:15:46,851 | INFO | app.session_manager | Session manager started in IDLE state (camera inactive)
+2025-09-30 13:15:46,852 | INFO | app.main | Application started successfully
+2025-09-30 13:15:46,852 | INFO | app.sensors.tof | ToF sensor active (threshold=450mm, debounce=200ms)
+2025-09-30 13:15:46,853 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:15:46,853 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:15:47,403 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:15:47,411 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:15:47,412 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:15:47,962 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:15:47,969 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:15:47,969 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:15:48,518 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:15:48,526 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:15:48,526 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:15:49,075 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:15:49,083 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:15:49,083 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:15:49,631 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:15:49,638 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:15:49,638 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:15:50,188 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:15:50,196 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:15:50,196 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:15:50,746 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:15:50,754 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:15:50,754 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:15:51,303 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:15:51,312 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:15:51,313 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:15:51,861 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:15:51,869 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:15:51,869 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:15:52,418 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:15:52,428 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:15:52,428 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:15:52,977 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:15:52,986 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:15:52,987 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:15:53,535 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:15:53,543 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:15:53,544 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:15:54,091 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:15:54,100 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:15:54,100 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:15:54,649 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:15:54,656 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:15:54,656 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:15:55,132 | INFO | app.session_manager | ToF TRIGGERED (distance=345mm, phase=idle)
+2025-09-30 13:15:55,132 | INFO | app.session_manager | Starting session from ToF trigger
+2025-09-30 13:15:55,132 | INFO | app.main | 🔧 Mock ToF: triggered=True, distance=345mm
+2025-09-30 13:15:55,133 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-09-30 13:15:55,205 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:15:55,215 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:15:55,215 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:15:55,764 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:15:55,771 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:15:55,772 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:15:56,247 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-09-30 13:15:56,248 | INFO | app.session_manager | 📱 Token issued: eyJhbGciOiJI... (expires in 180s)
+2025-09-30 13:15:56,320 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:15:56,329 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:15:56,329 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:15:56,878 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:15:56,888 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:15:56,888 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:15:57,133 | INFO | app.session_manager | 👋 Showing hello human screen
+2025-09-30 13:15:57,134 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiNTczNDQxZjYwYTkzNDRiYTk4M2E3N2NlZDBjZjlmZmUiLCJleHAiOjE3NTkyMTc2MzZ9.m7yWjc0TB0aakmeE8xAL8RDplkSLk2Mz3kHH0JX-HaU
+2025-09-30 13:15:57,437 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:15:57,446 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:15:57,446 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:15:57,995 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:15:58,003 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:15:58,003 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:15:58,054 | INFO | app.session_manager | 📱 QR code displayed - waiting for mobile app
+2025-09-30 13:15:58,054 | INFO | app.session_manager | ⏳ Waiting for mobile app connection (timeout=175.0s)
+2025-09-30 13:15:58,054 | INFO | app.session_manager | Bridge message received: joined
+2025-09-30 13:15:58,553 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:15:58,561 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:15:58,562 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:15:59,111 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:15:59,121 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:15:59,121 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:15:59,669 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:15:59,675 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:15:59,676 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:16:00,225 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:16:00,232 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:16:00,232 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:16:00,781 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:16:00,788 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:16:00,788 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:16:01,337 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:16:01,344 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:16:01,344 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:16:01,894 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:16:01,902 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:16:01,902 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:16:02,451 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:16:02,459 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:16:02,459 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:16:03,007 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:16:03,014 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:16:03,014 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:16:03,563 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:16:03,571 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:16:03,571 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:16:04,119 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:16:04,126 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:16:04,127 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:16:04,676 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:16:04,685 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:16:04,685 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:16:05,235 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:16:05,243 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:16:05,243 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:16:05,792 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:16:05,801 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:16:05,801 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:16:06,351 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:16:06,359 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:16:06,360 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:16:06,908 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:16:06,916 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:16:06,917 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:16:07,465 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:16:07,472 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:16:07,473 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:16:08,021 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:16:08,029 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:16:08,029 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:16:08,578 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:16:08,586 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:16:08,586 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:16:09,134 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:16:09,141 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:16:09,142 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:16:09,690 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:16:09,697 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:16:09,698 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:16:10,247 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:16:10,256 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:16:10,256 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:16:10,805 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:16:10,812 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:16:10,812 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:16:11,362 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:16:11,370 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:16:11,370 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:16:11,920 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:16:11,927 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:16:11,928 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:16:12,476 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:16:12,485 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:16:12,486 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:16:13,033 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:16:13,040 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:16:13,041 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:16:13,590 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:16:13,598 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:16:13,598 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:16:14,147 | INFO | app.sensors.tof_process | ToF reader starting on /dev/i2c-1 @ 20Hz
+2025-09-30 13:16:14,155 | ERROR | app.sensors.tof_process | ToF sensor error: aarch64-binfmt-P: Could not open '/lib/ld-linux-aarch64.so.1': No such file or directory
+2025-09-30 13:16:14,156 | ERROR | app.sensors.tof_process | ToF reader crashed (exit code 255)
+2025-09-30 13:16:14,312 | INFO | d435i_liveness | preview loop stopped
+2025-09-30 13:16:14,314 | INFO | app.session_manager | Stopping session manager
+2025-09-30 13:16:14,314 | INFO | app.session_manager | Session cancelled by user
+2025-09-30 13:16:14,617 | INFO | app.session_manager | 🔄 Session cleaned up, returning to idle

@@ -1,12 +1,19 @@
+/**
+ * StageRouter - Routes session phases to UI components
+ * 
+ * Clean, easy-to-understand routing for each phase.
+ * Each phase explicitly shows what the user sees.
+ */
+
 import { useState, useEffect, useRef } from 'react'
 import type { StateFrom } from 'xstate'
 import { sessionMachine, type SessionPhase } from '../app-state/sessionMachine'
 import ErrorOverlay from './ErrorOverlay'
 import IdleScreen, { IDLE_EXIT_DURATION_MS } from './IdleScreen'
+import HelloHumanHero from './HelloHumanHero'
 import InstructionStage from './InstructionStage'
 import QRCodeStage from './QRCodeStage'
-import { frontendConfig } from '../config'
-import type { TVBarsMode } from './TVBars'
+import ProcessingScreen from './ProcessingScreen'
 
 interface StageRouterProps {
   state: StateFrom<typeof sessionMachine>
@@ -21,18 +28,20 @@ export default function StageRouter({ state, qrPayload }: StageRouterProps) {
   
   console.log('🎬 [STAGE ROUTER] Phase:', currentPhase, '| Exiting:', isExiting)
   
-  // Detect transitions OUT of idle state and trigger exit animation
+  // ============================================================
+  // Exit Animation Handler
+  // Detects when leaving idle state and plays exit animation
+  // ============================================================
   useEffect(() => {
     const prev = previousPhaseRef.current
     const curr = currentPhase
     
-    // If we're leaving idle state, trigger exit animation
+    // If leaving idle → trigger exit animation
     if (prev === 'idle' && curr !== 'idle') {
-      console.log('🎬 [STAGE ROUTER] Leaving idle → triggering exit animation')
+      console.log('🎬 [STAGE ROUTER] Leaving idle → exit animation')
       setIsExiting(true)
       setExitFromPhase('idle')
       
-      // Clear exit state after animation completes
       const timer = setTimeout(() => {
         setIsExiting(false)
         setExitFromPhase(null)
@@ -44,32 +53,34 @@ export default function StageRouter({ state, qrPayload }: StageRouterProps) {
     previousPhaseRef.current = curr
   }, [currentPhase])
   
-  // If we're in exit animation, show the exiting screen
+  // ============================================================
+  // Phase Routing - Each phase returns a specific UI component
+  // ============================================================
+  
+  // Exit animation (TV bars retracting)
   if (isExiting && exitFromPhase === 'idle') {
-    console.log('🎬 [STAGE ROUTER] Playing exit animation from idle')
     return <IdleScreen mode="exit" showBars={true} />
   }
 
-  // Error state
-  if (state.matches('error')) {
-    return <ErrorOverlay message={state.context.error ?? 'Unknown error'} />
-  }
-
-  // Idle state
+  // Phase 1: IDLE - TV bars at 60% (static)
   if (state.matches('idle')) {
     return <IdleScreen mode="idle" showBars={true} />
   }
 
-  // Pairing/requesting token
+  // Phase 2: PAIRING_REQUEST - TV bars falling animation (1.5s)
   if (state.matches('pairing_request')) {
-    return <InstructionStage title="Preparing session" subtitle="Contacting server" />
+    return <IdleScreen mode="exit" showBars={true} />
   }
 
-  // QR code display
-  if (state.matches('qr_display') || state.matches('waiting_activation')) {
-    const payload = qrPayload ?? (state.context.qrPayload as Record<string, unknown> | undefined)
-    const status = state.matches('waiting_activation') ? 'Waiting for activation' : undefined
+  // Phase 3: HELLO_HUMAN - Welcome screen (2s)
+  if (state.matches('hello_human')) {
+    return <HelloHumanHero />
+  }
 
+  // Phase 4: QR_DISPLAY - Show QR code + "Scan to get started"
+  if (state.matches('qr_display')) {
+    const payload = qrPayload ?? (state.context.qrPayload as Record<string, unknown> | undefined)
+    
     if (!payload) {
       return <InstructionStage title="Preparing session" subtitle="Loading QR code" />
     }
@@ -79,27 +90,38 @@ export default function StageRouter({ state, qrPayload }: StageRouterProps) {
         token={state.context.token}
         qrPayload={payload}
         expiresIn={state.context.expiresIn}
-        status={status}
+        status="Scan this to get started"
       />
     )
   }
 
-  // Camera/preview phases - render nothing so preview is visible
-  // Backend controls timing via phase durations
-  if (state.matches('human_detect') || 
-      state.matches('stabilizing') || 
-      state.matches('uploading') || 
-      state.matches('waiting_ack')) {
-    console.log('🎬 [STAGE ROUTER] Camera phase - preview visible')
-    return null
+  // Phase 5: HUMAN_DETECT - Camera preview (3.5s validation)
+  if (state.matches('human_detect')) {
+    console.log('🎬 [STAGE ROUTER] Human detect - camera preview visible')
+    return null  // PreviewSurface component shows camera
   }
 
-  // Complete state
+  // Phase 6: PROCESSING - Processing animation (3-15s)
+  if (state.matches('processing')) {
+    return (
+      <ProcessingScreen
+        statusLines={['processing scan', 'please wait']}
+        guidanceLines={['verifying identity', 'analyzing biometric data']}
+      />
+    )
+  }
+
+  // Phase 7: COMPLETE - Success screen (3s)
   if (state.matches('complete')) {
-    return <InstructionStage title="Complete" subtitle="Thank you!" className="instruction-stage--tall" />
+    return <InstructionStage title="Complete!" subtitle="Thank you" className="instruction-stage--tall" />
   }
 
-  // Fallback
-  console.log('🎬 [STAGE ROUTER] Unknown phase, showing idle')
+  // Phase 8: ERROR - Error screen (3s)
+  if (state.matches('error')) {
+    return <ErrorOverlay message={state.context.error ?? 'Please try again'} />
+  }
+
+  // Fallback - should never reach here
+  console.warn('🎬 [STAGE ROUTER] Unknown phase:', currentPhase, '- showing idle')
   return <IdleScreen mode="idle" showBars={true} />
 }
