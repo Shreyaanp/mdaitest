@@ -48,7 +48,12 @@ class ToFSensor:
         if not self._task:
             return
         self._stop_event.set()
-        await self._task
+        try:
+            await self._task
+        except asyncio.CancelledError:
+            pass  # Expected during shutdown
+        except Exception as e:
+            logger.warning("Error stopping ToF task: %s", e)
         self._task = None
 
     async def _run_loop(self) -> None:

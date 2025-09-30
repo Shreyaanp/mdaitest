@@ -12,6 +12,9 @@ from fastapi.responses import JSONResponse, StreamingResponse
 from .config import Settings, get_settings
 from .logging_config import configure_logging
 from .session_manager import SessionManager
+from fastapi.responses import PlainTextResponse
+from fastapi import Request, status
+from fastapi.exceptions import RequestValidationError
 
 logger = logging.getLogger(__name__)
 
@@ -19,6 +22,24 @@ settings: Settings = get_settings()
 configure_logging(settings.log_level, settings.log_directory, settings.log_retention_days)
 app = FastAPI(title="mdai-controller", version="0.1.0")
 manager = SessionManager(settings=settings)
+
+@app.exception_handler(Exception)
+async def global_exception_handler(request: Request, exc: Exception) -> PlainTextResponse:
+    """Catch-all exception handler to prevent application crashes."""
+    logger.exception(f"Unhandled exception in {request.url.path}: {exc}")
+    return PlainTextResponse(
+        f"Internal server error: {str(exc)}", 
+        status_code=status.HTTP_500_INTERNAL_SERVER_ERROR
+    )
+
+@app.exception_handler(RequestValidationError)
+async def validation_exception_handler(request: Request, exc: RequestValidationError) -> JSONResponse:
+    """Handle request validation errors gracefully."""
+    logger.warning(f"Validation error in {request.url.path}: {exc}")
+    return JSONResponse(
+        status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
+        content={"detail": str(exc)}
+    )
 
 app.add_middleware(
     CORSMiddleware,
@@ -31,12 +52,22 @@ app.add_middleware(
 
 @app.on_event("startup")
 async def on_startup() -> None:
-    await manager.start()
+    try:
+        await manager.start()
+        logger.info("Application started successfully")
+    except Exception as e:
+        logger.exception(f"Failed to start session manager: {e}")
+        logger.error("Application startup failed - some features may not work")
+        # Don't re-raise - allow app to start in degraded mode
 
 
 @app.on_event("shutdown")
 async def on_shutdown() -> None:
-    await manager.stop()
+    try:
+        await manager.stop()
+        logger.info("Application shutdown complete")
+    except Exception as e:
+        logger.exception(f"Error during shutdown: {e}")
 
 
 @app.get("/healthz")
@@ -46,12 +77,41 @@ async def healthcheck() -> JSONResponse:
 
 @app.post("/debug/trigger")
 async def debug_trigger() -> JSONResponse:
-    await manager.trigger_debug_session()
-    return JSONResponse({"status": "scheduled"})
+    try:
+        await manager.trigger_debug_session()
+        return JSONResponse({"status": "scheduled"})
+    except Exception as e:
+        logger.error(f"Failed to trigger session: {e}")
+        return JSONResponse(
+            {"status": "error", "message": str(e)}, 
+            status_code=500
+        )
 
 
 class PreviewToggleRequest(BaseModel):
     enabled: bool = True
+
+
+class TofTriggerRequest(BaseModel):
+    triggered: bool = True
+    distance_mm: int | None = None
+
+
+@app.post("/debug/tof-trigger")
+async def debug_tof_trigger(payload: TofTriggerRequest) -> JSONResponse:
+    """Backend-only ToF trigger for testing. NOT exposed in UI."""
+    try:
+        await manager.simulate_tof_trigger(
+            triggered=payload.triggered, 
+            distance_mm=payload.distance_mm
+        )
+        return JSONResponse({"status": "ok"})
+    except Exception as e:
+        logger.error(f"Failed to simulate ToF trigger: {e}")
+        return JSONResponse(
+            {"status": "error", "message": str(e)},
+            status_code=500
+        )
 
 
 @app.post("/debug/preview")
@@ -63,11 +123,17 @@ async def debug_preview_toggle(payload: PreviewToggleRequest) -> JSONResponse:
 @app.post("/debug/app-ready")
 async def debug_app_ready(payload: dict[str, str] | None = Body(default=None)) -> JSONResponse:
     """Local helper to simulate the mobile app signalling readiness."""
-
-    platform_id = (payload or {}).get("platform_id")
-    acknowledged = await manager.mark_app_ready(platform_id=platform_id)
-    status = "acknowledged" if acknowledged else "ignored"
-    return JSONResponse({"status": status})
+    try:
+        platform_id = (payload or {}).get("platform_id")
+        acknowledged = await manager.mark_app_ready(platform_id=platform_id)
+        status = "acknowledged" if acknowledged else "ignored"
+        return JSONResponse({"status": status})
+    except Exception as e:
+        logger.error(f"Failed to mark app ready: {e}")
+        return JSONResponse(
+            {"status": "error", "message": str(e)},
+            status_code=500
+        )
 
 
 @app.get("/preview")
@@ -75,13 +141,17 @@ async def preview_stream() -> StreamingResponse:
     boundary = "frame"
 
     async def frame_iterator() -> AsyncIterator[bytes]:
-        async for frame in manager.preview_frames():
-            header = (
-                f"--{boundary}\r\n"
-                f"Content-Type: image/jpeg\r\n"
-                f"Content-Length: {len(frame)}\r\n\r\n"
-            ).encode("ascii")
-            yield header + frame + b"\r\n"
+        try:
+            async for frame in manager.preview_frames():
+                header = (
+                    f"--{boundary}\r\n"
+                    f"Content-Type: image/jpeg\r\n"
+                    f"Content-Length: {len(frame)}\r\n\r\n"
+                ).encode("ascii")
+                yield header + frame + b"\r\n"
+        except Exception as e:
+            logger.error(f"Preview stream error: {e}")
+            # Stream will end gracefully
 
     media_type = f"multipart/x-mixed-replace; boundary={boundary}"
     return StreamingResponse(frame_iterator(), media_type=media_type)
@@ -93,7 +163,11 @@ async def ui_socket(ws: WebSocket) -> None:
     queue = manager.register_ui()
     try:
         while True:
-            event = await queue.get()
+            try:
+                event = await queue.get()
+            except asyncio.CancelledError:
+                break  # Clean shutdown
+            
             payload = {
                 "type": event.type,
                 "phase": event.phase.value,
@@ -101,14 +175,19 @@ async def ui_socket(ws: WebSocket) -> None:
             }
             if event.error:
                 payload["error"] = event.error
+            
             try:
                 await ws.send_json(payload)
             except Exception as e:
                 # WebSocket closed, break out of loop
-                logger.warning(f"WebSocket send failed: {e}")
+                logger.debug(f"WebSocket send failed (client disconnected): {e}")
                 break
     except WebSocketDisconnect:
         pass
+    except asyncio.CancelledError:
+        pass  # Clean shutdown
+    except Exception as e:
+        logger.error(f"Unexpected error in UI websocket: {e}")
     finally:
         manager.unregister_ui(queue)
         try:

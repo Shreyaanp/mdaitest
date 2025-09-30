@@ -111,19 +111,42 @@ class SessionManager:
 
     async def start(self) -> None:
         logger.info("Starting session manager")
-        if self._tof_process:
-            await self._tof_process.start()
-        await self._realsense.start()
-        await self._tof.start()
+        try:
+            if self._tof_process:
+                await self._tof_process.start()
+            await self._tof.start()
+        except Exception as e:
+            logger.error("Failed to start ToF sensor: %s", e)
+            logger.error("ToF sensor is required. Check hardware connection and configuration.")
+            raise
+        
+        try:
+            await self._realsense.start()
+        except Exception as e:
+            logger.exception("Failed to start RealSense service: %s", e)
+            # Continue anyway - RealSense might not be available yet
+        
         self._background_tasks.append(asyncio.create_task(self._heartbeat_loop(), name="controller-heartbeat"))
         logger.info("Session manager started in IDLE state (camera inactive)")
 
     async def stop(self) -> None:
         logger.info("Stopping session manager")
-        await self._tof.stop()
-        if self._tof_process:
-            await self._tof_process.stop()
-        await self._realsense.stop()
+        
+        # Stop ToF sensor
+        try:
+            await self._tof.stop()
+            if self._tof_process:
+                await self._tof_process.stop()
+        except Exception as e:
+            logger.warning("Error stopping ToF sensor: %s", e)
+        
+        # Stop RealSense
+        try:
+            await self._realsense.stop()
+        except Exception as e:
+            logger.warning("Error stopping RealSense service: %s", e)
+        
+        # Cancel background tasks
         for task in self._background_tasks:
             task.cancel()
         for task in self._background_tasks:
@@ -131,9 +154,22 @@ class SessionManager:
                 await task
             except asyncio.CancelledError:
                 pass
+            except Exception as e:
+                logger.warning("Error stopping background task: %s", e)
         self._background_tasks.clear()
-        await self._ws_client.disconnect()
-        await self._http_client.aclose()
+        
+        # Disconnect clients
+        try:
+            await self._ws_client.disconnect()
+        except Exception as e:
+            logger.warning("Error disconnecting websocket client: %s", e)
+        
+        try:
+            await self._http_client.aclose()
+        except Exception as e:
+            logger.warning("Error closing HTTP client: %s", e)
+        
+        logger.info("Session manager stopped")
 
     def register_ui(self) -> asyncio.Queue[ControllerEvent]:
         queue: asyncio.Queue[ControllerEvent] = asyncio.Queue(maxsize=4)
@@ -148,6 +184,15 @@ class SessionManager:
         """Manual session trigger for testing (bypasses ToF sensor)."""
         logger.info("Debug session trigger invoked")
         self._schedule_session()
+    
+    async def simulate_tof_trigger(self, *, triggered: bool, distance_mm: Optional[int] = None) -> None:
+        """Simulate ToF sensor trigger for backend testing only."""
+        if distance_mm is None:
+            distance_mm = self.settings.tof_threshold_mm - 50 if triggered else self.settings.tof_threshold_mm + 50
+        
+        logger.info("Simulating ToF trigger (backend testing): triggered=%s, distance=%dmm", 
+                   triggered, distance_mm)
+        await self._handle_tof_trigger(triggered, distance_mm)
 
     async def mark_app_ready(self, *, platform_id: Optional[str] = None) -> bool:
         """Manually shortcut the app-ready handshake for local testing."""
@@ -176,18 +221,26 @@ class SessionManager:
         return result
 
     async def preview_frames(self) -> AsyncIterator[bytes]:
-        async for frame in self._realsense.preview_stream():
-            yield frame
+        """Stream preview frames with error handling."""
+        try:
+            async for frame in self._realsense.preview_stream():
+                yield frame
+        except Exception as e:
+            logger.error("Preview stream error: %s", e)
+            # Stream ends gracefully
 
     async def _broadcast(self, event: ControllerEvent) -> None:
-        logger.debug("Broadcasting event: %s", event)
+        """Broadcast event to all UI subscribers with error handling."""
         for queue in list(self._ui_subscribers):
-            if queue.full():
-                try:
-                    queue.get_nowait()
-                except QueueEmpty:
-                    pass
-            queue.put_nowait(event)
+            try:
+                if queue.full():
+                    try:
+                        queue.get_nowait()
+                    except QueueEmpty:
+                        pass
+                queue.put_nowait(event)
+            except Exception as e:
+                logger.warning("Failed to broadcast event to subscriber: %s", e)
 
     async def _set_phase(self, phase: SessionPhase, *, data: Optional[Dict[str, Any]] = None, error: Optional[str] = None) -> None:
         self._phase = phase
@@ -195,18 +248,21 @@ class SessionManager:
         self._phase_started_at = time.time()
 
     async def _handle_tof_trigger(self, triggered: bool, distance: int) -> None:
-        """Handle ToF sensor trigger events."""
-        logger.info("ToF %s (distance=%dmm, phase=%s)", 
-                   "TRIGGERED" if triggered else "released", distance, self.phase.value)
-        self._current_session.latest_distance_mm = distance
-        
-        if triggered and self.phase == SessionPhase.IDLE:
-            logger.info("Starting session from ToF trigger")
-            self._schedule_session()
-        elif not triggered and self.phase not in {SessionPhase.IDLE, SessionPhase.COMPLETE}:
-            logger.warning("ToF sensor released mid-session - cancelling")
-            if self._session_task:
-                self._session_task.cancel()
+        """Handle ToF sensor trigger events with error protection."""
+        try:
+            logger.info("ToF %s (distance=%dmm, phase=%s)", 
+                       "TRIGGERED" if triggered else "released", distance, self.phase.value)
+            self._current_session.latest_distance_mm = distance
+            
+            if triggered and self.phase == SessionPhase.IDLE:
+                logger.info("Starting session from ToF trigger")
+                self._schedule_session()
+            elif not triggered and self.phase not in {SessionPhase.IDLE, SessionPhase.COMPLETE}:
+                logger.warning("ToF sensor released mid-session - cancelling")
+                if self._session_task:
+                    self._session_task.cancel()
+        except Exception as e:
+            logger.exception("Error handling ToF trigger: %s", e)
 
     def _schedule_session(self) -> None:
         if self._session_task and not self._session_task.done():
@@ -215,21 +271,27 @@ class SessionManager:
         self._session_task = asyncio.create_task(self._run_session(), name="controller-session")
 
     async def _run_session(self) -> None:
+        """Run complete session flow with comprehensive error handling."""
         camera_activated = False
         try:
+            # Phase 1: Get pairing token
             await self._set_phase(SessionPhase.PAIRING_REQUEST)
             token_info = await self._http_client.issue_token()
             if not token_info:
-                await self._set_phase(SessionPhase.ERROR, error="token_issue_failed")
+                await self._set_phase(SessionPhase.ERROR, error="Failed to get pairing token")
+                await self._ensure_phase_duration(5.0)
                 return
 
             token = token_info.get("token")
             expires_in = token_info.get("expires_in")
             if not token:
-                await self._set_phase(SessionPhase.ERROR, error="token_missing")
+                await self._set_phase(SessionPhase.ERROR, error="Invalid token response")
+                await self._ensure_phase_duration(5.0)
                 return
 
             await self._ensure_phase_duration(3.0)
+            
+            # Phase 2: Display QR code
             qr_payload = self._build_qr_payload(token)
             self._current_session = SessionContext(
                 token=token,
@@ -248,39 +310,116 @@ class SessionManager:
                 },
             )
 
+            # Phase 3: Connect and wait for mobile app
             self._app_ready_event = asyncio.Event()
             self._ack_event = asyncio.Event()
-            await self._ws_client.connect(token, self._handle_bridge_message)
+            
+            try:
+                await self._ws_client.connect(token, self._handle_bridge_message)
+            except Exception as e:
+                logger.error("Failed to connect to bridge: %s", e)
+                await self._set_phase(SessionPhase.ERROR, error="Bridge connection failed")
+                await self._ensure_phase_duration(5.0)
+                return
+            
             await self._ensure_phase_duration(3.0)
 
-            await self._await_app_ready()
+            try:
+                await self._await_app_ready()
+            except asyncio.TimeoutError:
+                logger.error("Mobile app did not connect in time")
+                await self._set_phase(SessionPhase.ERROR, error="Mobile app connection timeout")
+                await self._ensure_phase_duration(5.0)
+                return
+            except Exception as e:
+                logger.error("Error waiting for app: %s", e)
+                await self._set_phase(SessionPhase.ERROR, error="App connection error")
+                await self._ensure_phase_duration(5.0)
+                return
             
-            # Activate camera for human detection and frame capture
+            # Phase 4: Activate camera and capture
             await self._set_phase(SessionPhase.HUMAN_DETECT)
-            await self._realsense.set_hardware_active(True, source="session")
-            camera_activated = True
-            logger.info("Camera activated for biometric capture")
+            
+            try:
+                await self._realsense.set_hardware_active(True, source="session")
+                camera_activated = True
+                logger.info("Camera activated for biometric capture")
+            except Exception as e:
+                logger.error("Failed to activate camera: %s", e)
+                await self._set_phase(SessionPhase.ERROR, error="Camera activation failed")
+                await self._ensure_phase_duration(5.0)
+                return
             
             await self._ensure_phase_duration(3.0)
-            await self._collect_best_frame()
-            await self._upload_frame()
-            await self._wait_for_ack()
+            
+            # Phase 5: Collect best frame with liveness checks
+            try:
+                await self._collect_best_frame()
+            except Exception as e:
+                logger.error("Failed to collect frame: %s", e)
+                await self._set_phase(SessionPhase.ERROR, error="Frame capture failed")
+                await self._ensure_phase_duration(5.0)
+                return
+            
+            # Phase 6: Upload frame
+            try:
+                await self._upload_frame()
+            except Exception as e:
+                logger.error("Failed to upload frame: %s", e)
+                await self._set_phase(SessionPhase.ERROR, error="Upload failed")
+                await self._ensure_phase_duration(5.0)
+                return
+            
+            # Phase 7: Wait for backend acknowledgment
+            try:
+                await self._wait_for_ack()
+            except asyncio.TimeoutError:
+                logger.error("Backend acknowledgment timeout")
+                await self._set_phase(SessionPhase.ERROR, error="Backend timeout")
+                await self._ensure_phase_duration(5.0)
+                return
+            except Exception as e:
+                logger.error("Error waiting for ack: %s", e)
+                await self._set_phase(SessionPhase.ERROR, error="Backend error")
+                await self._ensure_phase_duration(5.0)
+                return
+            
+            # Phase 8: Success
             await self._set_phase(SessionPhase.COMPLETE)
             await self._ensure_phase_duration(3.0)
+            logger.info("Session completed successfully")
+            
         except asyncio.CancelledError:
-            logger.info("Session cancelled")
+            logger.info("Session cancelled by user or ToF reset")
             raise
-        except Exception as exc:  # pragma: no cover - defensive guard
-            logger.exception("Session failed: %s", exc)
-            await self._set_phase(SessionPhase.ERROR, error=str(exc))
-            await self._ensure_phase_duration(3.0)
+        except Exception as exc:
+            # Catch-all for unexpected errors
+            logger.exception("Unexpected session error: %s", exc)
+            try:
+                await self._set_phase(SessionPhase.ERROR, error=f"Unexpected error: {str(exc)}")
+                await self._ensure_phase_duration(5.0)
+            except Exception:
+                pass  # Don't fail on error handling
         finally:
-            # Deactivate camera only if it was activated
-            if camera_activated:
-                await self._realsense.set_hardware_active(False, source="session")
-                logger.info("Camera deactivated after session")
-            await self._ws_client.disconnect()
-            await self._set_phase(SessionPhase.IDLE)
+            # Cleanup - must not fail
+            try:
+                if camera_activated:
+                    await self._realsense.set_hardware_active(False, source="session")
+                    logger.info("Camera deactivated after session")
+            except Exception as e:
+                logger.warning("Error deactivating camera: %s", e)
+            
+            try:
+                await self._ws_client.disconnect()
+            except Exception as e:
+                logger.warning("Error disconnecting websocket: %s", e)
+            
+            try:
+                await self._set_phase(SessionPhase.IDLE)
+            except Exception as e:
+                logger.warning("Error setting IDLE phase: %s", e)
+                self._phase = SessionPhase.IDLE  # Force it
+            
             self._session_task = None
             self._app_ready_event = None
             self._ack_event = None
@@ -413,83 +552,95 @@ class SessionManager:
         await self._ensure_phase_duration(3.0)
 
     async def _heartbeat_loop(self) -> None:
+        """Send periodic heartbeat to UI clients."""
         try:
             while True:
                 await asyncio.sleep(30)
-                await self._broadcast(ControllerEvent(type="heartbeat", data={}, phase=self.phase))
-        except asyncio.CancelledError:  # pragma: no cover - cooperative cancel
+                try:
+                    await self._broadcast(ControllerEvent(type="heartbeat", data={}, phase=self.phase))
+                except Exception as e:
+                    logger.warning("Failed to send heartbeat: %s", e)
+        except asyncio.CancelledError:
             raise
+        except Exception as e:
+            logger.exception("Heartbeat loop crashed: %s", e)
 
     async def _handle_bridge_message(self, message: dict[str, Any]) -> None:
-        message_type = message.get("type")
-        logger.info("Bridge message received: %s", message_type)
+        """Handle messages from bridge websocket with full error protection."""
+        try:
+            message_type = message.get("type")
+            logger.info("Bridge message received: %s", message_type)
 
-        if message_type == "joined":
-            await self._broadcast(
-                ControllerEvent(
-                    type="backend",
-                    phase=self._phase,
-                    data={"event": "joined", "role": message.get("role")},
+            if message_type == "joined":
+                await self._broadcast(
+                    ControllerEvent(
+                        type="backend",
+                        phase=self._phase,
+                        data={"event": "joined", "role": message.get("role")},
+                    )
                 )
-            )
-            return
+                return
 
-        if message_type == "from_app":
-            data = message.get("data") or {}
-            await self._broadcast(
-                ControllerEvent(
-                    type="backend",
-                    phase=self._phase,
-                    data={"event": "from_app", "data": data},
+            if message_type == "from_app":
+                data = message.get("data") or {}
+                await self._broadcast(
+                    ControllerEvent(
+                        type="backend",
+                        phase=self._phase,
+                        data={"event": "from_app", "data": data},
+                    )
                 )
-            )
 
-            if data.get("message") == "hello":
-                await self._ws_client.send({"type": "to_app", "data": {"message": "hello"}})
-            platform_id = data.get("platform_id")
-            if platform_id:
-                self._current_session.platform_id = platform_id
-                if self._app_ready_event and not self._app_ready_event.is_set():
-                    self._app_ready_event.set()
-            return
+                if data.get("message") == "hello":
+                    await self._ws_client.send({"type": "to_app", "data": {"message": "hello"}})
+                platform_id = data.get("platform_id")
+                if platform_id:
+                    self._current_session.platform_id = platform_id
+                    if self._app_ready_event and not self._app_ready_event.is_set():
+                        self._app_ready_event.set()
+                return
 
-        if message_type == "backend_response":
-            if self._ack_event and not self._ack_event.is_set():
-                self._ack_event.set()
-            await self._broadcast(
-                ControllerEvent(
-                    type="backend",
-                    phase=self._phase,
-                    data={
-                        "event": "backend_response",
-                        "status_code": message.get("status_code"),
-                        "data": message.get("data"),
-                        "latency_ms": message.get("latency_ms"),
-                    },
+            if message_type == "backend_response":
+                if self._ack_event and not self._ack_event.is_set():
+                    self._ack_event.set()
+                await self._broadcast(
+                    ControllerEvent(
+                        type="backend",
+                        phase=self._phase,
+                        data={
+                            "event": "backend_response",
+                            "status_code": message.get("status_code"),
+                            "data": message.get("data"),
+                            "latency_ms": message.get("latency_ms"),
+                        },
+                    )
                 )
-            )
-            return
+                return
 
-        if message_type == "status":
-            await self._broadcast(
-                ControllerEvent(
-                    type="backend",
-                    phase=self._phase,
-                    data={"event": "status", "message": message.get("msg")},
+            if message_type == "status":
+                await self._broadcast(
+                    ControllerEvent(
+                        type="backend",
+                        phase=self._phase,
+                        data={"event": "status", "message": message.get("msg")},
+                    )
                 )
-            )
-            return
+                return
 
-        if message_type == "error":
-            detail = message.get("message", "unknown_error")
-            await self._broadcast(
-                ControllerEvent(
-                    type="backend",
-                    phase=self._phase,
-                    data={"event": "error", "code": message.get("code"), "message": detail},
+            if message_type == "error":
+                detail = message.get("message", "unknown_error")
+                await self._broadcast(
+                    ControllerEvent(
+                        type="backend",
+                        phase=self._phase,
+                        data={"event": "error", "code": message.get("code"), "message": detail},
+                    )
                 )
-            )
-            raise RuntimeError(detail)
+                raise RuntimeError(detail)
+        
+        except Exception as e:
+            logger.exception("Error handling bridge message: %s", e)
+            # Don't re-raise - keep session running if possible
 
     def _build_qr_payload(self, token: str) -> Dict[str, Any]:
         ws_base = self.settings.backend_ws_url.rstrip('/')

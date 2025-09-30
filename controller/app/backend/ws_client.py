@@ -28,32 +28,50 @@ class BackendWebSocketClient:
         self._handler: Optional[IncomingHandler] = None
 
     async def connect(self, token: str, handler: IncomingHandler) -> None:
-        await self.disconnect()
-        uri = self._build_uri(token)
-        logger.info("Connecting to bridge websocket %s", uri)
-        self._stop_event.clear()
-        self._handler = handler
-        self._conn = await websockets.connect(uri, ping_interval=None, ping_timeout=None)
-        self._listener_task = asyncio.create_task(self._listen(), name="bridge-ws-listener")
+        try:
+            await self.disconnect()
+            uri = self._build_uri(token)
+            logger.info("Connecting to bridge websocket %s", uri)
+            self._stop_event.clear()
+            self._handler = handler
+            self._conn = await websockets.connect(uri, ping_interval=None, ping_timeout=None)
+            self._listener_task = asyncio.create_task(self._listen(), name="bridge-ws-listener")
+        except Exception as e:
+            logger.error("Failed to connect to bridge websocket: %s", e)
+            raise
 
     async def disconnect(self) -> None:
-        self._stop_event.set()
-        if self._listener_task:
-            self._listener_task.cancel()
-            try:
-                await self._listener_task
-            except asyncio.CancelledError:
-                pass
-        self._listener_task = None
-        if self._conn:
-            await self._conn.close()
-            self._conn = None
-        self._handler = None
+        try:
+            self._stop_event.set()
+            if self._listener_task:
+                self._listener_task.cancel()
+                try:
+                    await self._listener_task
+                except asyncio.CancelledError:
+                    pass
+                except Exception as e:
+                    logger.warning("Error during listener task cleanup: %s", e)
+            self._listener_task = None
+            if self._conn:
+                try:
+                    await self._conn.close()
+                except Exception as e:
+                    logger.warning("Error closing websocket connection: %s", e)
+                self._conn = None
+            self._handler = None
+        except Exception as e:
+            logger.warning("Error during disconnect: %s", e)
 
     async def send(self, message: dict[str, Any]) -> None:
         if not self._conn:
-            raise RuntimeError("Bridge websocket not connected")
-        await self._conn.send(json.dumps(message))
+            logger.warning("Cannot send message - bridge websocket not connected")
+            return
+        try:
+            await self._conn.send(json.dumps(message))
+        except websockets.ConnectionClosed:
+            logger.warning("Cannot send message - websocket connection closed")
+        except Exception as e:
+            logger.error("Failed to send websocket message: %s", e)
 
     async def _listen(self) -> None:
         assert self._conn is not None
@@ -70,7 +88,10 @@ class BackendWebSocketClient:
                     continue
 
                 if self._handler:
-                    await self._handler(payload)
+                    try:
+                        await self._handler(payload)
+                    except Exception as e:
+                        logger.exception("Error in websocket message handler: %s", e)
         except asyncio.CancelledError:  # cooperative cancel
             raise
         except websockets.ConnectionClosedOK:

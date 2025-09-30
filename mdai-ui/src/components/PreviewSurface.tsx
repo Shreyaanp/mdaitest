@@ -11,8 +11,8 @@ interface PreviewSurfaceProps {
 }
 
 const DEFAULT_TITLE = 'Camera preview'
-const DEFAULT_BLOCK_SIZE = 20
-const KEEP_THRESHOLD = 0.55
+const DEFAULT_BLOCK_SIZE = 24 // Increased from 20 for better performance (fewer tiles)
+const KEEP_THRESHOLD = 0.50 // Reduced from 0.55 for more permissive masking
 const LOCATE_FILE_BASE = 'https://cdn.jsdelivr.net/npm/@mediapipe/selfie_segmentation/'
 
 type OffscreenCanvasBundle = {
@@ -152,7 +152,7 @@ function renderTileSnappedPixelation(
   frameCtx.clearRect(0, 0, width, height)
   frameCtx.drawImage(results.image, 0, 0, width, height)
 
-  downsampleCtx.imageSmoothingEnabled = true
+  downsampleCtx.imageSmoothingEnabled = false // Faster rendering
   downsampleCtx.clearRect(0, 0, columns, rows)
   downsampleCtx.drawImage(frame, 0, 0, useWidth, useHeight, 0, 0, columns, rows)
 
@@ -203,6 +203,9 @@ function renderTileSnappedPixelation(
   }
 }
 
+const TARGET_FPS = 15 // Throttle to 15 FPS to match camera and reduce CPU
+const FRAME_INTERVAL_MS = 1000 / TARGET_FPS
+
 export default function PreviewSurface({
   visible,
   previewUrl,
@@ -213,6 +216,7 @@ export default function PreviewSurface({
   const animationFrameRef = useRef<number | null>(null)
   const processingRef = useRef(false)
   const offscreenRef = useRef<OffscreenCanvasBundle | null>(null)
+  const lastFrameTimeRef = useRef<number>(0)
 
   useEffect(() => {
     const canvasEl = canvasRef.current
@@ -240,8 +244,8 @@ export default function PreviewSurface({
     })
 
     segmentation.setOptions({
-      modelSelection: 1,
-      selfieMode: true
+      modelSelection: 0,  // Use faster general model (was 1 = landscape)
+      selfieMode: false   // Disable selfie mode for better performance
     })
 
     let isActive = true
@@ -274,22 +278,35 @@ export default function PreviewSurface({
         return
       }
 
+      // Throttle to target FPS
+      const now = performance.now()
+      const timeSinceLastFrame = now - lastFrameTimeRef.current
+      if (timeSinceLastFrame < FRAME_INTERVAL_MS) {
+        // Too soon, schedule for later
+        setTimeout(scheduleNext, FRAME_INTERVAL_MS - timeSinceLastFrame)
+        return
+      }
+
       if (!imageEl.complete || imageEl.naturalWidth === 0 || imageEl.naturalHeight === 0) {
         scheduleNext()
         return
       }
 
       if (processingRef.current) {
+        // Skip this frame if still processing previous one
         scheduleNext()
         return
       }
 
+      lastFrameTimeRef.current = now
       processingRef.current = true
+      
       try {
         await segmentation.send({ image: imageEl })
       } catch (error) {
         console.error('PreviewSurface: segmentation failed', error)
         isActive = false
+        // Fallback: show raw image without segmentation
         if (imageEl.naturalWidth > 0 && imageEl.naturalHeight > 0) {
           canvasEl.width = imageEl.naturalWidth
           canvasEl.height = imageEl.naturalHeight
