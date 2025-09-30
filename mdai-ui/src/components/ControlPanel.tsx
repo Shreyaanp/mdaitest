@@ -126,22 +126,8 @@ export default function ControlPanel(props: ControlPanelProps) {
               value={pairingToken ?? ''}
               placeholder="Waiting for token…"
             />
-            <button type="button" onClick={handleCopyToken} disabled={!pairingToken}>
-              Copy
-            </button>
           </div>
         </div>
-        {qrPayloadJson && (
-          <div className="qr-payload">
-            <div className="qr-payload-header">
-              <span>QR payload</span>
-              <button type="button" onClick={handleCopyQrPayload}>
-                Copy JSON
-              </button>
-            </div>
-            <pre>{qrPayloadJson}</pre>
-          </div>
-        )}
       </section>
 
       <section>

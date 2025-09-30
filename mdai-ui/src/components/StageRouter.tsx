@@ -57,7 +57,7 @@ export default function StageRouter({ state, qrPayload }: StageRouterProps) {
 
   // Idle state
   if (state.matches('idle')) {
-    return <IdleScreen mode="entry" showBars={true} />
+    return <IdleScreen mode="idle" showBars={true} />
   }
 
   // Pairing/requesting token
@@ -101,5 +101,5 @@ export default function StageRouter({ state, qrPayload }: StageRouterProps) {
 
   // Fallback
   console.log('🎬 [STAGE ROUTER] Unknown phase, showing idle')
-  return <IdleScreen mode="entry" showBars={true} />
+  return <IdleScreen mode="idle" showBars={true} />
 }

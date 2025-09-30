@@ -46,7 +46,7 @@ export default function StageRouter({ state, qrPayload }) {
     }
     // Idle state
     if (state.matches('idle')) {
-        return _jsx(IdleScreen, { mode: "entry", showBars: true });
+        return _jsx(IdleScreen, { mode: "idle", showBars: true });
     }
     // Pairing/requesting token
     if (state.matches('pairing_request')) {
@@ -76,5 +76,5 @@ export default function StageRouter({ state, qrPayload }) {
     }
     // Fallback
     console.log('🎬 [STAGE ROUTER] Unknown phase, showing idle');
-    return _jsx(IdleScreen, { mode: "entry", showBars: true });
+    return _jsx(IdleScreen, { mode: "idle", showBars: true });
 }
