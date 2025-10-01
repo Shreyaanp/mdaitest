@@ -71,7 +71,7 @@ export default function App() {
         appendLog('Controller websocket disconnected', 'error')
       }
     },
-    [appendLog]
+    [appendLog, send]
   )
 
   const handleControllerEvent = useCallback(
@@ -140,6 +140,23 @@ export default function App() {
         return
       }
 
+      if (type === 'watchdog') {
+        const payload = message.data as ControllerData | undefined
+        const action = payload && typeof payload.action === 'string' ? (payload.action as string) : 'unknown'
+        const status = payload && typeof payload.status === 'string' ? (payload.status as string) : undefined
+        const elapsed = getNumberField(payload, 'elapsed')
+        const extras: string[] = []
+        if (status) extras.push(`status=${status}`)
+        if (typeof elapsed === 'number') extras.push(`elapsed=${elapsed}s`)
+        if (payload && typeof payload.reason === 'string') extras.push(`reason=${payload.reason}`)
+        appendLog(`Watchdog → ${action}${extras.length ? ` (${extras.join(', ')})` : ''}`)
+
+        if (action === 'forced_idle') {
+          send({ type: 'RESET' })
+        }
+        return
+      }
+
       if (type === 'error') {
         appendLog(message.error ?? 'Controller reported an error', 'error')
         return
@@ -147,7 +164,7 @@ export default function App() {
 
       appendLog(`Event → ${type}`)
     },
-    [appendLog]
+    [appendLog, send]
   )
 
   const socketOptions = useMemo(

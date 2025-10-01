@@ -4,6 +4,20 @@
 
 The controller has been hardened with **defense-in-depth error handling** to ensure the application NEVER crashes, regardless of hardware failures, network issues, or unexpected errors.
 
+### New: Backend Watchdog
+
+> File references: `controller/app/session_manager.py:1140`, `mdai-ui/src/App.tsx:120`
+
+- A watchdog coroutine wakes every ~2 s and inspects the current `SessionPhase` duration.
+- Each phase has a generous ceiling (e.g. pairing ≤ 20 s, QR display ≤ 3 min, processing ≤ 60 s).
+- Recovery ladder:
+  1. **Soft resync** – rebroadcasts the active phase event so the UI can snap back in sync.
+  2. **Bridge reconnect** – if the bridge websocket is silent for 30 s, the watchdog closes and reopens it with the current token.
+  3. **Session reset** – cancels the running session coroutine and lets the regular cleanup bring hardware back to idle.
+  4. **Forced idle fallback** – if previous steps fail, state is hard-reset to `idle` and UI receives both a watchdog event and a fresh idle phase update.
+- Every action is broadcast to the UI as a `watchdog` event; the React dashboard logs the action and issues an XState `RESET` on forced idle.
+- Operators now see log lines such as "Watchdog → resync" or "Watchdog → forced_idle (reason=watchdog_fallback)" without needing to tail backend logs.
+
 ---
 
 ## Error Handling Layers

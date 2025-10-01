@@ -654,7 +654,7 @@ class SimpleRealSenseService:
             # Lazy init eye renderer
             if self._eye_renderer is None:
                 from .eye_tracking_viz import EyeOfHorusRenderer
-                self._eye_renderer = EyeOfHorusRenderer(width=640, height=480)
+                self._eye_renderer = EyeOfHorusRenderer(width=640, height=480, mirror_input=True)
             
             # No face or no color image - render empty state
             if result is None or not result.face_detected or result.color_image is None:

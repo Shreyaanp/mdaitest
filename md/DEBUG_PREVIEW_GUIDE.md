@@ -177,7 +177,7 @@ For actual kiosk operation:
 5. Best frame captured and uploaded
 6. Session completes
 
-**The debug preview page bypasses steps 1-3** and goes straight to camera + heuristics testing.
+**The debug preview page bypasses steps 1-3** and spins up the RealSense liveness pipeline immediately so you can inspect heuristics without triggering the full flow.
 
 ## 📁 Related Files
 
@@ -195,10 +195,10 @@ For actual kiosk operation:
 
 ### Camera Control
 ```bash
-# Enable camera
+# Enable preview surface (spins up RealSense hardware + heuristics immediately)
 POST /debug/preview {"enabled": true}
 
-# Disable camera
+# Disable preview surface
 POST /debug/preview {"enabled": false}
 ```
 

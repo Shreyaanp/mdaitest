@@ -43,10 +43,13 @@ class EyeData:
 class EyeOfHorusRenderer:
     """Renders Eye of Horus/Ra design based on tracked eye landmarks."""
     
-    def __init__(self, width: int = 640, height: int = 480):
+    def __init__(self, width: int = 640, height: int = 480, *, mirror_input: bool = False):
         self.width = width
         self.height = height
         self.animation_phase = 0.0  # For pulsing effects
+        self.animation_speed = 0.05  # Controls breathing cadence
+        self.breath_amplitude = 0.12  # Scale modulation for breathing
+        self.mirror_input = mirror_input
         
         # Smoothing for movement (exponential moving average)
         self.smooth_center_x = width // 2
@@ -71,26 +74,21 @@ class EyeOfHorusRenderer:
         
         try:
             # Convert normalized landmarks to pixel coordinates
-            left_eye_points = []
-            for idx in LEFT_EYE_CONTOUR:
+            def to_pixel(idx: int) -> Tuple[int, int]:
                 landmark = face_landmarks.landmark[idx]
-                x = int(landmark.x * image_width)
-                y = int(landmark.y * image_height)
-                left_eye_points.append((x, y))
-            
-            right_eye_points = []
-            for idx in RIGHT_EYE_CONTOUR:
-                landmark = face_landmarks.landmark[idx]
-                x = int(landmark.x * image_width)
-                y = int(landmark.y * image_height)
-                right_eye_points.append((x, y))
+                px = int(landmark.x * image_width)
+                py = int(landmark.y * image_height)
+                if self.mirror_input:
+                    px = (image_width - 1) - px
+                return px, py
+
+            left_eye_points = [to_pixel(idx) for idx in LEFT_EYE_CONTOUR]
+            right_eye_points = [to_pixel(idx) for idx in RIGHT_EYE_CONTOUR]
             
             # Get eye centers (use iris centers if available, else compute from contour)
             if len(face_landmarks.landmark) > 468:
-                left_iris = face_landmarks.landmark[LEFT_IRIS_CENTER]
-                left_center = (int(left_iris.x * image_width), int(left_iris.y * image_height))
-                right_iris = face_landmarks.landmark[RIGHT_IRIS_CENTER]
-                right_center = (int(right_iris.x * image_width), int(right_iris.y * image_height))
+                left_center = to_pixel(LEFT_IRIS_CENTER)
+                right_center = to_pixel(RIGHT_IRIS_CENTER)
             else:
                 # Fallback: compute center from contour
                 left_center = tuple(np.mean(left_eye_points, axis=0).astype(int))
@@ -115,11 +113,14 @@ class EyeOfHorusRenderer:
     ):
         """Draw Eye of Horus design - large, stylized version."""
         x, y = center
-        scale = self.eye_size / 100  # Scale factor for 300px eyes
-        
-        # Subtle pulsing glow effect (reduced for crispness)
-        glow_radius = int(80 * scale + 12 * np.sin(self.animation_phase))
-        glow_alpha = 0.1
+        # Breathing modulation keeps proportions fluid without jitter
+        breath = 1.0 + self.breath_amplitude * np.sin(self.animation_phase)
+        scale = (self.eye_size / 100) * breath  # Scale factor for 300px eyes
+        pulse_wave = (np.sin(self.animation_phase) + 1.0) * 0.5  # 0 → 1
+
+        # Subtle pulsing glow effect aligned with breathing
+        glow_radius = int(80 * scale + 18 * pulse_wave)
+        glow_alpha = 0.06 + 0.08 * pulse_wave
         overlay = canvas.copy()
         cv2.circle(overlay, center, glow_radius, ACCENT, -1)
         cv2.addWeighted(overlay, glow_alpha, canvas, 1 - glow_alpha, 0, canvas)
@@ -127,16 +128,17 @@ class EyeOfHorusRenderer:
         # Main eye almond shape (THICKER for sharper lines)
         eye_width = int(60 * scale)
         eye_height = int(30 * scale)
+        line_thickness = max(3, int(5 * breath))
         
         # Draw almond eye shape with thick crisp line
         ellipse_center = (x, y)
         axes = (eye_width, eye_height)
-        cv2.ellipse(canvas, ellipse_center, axes, 0, 0, 360, GOLD, 5, cv2.LINE_AA)
+        cv2.ellipse(canvas, ellipse_center, axes, 0, 0, 360, GOLD, line_thickness, cv2.LINE_AA)
         
         # Pupil/iris circle (large and prominent) - THICKER lines
         iris_radius = int(35 * scale)
         cv2.circle(canvas, center, iris_radius, DARK_GOLD, -1)
-        cv2.circle(canvas, center, iris_radius, GOLD, 4)
+        cv2.circle(canvas, center, iris_radius, GOLD, max(3, int(4 * breath)))
         cv2.circle(canvas, center, int(iris_radius * 0.6), BLACK, -1)
         cv2.circle(canvas, center, int(iris_radius * 0.4), ACCENT, -1)
         
@@ -175,13 +177,13 @@ class EyeOfHorusRenderer:
         tear_end = (tear_end_x, tear_end_y)
 
         # Draw tear line starting from intersection point - THICKER for sharpness
-        cv2.line(canvas, (intersect_x, intersect_y), tear_curve, GOLD, 5, cv2.LINE_AA)
-        cv2.line(canvas, tear_curve, tear_end, GOLD, 5, cv2.LINE_AA)
+        cv2.line(canvas, (intersect_x, intersect_y), tear_curve, GOLD, line_thickness, cv2.LINE_AA)
+        cv2.line(canvas, tear_curve, tear_end, GOLD, line_thickness, cv2.LINE_AA)
         
         # Spiral at end of tear (Ra symbol) - THICKER outline
         spiral_radius = int(12 * scale)
         cv2.circle(canvas, tear_end, spiral_radius, DARK_GOLD, -1)
-        cv2.circle(canvas, tear_end, spiral_radius, GOLD, 4)
+        cv2.circle(canvas, tear_end, spiral_radius, GOLD, max(3, int(4 * breath)))
         
         # Top eyebrow arc - THICKER line
         eyebrow_start = (x - eye_width, y - int(25 * scale))
@@ -189,15 +191,15 @@ class EyeOfHorusRenderer:
         eyebrow_peak = (x, y - int(45 * scale))
         
         pts = np.array([eyebrow_start, eyebrow_peak, eyebrow_end], dtype=np.int32)
-        cv2.polylines(canvas, [pts], False, GOLD, 5, cv2.LINE_AA)
+        cv2.polylines(canvas, [pts], False, GOLD, line_thickness, cv2.LINE_AA)
         
         # Add inner eye detail lines (Egyptian style) - THICKER
         # Inner corner accent
         corner_offset = int(20 * scale)
         if is_left:
-            cv2.line(canvas, (x - corner_offset, y), (x - corner_offset - 10, y + 5), GOLD, 3, cv2.LINE_AA)
+            cv2.line(canvas, (x - corner_offset, y), (x - corner_offset - 10, y + 5), GOLD, max(2, int(3 * breath)), cv2.LINE_AA)
         else:
-            cv2.line(canvas, (x + corner_offset, y), (x + corner_offset + 10, y + 5), GOLD, 3, cv2.LINE_AA)
+            cv2.line(canvas, (x + corner_offset, y), (x + corner_offset + 10, y + 5), GOLD, max(2, int(3 * breath)), cv2.LINE_AA)
     
     def render(self, eye_data: Optional[EyeData], show_guide: bool = True, progress: float = 0.0) -> np.ndarray:
         """
@@ -211,8 +213,8 @@ class EyeOfHorusRenderer:
         # Create black canvas
         canvas = np.zeros((self.height, self.width, 3), dtype=np.uint8)
         
-        # Update animation phase
-        self.animation_phase += 0.08
+        # Update animation phase (slow breathing cadence)
+        self.animation_phase += self.animation_speed
         if self.animation_phase > 2 * np.pi:
             self.animation_phase = 0.0
         
@@ -232,8 +234,8 @@ class EyeOfHorusRenderer:
         elif self.no_face_frames >= self.state_change_threshold:
             self.smooth_state = "searching"
         
-        # Smooth fade transition (0.2s = ~6 frames at 30fps)
-        fade_speed = 0.15  # Adjust per frame
+        # Smooth fade transition (~0.6s at 30fps for softer entry/exit)
+        fade_speed = 0.05  # Adjust per frame
         if self.smooth_state == "scanning":
             self.fade_alpha = min(1.0, self.fade_alpha + fade_speed)
         else:
@@ -374,4 +376,3 @@ def create_eye_tracking_frame(mesh_result, width: int = 640, height: int = 480) 
     """
     renderer = EyeOfHorusRenderer(width, height)
     return renderer.render_from_mesh_result(mesh_result, width, height)
-

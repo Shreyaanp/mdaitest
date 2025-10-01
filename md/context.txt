@@ -1,15 +1,15 @@
 Project Overview
 - The repository hosts the mdai kiosk controller (FastAPI) and React UI. RealSense D435i hardware, MediaPipe liveness, and ToF sensor integration drive the user flow.
-- Controller code lives under controller/app; UI in mdai-ui; liveness helpers in d435i/mediapipe_liveness.py.
+- Controller code lives under controller/app; UI in mdai-ui; RealSense + MediaPipe live inside `controller/app/sensors`.
 
-Liveness Pipeline (d435i/mediapipe_liveness.py)
+Liveness Pipeline (`controller/app/sensors/realsense.py`)
 - Streams color (RGB), depth (Z16), and IR (Y8) at 640x480@30fps; depth aligned to color.
-- Face detection + mesh run on IR frames via MediaPipe; motion metrics derived from landmarks.
+- Face detection + mesh run on RGB frames via MediaPipe; motion metrics derived from landmarks.
 - Depth metrics: range, stdev, center-vs-outer prominence, cheek asymmetry.
 - IR metrics: mean, stdev, saturation fraction, dark fraction, flicker over rolling history.
 - Motion metrics: eye/mouth aspect ratio variance, nose depth change, face center shift.
-- DecisionAccumulator (hysteresis) combines depth_ok & ir_ok & movement_ok -> instant_alive/stable_alive.
-- Returns LivenessResult containing RGB frame, metrics, and liveness flags.
+- Hysteresis ensures depth_ok, ir_ok, and movement_ok accumulate into instant_alive/stable_alive.
+- Returns `SimpleLivenessResult` containing RGB frame, metrics, and liveness flags.
 
 RealSense Service (controller/app/sensors/realsense.py)
 - Manages preview and liveness results broadcast; placeholder JPEG used when hardware disabled.

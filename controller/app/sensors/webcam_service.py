@@ -289,7 +289,7 @@ class WebcamService:
             # Lazy init eye renderer
             if self._eye_renderer is None:
                 from .eye_tracking_viz import EyeOfHorusRenderer
-                self._eye_renderer = EyeOfHorusRenderer(width=640, height=480)
+                self._eye_renderer = EyeOfHorusRenderer(width=640, height=480, mirror_input=True)
             
             # Run face mesh if face detected
             if not frame_data.face_detected:
@@ -348,4 +348,3 @@ class WebcamService:
     def set_validation_progress(self, progress: float) -> None:
         """Set validation progress for progress bar display (0.0 to 1.0)."""
         self._validation_progress = max(0.0, min(1.0, progress))
-

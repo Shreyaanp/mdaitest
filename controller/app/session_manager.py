@@ -6,7 +6,6 @@ from asyncio import QueueEmpty
 import base64
 import logging
 import time
-from contextlib import asynccontextmanager
 from dataclasses import dataclass, field
 from typing import Any, AsyncIterator, Dict, List, Optional
 from urllib.parse import urlparse
@@ -41,6 +40,16 @@ class SessionContext:
     metadata: Dict[str, Any] = field(default_factory=dict)
 
 
+@dataclass
+class WatchdogState:
+    """Tracks watchdog actions within the current phase."""
+
+    phase: SessionPhase = SessionPhase.IDLE
+    soft_actions: int = 0
+    bridge_attempted: bool = False
+    reset_attempted: bool = False
+
+
 class SessionFlowError(RuntimeError):
     """Raised when a recoverable session step fails."""
 
@@ -51,6 +60,20 @@ class SessionFlowError(RuntimeError):
 
 class SessionManager:
     """Coordinates sensors, bridge comms, and UI state updates."""
+
+    _WATCHDOG_LIMITS: Dict[SessionPhase, float] = {
+        SessionPhase.PAIRING_REQUEST: 20.0,
+        SessionPhase.HELLO_HUMAN: 10.0,
+        SessionPhase.SCAN_PROMPT: 20.0,
+        SessionPhase.QR_DISPLAY: 180.0,
+        SessionPhase.HUMAN_DETECT: 25.0,
+        SessionPhase.PROCESSING: 60.0,
+        SessionPhase.COMPLETE: 15.0,
+        SessionPhase.ERROR: 15.0,
+    }
+    _WATCHDOG_TICK_SECONDS: float = 2.0
+    _WATCHDOG_SOFT_LIMIT: int = 2
+    _WATCHDOG_BACKEND_TIMEOUT: float = 30.0
 
     def __init__(
         self,
@@ -143,6 +166,11 @@ class SessionManager:
         self._ack_event: Optional[asyncio.Event] = None
         self._last_metrics_ts: float = 0.0
         self._debug_metrics_task: Optional[asyncio.Task[None]] = None
+        self._watchdog_task: Optional[asyncio.Task[None]] = None
+        self._watchdog_state = WatchdogState()
+        self._last_backend_message_ts: float = time.time()
+        self._last_phase_payload: Dict[str, Any] | None = None
+        self._last_phase_error: Optional[str] = None
 
     @property
     def phase(self) -> SessionPhase:
@@ -164,13 +192,15 @@ class SessionManager:
         except Exception as e:
             logger.exception("Failed to start RealSense service: %s", e)
             # Continue anyway - RealSense might not be available yet
-        
+
         self._background_tasks.append(asyncio.create_task(self._heartbeat_loop(), name="controller-heartbeat"))
+        if not self._watchdog_task or self._watchdog_task.done():
+            self._watchdog_task = asyncio.create_task(self._watchdog_loop(), name="controller-watchdog")
         logger.info("Session manager started in IDLE state (camera inactive)")
 
     async def stop(self) -> None:
         logger.info("Stopping session manager")
-        
+
         # Stop ToF sensor
         try:
             await self._tof.stop()
@@ -196,7 +226,17 @@ class SessionManager:
             except Exception as e:
                 logger.warning("Error stopping background task: %s", e)
         self._background_tasks.clear()
-        
+
+        if self._watchdog_task and not self._watchdog_task.done():
+            self._watchdog_task.cancel()
+            try:
+                await self._watchdog_task
+            except asyncio.CancelledError:
+                pass
+            except Exception as e:
+                logger.warning("Error stopping watchdog task: %s", e)
+        self._watchdog_task = None
+
         # Disconnect clients
         try:
             await self._ws_client.disconnect()
@@ -351,6 +391,9 @@ class SessionManager:
 
         self._phase = phase
         self._phase_started_at = time.time()
+        self._last_phase_payload = data or {}
+        self._last_phase_error = error
+        self._reset_watchdog_state(phase)
         await self._broadcast(ControllerEvent(type="state", data=data or {}, phase=phase, error=error))
 
     async def _ensure_current_phase_duration(self, minimum_seconds: float) -> None:
@@ -359,7 +402,11 @@ class SessionManager:
         elapsed = time.time() - self._phase_started_at
         if elapsed < minimum_seconds:
             await asyncio.sleep(minimum_seconds - elapsed)
-    
+
+    def _reset_watchdog_state(self, phase: SessionPhase) -> None:
+        """Reset watchdog tracking when phase changes or session completes."""
+        self._watchdog_state = WatchdogState(phase=phase)
+
     async def _mock_tof_distance(self) -> Optional[int]:
         """Mock ToF distance provider for testing without hardware."""
         # Returns very far distance (idle) - actual triggers come from /debug/mock-tof endpoint
@@ -555,6 +602,7 @@ class SessionManager:
         # Connect to websocket bridge
         try:
             await self._ws_client.connect(token, self._handle_bridge_message)
+            self._last_backend_message_ts = time.time()
         except Exception as exc:
             raise SessionFlowError("Failed to connect to bridge") from exc
         
@@ -600,17 +648,27 @@ class SessionManager:
         await self._advance_phase(SessionPhase.HUMAN_DETECT)
         logger.info(f"📸 Starting human validation ({VALIDATION_DURATION}s, need ≥{MIN_PASSING_FRAMES} frames)")
         
-        # TEST MODE: Skip RealSense if hardware not enabled
+        # Production mode requires RealSense hardware
         if not self._realsense.enable_hardware:
-            logger.info("📸 TEST MODE: RealSense disabled - using simulated validation")
-            return await self._mock_validate_with_webcam()
-        
+            logger.error("RealSense hardware disabled - cannot perform production validation")
+            raise SessionFlowError(
+                user_message="camera unavailable, please contact support",
+                log_message="RealSense hardware disabled"
+            )
+
         # Activate RealSense camera for production use
         try:
             await self._realsense.set_hardware_active(True, source="validation")
         except Exception as exc:
-            logger.warning(f"⚠️ RealSense activation failed: {exc} - falling back to TEST MODE")
-            return await self._mock_validate_with_webcam()
+            logger.exception("RealSense activation failed: %s", exc)
+            try:
+                await self._realsense.set_hardware_active(False, source="validation")
+            except Exception as release_exc:
+                logger.warning("Failed to release RealSense after activation error: %s", release_exc)
+            raise SessionFlowError(
+                user_message="camera unavailable, please contact support",
+                log_message="RealSense activation failed"
+            )
         
         try:
             # Collect frames for exactly 3.5 seconds
@@ -926,6 +984,7 @@ class SessionManager:
         self._ack_event = asyncio.Event()
         try:
             await self._ws_client.connect(token, self._handle_bridge_message)
+            self._last_backend_message_ts = time.time()
         except Exception as exc:  # pragma: no cover - depends on network
             raise SessionFlowError("Bridge connection failed") from exc
 
@@ -1087,9 +1146,145 @@ class SessionManager:
         except Exception as e:
             logger.exception("Heartbeat loop crashed: %s", e)
 
+    async def _watchdog_loop(self) -> None:
+        """Monitor session flow and recover from stuck states."""
+        logger.info("Watchdog loop started")
+        try:
+            while True:
+                await asyncio.sleep(self._WATCHDOG_TICK_SECONDS)
+                try:
+                    await self._watchdog_tick()
+                except asyncio.CancelledError:
+                    raise
+                except Exception as exc:
+                    logger.exception("Watchdog tick error: %s", exc)
+        except asyncio.CancelledError:
+            logger.info("Watchdog loop cancelled")
+            raise
+        except Exception as exc:
+            logger.exception("Watchdog loop crashed: %s", exc)
+
+    async def _watchdog_tick(self) -> None:
+        phase = self._phase
+        if phase == SessionPhase.IDLE:
+            if self._watchdog_state.phase != SessionPhase.IDLE:
+                self._reset_watchdog_state(SessionPhase.IDLE)
+            return
+
+        limit = self._WATCHDOG_LIMITS.get(phase)
+        if limit is None:
+            return
+
+        elapsed = time.time() - self._phase_started_at
+        if elapsed < limit:
+            return
+
+        if self._watchdog_state.phase != phase:
+            self._reset_watchdog_state(phase)
+
+        backend_stale = (time.time() - self._last_backend_message_ts) > self._WATCHDOG_BACKEND_TIMEOUT
+        if backend_stale and not self._watchdog_state.bridge_attempted:
+            self._watchdog_state.bridge_attempted = True
+            success = await self._attempt_bridge_reconnect()
+            await self._broadcast_watchdog(
+                "bridge_reconnect",
+                status="success" if success else "failed",
+                elapsed=round(elapsed, 1),
+            )
+            if success:
+                self._watchdog_state.soft_actions += 1
+                return
+
+        if self._watchdog_state.soft_actions < self._WATCHDOG_SOFT_LIMIT:
+            self._watchdog_state.soft_actions += 1
+            await self._broadcast_watchdog("resync", elapsed=round(elapsed, 1))
+            await self._rebroadcast_phase_state()
+            return
+
+        if not self._watchdog_state.reset_attempted:
+            self._watchdog_state.reset_attempted = True
+            await self._broadcast_watchdog("reset_session", elapsed=round(elapsed, 1))
+            await self._reset_stuck_session(reason=f"watchdog_{phase.value}")
+            return
+
+        if phase != SessionPhase.IDLE:
+            await self._force_idle("watchdog_fallback")
+
+    async def _broadcast_watchdog(
+        self,
+        action: str,
+        *,
+        phase: SessionPhase | None = None,
+        **data: Any,
+    ) -> None:
+        await self._broadcast(
+            ControllerEvent(
+                type="watchdog",
+                phase=phase or self._phase,
+                data={"action": action, **data},
+            )
+        )
+
+    async def _rebroadcast_phase_state(self) -> None:
+        await self._broadcast(
+            ControllerEvent(
+                type="state",
+                phase=self._phase,
+                data=self._last_phase_payload or {},
+                error=self._last_phase_error,
+            )
+        )
+
+    async def _attempt_bridge_reconnect(self) -> bool:
+        token = self._current_session.token
+        if not token:
+            logger.debug("Watchdog skip bridge reconnect: no token available")
+            return False
+
+        try:
+            await self._ws_client.disconnect()
+        except Exception as exc:
+            logger.debug("Watchdog bridge disconnect warning: %s", exc)
+
+        try:
+            await self._ws_client.connect(token, self._handle_bridge_message)
+            self._last_backend_message_ts = time.time()
+            logger.info("Watchdog reconnected bridge websocket")
+            return True
+        except Exception as exc:
+            logger.warning("Watchdog failed to reconnect bridge websocket: %s", exc)
+            return False
+
+    async def _reset_stuck_session(self, *, reason: str) -> None:
+        task = self._session_task
+        if task and not task.done():
+            task.cancel()
+            try:
+                await asyncio.wait_for(task, timeout=5.0)
+            except asyncio.TimeoutError:
+                logger.warning("Watchdog session cancel timeout")
+            except asyncio.CancelledError:
+                pass
+            except Exception as exc:
+                logger.warning("Watchdog session cancel error: %s", exc)
+
+        if self._phase != SessionPhase.IDLE:
+            await self._force_idle(reason)
+
+    async def _force_idle(self, reason: str) -> None:
+        self._phase = SessionPhase.IDLE
+        self._phase_started_at = time.time()
+        self._current_session = SessionContext()
+        self._last_phase_payload = {}
+        self._last_phase_error = None
+        self._reset_watchdog_state(SessionPhase.IDLE)
+        await self._broadcast_watchdog("forced_idle", reason=reason, phase=self._phase)
+        await self._broadcast(ControllerEvent(type="state", data={}, phase=self._phase))
+
     async def _handle_bridge_message(self, message: dict[str, Any]) -> None:
         """Handle messages from bridge websocket with full error protection."""
         try:
+            self._last_backend_message_ts = time.time()
             message_type = message.get("type")
             logger.info("Bridge message received: %s", message_type)
 
@@ -1309,39 +1504,6 @@ class SessionManager:
             
         except Exception:
             logger.exception("Failed to save best frame to captures directory")
-    @asynccontextmanager
-    async def _camera_session(self) -> AsyncIterator[None]:
-        try:
-            await self._realsense.set_hardware_active(True, source="session")
-            logger.info("Camera activated for biometric capture")
-        except Exception as exc:
-            raise SessionFlowError("Camera activation failed") from exc
-        try:
-            yield
-        finally:
-            try:
-                await self._realsense.set_hardware_active(False, source="session")
-                logger.info("Camera deactivated after session")
-            except Exception as exc:
-                logger.warning("Error deactivating camera: %s", exc)
-
-    async def _cleanup_after_session(self) -> None:
-        try:
-            await self._ws_client.disconnect()
-        except Exception as exc:
-            logger.warning("Error disconnecting websocket: %s", exc)
-
-        try:
-            if self._phase == SessionPhase.ERROR:
-                await self._ensure_current_phase_duration(5.0)
-            elif self._phase == SessionPhase.COMPLETE:
-                await self._ensure_current_phase_duration(3.0)
-
-            await self._advance_phase(SessionPhase.IDLE)
-        except Exception as exc:
-            logger.warning("Error setting IDLE phase: %s", exc)
-            self._phase = SessionPhase.IDLE
-            self._phase_started_at = time.time()
 
         self._session_task = None
         self._app_ready_event = None

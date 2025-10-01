@@ -17,6 +17,7 @@ from .sensors.webcam_service import WebcamService
 from fastapi.responses import PlainTextResponse
 from fastapi import Request, status
 from fastapi.exceptions import RequestValidationError
+import asyncio
 
 logger = logging.getLogger(__name__)
 
@@ -142,19 +143,32 @@ async def mock_tof(payload: TofMockRequest) -> JSONResponse:
 async def debug_preview_toggle(payload: PreviewToggleRequest) -> JSONResponse:
     """Enable/disable preview AND activate camera hardware for debugging."""
     try:
-        # Set preview enabled
+        # Set preview enabled (camera hardware stays controlled by session flow)
         preview_enabled = await manager.set_preview_enabled(payload.enabled)
-        
-        # ALSO activate/deactivate camera hardware (this starts liveness checks too!)
-        await manager._realsense.set_hardware_active(payload.enabled, source="debug_preview")
-        
-        logger.info(f"🎥 Debug preview: camera hardware {'activated' if payload.enabled else 'deactivated'}")
-        logger.info(f"🎥 Liveness heuristics will run automatically when camera is ON")
+
+        try:
+            await manager._realsense.set_hardware_active(payload.enabled, source="debug_preview")
+            logger.info(
+                "🎥 Debug preview %s (RealSense %s)",
+                "enabled" if payload.enabled else "disabled",
+                "activated" if payload.enabled else "deactivated",
+            )
+        except Exception as exc:
+            logger.exception("Failed to toggle debug preview hardware: %s", exc)
+            try:
+                await manager._realsense.set_hardware_active(False, source="debug_preview")
+            except Exception:
+                logger.warning("Failed to ensure debug preview hardware release after error")
+            await manager.set_preview_enabled(False)
+            return JSONResponse(
+                {"status": "error", "message": "Unable to toggle camera hardware"},
+                status_code=500,
+            )
         
         return JSONResponse({
             "status": "enabled" if preview_enabled else "disabled",
-            "hardware_active": payload.enabled,
-            "liveness_active": payload.enabled
+            "hardware_active": preview_enabled,
+            "liveness_active": preview_enabled
         })
     except Exception as e:
         logger.error(f"Failed to toggle preview: {e}")
@@ -350,4 +364,3 @@ async def ui_socket(ws: WebSocket) -> None:
             await ws.close()
         except Exception:
             pass
-

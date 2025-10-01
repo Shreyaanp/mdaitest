@@ -201,7 +201,7 @@ MJPEG Stream → Frontend
 
 ## Testing Checklist
 
-- [ ] Start camera in debug preview
+- [ ] Enable debug preview (RealSense pipeline activates immediately)
 - [ ] Toggle eye tracking mode ON
 - [ ] Verify black background with eye visualization
 - [ ] Move face around - eyes should track
@@ -239,4 +239,3 @@ This visualization embodies the "Identity of Soul" concept:
 **Status**: ✅ Fully implemented and ready for testing
 **Created**: October 1, 2025
 **Tech Stack**: Python, MediaPipe, OpenCV, React, TypeScript
-

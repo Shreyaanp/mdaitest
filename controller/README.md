@@ -8,7 +8,7 @@ FastAPI-based supervisor that coordinates ToF triggers, RealSense capture, and t
 - Local WebSocket (`/ws/ui`) broadcasting session phase updates to the React frontend
 - Session manager that mints bridge tokens, manages the hardware websocket lifecycle, and orchestrates liveness capture + uploads
 - ToF polling abstraction with debounce and pluggable distance provider
-- RealSense service wrapper that reuses the existing `d435i/mediapipe_liveness.py` pipeline when available and falls back to placeholder frames otherwise
+- RealSense service wrapper with an embedded MediaPipe liveness implementation (`controller/app/sensors/realsense.py`)
 
 ## Running locally
 
