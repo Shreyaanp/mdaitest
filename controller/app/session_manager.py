@@ -417,12 +417,15 @@ class SessionManager:
         Handle ToF sensor trigger events.
         
         Logic:
-        - Distance ≤ 450mm in IDLE → Start session
-        - Distance > 450mm for 1.2s in active session → Cancel immediately (user walked away)
+        - Distance ≤ threshold in IDLE → Start session
+        - Distance > threshold for debounce duration in active session → Cancel (user walked away)
         - Monitoring applies to ALL phases except IDLE, COMPLETE, ERROR
         """
         try:
-            logger.debug(f"ToF: distance={distance}mm, phase={self.phase.value}")
+            threshold = self.settings.tof_threshold_mm
+            debounce_seconds = self.settings.tof_debounce_ms / 1000.0
+            
+            logger.debug(f"ToF: distance={distance}mm, phase={self.phase.value}, threshold={threshold}mm")
             self._current_session.latest_distance_mm = distance
             
             # Behavior depends on current phase
@@ -430,8 +433,8 @@ class SessionManager:
             
             # IDLE state: Start session if user is close
             if current_phase == SessionPhase.IDLE:
-                if distance <= 450:
-                    logger.info(f"👆 ToF triggered (distance={distance}mm) - starting session")
+                if distance <= threshold:
+                    logger.info(f"👆 ToF triggered (distance={distance}mm ≤ {threshold}mm) - starting session")
                     self._schedule_session()
                 return
             
@@ -441,18 +444,18 @@ class SessionManager:
             
             # Active session states: Monitor distance and cancel if user walks away
             # Applies to: PAIRING_REQUEST, HELLO_HUMAN, SCAN_PROMPT, QR_DISPLAY, HUMAN_DETECT, PROCESSING
-            if distance > 450:
-                # User is too far - check if they've been away for 1.2s
+            if distance > threshold:
+                # User is too far - check if they've been away for debounce duration
                 if not hasattr(self, '_tof_far_since'):
                     self._tof_far_since = time.time()
-                    logger.info(f"⚠️ User moved away (distance={distance}mm) - will cancel in 1.2s...")
+                    logger.info(f"⚠️ User moved away (distance={distance}mm > {threshold}mm) - will cancel in {debounce_seconds}s...")
                     
                     # Schedule delayed check (for mock ToF that doesn't poll continuously)
                     async def delayed_cancel():
-                        await asyncio.sleep(1.2)
+                        await asyncio.sleep(debounce_seconds)
                         if hasattr(self, '_tof_far_since'):
                             time_away = time.time() - self._tof_far_since
-                            if time_away >= 1.2:
+                            if time_away >= debounce_seconds:
                                 logger.warning(f"🚶 User walked away for {time_away:.1f}s - cancelling session")
                                 if self._session_task and not self._session_task.done():
                                     self._session_task.cancel()
@@ -461,7 +464,7 @@ class SessionManager:
                     asyncio.create_task(delayed_cancel())
                 else:
                     time_away = time.time() - self._tof_far_since
-                    if time_away >= 1.2:
+                    if time_away >= debounce_seconds:
                         logger.warning(f"🚶 User walked away for {time_away:.1f}s - cancelling session")
                         if self._session_task and not self._session_task.done():
                             self._session_task.cancel()

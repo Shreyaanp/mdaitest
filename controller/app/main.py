@@ -26,12 +26,16 @@ configure_logging(settings.log_level, settings.log_directory, settings.log_reten
 app = FastAPI(title="mdai-controller", version="0.1.0")
 manager = SessionManager(settings=settings)
 
-# Webcam service for debug preview (laptop camera)
+# Webcam service for debug/fallback (laptop camera)
 webcam_service = WebcamService(camera_id=0)
-active_camera_source: str = "webcam"  # "realsense" or "webcam" - default to webcam for easier testing
 
-# Inject webcam service into manager for progress updates
+# Production default: RealSense (switch to webcam for testing without hardware)
+active_camera_source: str = "realsense" if manager._realsense.enable_hardware else "webcam"
+
+# Inject webcam service into manager for progress updates (test mode)
 manager._webcam_service = webcam_service
+
+logger.info(f"📷 Default camera source: {active_camera_source}")
 
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception) -> PlainTextResponse:
@@ -89,16 +93,23 @@ async def healthcheck() -> JSONResponse:
 
 @app.get("/debug/performance")
 async def debug_performance() -> JSONResponse:
-    """Get real-time CPU and memory usage."""
+    """Get real-time CPU, memory, and ToF distance."""
     try:
         cpu_percent = psutil.cpu_percent(interval=0.1)
         memory = psutil.virtual_memory()
+        
+        # Get current ToF distance
+        tof_distance = manager._current_session.latest_distance_mm
         
         return JSONResponse({
             "cpu_percent": round(cpu_percent, 1),
             "memory_percent": round(memory.percent, 1),
             "memory_used_mb": round(memory.used / (1024 * 1024), 1),
-            "memory_total_mb": round(memory.total / (1024 * 1024), 1)
+            "memory_total_mb": round(memory.total / (1024 * 1024), 1),
+            "tof_distance_mm": tof_distance,
+            "tof_threshold_mm": settings.tof_threshold_mm,
+            "camera_source": active_camera_source,
+            "realsense_enabled": manager._realsense.enable_hardware
         })
     except Exception as e:
         logger.error(f"Performance monitoring error: {e}")

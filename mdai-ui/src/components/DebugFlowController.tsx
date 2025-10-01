@@ -16,12 +16,14 @@ import { backendConfig } from '../config'
 interface FlowState {
   phase: string
   tofDistance: number
+  tofLive: number | null  // Live ToF reading from sensor
   cameraSource: 'realsense' | 'webcam' | 'mock'
   cameraActive: boolean
   eyeTrackingMode: boolean
   faceDetected: boolean
   validationProgress: number
   frameCount: number
+  realsenseEnabled: boolean
 }
 
 export default function DebugFlowController() {
@@ -31,13 +33,15 @@ export default function DebugFlowController() {
   const [config, setConfig] = useState<MockFlowConfig>(DEFAULT_MOCK_CONFIG)
   const [flowState, setFlowState] = useState<FlowState>({
     phase: 'idle',
-    tofDistance: 800,
-    cameraSource: 'webcam',
+    tofDistance: 1000,  // Default to idle distance (beyond 500mm threshold)
+    tofLive: null,  // Live ToF reading
+    cameraSource: 'realsense',  // Production default
     cameraActive: false,
     eyeTrackingMode: true,
     faceDetected: false,
     validationProgress: 0,
-    frameCount: 0
+    frameCount: 0,
+    realsenseEnabled: false
   })
   const [logs, setLogs] = useState<string[]>([])
   const [runningScenario, setRunningScenario] = useState<string | null>(null)
@@ -72,7 +76,7 @@ export default function DebugFlowController() {
   useEffect(() => {
     const init = async () => {
       try {
-        // Fetch initial state from backend
+        // Fetch initial state and configuration from backend
         const healthResponse = await fetch('http://localhost:5000/healthz')
         if (healthResponse.ok) {
           const health = await healthResponse.json()
@@ -86,12 +90,18 @@ export default function DebugFlowController() {
           })
         }
         
-        // Set camera source
-        await fetch('http://localhost:5000/debug/camera-source', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ source: config.camera.source })
-        })
+        // Get initial performance data to detect camera mode
+        const perfResponse = await fetch('http://localhost:5000/debug/performance')
+        if (perfResponse.ok) {
+          const perfData = await perfResponse.json()
+          const detectedSource = perfData.camera_source || (perfData.realsense_enabled ? 'realsense' : 'webcam')
+          setFlowState(prev => ({ 
+            ...prev, 
+            cameraSource: detectedSource,
+            realsenseEnabled: perfData.realsense_enabled || false
+          }))
+          addLog(`📷 Detected camera: ${detectedSource} (RealSense: ${perfData.realsense_enabled ? 'Yes' : 'No'})`)
+        }
 
         // Activate camera if needed
         if (config.camera.source === 'webcam') {
@@ -170,7 +180,7 @@ export default function DebugFlowController() {
 
     init()
     
-    // Start CPU/Memory monitoring (real-time)
+    // Start CPU/Memory/ToF monitoring (real-time)
     performanceInterval.current = setInterval(async () => {
       try {
         const response = await fetch('http://localhost:5000/debug/performance')
@@ -178,11 +188,18 @@ export default function DebugFlowController() {
           const data = await response.json()
           setCpuUsage(data.cpu_percent || 0)
           setMemoryUsage(data.memory_percent || 0)
+          
+          // Update live ToF feed and camera info
+          setFlowState(prev => ({
+            ...prev,
+            tofLive: data.tof_distance_mm,
+            realsenseEnabled: data.realsense_enabled || false
+          }))
         }
       } catch (e) {
         console.error('Performance monitoring error:', e)
       }
-    }, 2000)  // Update every 2s
+    }, 500)  // Update every 0.5s for responsive ToF display
 
     return () => {
       if (wsRef.current) wsRef.current.close()
@@ -205,9 +222,9 @@ export default function DebugFlowController() {
         
         // Update UI immediately
         setFlowState(prev => ({ ...prev, tofDistance: distance_mm }))
-        addLog(`📏 ToF: ${distance_mm}mm (waiting 1.2s to trigger...)`)
+        addLog(`📏 ToF: ${distance_mm}mm (waiting ${config.tof.debounceMs}ms to trigger...)`)
         
-        // Wait 1.2s before actually triggering
+        // Wait configured debounce time before actually triggering
         tofDebounceTimer.current = setTimeout(async () => {
           const response = await fetch('http://localhost:5000/debug/mock-tof', {
             method: 'POST',
@@ -217,7 +234,7 @@ export default function DebugFlowController() {
           if (response.ok) {
             addLog(`📏 ToF: ${distance_mm}mm ${triggered ? '✓ TRIGGERED' : '✓ idle'}`)
           }
-        }, 1200)
+        }, config.tof.debounceMs)
       } else {
         // Immediate trigger (for button clicks)
         const response = await fetch('http://localhost:5000/debug/mock-tof', {
@@ -310,7 +327,7 @@ export default function DebugFlowController() {
 
   // Reset to IDLE
   const resetToIdle = async () => {
-    await triggerToF(800, true)  // Immediate trigger
+    await triggerToF(1000, true)  // Immediate trigger with idle distance
     addLog('🔄 Reset to IDLE')
   }
 
@@ -368,15 +385,33 @@ export default function DebugFlowController() {
             </span>
           </div>
           <div>
-            <span style={{ opacity: 0.6 }}>ToF:</span>{' '}
-            <span style={{ color: flowState.tofDistance < 450 ? '#4f4' : '#888' }}>
+            <span style={{ opacity: 0.6 }}>ToF Manual:</span>{' '}
+            <span style={{ color: flowState.tofDistance <= 500 ? '#4f4' : '#888', fontWeight: 'bold' }}>
               {flowState.tofDistance}mm
             </span>
           </div>
+          {flowState.tofLive !== null && (
+            <div>
+              <span style={{ opacity: 0.6 }}>ToF Live:</span>{' '}
+              <span style={{ 
+                color: flowState.tofLive <= 500 ? '#0f0' : '#888',
+                fontWeight: 'bold',
+                animation: 'pulse 1s infinite'
+              }}>
+                {flowState.tofLive}mm
+              </span>
+              <span style={{ fontSize: '10px', marginLeft: '4px', opacity: 0.5 }}>
+                (sensor reading)
+              </span>
+            </div>
+          )}
           <div>
             <span style={{ opacity: 0.6 }}>Camera:</span>{' '}
-            <span style={{ color: flowState.cameraActive ? '#4f4' : '#f44' }}>
-              {flowState.cameraSource} {flowState.cameraActive ? '✓' : '✗'}
+            <span style={{ 
+              color: flowState.realsenseEnabled ? '#4af' : '#fa0',
+              fontWeight: 'bold'
+            }}>
+              {flowState.realsenseEnabled ? 'RealSense D435i' : 'Webcam (Test)'}
             </span>
           </div>
           <div>
@@ -424,7 +459,7 @@ export default function DebugFlowController() {
               fontSize: '11px'
             }}
           >
-            ▶ Start Flow (ToF &lt; 450)
+            ▶ Start Flow (ToF ≤ 500mm)
           </button>
 
           <button
@@ -494,27 +529,44 @@ export default function DebugFlowController() {
           display: 'flex',
           gap: '8px',
           alignItems: 'center',
-          fontSize: '11px'
+          fontSize: '11px',
+          background: 'rgba(255, 255, 255, 0.05)',
+          padding: '8px 12px',
+          borderRadius: '4px',
+          border: '1px solid rgba(255, 255, 255, 0.1)'
         }}>
-          <span style={{ opacity: 0.6 }}>ToF Distance:</span>
+          <span style={{ opacity: 0.8, fontWeight: 'bold' }}>🎮 Manual ToF Control:</span>
           <input
             type="range"
             min="100"
-            max="1000"
+            max="1500"
             step="50"
             value={flowState.tofDistance}
             onChange={(e) => {
               const distance = parseInt(e.target.value)
-              setFlowState(prev => ({ ...prev, tofDistance: distance }))
-              triggerToF(distance)
+              triggerToF(distance, false)  // Use debounced trigger for slider
             }}
-            style={{ width: '200px' }}
+            style={{ width: '300px' }}
           />
           <span style={{ 
-            color: flowState.tofDistance < 450 ? '#4f4' : '#888',
-            minWidth: '60px'
+            color: flowState.tofDistance <= 500 ? '#4f4' : '#f44',
+            minWidth: '90px',
+            fontWeight: 'bold',
+            fontSize: '13px'
           }}>
             {flowState.tofDistance}mm
+          </span>
+          <span style={{ 
+            background: flowState.tofDistance <= 500 ? 'rgba(0,255,0,0.2)' : 'rgba(255,68,68,0.2)',
+            padding: '2px 8px',
+            borderRadius: '3px',
+            fontSize: '10px',
+            fontWeight: 'bold'
+          }}>
+            {flowState.tofDistance <= 500 ? '✓ TRIGGER' : 'IDLE'}
+          </span>
+          <span style={{ opacity: 0.5, fontSize: '10px' }}>
+            (moves after 1.5s)
           </span>
 
           <div style={{ borderLeft: '1px solid rgba(255,255,255,0.2)', height: '20px', margin: '0 8px' }} />

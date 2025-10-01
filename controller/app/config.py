@@ -22,8 +22,8 @@ class Settings(BaseSettings):
     controller_host: str = Field("0.0.0.0", description="Host interface for local FastAPI server")
     controller_port: int = Field(5000, description="Port for FastAPI server")
 
-    tof_threshold_mm: int = Field(450, description="Distance threshold that triggers workflow")
-    tof_debounce_ms: int = Field(200, description="Debounce period before treating ToF trigger as valid")
+    tof_threshold_mm: int = Field(500, description="Distance threshold that triggers workflow (increased for stability)")
+    tof_debounce_ms: int = Field(1500, description="Debounce period before treating ToF trigger as valid (1.5s to avoid false triggers)")
     tof_reader_binary: Optional[str] = Field(
         None,
         description="Path to the compiled tof-reader executable (enables hardware polling when set)",
@@ -34,7 +34,7 @@ class Settings(BaseSettings):
         None,
         description="Optional sysfs GPIO value path to toggle the sensor XSHUT line",
     )
-    tof_output_hz: int = Field(20, description="Polling rate (Hz) requested from the tof-reader process")
+    tof_output_hz: int = Field(10, description="Polling rate (Hz) - reduced to 10Hz for less I2C traffic")
 
     preview_frame_width: int = Field(640, description="Preview width for MJPEG streaming")
     preview_frame_height: int = Field(480, description="Preview height for MJPEG streaming")

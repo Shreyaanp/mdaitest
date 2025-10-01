@@ -34,9 +34,9 @@ export interface MockFlowConfig {
 
 export const DEFAULT_MOCK_CONFIG: MockFlowConfig = {
   tof: {
-    triggerDistance: 345,
-    idleDistance: 800,
-    debounceMs: 1200
+    triggerDistance: 450,  // Within 500mm threshold
+    idleDistance: 1000,    // Well beyond 500mm threshold
+    debounceMs: 1500       // Matches backend config
   },
   qr: {
     token: 'DEBUG_TOKEN_ABC123XYZ789',
@@ -81,7 +81,7 @@ export const TEST_SCENARIOS: TestScenario[] = [
     name: 'Happy Path',
     description: 'Complete successful flow from start to finish',
     steps: [
-      { action: 'trigger_tof', params: { distance_mm: 345 } },
+      { action: 'trigger_tof', params: { distance_mm: 450 } },
       { action: 'wait', delayMs: 7000 }, // Wait for hello_human + scan_prompt
       { action: 'mock_app_ready', params: { platform_id: 'test-123' } },
       { action: 'wait', delayMs: 3500 }, // Wait for validation
@@ -92,7 +92,7 @@ export const TEST_SCENARIOS: TestScenario[] = [
     name: 'No Face Error',
     description: 'User has no face detected during validation',
     steps: [
-      { action: 'trigger_tof', params: { distance_mm: 345 } },
+      { action: 'trigger_tof', params: { distance_mm: 450 } },
       { action: 'wait', delayMs: 7000 },
       { action: 'mock_app_ready', params: { platform_id: 'test-no-face', simulate_no_face: true } },
       { action: 'wait', delayMs: 4000 },
@@ -103,7 +103,7 @@ export const TEST_SCENARIOS: TestScenario[] = [
     name: 'Lost Tracking',
     description: 'Face detected briefly then lost',
     steps: [
-      { action: 'trigger_tof', params: { distance_mm: 345 } },
+      { action: 'trigger_tof', params: { distance_mm: 450 } },
       { action: 'wait', delayMs: 7000 },
       { action: 'mock_app_ready', params: { platform_id: 'test-lost', simulate_lost_tracking: true } },
       { action: 'wait', delayMs: 4000 },
@@ -112,11 +112,11 @@ export const TEST_SCENARIOS: TestScenario[] = [
   },
   {
     name: 'User Walks Away',
-    description: 'ToF > 450mm for 1.2s during flow',
+    description: 'ToF > 500mm for 1.5s during flow',
     steps: [
-      { action: 'trigger_tof', params: { distance_mm: 345 } },
+      { action: 'trigger_tof', params: { distance_mm: 450 } },
       { action: 'wait', delayMs: 3000 },
-      { action: 'trigger_tof', params: { distance_mm: 800, duration_ms: 1300 } },
+      { action: 'trigger_tof', params: { distance_mm: 1000, duration_ms: 1600 } },
       { action: 'check_phase', params: { expected: 'idle' } }
     ]
   },
@@ -124,7 +124,7 @@ export const TEST_SCENARIOS: TestScenario[] = [
     name: 'QR Data Delay',
     description: 'QR data takes time - shows fallback screen for 1.8s minimum',
     steps: [
-      { action: 'trigger_tof', params: { distance_mm: 345 } },
+      { action: 'trigger_tof', params: { distance_mm: 450 } },
       { action: 'wait', delayMs: 5500 }, // Wait for pairing + hello + scan
       // QR phase will show "Loading" fallback
       { action: 'wait', delayMs: 2000 }, // Fallback should stay minimum 1.8s
@@ -135,7 +135,7 @@ export const TEST_SCENARIOS: TestScenario[] = [
     name: 'Backend Timeout',
     description: 'Backend processing takes too long (3s timeout)',
     steps: [
-      { action: 'trigger_tof', params: { distance_mm: 345 } },
+      { action: 'trigger_tof', params: { distance_mm: 450 } },
       { action: 'wait', delayMs: 7000 },
       { action: 'mock_app_ready', params: { platform_id: 'test-timeout' } },
       { action: 'wait', delayMs: 7000 }, // 3.5s validation + 3s processing
