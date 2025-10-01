@@ -2,7 +2,8 @@
 from __future__ import annotations
 
 import logging
-from typing import AsyncIterator
+from typing import Any, AsyncIterator
+import psutil
 
 from fastapi import Body, FastAPI, WebSocket, WebSocketDisconnect
 from pydantic import BaseModel
@@ -12,6 +13,7 @@ from fastapi.responses import JSONResponse, StreamingResponse
 from .config import Settings, get_settings
 from .logging_config import configure_logging
 from .session_manager import SessionManager
+from .sensors.webcam_service import WebcamService
 from fastapi.responses import PlainTextResponse
 from fastapi import Request, status
 from fastapi.exceptions import RequestValidationError
@@ -22,6 +24,13 @@ settings: Settings = get_settings()
 configure_logging(settings.log_level, settings.log_directory, settings.log_retention_days)
 app = FastAPI(title="mdai-controller", version="0.1.0")
 manager = SessionManager(settings=settings)
+
+# Webcam service for debug preview (laptop camera)
+webcam_service = WebcamService(camera_id=0)
+active_camera_source: str = "webcam"  # "realsense" or "webcam" - default to webcam for easier testing
+
+# Inject webcam service into manager for progress updates
+manager._webcam_service = webcam_service
 
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception) -> PlainTextResponse:
@@ -54,9 +63,10 @@ app.add_middleware(
 async def on_startup() -> None:
     try:
         await manager.start()
-        logger.info("Application started successfully")
+        await webcam_service.start()
+        logger.info("Application started successfully (including webcam service)")
     except Exception as e:
-        logger.exception(f"Failed to start session manager: {e}")
+        logger.exception(f"Failed to start services: {e}")
         logger.error("Application startup failed - some features may not work")
         # Don't re-raise - allow app to start in degraded mode
 
@@ -65,6 +75,7 @@ async def on_startup() -> None:
 async def on_shutdown() -> None:
     try:
         await manager.stop()
+        await webcam_service.stop()
         logger.info("Application shutdown complete")
     except Exception as e:
         logger.exception(f"Error during shutdown: {e}")
@@ -73,6 +84,27 @@ async def on_shutdown() -> None:
 @app.get("/healthz")
 async def healthcheck() -> JSONResponse:
     return JSONResponse({"status": "ok", "phase": manager.phase.value})
+
+
+@app.get("/debug/performance")
+async def debug_performance() -> JSONResponse:
+    """Get real-time CPU and memory usage."""
+    try:
+        cpu_percent = psutil.cpu_percent(interval=0.1)
+        memory = psutil.virtual_memory()
+        
+        return JSONResponse({
+            "cpu_percent": round(cpu_percent, 1),
+            "memory_percent": round(memory.percent, 1),
+            "memory_used_mb": round(memory.used / (1024 * 1024), 1),
+            "memory_total_mb": round(memory.total / (1024 * 1024), 1)
+        })
+    except Exception as e:
+        logger.error(f"Performance monitoring error: {e}")
+        return JSONResponse(
+            {"error": str(e)},
+            status_code=500
+        )
 
 
 class PreviewToggleRequest(BaseModel):
@@ -132,14 +164,119 @@ async def debug_preview_toggle(payload: PreviewToggleRequest) -> JSONResponse:
         )
 
 
-@app.post("/debug/app-ready")
-async def debug_app_ready(payload: dict[str, str] | None = Body(default=None)) -> JSONResponse:
-    """Local helper to simulate the mobile app signalling readiness."""
+class PreviewModeRequest(BaseModel):
+    mode: str = "normal"  # "normal" or "eye_tracking"
+
+
+@app.post("/debug/preview-mode")
+async def debug_preview_mode(payload: PreviewModeRequest) -> JSONResponse:
+    """Toggle preview rendering mode between normal and eye tracking."""
     try:
-        platform_id = (payload or {}).get("platform_id")
+        # Set mode on active camera source
+        if active_camera_source == "webcam":
+            mode = await webcam_service.set_preview_mode(payload.mode)
+        else:
+            mode = await manager._realsense.set_preview_mode(payload.mode)
+        
+        logger.info(f"👁️ Preview mode changed to: {mode} (source: {active_camera_source})")
+        
+        return JSONResponse({
+            "status": "ok",
+            "mode": mode,
+            "camera_source": active_camera_source
+        })
+    except Exception as e:
+        logger.error(f"Failed to set preview mode: {e}")
+        return JSONResponse(
+            {"status": "error", "message": str(e)},
+            status_code=500
+        )
+
+
+class CameraSourceRequest(BaseModel):
+    source: str = "realsense"  # "realsense" or "webcam"
+
+
+@app.post("/debug/camera-source")
+async def debug_camera_source(payload: CameraSourceRequest) -> JSONResponse:
+    """Switch between RealSense and webcam camera sources."""
+    global active_camera_source
+    
+    try:
+        if payload.source not in ("realsense", "webcam"):
+            return JSONResponse(
+                {"status": "error", "message": f"Invalid source: {payload.source}"},
+                status_code=400
+            )
+        
+        old_source = active_camera_source
+        active_camera_source = payload.source
+        
+        logger.info(f"📷 Camera source switched: {old_source} → {active_camera_source}")
+        
+        return JSONResponse({
+            "status": "ok",
+            "camera_source": active_camera_source,
+            "previous_source": old_source
+        })
+    except Exception as e:
+        logger.error(f"Failed to switch camera source: {e}")
+        return JSONResponse(
+            {"status": "error", "message": str(e)},
+            status_code=500
+        )
+
+
+@app.post("/debug/webcam")
+async def debug_webcam_toggle(payload: PreviewToggleRequest) -> JSONResponse:
+    """Enable/disable laptop webcam."""
+    try:
+        await webcam_service.set_active(payload.enabled)
+        
+        logger.info(f"📷 Webcam {'activated' if payload.enabled else 'deactivated'}")
+        
+        return JSONResponse({
+            "status": "enabled" if payload.enabled else "disabled",
+            "camera_source": "webcam"
+        })
+    except Exception as e:
+        logger.error(f"Failed to toggle webcam: {e}")
+        return JSONResponse(
+            {"status": "error", "message": str(e)},
+            status_code=500
+        )
+
+
+@app.post("/debug/app-ready")
+async def debug_app_ready(payload: dict[str, Any] | None = Body(default=None)) -> JSONResponse:
+    """Local helper to simulate the mobile app signalling readiness with scenario control."""
+    try:
+        payload = payload or {}
+        platform_id = payload.get("platform_id")
+        
+        # Scenario control parameters
+        simulate_no_face = payload.get("simulate_no_face", False)
+        simulate_lost_tracking = payload.get("simulate_lost_tracking", False)
+        simulate_liveness_fail = payload.get("simulate_liveness_fail", False)
+        
+        # Store scenario params in session metadata
+        if simulate_no_face:
+            manager._current_session.metadata['simulate_no_face'] = True
+        if simulate_lost_tracking:
+            manager._current_session.metadata['simulate_lost_tracking'] = True
+        if simulate_liveness_fail:
+            manager._current_session.metadata['simulate_liveness_fail'] = True
+        
         acknowledged = await manager.mark_app_ready(platform_id=platform_id)
         status = "acknowledged" if acknowledged else "ignored"
-        return JSONResponse({"status": status})
+        return JSONResponse({
+            "status": status,
+            "scenario": {
+                "no_face": simulate_no_face,
+                "lost_tracking": simulate_lost_tracking,
+                "liveness_fail": simulate_liveness_fail
+            }
+        })
     except Exception as e:
         logger.error(f"Failed to mark app ready: {e}")
         return JSONResponse(
@@ -150,11 +287,18 @@ async def debug_app_ready(payload: dict[str, str] | None = Body(default=None)) -
 
 @app.get("/preview")
 async def preview_stream() -> StreamingResponse:
+    """Stream preview from active camera source (realsense or webcam)."""
     boundary = "frame"
 
     async def frame_iterator() -> AsyncIterator[bytes]:
         try:
-            async for frame in manager.preview_frames():
+            # Route to appropriate camera source
+            if active_camera_source == "webcam":
+                source = webcam_service.preview_stream()
+            else:
+                source = manager.preview_frames()
+            
+            async for frame in source:
                 header = (
                     f"--{boundary}\r\n"
                     f"Content-Type: image/jpeg\r\n"

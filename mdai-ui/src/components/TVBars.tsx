@@ -9,19 +9,22 @@ export interface TVBarsProps {
   mode?: TVBarsMode
 }
 
-export const TV_BARS_FALL_DURATION_MS = 1200  // 1.2 seconds for exit/entry animation
+export const TV_BARS_FALL_DURATION_MS = 1230  // 1.23 seconds for exit/entry animation
 export const TV_BARS_MARQUEE_DURATION_MS = 6000
 
 const STYLE_RULES = String.raw`
 @keyframes fall {
-  0% { background-size: 100% 0%; }
-  60% { background-size: 100% 60%; }
-  100% { background-size: 100% 60%; }
+  from { 
+    background-size: 100% 0%;
+  }
+  to { 
+    background-size: 100% 60%;
+  }
 }
 
 @keyframes fall-exit {
-  0% { background-size: 100% 60%; }
-  100% { background-size: 100% 0%; }
+  from { background-size: 100% 60%; }
+  to { background-size: 100% 0%; }
 }
 
 @keyframes marquee {
@@ -44,12 +47,11 @@ main[data-tv-bars] {
 }
 
 main[data-tv-bars][data-mode="entry"] {
-  animation: fall var(--fall-duration) linear forwards;
+  animation: fall var(--fall-duration) ease-in-out forwards;
 }
 
 main[data-tv-bars][data-mode="exit"] {
-  background-size: 100% 60%;
-  animation: fall-exit var(--fall-duration) cubic-bezier(0.45, 0, 0.45, 1) forwards;
+  animation: fall-exit var(--fall-duration) ease-in-out forwards;
   --marquee-gradient: linear-gradient(
     to right,
     #bfbfbf 0 14.285%,
@@ -74,11 +76,26 @@ main[data-tv-bars]::before {
   background-repeat: no-repeat;
   animation: marquee var(--marquee-duration) linear infinite;
   transform: translateX(0);
-  transition: transform var(--exit-duration) cubic-bezier(0.55, 0, 0.45, 1);
+}
+
+main[data-tv-bars][data-mode="entry"]::before {
+  /* During entry: slide in from left over 1.23s */
+  animation: marquee-entry var(--fall-duration) ease-in-out forwards;
 }
 
 main[data-tv-bars][data-mode="exit"]::before {
-  transform: translateX(120%);
+  /* During exit: slide out to right over 1.23s */
+  animation: marquee-exit var(--fall-duration) ease-in-out forwards;
+}
+
+@keyframes marquee-entry {
+  from { transform: translateX(-120%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes marquee-exit {
+  from { transform: translateX(0); }
+  to { transform: translateX(120%); }
 }
 
 main[data-tv-bars]::after {
@@ -98,11 +115,26 @@ main[data-tv-bars]::after {
     #0a3a8a 83.3% 100%
   );
   transform: translateY(0);
-  transition: transform var(--exit-duration) cubic-bezier(0.55, 0, 0.45, 1);
+}
+
+main[data-tv-bars][data-mode="entry"]::after {
+  /* During entry: slide up from bottom over 1.23s */
+  animation: bottom-entry var(--fall-duration) ease-in-out forwards;
 }
 
 main[data-tv-bars][data-mode="exit"]::after {
-  transform: translateY(130%);
+  /* During exit: slide down over 1.23s */
+  animation: bottom-exit var(--fall-duration) ease-in-out forwards;
+}
+
+@keyframes bottom-entry {
+  from { transform: translateY(130%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes bottom-exit {
+  from { transform: translateY(0); }
+  to { transform: translateY(130%); }
 }
 `
 
@@ -111,8 +143,6 @@ export function TVBars({
   marqueeMs = TV_BARS_MARQUEE_DURATION_MS,
   mode = 'idle'
 }: TVBarsProps) {
-  const exitDuration = fallMs
-
   const mainStyle = useMemo(() => {
     return {
       position: 'relative',
@@ -126,11 +156,11 @@ export function TVBars({
       backgroundPosition: 'top left',
       backgroundSize: mode === 'entry' ? '100% 0%' : '100% 60%',
       overflow: 'hidden',
+      // ALL THREE COMPONENTS use same --fall-duration for synchronized animation
       ['--fall-duration' as '--fall-duration']: `${fallMs}ms`,
-      ['--marquee-duration' as '--marquee-duration']: `${marqueeMs}ms`,
-      ['--exit-duration' as '--exit-duration']: `${exitDuration}ms`
+      ['--marquee-duration' as '--marquee-duration']: `${marqueeMs}ms`
     } as CSSProperties
-  }, [fallMs, marqueeMs, mode, exitDuration])
+  }, [fallMs, marqueeMs, mode])
 
   return (
     <>

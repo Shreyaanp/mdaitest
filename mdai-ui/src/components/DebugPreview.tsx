@@ -13,6 +13,8 @@ interface LivenessMetrics {
 
 export default function DebugPreview() {
   const [cameraActive, setCameraActive] = useState(false)
+  const [cameraSource, setCameraSource] = useState<'realsense' | 'webcam'>('webcam')
+  const [eyeTrackingMode, setEyeTrackingMode] = useState(false)
   const [metrics, setMetrics] = useState<LivenessMetrics>({})
   const [logs, setLogs] = useState<string[]>([])
   const imgRef = useRef<HTMLImageElement | null>(null)
@@ -23,12 +25,64 @@ export default function DebugPreview() {
     setLogs(prev => [...prev.slice(-50), `[${timestamp}] ${msg}`])
     console.log('🔍 [DEBUG PREVIEW]', msg)
   }
+  
+  const toggleEyeTracking = async () => {
+    try {
+      const newMode = !eyeTrackingMode
+      const mode = newMode ? 'eye_tracking' : 'normal'
+      
+      const response = await fetch('http://localhost:5000/debug/preview-mode', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ mode })
+      })
+      
+      if (response.ok) {
+        const data = await response.json()
+        setEyeTrackingMode(newMode)
+        addLog(`👁️ Preview mode: ${data.mode}`)
+      } else {
+        addLog(`❌ Failed to toggle preview mode: ${response.status}`)
+      }
+    } catch (error) {
+      addLog(`❌ Error toggling eye tracking: ${error}`)
+    }
+  }
+  
+  const switchCameraSource = async (source: 'realsense' | 'webcam') => {
+    try {
+      const response = await fetch('http://localhost:5000/debug/camera-source', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ source })
+      })
+      
+      if (response.ok) {
+        const data = await response.json()
+        setCameraSource(source)
+        addLog(`📷 Camera source: ${data.camera_source}`)
+        
+        // If camera is active, restart stream with new source
+        if (cameraActive && imgRef.current) {
+          imgRef.current.src = `http://localhost:5000/preview?t=${Date.now()}`
+        }
+      } else {
+        addLog(`❌ Failed to switch camera source: ${response.status}`)
+      }
+    } catch (error) {
+      addLog(`❌ Error switching camera: ${error}`)
+    }
+  }
 
   const activateCamera = async () => {
     try {
-      addLog('Activating camera hardware...')
+      const endpoint = cameraSource === 'webcam' 
+        ? 'http://localhost:5000/debug/webcam'
+        : 'http://localhost:5000/debug/preview'
       
-      const response = await fetch('http://localhost:5000/debug/preview', {
+      addLog(`Activating ${cameraSource} camera...`)
+      
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ enabled: true })
@@ -37,7 +91,12 @@ export default function DebugPreview() {
       if (response.ok) {
         const data = await response.json()
         setCameraActive(true)
-        addLog(`✅ Camera activated (hardware=${data.hardware_active}, liveness=${data.liveness_active})`)
+        
+        if (cameraSource === 'webcam') {
+          addLog(`✅ Webcam activated (laptop camera)`)
+        } else {
+          addLog(`✅ RealSense activated (hardware=${data.hardware_active}, liveness=${data.liveness_active})`)
+        }
         
         // Setup MJPEG stream
         if (imgRef.current) {
@@ -46,31 +105,33 @@ export default function DebugPreview() {
           addLog(`📺 MJPEG stream started: ${streamUrl}`)
         }
         
-        // Connect to metrics websocket
-        const ws = new WebSocket('ws://localhost:5000/ws/ui')
-        wsRef.current = ws
-        
-        ws.onopen = () => addLog('✅ WebSocket connected for metrics')
-        ws.onclose = () => addLog('❌ WebSocket closed')
-        ws.onerror = (err) => addLog(`❌ WebSocket error`)
-        
-        ws.onmessage = (event) => {
-          try {
-            const msg = JSON.parse(event.data)
-            
-            if (msg.type === 'metrics') {
-              setMetrics(msg.data)
-              const { stable_alive, instant_alive, depth_ok, screen_ok, movement_ok } = msg.data
-              addLog(`📊 ${instant_alive ? '✅' : '❌'} instant | ${stable_alive ? '✅' : '❌'} stable | D:${depth_ok ? '✓' : '✗'} S:${screen_ok ? '✓' : '✗'} M:${movement_ok ? '✓' : '✗'}`)
-            } else if (msg.type === 'state') {
-              addLog(`📍 Phase: ${msg.phase}`)
-            } else if (msg.type === 'heartbeat') {
-              // Ignore heartbeats
-            } else {
-              addLog(`📨 ${msg.type}`)
+        // Connect to metrics websocket (only for RealSense)
+        if (cameraSource === 'realsense') {
+          const ws = new WebSocket('ws://localhost:5000/ws/ui')
+          wsRef.current = ws
+          
+          ws.onopen = () => addLog('✅ WebSocket connected for metrics')
+          ws.onclose = () => addLog('❌ WebSocket closed')
+          ws.onerror = (err) => addLog(`❌ WebSocket error`)
+          
+          ws.onmessage = (event) => {
+            try {
+              const msg = JSON.parse(event.data)
+              
+              if (msg.type === 'metrics') {
+                setMetrics(msg.data)
+                const { stable_alive, instant_alive, depth_ok, screen_ok, movement_ok } = msg.data
+                addLog(`📊 ${instant_alive ? '✅' : '❌'} instant | ${stable_alive ? '✅' : '❌'} stable | D:${depth_ok ? '✓' : '✗'} S:${screen_ok ? '✓' : '✗'} M:${movement_ok ? '✓' : '✗'}`)
+              } else if (msg.type === 'state') {
+                addLog(`📍 Phase: ${msg.phase}`)
+              } else if (msg.type === 'heartbeat') {
+                // Ignore heartbeats
+              } else {
+                addLog(`📨 ${msg.type}`)
+              }
+            } catch (e) {
+              console.error('Failed to parse message:', e)
             }
-          } catch (e) {
-            console.error('Failed to parse message:', e)
           }
         }
         
@@ -84,6 +145,10 @@ export default function DebugPreview() {
 
   const deactivateCamera = async () => {
     try {
+      const endpoint = cameraSource === 'webcam' 
+        ? 'http://localhost:5000/debug/webcam'
+        : 'http://localhost:5000/debug/preview'
+      
       addLog('Deactivating camera...')
       
       if (wsRef.current) {
@@ -95,7 +160,7 @@ export default function DebugPreview() {
         imgRef.current.src = ''
       }
       
-      await fetch('http://localhost:5000/debug/preview', {
+      await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ enabled: false })
@@ -110,9 +175,28 @@ export default function DebugPreview() {
   }
 
   useEffect(() => {
+    // Initialize camera source on mount
+    const initCameraSource = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/debug/camera-source', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ source: 'webcam' })
+        })
+        if (response.ok) {
+          console.log('Camera source initialized to webcam')
+        }
+      } catch (error) {
+        console.error('Failed to initialize camera source:', error)
+      }
+    }
+    
+    initCameraSource()
+    
     return () => {
       if (wsRef.current) wsRef.current.close()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
@@ -154,8 +238,8 @@ export default function DebugPreview() {
           </div>
         )}
         
-        {/* Metrics Overlay */}
-        {cameraActive && (
+        {/* Metrics Overlay - Only for RealSense */}
+        {cameraActive && cameraSource === 'realsense' && (
           <div style={{
             position: 'absolute',
             top: '20px',
@@ -240,6 +324,54 @@ export default function DebugPreview() {
             Tests camera + liveness without full session flow
           </div>
           
+          {/* Camera Source Selector */}
+          <div style={{ marginBottom: '15px' }}>
+            <div style={{ fontSize: '12px', marginBottom: '8px', opacity: 0.8 }}>
+              Camera Source:
+            </div>
+            <div style={{ display: 'flex', gap: '8px' }}>
+              <button
+                onClick={() => !cameraActive && switchCameraSource('webcam')}
+                disabled={cameraActive}
+                style={{
+                  flex: 1,
+                  padding: '10px',
+                  background: cameraSource === 'webcam' ? '#4af' : '#222',
+                  color: cameraSource === 'webcam' ? '#000' : '#aaa',
+                  border: cameraSource === 'webcam' ? '2px solid #4af' : '2px solid #444',
+                  borderRadius: '6px',
+                  cursor: cameraActive ? 'not-allowed' : 'pointer',
+                  fontWeight: cameraSource === 'webcam' ? 'bold' : 'normal',
+                  fontSize: '12px',
+                  opacity: cameraActive ? 0.5 : 1
+                }}
+              >
+                💻 Laptop Camera
+              </button>
+              <button
+                onClick={() => !cameraActive && switchCameraSource('realsense')}
+                disabled={cameraActive}
+                style={{
+                  flex: 1,
+                  padding: '10px',
+                  background: cameraSource === 'realsense' ? '#4af' : '#222',
+                  color: cameraSource === 'realsense' ? '#000' : '#aaa',
+                  border: cameraSource === 'realsense' ? '2px solid #4af' : '2px solid #444',
+                  borderRadius: '6px',
+                  cursor: cameraActive ? 'not-allowed' : 'pointer',
+                  fontWeight: cameraSource === 'realsense' ? 'bold' : 'normal',
+                  fontSize: '12px',
+                  opacity: cameraActive ? 0.5 : 1
+                }}
+              >
+                📷 RealSense D435i
+              </button>
+            </div>
+            <div style={{ fontSize: '10px', marginTop: '5px', opacity: 0.5, textAlign: 'center' }}>
+              {cameraActive ? '⚠️ Stop camera to switch source' : 'Select before starting camera'}
+            </div>
+          </div>
+          
           <button
             onClick={cameraActive ? deactivateCamera : activateCamera}
             style={{
@@ -252,10 +384,30 @@ export default function DebugPreview() {
               fontWeight: 'bold',
               fontSize: '14px',
               width: '100%',
-              marginBottom: '15px'
+              marginBottom: '10px'
             }}
           >
             {cameraActive ? '⏹ Stop Camera' : '▶ Start Camera'}
+          </button>
+          
+          <button
+            onClick={toggleEyeTracking}
+            disabled={!cameraActive}
+            style={{
+              padding: '10px 20px',
+              background: eyeTrackingMode ? '#764ba2' : '#333',
+              color: eyeTrackingMode ? '#fff' : '#aaa',
+              border: eyeTrackingMode ? '2px solid #667eea' : '2px solid #444',
+              borderRadius: '6px',
+              cursor: cameraActive ? 'pointer' : 'not-allowed',
+              fontWeight: 'bold',
+              fontSize: '13px',
+              width: '100%',
+              marginBottom: '15px',
+              opacity: cameraActive ? 1 : 0.5
+            }}
+          >
+            {eyeTrackingMode ? '👁️ Eye of Horus Mode ON' : '👁️ Eye of Horus Mode OFF'}
           </button>
           
           <div style={{ 
@@ -266,9 +418,18 @@ export default function DebugPreview() {
             borderRadius: '4px',
             marginBottom: '10px'
           }}>
-            <div>📺 Stream: MJPEG (simple)</div>
-            <div>📊 Metrics: WebSocket</div>
-            <div>🔬 Heuristics: IR + Depth + Movement</div>
+            <div>📺 Stream: MJPEG {eyeTrackingMode ? '(Eye Tracking)' : '(Normal)'}</div>
+            <div>📷 Source: {cameraSource === 'webcam' ? 'Laptop Camera' : 'RealSense D435i'}</div>
+            {cameraSource === 'realsense' && (
+              <>
+                <div>📊 Metrics: WebSocket</div>
+                <div>🔬 Heuristics: IR + Depth + Movement</div>
+              </>
+            )}
+            {cameraSource === 'webcam' && (
+              <div>💻 Simple: Face detection only</div>
+            )}
+            {eyeTrackingMode && <div style={{color: '#667eea'}}>👁️ Visualizing: Eye landmarks only</div>}
           </div>
         </div>
 

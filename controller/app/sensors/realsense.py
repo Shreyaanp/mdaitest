@@ -11,6 +11,7 @@ from __future__ import annotations
 import asyncio
 from asyncio import QueueEmpty
 import base64
+import gc
 import logging
 import time
 from collections import Counter, deque
@@ -207,7 +208,7 @@ def simple_liveness_check(
 # ============================================================
 
 class SimpleMediaPipeLiveness:
-    """Simple, robust face + depth liveness detection."""
+    """Simple, robust face + depth liveness detection - RPi 5 optimized."""
     
     def __init__(self, config: Optional[SimpleLivenessConfig] = None) -> None:
         if rs is None or mp is None:
@@ -215,10 +216,13 @@ class SimpleMediaPipeLiveness:
         
         self.config = config or SimpleLivenessConfig()
         
-        # MediaPipe face detection (short-range model for kiosks)
-        self.face_detector = mp.solutions.face_detection.FaceDetection(
-            model_selection=0,  # Short-range model (faster, better for close faces)
+        # OPTIMIZATION: Use ONLY face_mesh (does detection + landmarks in one pass)
+        # Removed face_detector to save 50% CPU
+        self.face_mesh = mp.solutions.face_mesh.FaceMesh(
+            max_num_faces=1,
+            refine_landmarks=True,
             min_detection_confidence=self.config.face_confidence,
+            min_tracking_confidence=self.config.face_confidence
         )
         
         self.pipe: Optional[rs.pipeline] = None
@@ -235,9 +239,9 @@ class SimpleMediaPipeLiveness:
         
         pipe = rs.pipeline()
         cfg = rs.config()
-        # 60 FPS for smoother capture - requires good USB 3.0 connection
-        cfg.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 60)
-        cfg.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 60)
+        # RPi 5 OPTIMIZATION: 30 FPS for stable performance (60 FPS too demanding)
+        cfg.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
+        cfg.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 30)
         
         profile: rs.pipeline_profile = pipe.start(cfg)
         device = profile.get_device()
@@ -266,9 +270,9 @@ class SimpleMediaPipeLiveness:
         if self._closed:
             return
         self.stop()
-        if self.face_detector:
-            self.face_detector.close()
-            self.face_detector = None
+        if self.face_mesh:
+            self.face_mesh.close()
+            self.face_mesh = None
         self._closed = True
     
     def __enter__(self) -> "SimpleMediaPipeLiveness":
@@ -300,15 +304,15 @@ class SimpleMediaPipeLiveness:
         # Convert to RGB for MediaPipe
         rgb_image = cv2.cvtColor(color_image, cv2.COLOR_BGR2RGB) if cv2 else color_image
         
-        # Detect face
+        # Detect face using face_mesh (single pass for detection + landmarks)
         try:
-            detection_result = self.face_detector.process(rgb_image)
+            mesh_result = self.face_mesh.process(rgb_image)
         except Exception as e:
             logger.warning(f"MediaPipe error: {e}")
             return None
         
         # No face detected
-        if not detection_result or not detection_result.detections:
+        if not mesh_result or not mesh_result.multi_face_landmarks:
             return SimpleLivenessResult(
                 timestamp=time.time(),
                 color_image=color_image,
@@ -319,17 +323,18 @@ class SimpleMediaPipeLiveness:
                 reason="no_face_detected"
             )
         
-        # Get best detection
-        det = max(detection_result.detections, key=lambda d: d.score[0])
-        
-        # Convert MediaPipe bbox to pixel coordinates
-        bbox_data = det.location_data.relative_bounding_box
+        # Get face landmarks and compute bounding box
+        face_landmarks = mesh_result.multi_face_landmarks[0]
         h, w = color_image.shape[:2]
         
-        x = int(bbox_data.xmin * w)
-        y = int(bbox_data.ymin * h)
-        box_w = int(bbox_data.width * w)
-        box_h = int(bbox_data.height * h)
+        # Compute bbox from landmarks (more accurate than detection bbox)
+        x_coords = [lm.x for lm in face_landmarks.landmark]
+        y_coords = [lm.y for lm in face_landmarks.landmark]
+        
+        x = int(min(x_coords) * w)
+        y = int(min(y_coords) * h)
+        box_w = int((max(x_coords) - min(x_coords)) * w)
+        box_h = int((max(y_coords) - min(y_coords)) * h)
         
         # Expand bbox slightly for better depth coverage
         expansion = 0.1
@@ -385,11 +390,20 @@ class SimpleRealSenseService:
         self._instance: Optional[SimpleMediaPipeLiveness] = None
         self._hardware_active = False
         self._hardware_requests: Counter[str] = Counter()
+        self._preview_mode: str = "eye_tracking"  # Eye of Horus by default for production
+        self._validation_progress: float = 0.0  # Progress 0.0-1.0 for eye tracking progress bar
         self._lock = asyncio.Lock()
         self._preview_subscribers: list[asyncio.Queue[bytes]] = []
         self._result_subscribers: list[asyncio.Queue[Optional[SimpleLivenessResult]]] = []
         self._loop_task: Optional[asyncio.Task[None]] = None
         self._stop_event = asyncio.Event()
+        
+        # Eye tracking visualization renderer (lazy init)
+        self._eye_renderer = None
+        
+        # RPi 5 OPTIMIZATION: Garbage collection tracking
+        self._last_gc: float = time.time()
+        self._frame_count: int = 0
     
     async def start(self) -> None:
         if self._loop_task:
@@ -436,6 +450,10 @@ class SimpleRealSenseService:
         if inst:
             loop = asyncio.get_running_loop()
             await loop.run_in_executor(None, inst.close)
+        
+        # RPi 5 OPTIMIZATION: Force GC after deactivation to free camera buffers
+        gc.collect()
+        logger.debug("GC run after camera deactivation")
     
     async def _force_hardware_shutdown(self) -> None:
         if not self.enable_hardware:
@@ -449,6 +467,10 @@ class SimpleRealSenseService:
                 if inst:
                     loop = asyncio.get_running_loop()
                     await loop.run_in_executor(None, inst.close)
+                
+                # RPi 5 OPTIMIZATION: Force GC after shutdown
+                gc.collect()
+                logger.debug("GC run after hardware shutdown")
     
     async def set_hardware_active(self, active: bool, *, source: str = "session") -> None:
         if not self.enable_hardware:
@@ -510,16 +532,35 @@ class SimpleRealSenseService:
         return out
     
     async def _preview_loop(self) -> None:
-        """Main preview loop - keeps feed alive."""
+        """Main preview loop - RPi 5 optimized with frame rate limiting and GC."""
+        target_fps = 30
+        frame_delay = 1.0 / target_fps
+        
         try:
             while not self._stop_event.is_set():
+                frame_start = time.time()
+                
                 if self.enable_hardware and self._hardware_active and self._instance:
                     result = await self._run_process()
                     frame_bytes = self._serialize_frame(result)
                     self._broadcast_frame(frame_bytes)
                     self._broadcast_result(result)
-                    if result is None:
+                    
+                    self._frame_count += 1
+                    
+                    # RPi 5 OPTIMIZATION: Periodic garbage collection every 30 seconds
+                    if time.time() - self._last_gc > 30.0:
+                        gc.collect()
+                        self._last_gc = time.time()
+                        logger.debug(f"GC run after {self._frame_count} frames")
+                    
+                    # Frame rate limiting - maintain 30 FPS
+                    elapsed = time.time() - frame_start
+                    if elapsed < frame_delay:
+                        await asyncio.sleep(frame_delay - elapsed)
+                    elif result is None:
                         await asyncio.sleep(0.05)
+                        
                 elif not self.enable_hardware:
                     self._broadcast_frame(self._placeholder_frame())
                     self._broadcast_result(None)
@@ -552,15 +593,20 @@ class SimpleRealSenseService:
                 return None
     
     def _serialize_frame(self, result: Optional[SimpleLivenessResult]) -> bytes:
-        """Generate black screen with face dot indicator."""
+        """Generate preview frame based on current mode."""
         if cv2 is None:
             return self._placeholder_frame()
         
         try:
-            frame = self._create_face_dot_frame(result)
+            if self._preview_mode == "eye_tracking":
+                frame = self._create_eye_tracking_frame(result)
+            else:
+                frame = self._create_face_dot_frame(result)
+            
             ret, enc = cv2.imencode(".jpg", frame, [cv2.IMWRITE_JPEG_QUALITY, 70])
             return enc.tobytes() if ret else self._placeholder_frame()
-        except Exception:
+        except Exception as e:
+            logger.warning(f"Frame serialization error: {e}")
             return self._placeholder_frame()
     
     def _create_face_dot_frame(self, result: Optional[SimpleLivenessResult]) -> np.ndarray:
@@ -602,6 +648,38 @@ class SimpleRealSenseService:
         
         return frame
     
+    def _create_eye_tracking_frame(self, result: Optional[SimpleLivenessResult]) -> np.ndarray:
+        """Create Eye of Horus tracking visualization - optimized to reuse existing MediaPipe."""
+        try:
+            # Lazy init eye renderer
+            if self._eye_renderer is None:
+                from .eye_tracking_viz import EyeOfHorusRenderer
+                self._eye_renderer = EyeOfHorusRenderer(width=640, height=480)
+            
+            # No face or no color image - render empty state
+            if result is None or not result.face_detected or result.color_image is None:
+                return self._eye_renderer.render(None, progress=self._validation_progress)
+            
+            # RPi 5 OPTIMIZATION: Reuse face_mesh from the instance
+            # The instance already ran face_mesh in process(), so we access it directly
+            if not self._instance or not hasattr(self._instance, 'face_mesh'):
+                # Fallback if instance not available
+                return self._create_face_dot_frame(result)
+            
+            # Convert BGR to RGB for MediaPipe
+            rgb_image = cv2.cvtColor(result.color_image, cv2.COLOR_BGR2RGB)
+            
+            # Reuse the SAME face_mesh instance (already created, no duplication)
+            mesh_result = self._instance.face_mesh.process(rgb_image)
+            
+            # Render using the mesh result with progress
+            return self._eye_renderer.render_from_mesh_result(mesh_result, 640, 480, self._validation_progress)
+            
+        except Exception as e:
+            logger.warning(f"Eye tracking visualization error: {e}")
+            # Fallback to simple dot frame
+            return self._create_face_dot_frame(result)
+    
     def _placeholder_frame(self) -> bytes:
         return _PLACEHOLDER_JPEG
     
@@ -626,6 +704,28 @@ class SimpleRealSenseService:
     async def set_preview_enabled(self, enabled: bool) -> bool:
         """For compatibility with old interface."""
         return enabled
+    
+    async def set_preview_mode(self, mode: str) -> str:
+        """Set preview rendering mode: 'normal' or 'eye_tracking'."""
+        if mode not in ("normal", "eye_tracking"):
+            logger.warning(f"Invalid preview mode: {mode}, using 'normal'")
+            mode = "normal"
+        self._preview_mode = mode
+        logger.info(f"Preview mode set to: {mode}")
+        return self._preview_mode
+    
+    def get_preview_mode(self) -> str:
+        """Get current preview rendering mode."""
+        return self._preview_mode
+    
+    def set_validation_progress(self, progress: float) -> None:
+        """
+        Set validation progress for progress bar display.
+        
+        Args:
+            progress: 0.0 to 1.0 (e.g., passing_frames / MIN_PASSING_FRAMES)
+        """
+        self._validation_progress = max(0.0, min(1.0, progress))
 
 
 # Backward compatibility aliases
