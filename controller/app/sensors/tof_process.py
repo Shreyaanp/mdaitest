@@ -4,6 +4,7 @@ from __future__ import annotations
 import asyncio
 import json
 import logging
+import time
 from pathlib import Path
 from typing import Optional
 
@@ -31,9 +32,11 @@ class ToFReaderProcess:
         self._proc: Optional[asyncio.subprocess.Process] = None
         self._stdout_task: Optional[asyncio.Task[None]] = None
         self._stderr_task: Optional[asyncio.Task[None]] = None
+        self._logging_task: Optional[asyncio.Task[None]] = None
         self._latest_distance: Optional[int] = None
         self._ready_event = asyncio.Event()
         self._restart_lock = asyncio.Lock()
+        self._last_log_time = 0.0
 
     async def start(self) -> None:
         """Launch the reader process if it is not already running."""
@@ -71,6 +74,9 @@ class ToFReaderProcess:
             self._stdout_task = asyncio.create_task(self._consume_stdout(), name="tof-reader-stdout")
             if self._proc.stderr:
                 self._stderr_task = asyncio.create_task(self._consume_stderr(), name="tof-reader-stderr")
+            
+            # Start the periodic logging task
+            self._logging_task = asyncio.create_task(self._periodic_logging(), name="tof-periodic-log")
 
     async def stop(self) -> None:
         """Stop the reader process and clean up tasks."""
@@ -84,6 +90,10 @@ class ToFReaderProcess:
             self._stderr_task.cancel()
             tasks.append(self._stderr_task)
             self._stderr_task = None
+        if self._logging_task:
+            self._logging_task.cancel()
+            tasks.append(self._logging_task)
+            self._logging_task = None
 
         if self._proc and self._proc.returncode is None:
             self._proc.terminate()
@@ -115,6 +125,22 @@ class ToFReaderProcess:
 
         return self._latest_distance
 
+    async def _periodic_logging(self) -> None:
+        """Log ToF distance every 10 seconds for debugging."""
+        try:
+            while True:
+                await asyncio.sleep(10)  # Wait 10 seconds
+                current_distance = self._latest_distance
+                if current_distance is not None:
+                    logger.info("🔍 ToF DEBUG: Current distance = %dmm (threshold=500mm)", current_distance)
+                else:
+                    logger.warning("🔍 ToF DEBUG: No distance reading available")
+        except asyncio.CancelledError:
+            logger.info("🔍 ToF DEBUG: Periodic logging stopped")
+            raise
+        except Exception as exc:
+            logger.exception("🔍 ToF DEBUG: Periodic logging error: %s", exc)
+
     async def _consume_stdout(self) -> None:
         assert self._proc and self._proc.stdout
         try:
@@ -129,6 +155,14 @@ class ToFReaderProcess:
                 if distance is not None:
                     self._latest_distance = distance
                     self._ready_event.set()
+                    
+                    # Log every reading for extra debugging (can be removed later)
+                    current_time = time.time()
+                    if current_time - self._last_log_time > 1.0:  # Log at most once per second
+                        threshold_status = "≤ 500mm (TRIGGER)" if distance <= 500 else "> 500mm (no trigger)"
+                        logger.info("📏 ToF reading: %dmm %s", distance, threshold_status)
+                        self._last_log_time = current_time
+                        
         except asyncio.CancelledError:
             raise
         except Exception as exc:  # pragma: no cover - defensive guard

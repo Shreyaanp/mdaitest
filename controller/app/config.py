@@ -5,7 +5,7 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Optional
 
-from pydantic import Field
+from pydantic import Field, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 ROOT_DIR = Path(__file__).resolve().parents[2]
@@ -35,6 +35,7 @@ class Settings(BaseSettings):
         description="Optional sysfs GPIO value path to toggle the sensor XSHUT line",
     )
     tof_output_hz: int = Field(10, description="Polling rate (Hz) - reduced to 10Hz for less I2C traffic")
+    tof_use_python: bool = Field(True, description="Use Python I2C implementation instead of C++ binary")
 
     preview_frame_width: int = Field(640, description="Preview width for MJPEG streaming")
     preview_frame_height: int = Field(480, description="Preview height for MJPEG streaming")
@@ -54,6 +55,20 @@ class Settings(BaseSettings):
     log_level: str = Field("INFO", description="Logging level for controller")
     log_directory: Path = Field(ROOT_DIR / "logs", description="Directory where controller logs are written")
     log_retention_days: int = Field(14, description="Number of rotated log files (days) to retain")
+
+    @field_validator("tof_i2c_address", mode="before")
+    @classmethod
+    def _parse_i2c_address(cls, value: object) -> object:
+        if isinstance(value, str):
+            parsed = value.strip()
+            if not parsed:
+                return parsed
+            try:
+                base = 16 if parsed.lower().startswith("0x") else 10
+                return int(parsed, base)
+            except ValueError as exc:  # pragma: no cover - defensive guardrail
+                raise ValueError("TOF_I2C_ADDRESS must be an integer or hex string") from exc
+        return value
 
     model_config = SettingsConfigDict(
         env_file=str(DEFAULT_ENV_FILE),

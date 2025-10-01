@@ -21,6 +21,9 @@ struct ToFMeasurement {
     uint64_t timestamp_ms = 0;
 };
 
+// Forward declaration for raw sensor
+class RawVL53L0X;
+
 class ToFReader {
   public:
     explicit ToFReader(const ToFConfig& cfg);
@@ -31,14 +34,14 @@ class ToFReader {
 
   private:
     bool reset_sensor();
+    bool initialize_sensor();
     int parse_bus_number(const std::string& bus) const;
 
     ToFConfig config_;
     int bus_number_ = 1;
     bool initialized_ = false;
-    std::unique_ptr<class VL53L0X> sensor_;
+    std::unique_ptr<RawVL53L0X> raw_sensor_;
 };
 
 uint64_t monotonic_millis();
 bool write_gpio_value(const std::string& path, bool high);
-

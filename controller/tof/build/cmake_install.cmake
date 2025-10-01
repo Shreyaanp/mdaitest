@@ -1,4 +1,4 @@
-# Install script for directory: /workspace/mdaitest/controller/tof
+# Install script for directory: /home/ubuntu/Desktop/mdaitest/controller/tof
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/workspace/mdaitest/controller/tof/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/ubuntu/Desktop/mdaitest/controller/tof/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

@@ -29,13 +29,16 @@ manager = SessionManager(settings=settings)
 # Webcam service for debug/fallback (laptop camera)
 webcam_service = WebcamService(camera_id=0)
 
-# Production default: RealSense (switch to webcam for testing without hardware)
-active_camera_source: str = "realsense" if manager._realsense.enable_hardware else "webcam"
+# Production default follows configuration toggle (RealSense preferred when enabled)
+active_camera_source: str = "realsense" if settings.realsense_enable_hardware else "webcam"
 
 # Inject webcam service into manager for progress updates (test mode)
 manager._webcam_service = webcam_service
 
 logger.info(f"📷 Default camera source: {active_camera_source}")
+
+if active_camera_source == "realsense" and not manager._realsense.enable_hardware:
+    logger.warning("📷 RealSense dependencies unavailable - running in placeholder mode until resolved")
 
 @app.exception_handler(Exception)
 async def global_exception_handler(request: Request, exc: Exception) -> PlainTextResponse:

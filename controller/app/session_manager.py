@@ -7,6 +7,7 @@ import base64
 import logging
 import time
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import Any, AsyncIterator, Dict, List, Optional
 from urllib.parse import urlparse
 
@@ -23,6 +24,7 @@ from .config import Settings, get_settings
 from .sensors.realsense import RealSenseService
 from .sensors.tof import DistanceProvider, ToFSensor
 from .sensors.tof_process import ToFReaderProcess
+from .sensors.python_tof import PythonToFProvider
 from .sensors.webcam_service import WebcamService
 from .state import ControllerEvent, SessionPhase
 
@@ -88,16 +90,32 @@ class SessionManager:
         self._ui_subscribers: List[asyncio.Queue[ControllerEvent]] = []
         self._current_session = SessionContext()
 
-        # ToF sensor setup - skip if binary doesn't exist (test mode)
+        # ToF sensor setup
         self._tof_process: Optional[ToFReaderProcess] = None
+        self._python_tof: Optional[PythonToFProvider] = None
+        
         if tof_distance_provider is None:
-            if not self.settings.tof_reader_binary:
+            # Check if we should use Python implementation
+            use_python_tof = getattr(self.settings, 'tof_use_python', True)
+            
+            if use_python_tof:
+                # Use Python I2C implementation
+                logger.info("🐍 Using Python ToF implementation")
+                self._python_tof = PythonToFProvider(
+                    i2c_bus=self.settings.tof_i2c_bus,
+                    i2c_address=self.settings.tof_i2c_address,
+                    output_hz=self.settings.tof_output_hz,
+                )
+                tof_distance_provider = self._python_tof.get_distance
+            elif not self.settings.tof_reader_binary:
                 logger.warning("🧪 TEST MODE: ToF binary not configured - using mock ToF")
                 tof_distance_provider = self._mock_tof_distance
             elif not Path(self.settings.tof_reader_binary).exists():
                 logger.warning(f"🧪 TEST MODE: ToF binary not found at {self.settings.tof_reader_binary} - using mock ToF")
                 tof_distance_provider = self._mock_tof_distance
             else:
+                # Use C++ binary implementation (fallback)
+                logger.info("⚙️ Using C++ ToF implementation")
                 self._tof_process = ToFReaderProcess(
                     binary_path=self.settings.tof_reader_binary,
                     i2c_bus=self.settings.tof_i2c_bus,
@@ -145,12 +163,12 @@ class SessionManager:
             # GENERAL
             "max_depth_m": 4,  # Allow people farther away (was 2.0, 25% increase)
         }
-        # Force disable hardware if ToF binary not found (test mode indicator)
+        # Preserve RealSense enablement even if ToF binary missing (test mode still allowed)
         force_test_mode = not self.settings.tof_reader_binary or not Path(self.settings.tof_reader_binary).exists()
-        enable_realsense = self.settings.realsense_enable_hardware and not force_test_mode
-        
-        if force_test_mode:
-            logger.warning("🧪 TEST MODE: ToF binary missing - disabling RealSense hardware")
+        enable_realsense = self.settings.realsense_enable_hardware
+
+        if force_test_mode and enable_realsense:
+            logger.warning("🧪 TEST MODE: ToF binary missing - continuing with RealSense enabled")
         
         self._realsense = RealSenseService(
             enable_hardware=enable_realsense,
@@ -181,6 +199,8 @@ class SessionManager:
         try:
             if self._tof_process:
                 await self._tof_process.start()
+            if self._python_tof:
+                await self._python_tof.start()
             await self._tof.start()
         except Exception as e:
             logger.error("Failed to start ToF sensor: %s", e)
@@ -206,6 +226,8 @@ class SessionManager:
             await self._tof.stop()
             if self._tof_process:
                 await self._tof_process.stop()
+            if self._python_tof:
+                await self._python_tof.stop()
         except Exception as e:
             logger.warning("Error stopping ToF sensor: %s", e)
         
