@@ -20,11 +20,13 @@ class ToFSensor:
         self,
         *,
         threshold_mm: int,
+        min_threshold_mm: int = 0,
         debounce_ms: int = 150,
         poll_interval_ms: int = 100,  # 10Hz polling (100ms interval)
         distance_provider: DistanceProvider,
     ) -> None:
         self.threshold_mm = threshold_mm
+        self.min_threshold_mm = min_threshold_mm
         self.debounce_ms = debounce_ms
         self.poll_interval_ms = poll_interval_ms
         self.distance_provider = distance_provider
@@ -57,8 +59,8 @@ class ToFSensor:
         self._task = None
 
     async def _run_loop(self) -> None:
-        logger.info("ToF sensor active (threshold=%dmm, debounce=%dms)", 
-                   self.threshold_mm, self.debounce_ms)
+        logger.info("ToF sensor active (range=%d-%dmm, debounce=%dms)", 
+                   self.min_threshold_mm, self.threshold_mm, self.debounce_ms)
         try:
             while not self._stop_event.is_set():
                 distance = await self.distance_provider()
@@ -66,7 +68,7 @@ class ToFSensor:
                     await asyncio.sleep(self.poll_interval_ms / 1000)
                     continue
 
-                triggered = distance < self.threshold_mm
+                triggered = self.min_threshold_mm <= distance <= self.threshold_mm
                 now = time.monotonic() * 1000
                 if triggered != self._is_triggered:
                     if now - self._last_toggle_ts >= self.debounce_ms:

@@ -23,6 +23,7 @@ class Settings(BaseSettings):
     controller_port: int = Field(5000, description="Port for FastAPI server")
 
     tof_threshold_mm: int = Field(500, description="Distance threshold that triggers workflow (increased for stability)")
+    tof_min_threshold_mm: int = Field(100, description="Minimum distance threshold (prevents triggers when too close)")
     tof_debounce_ms: int = Field(1500, description="Debounce period before treating ToF trigger as valid (1.5s to avoid false triggers)")
     tof_reader_binary: Optional[str] = Field(
         None,
