@@ -104,14 +104,6 @@ class Settings(BaseSettings):
     performance: PerformanceSettings = Field(default_factory=PerformanceSettings, description="Performance tuning")
     eye_of_horus: EyeOfHorusSettings = Field(default_factory=EyeOfHorusSettings, description="Eye of Horus visualization")
 
-    # Legacy fields (deprecated but kept for backward compatibility)
-    preview_frame_width: int = Field(640, description="DEPRECATED: Use camera.resolution_width")
-    preview_frame_height: int = Field(480, description="DEPRECATED: Use camera.resolution_height")
-    preview_fps: int = Field(30, description="DEPRECATED: Use camera.fps")
-    mediapipe_stride: int = Field(3, description="DEPRECATED: No longer used")
-    mediapipe_confidence: float = Field(0.6, description="DEPRECATED: Use camera.face_confidence")
-    stability_seconds: float = Field(4.0, description="DEPRECATED: No longer used")
-    mediapipe_max_horizontal_asymmetry_m: float = Field(0.12, description="DEPRECATED: No longer used")
 
     @field_validator("tof_i2c_address", mode="before")
     @classmethod
