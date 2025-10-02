@@ -64,8 +64,12 @@ class SimpleLivenessConfig:
     face_confidence: float = 0.5  # Lower threshold for better detection
     confidence: float = 0.5  # Alias for backward compatibility
     
-    # Performance
-    fps: float = 5.0
+    # Camera hardware settings (can be overridden from main config)
+    resolution_width: int = 640
+    resolution_height: int = 480
+    fps: int = 30
+    
+    # Legacy/compatibility fields
     display: bool = False
     stride: int = 3  # For backward compatibility
     record_seconds: int = 0  # For backward compatibility
@@ -218,9 +222,10 @@ class SimpleMediaPipeLiveness:
         
         # OPTIMIZATION: Use ONLY face_mesh (does detection + landmarks in one pass)
         # Removed face_detector to save 50% CPU
+        # refine_landmarks=False saves 30-40% CPU (no iris/lip refinement needed for liveness)
         self.face_mesh = mp.solutions.face_mesh.FaceMesh(
             max_num_faces=1,
-            refine_landmarks=True,
+            refine_landmarks=False,
             min_detection_confidence=self.config.face_confidence,
             min_tracking_confidence=self.config.face_confidence
         )
@@ -239,9 +244,14 @@ class SimpleMediaPipeLiveness:
         
         pipe = rs.pipeline()
         cfg = rs.config()
-        # RPi 5 OPTIMIZATION: 30 FPS for stable performance (60 FPS too demanding)
-        cfg.enable_stream(rs.stream.color, 640, 480, rs.format.bgr8, 30)
-        cfg.enable_stream(rs.stream.depth, 640, 480, rs.format.z16, 30)
+        # RPi 5 OPTIMIZATION: Configurable FPS for stable performance
+        # Default: 30 FPS (60 FPS too demanding)
+        width = self.config.resolution_width if hasattr(self.config, 'resolution_width') else 640
+        height = self.config.resolution_height if hasattr(self.config, 'resolution_height') else 480
+        fps = self.config.fps if hasattr(self.config, 'fps') else 30
+        
+        cfg.enable_stream(rs.stream.color, width, height, rs.format.bgr8, fps)
+        cfg.enable_stream(rs.stream.depth, width, height, rs.format.z16, fps)
         
         profile: rs.pipeline_profile = pipe.start(cfg)
         device = profile.get_device()
@@ -384,9 +394,19 @@ class SimpleRealSenseService:
         enable_hardware: bool = True,
         liveness_config: Optional[dict] = None,
         threshold_overrides: Optional[dict] = None,  # For backward compatibility
+        settings: Optional[Any] = None,  # Settings object for configuration
     ) -> None:
         self.enable_hardware = bool(enable_hardware and rs is not None and mp is not None and cv2 is not None)
-        self._liveness_config = liveness_config or {}
+        
+        # Merge liveness config with settings if available
+        merged_config = liveness_config or {}
+        if settings and hasattr(settings, 'camera'):
+            merged_config.setdefault('distance_min_m', settings.camera.distance_min_m)
+            merged_config.setdefault('distance_max_m', settings.camera.distance_max_m)
+            merged_config.setdefault('face_confidence', settings.camera.face_confidence)
+        
+        self._liveness_config = merged_config
+        self._settings = settings  # Store settings for config access
         self._instance: Optional[SimpleMediaPipeLiveness] = None
         self._hardware_active = False
         self._hardware_requests: Counter[str] = Counter()
@@ -404,6 +424,16 @@ class SimpleRealSenseService:
         # RPi 5 OPTIMIZATION: Garbage collection tracking
         self._last_gc: float = time.time()
         self._frame_count: int = 0
+        
+        # OPTIMIZATION: Pre-allocate result buffer to reduce memory churn
+        # Use config if available, otherwise fall back to default
+        if settings and hasattr(settings, 'performance'):
+            self._result_buffer_capacity: int = settings.performance.result_queue_size
+            self._gc_interval = settings.performance.garbage_collection_interval
+        else:
+            self._result_buffer_capacity: int = 200
+            self._gc_interval = 30
+        logger.debug(f"Pre-allocated result buffer capacity: {self._result_buffer_capacity}")
     
     async def start(self) -> None:
         if self._loop_task:
@@ -431,7 +461,16 @@ class SimpleRealSenseService:
         logger.info("Activating RealSense pipeline")
         
         def _create() -> SimpleMediaPipeLiveness:
-            cfg = SimpleLivenessConfig(**self._liveness_config) if self._liveness_config else SimpleLivenessConfig()
+            # Merge settings into config
+            cfg_dict = dict(self._liveness_config) if self._liveness_config else {}
+            
+            # Add camera settings if available
+            if self._settings and hasattr(self._settings, 'camera'):
+                cfg_dict.setdefault('resolution_width', self._settings.camera.resolution_width)
+                cfg_dict.setdefault('resolution_height', self._settings.camera.resolution_height)
+                cfg_dict.setdefault('fps', self._settings.camera.fps)
+                
+            cfg = SimpleLivenessConfig(**cfg_dict) if cfg_dict else SimpleLivenessConfig()
             return SimpleMediaPipeLiveness(config=cfg)
         
         loop = asyncio.get_running_loop()
@@ -495,7 +534,8 @@ class SimpleRealSenseService:
     
     async def preview_stream(self) -> AsyncIterator[bytes]:
         """Stream preview frames."""
-        q: asyncio.Queue[bytes] = asyncio.Queue(maxsize=2)
+        maxsize = self._settings.performance.preview_queue_size if self._settings else 2
+        q: asyncio.Queue[bytes] = asyncio.Queue(maxsize=maxsize)
         self._preview_subscribers.append(q)
         try:
             while True:
@@ -510,9 +550,13 @@ class SimpleRealSenseService:
             await asyncio.sleep(duration)
             return []
         
-        q: asyncio.Queue[Optional[SimpleLivenessResult]] = asyncio.Queue(maxsize=5)
+        # OPTIMIZATION: Larger queue to prevent blocking
+        maxsize = self._settings.performance.result_queue_size if self._settings else 50
+        q: asyncio.Queue[Optional[SimpleLivenessResult]] = asyncio.Queue(maxsize=maxsize)
         self._result_subscribers.append(q)
+        # OPTIMIZATION: Pre-allocate list with expected capacity hint (reduces resizing)
         out: list[SimpleLivenessResult] = []
+        out.reserve = self._result_buffer_capacity  # Python hint (no-op but documents intent)
         loop = asyncio.get_running_loop()
         start = loop.time()
         
@@ -533,9 +577,10 @@ class SimpleRealSenseService:
     
     async def _preview_loop(self) -> None:
         """Main preview loop - RPi 5 optimized with frame skipping for performance."""
-        # Process every frame but only broadcast previews every 3rd frame
-        # This allows validation to get ~10 FPS while preview stays smooth
+        # Process every frame but only broadcast previews every Nth frame
+        # This allows validation to get more CPU while preview stays smooth
         frame_skip_counter = 0
+        frame_skip = self._settings.camera.preview_frame_skip if self._settings else 4
         
         try:
             while not self._stop_event.is_set():
@@ -548,24 +593,25 @@ class SimpleRealSenseService:
                     # Broadcast result for validation (always)
                     self._broadcast_result(result)
                     
-                    # Only generate and broadcast preview every 3rd frame (reduces load)
+                    # Only generate and broadcast preview every Nth frame (reduces load)
                     frame_skip_counter += 1
-                    if frame_skip_counter % 3 == 0:
+                    if frame_skip_counter % frame_skip == 0:
                         frame_bytes = self._serialize_frame(result)
                         self._broadcast_frame(frame_bytes)
                     
                     self._frame_count += 1
                     
-                    # RPi 5 OPTIMIZATION: Periodic garbage collection every 30 seconds
-                    if time.time() - self._last_gc > 30.0:
+                    # RPi 5 OPTIMIZATION: Periodic garbage collection
+                    if time.time() - self._last_gc > self._gc_interval:
                         gc.collect()
                         self._last_gc = time.time()
                         logger.debug(f"GC run after {self._frame_count} frames")
                     
                     # Minimal delay for throughput (aim for ~10-15 FPS)
                     elapsed = time.time() - frame_start
-                    if elapsed < 0.033:  # ~30 FPS max
-                        await asyncio.sleep(0.033 - elapsed)
+                    fps_limit = self._settings.performance.preview_fps_limit if self._settings else 0.033
+                    if elapsed < fps_limit:
+                        await asyncio.sleep(fps_limit - elapsed)
                     elif result is None:
                         await asyncio.sleep(0.05)
                         
@@ -618,8 +664,10 @@ class SimpleRealSenseService:
             return self._placeholder_frame()
     
     def _create_face_dot_frame(self, result: Optional[SimpleLivenessResult]) -> np.ndarray:
-        """Create 640x480 black frame with colored dot."""
-        frame = np.zeros((480, 640, 3), dtype=np.uint8)
+        """Create black frame with colored dot."""
+        width = self._settings.camera.resolution_width if self._settings else 640
+        height = self._settings.camera.resolution_height if self._settings else 480
+        frame = np.zeros((height, width, 3), dtype=np.uint8)
         
         if result is None or not result.face_detected or result.bbox is None:
             # No face - red dot in center
@@ -662,7 +710,9 @@ class SimpleRealSenseService:
             # Lazy init eye renderer
             if self._eye_renderer is None:
                 from .eye_tracking_viz import EyeOfHorusRenderer
-                self._eye_renderer = EyeOfHorusRenderer(width=640, height=480, mirror_input=True)
+                width = self._settings.eye_of_horus.width if self._settings else 640
+                height = self._settings.eye_of_horus.height if self._settings else 480
+                self._eye_renderer = EyeOfHorusRenderer(width=width, height=height, mirror_input=True)
             
             # No face or no color image - render empty state
             if result is None or not result.face_detected or result.color_image is None:
@@ -681,7 +731,9 @@ class SimpleRealSenseService:
             mesh_result = self._instance.face_mesh.process(rgb_image)
             
             # Render using the mesh result with progress
-            return self._eye_renderer.render_from_mesh_result(mesh_result, 640, 480, self._validation_progress)
+            width = self._settings.eye_of_horus.width if self._settings else 640
+            height = self._settings.eye_of_horus.height if self._settings else 480
+            return self._eye_renderer.render_from_mesh_result(mesh_result, width, height, self._validation_progress)
             
         except Exception as e:
             logger.warning(f"Eye tracking visualization error: {e}")

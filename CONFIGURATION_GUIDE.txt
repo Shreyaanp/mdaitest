@@ -1,0 +1,301 @@
+============================================================
+📋 CONFIGURATION GUIDE - Single Source of Truth
+============================================================
+
+All hardcoded values have been moved to config.py!
+No more magic numbers scattered throughout the codebase.
+
+============================================================
+🎯 Configuration Structure
+============================================================
+
+controller/app/config.py now contains:
+
+1. ValidationSettings      - Face validation parameters
+2. PhaseDurations         - UI phase timing
+3. CameraSettings         - RealSense hardware config
+4. PerformanceSettings    - Queue sizes & optimization
+5. EyeOfHorusSettings    - Visualization config
+
+============================================================
+✅ How to Change Configuration
+============================================================
+
+METHOD 1: Edit config.py (Permanent Defaults)
+---------------------------------------------
+Edit: controller/app/config.py
+
+Example - Change validation duration:
+  class ValidationSettings(BaseModel):
+      duration_seconds: float = Field(15.0, ...)  # Was 10.0
+
+METHOD 2: Environment Variables (Override Defaults)
+-------------------------------------------------
+Create/Edit: .env file in project root
+
+Format: VALIDATION__DURATION_SECONDS=15.0
+Note: Double underscore (__) for nested config!
+
+Examples:
+  # Validation
+  VALIDATION__DURATION_SECONDS=15.0
+  VALIDATION__MIN_PASSING_FRAMES=15
+  VALIDATION__CAMERA_WARMUP_COLD_MS=3000
+  
+  # Phases
+  PHASES__HELLO_HUMAN=5.0
+  PHASES__COMPLETE=5.0
+  
+  # Camera
+  CAMERA__RESOLUTION_WIDTH=1280
+  CAMERA__RESOLUTION_HEIGHT=720
+  CAMERA__FPS=15
+  CAMERA__DISTANCE_MIN_M=0.3
+  CAMERA__DISTANCE_MAX_M=1.5
+  CAMERA__PREVIEW_FRAME_SKIP=6
+  
+  # Performance
+  PERFORMANCE__RESULT_QUEUE_SIZE=100
+  PERFORMANCE__GARBAGE_COLLECTION_INTERVAL=60
+
+============================================================
+📊 Complete Configuration Reference
+============================================================
+
+ValidationSettings (validation.*)
+---------------------------------
+duration_seconds: float = 10.0
+  → How long to collect validation frames
+
+min_passing_frames: int = 10
+  → Minimum valid frames required
+
+camera_warmup_cold_ms: int = 2000
+  → Camera warmup time when not pre-warmed (ms)
+
+camera_warmup_warm_ms: int = 500
+  → Camera stabilization time when pre-warmed (ms)
+
+focus_normalization_threshold: float = 800.0
+  → Focus score normalization divisor
+
+stability_weight: float = 0.7
+  → Weight for stability in composite score (0-1)
+
+focus_weight: float = 0.3
+  → Weight for focus in composite score (0-1)
+
+
+PhaseDurations (phases.*)
+--------------------------
+pairing_request: float = 1.2
+  → Pairing request exit animation duration (s)
+
+hello_human: float = 3.0
+  → Welcome screen duration (s)
+
+scan_prompt: float = 1.5
+  → Scan prompt duration (s)
+
+complete: float = 3.0
+  → Success screen duration (s)
+
+error: float = 3.0
+  → Error screen duration (s)
+
+backend_ack_timeout: float = 3.0
+  → Max wait for backend acknowledgment (s)
+
+
+CameraSettings (camera.*)
+--------------------------
+resolution_width: int = 640
+  → Camera stream width (pixels)
+
+resolution_height: int = 480
+  → Camera stream height (pixels)
+
+fps: int = 30
+  → Hardware capture frame rate
+
+distance_min_m: float = 0.25
+  → Minimum acceptable face distance (meters)
+
+distance_max_m: float = 1.2
+  → Maximum acceptable face distance (meters)
+
+face_confidence: float = 0.5
+  → MediaPipe face detection confidence (0-1)
+
+preview_frame_skip: int = 4
+  → Encode preview every Nth frame
+
+
+PerformanceSettings (performance.*)
+------------------------------------
+result_queue_size: int = 50
+  → Max buffered validation results
+
+preview_queue_size: int = 2
+  → Max buffered preview JPEG frames
+
+ui_event_queue_size: int = 4
+  → Max buffered UI events
+
+metrics_queue_size: int = 2
+  → Max buffered metrics for debug
+
+preview_fps_limit: float = 0.033
+  → Minimum time between frames (s, 30 FPS)
+
+garbage_collection_interval: int = 30
+  → GC interval (seconds)
+
+
+EyeOfHorusSettings (eye_of_horus.*)
+------------------------------------
+width: int = 640
+  → Visualization canvas width
+
+height: int = 480
+  → Visualization canvas height
+
+eye_spacing: int = 180
+  → Fixed distance between eyes
+
+eye_size: int = 130
+  → Size of each eye
+
+animation_speed: float = 0.05
+  → Breathing animation speed
+
+breath_amplitude: float = 0.12
+  → Scale modulation for breathing
+
+smoothing_factor: float = 0.6
+  → Movement smoothing (lower = smoother)
+
+state_change_threshold: int = 3
+  → Frames needed to change state
+
+============================================================
+🎛️ Common Configuration Scenarios
+============================================================
+
+SCENARIO 1: Faster Validation
+------------------------------
+VALIDATION__DURATION_SECONDS=6.0
+VALIDATION__MIN_PASSING_FRAMES=8
+
+SCENARIO 2: Higher Resolution
+------------------------------
+CAMERA__RESOLUTION_WIDTH=1280
+CAMERA__RESOLUTION_HEIGHT=720
+CAMERA__FPS=15
+CAMERA__PREVIEW_FRAME_SKIP=8
+
+SCENARIO 3: Longer User Feedback
+---------------------------------
+PHASES__HELLO_HUMAN=5.0
+PHASES__COMPLETE=5.0
+PHASES__ERROR=5.0
+
+SCENARIO 4: More CPU for Validation
+------------------------------------
+CAMERA__PREVIEW_FRAME_SKIP=8
+PERFORMANCE__PREVIEW_FPS_LIMIT=0.05
+PERFORMANCE__GARBAGE_COLLECTION_INTERVAL=60
+
+SCENARIO 5: Stricter Face Detection
+------------------------------------
+CAMERA__FACE_CONFIDENCE=0.7
+CAMERA__DISTANCE_MIN_M=0.4
+CAMERA__DISTANCE_MAX_M=1.0
+VALIDATION__MIN_PASSING_FRAMES=15
+
+============================================================
+🔍 Where Values Are Used
+============================================================
+
+Validation:
+  session_manager.py:
+    - Line 652-653: duration & min_frames
+    - Line 684-691: camera warmup times
+    - Line 727-728: focus & stability weights
+
+Phase Durations:
+  session_manager.py:
+    - Line 544: pairing_request
+    - Line 568: hello_human
+    - Line 579: scan_prompt
+    - Line 848: complete
+    - Line 856: error
+    - Line 828-834: backend_ack_timeout
+
+Camera:
+  realsense.py:
+    - Line 245-250: resolution & fps
+    - Line 395-397: distance & confidence
+    - Line 557: preview_frame_skip
+    - Line 642-644: resolution for frames
+
+Performance:
+  realsense.py:
+    - Line 511: preview_queue_size
+    - Line 528: result_queue_size
+    - Line 579: gc_interval
+    - Line 586: preview_fps_limit
+  session_manager.py:
+    - Line 246: ui_event_queue_size
+    - Line 303: metrics_queue_size
+
+Eye of Horus:
+  realsense.py:
+    - Line 687-689: width & height
+    - Eye tracking visualization
+
+============================================================
+✨ Benefits of This Approach
+============================================================
+
+✅ Single Source of Truth
+   - All config in one place
+   - No scattered magic numbers
+
+✅ Type Safety
+   - Pydantic validation
+   - IDE autocomplete
+
+✅ Environment Override
+   - Dev/staging/prod configs
+   - No code changes needed
+
+✅ Documentation
+   - Field descriptions
+   - Default values visible
+
+✅ Flexibility
+   - Easy to tune performance
+   - Quick A/B testing
+
+✅ Maintainability
+   - Clear what can be changed
+   - Prevent hardcoding bugs
+
+============================================================
+🧪 Testing Configuration Changes
+============================================================
+
+1. Edit .env file with new values
+2. Restart controller:
+   cd controller && python -m app.main
+3. Watch logs for config values
+4. Test session flow
+5. Adjust as needed
+
+Logs show:
+  "📸 Starting human validation (15.0s, need ≥15 frames)"
+  "👋 Showing hello human screen (5.0s)"
+  "⏱️ Warming up camera (3000ms)..."
+
+============================================================

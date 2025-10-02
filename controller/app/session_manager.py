@@ -23,7 +23,6 @@ from .backend.ws_client import BackendWebSocketClient
 from .config import Settings, get_settings
 from .sensors.realsense import RealSenseService
 from .sensors.tof import DistanceProvider, ToFSensor
-from .sensors.tof_process import ToFReaderProcess
 from .sensors.python_tof import PythonToFProvider
 from .sensors.webcam_service import WebcamService
 from .state import ControllerEvent, SessionPhase
@@ -90,40 +89,18 @@ class SessionManager:
         self._ui_subscribers: List[asyncio.Queue[ControllerEvent]] = []
         self._current_session = SessionContext()
 
-        # ToF sensor setup
-        self._tof_process: Optional[ToFReaderProcess] = None
+        # ToF sensor setup - Python I2C implementation only
         self._python_tof: Optional[PythonToFProvider] = None
         
         if tof_distance_provider is None:
-            # Check if we should use Python implementation
-            use_python_tof = getattr(self.settings, 'tof_use_python', True)
-            
-            if use_python_tof:
-                # Use Python I2C implementation
-                logger.info("🐍 Using Python ToF implementation")
-                self._python_tof = PythonToFProvider(
-                    i2c_bus=self.settings.tof_i2c_bus,
-                    i2c_address=self.settings.tof_i2c_address,
-                    output_hz=self.settings.tof_output_hz,
-                )
-                tof_distance_provider = self._python_tof.get_distance
-            elif not self.settings.tof_reader_binary:
-                logger.warning("🧪 TEST MODE: ToF binary not configured - using mock ToF")
-                tof_distance_provider = self._mock_tof_distance
-            elif not Path(self.settings.tof_reader_binary).exists():
-                logger.warning(f"🧪 TEST MODE: ToF binary not found at {self.settings.tof_reader_binary} - using mock ToF")
-                tof_distance_provider = self._mock_tof_distance
-            else:
-                # Use C++ binary implementation (fallback)
-                logger.info("⚙️ Using C++ ToF implementation")
-                self._tof_process = ToFReaderProcess(
-                    binary_path=self.settings.tof_reader_binary,
-                    i2c_bus=self.settings.tof_i2c_bus,
-                    i2c_address=self.settings.tof_i2c_address,
-                    xshut_path=self.settings.tof_xshut_path,
-                    output_hz=self.settings.tof_output_hz,
-                )
-                tof_distance_provider = self._tof_process.get_distance
+            # Use Python I2C implementation (reliable and simple)
+            logger.info("🐍 Using Python ToF implementation")
+            self._python_tof = PythonToFProvider(
+                i2c_bus=self.settings.tof_i2c_bus,
+                i2c_address=self.settings.tof_i2c_address,
+                output_hz=self.settings.tof_output_hz,
+            )
+            tof_distance_provider = self._python_tof.get_distance
 
         self._tof = ToFSensor(
             threshold_mm=self.settings.tof_threshold_mm,
@@ -171,6 +148,7 @@ class SessionManager:
             enable_hardware=enable_realsense,
             liveness_config=liveness_config,
             threshold_overrides=threshold_overrides,
+            settings=self.settings,  # Pass settings for configuration
         )
         self._http_client = BridgeHttpClient(self.settings)
         self._ws_client = BackendWebSocketClient(self.settings)
@@ -194,8 +172,6 @@ class SessionManager:
     async def start(self) -> None:
         logger.info("Starting session manager")
         try:
-            if self._tof_process:
-                await self._tof_process.start()
             if self._python_tof:
                 await self._python_tof.start()
             await self._tof.start()
@@ -221,8 +197,6 @@ class SessionManager:
         # Stop ToF sensor
         try:
             await self._tof.stop()
-            if self._tof_process:
-                await self._tof_process.stop()
             if self._python_tof:
                 await self._python_tof.stop()
         except Exception as e:
@@ -270,7 +244,7 @@ class SessionManager:
         logger.info("Session manager stopped")
 
     def register_ui(self) -> asyncio.Queue[ControllerEvent]:
-        queue: asyncio.Queue[ControllerEvent] = asyncio.Queue(maxsize=4)
+        queue: asyncio.Queue[ControllerEvent] = asyncio.Queue(maxsize=self.settings.performance.ui_event_queue_size)
         self._ui_subscribers.append(queue)
         return queue
 
@@ -327,7 +301,7 @@ class SessionManager:
         """Continuously broadcast liveness metrics for debug preview."""
         try:
             logger.info("🔍 Debug metrics broadcaster started")
-            result_queue: asyncio.Queue = asyncio.Queue(maxsize=2)
+            result_queue: asyncio.Queue = asyncio.Queue(maxsize=self.settings.performance.metrics_queue_size)
             self._realsense._result_subscribers.append(result_queue)
             
             metrics_count = 0
@@ -568,7 +542,7 @@ class SessionManager:
         Step 1: Request pairing token from backend.
         Duration: 1.2s (matches TV bars exit animation)
         """
-        await self._advance_phase(SessionPhase.PAIRING_REQUEST, min_duration=1.2)
+        await self._advance_phase(SessionPhase.PAIRING_REQUEST, min_duration=self.settings.phases.pairing_request)
         
         # Request token from backend
         token_info = await self._http_client.issue_token()
@@ -592,8 +566,8 @@ class SessionManager:
         Step 2: Show "Hello Human" welcome screen.
         Duration: 3s
         """
-        await self._advance_phase(SessionPhase.HELLO_HUMAN, min_duration=3.0)
-        logger.info("👋 Showing hello human screen (3s)")
+        await self._advance_phase(SessionPhase.HELLO_HUMAN, min_duration=self.settings.phases.hello_human)
+        logger.info(f"👋 Showing hello human screen ({self.settings.phases.hello_human}s)")
     
     async def _show_scan_prompt(self) -> None:
         """
@@ -603,7 +577,7 @@ class SessionManager:
         """
         await self._advance_phase(
             SessionPhase.SCAN_PROMPT, 
-            min_duration=1.5,
+            min_duration=self.settings.phases.scan_prompt,
             data={"message": "Scan this to get started"}
         )
         logger.info("📱 Showing scan prompt screen")
@@ -653,6 +627,18 @@ class SessionManager:
         try:
             await asyncio.wait_for(self._app_ready_event.wait(), timeout=timeout)
             logger.info(f"✅ Mobile app connected: {self._current_session.platform_id}")
+            
+            # Pre-warm camera immediately after connection to give it time to initialize
+            # This prevents "Frame didn't arrive" and "processing block" errors
+            logger.info("📷 Pre-warming RealSense camera for upcoming validation...")
+            if self._realsense.enable_hardware:
+                try:
+                    await self._realsense.set_hardware_active(True, source="validation")
+                    logger.info("📷 RealSense camera pre-warmed successfully")
+                except Exception as exc:
+                    logger.warning(f"⚠️ Camera pre-warm failed (will retry during validation): {exc}")
+                    # Don't fail here - we'll try again in validation if needed
+                    
         except asyncio.TimeoutError as exc:
             raise SessionFlowError("Mobile app did not connect in time") from exc
     
@@ -664,8 +650,8 @@ class SessionManager:
         
         Returns: Best frame as JPEG bytes
         """
-        VALIDATION_DURATION = 10  # Strict 3.5 seconds
-        MIN_PASSING_FRAMES = 10    # Need at least 10 good frames
+        VALIDATION_DURATION = self.settings.validation.duration_seconds
+        MIN_PASSING_FRAMES = self.settings.validation.min_passing_frames
         
         await self._advance_phase(SessionPhase.HUMAN_DETECT)
         logger.info(f"📸 Starting human validation ({VALIDATION_DURATION}s, need ≥{MIN_PASSING_FRAMES} frames)")
@@ -678,23 +664,32 @@ class SessionManager:
                 log_message="RealSense hardware disabled"
             )
 
-        # Activate RealSense camera for production use
-        try:
-            await self._realsense.set_hardware_active(True, source="validation")
-        except Exception as exc:
-            logger.exception("RealSense activation failed: %s", exc)
+        # Activate RealSense camera if not already active (may have been pre-warmed)
+        camera_already_active = self._realsense._hardware_active
+        if not camera_already_active:
+            logger.info("📷 Camera not pre-warmed, activating now...")
             try:
-                await self._realsense.set_hardware_active(False, source="validation")
-            except Exception as release_exc:
-                logger.warning("Failed to release RealSense after activation error: %s", release_exc)
-            raise SessionFlowError(
-                user_message="camera unavailable, please contact support",
-                log_message="RealSense activation failed"
-            )
-        
-        # Give the camera time to warm up and start streaming
-        logger.info("⏱️ Warming up camera (500ms)...")
-        await asyncio.sleep(0.5)
+                await self._realsense.set_hardware_active(True, source="validation")
+            except Exception as exc:
+                logger.exception("RealSense activation failed: %s", exc)
+                try:
+                    await self._realsense.set_hardware_active(False, source="validation")
+                except Exception as release_exc:
+                    logger.warning("Failed to release RealSense after activation error: %s", release_exc)
+                raise SessionFlowError(
+                    user_message="camera unavailable, please contact support",
+                    log_message="RealSense activation failed"
+                )
+            
+            # Give the camera extra time to warm up if it wasn't pre-warmed
+            warmup_time = self.settings.validation.camera_warmup_cold_ms / 1000.0
+            logger.info(f"⏱️ Warming up camera ({self.settings.validation.camera_warmup_cold_ms}ms)...")
+            await asyncio.sleep(warmup_time)
+        else:
+            # Camera was pre-warmed, just give it a moment to stabilize
+            stabilize_time = self.settings.validation.camera_warmup_warm_ms / 1000.0
+            logger.info(f"⏱️ Camera already active, stabilizing ({self.settings.validation.camera_warmup_warm_ms}ms)...")
+            await asyncio.sleep(stabilize_time)
         
         try:
             # Collect frames for exactly 3.5 seconds
@@ -730,8 +725,8 @@ class SessionManager:
                         
                         # Calculate quality score
                         focus_score = self._compute_focus(result.color_image)
-                        normalized_focus = min(focus_score / 800.0, 1.0)
-                        composite_score = (result.stability_score * 0.7) + (normalized_focus * 0.3)
+                        normalized_focus = min(focus_score / self.settings.validation.focus_normalization_threshold, 1.0)
+                        composite_score = (result.stability_score * self.settings.validation.stability_weight) + (normalized_focus * self.settings.validation.focus_weight)
                         
                         # Track best frame
                         if composite_score > best_score:
@@ -831,8 +826,9 @@ class SessionManager:
         # Wait for backend acknowledgment OR timeout after 3s (kiosk needs predictable timing)
         if not self._ack_event:
             # Test mode: just wait 3s
-            logger.info("⚠️ Test mode: No ACK event, waiting 3s...")
-            await asyncio.sleep(3.0)
+            timeout = self.settings.phases.backend_ack_timeout
+            logger.info(f"⚠️ Test mode: No ACK event, waiting {timeout}s...")
+            await asyncio.sleep(timeout)
         else:
             try:
                 # Production: wait for ACK but timeout after 3s for UX
@@ -845,113 +841,12 @@ class SessionManager:
         # Processing phase shown for exactly 3s total
         await self._ensure_current_phase_duration(3.0)
     
-    async def _mock_validate_with_webcam(self) -> bytes:
-        """
-        TEST MODE: Mock validation using webcam (no RealSense depth).
-        Simulates the validation process for testing UI flow.
-        Can be controlled via scenario parameters.
-        """
-        VALIDATION_DURATION = 3.5
-        MIN_PASSING_FRAMES = 10
-        TARGET_FPS = 30
-        EXPECTED_TOTAL_FRAMES = int(VALIDATION_DURATION * TARGET_FPS)  # ~105 frames
-        
-        # Check if scenario parameters exist
-        simulate_no_face = self._current_session.metadata.get('simulate_no_face', False)
-        simulate_lost_tracking = self._current_session.metadata.get('simulate_lost_tracking', False)
-        
-        start_time = time.time()
-        face_detected_count = 0
-        passing_frames_count = 0
-        total_frames = 0
-        
-        logger.info(f"🧪 Mock validation: duration={VALIDATION_DURATION}s, expected_frames={EXPECTED_TOTAL_FRAMES}")
-        if simulate_no_face:
-            logger.warning("🧪 Simulating: NO FACE scenario")
-        if simulate_lost_tracking:
-            logger.warning("🧪 Simulating: LOST TRACKING scenario")
-        
-        # Simulate frame collection matching real timing
-        while time.time() - start_time < VALIDATION_DURATION:
-            total_frames += 1
-            elapsed = time.time() - start_time
-            
-            # Simulate different scenarios
-            if simulate_no_face:
-                # Never detect face
-                face_detected = False
-            elif simulate_lost_tracking:
-                # Detect face briefly then lose it (only first 30% of frames)
-                face_detected = total_frames < (EXPECTED_TOTAL_FRAMES * 0.3)
-            else:
-                # Normal: detect face after initial frames
-                face_detected = total_frames > 5
-            
-            if face_detected:
-                face_detected_count += 1
-                passing_frames_count += 1
-            
-            # Update progress based on TIME elapsed (fills over full 3.5s)
-            # This ensures progress bar takes entire duration regardless of frame count
-            time_progress = elapsed / VALIDATION_DURATION
-            frame_progress = passing_frames_count / MIN_PASSING_FRAMES if face_detected_count > 0 else 0
-            
-            # Use minimum of time and frame progress (whichever is slower)
-            # This ensures progress never exceeds actual validation time
-            progress = min(time_progress, frame_progress, 1.0)
-            
-            if hasattr(self, '_webcam_service'):
-                self._webcam_service.set_validation_progress(progress)
-            
-            # Log progress every 30 frames (~1 second)
-            if total_frames % 30 == 0:
-                logger.debug(f"🧪 Progress: {int(progress*100)}% | Time: {elapsed:.1f}s/{VALIDATION_DURATION}s | Frames: {passing_frames_count}/{MIN_PASSING_FRAMES}")
-            
-            # Sleep to maintain ~30 FPS (realistic timing)
-            await asyncio.sleep(1.0 / TARGET_FPS)
-        
-        # Reset progress
-        if hasattr(self, '_webcam_service'):
-            self._webcam_service.set_validation_progress(0.0)
-        
-        logger.info(f"🧪 Mock validation complete: {passing_frames_count}/{total_frames} frames passed, {face_detected_count} with face")
-        
-        # Apply same error logic as real validation
-        if face_detected_count == 0:
-            raise SessionFlowError(
-                user_message="sorry I am confused, you dont seem to have facial features"
-            )
-        
-        if face_detected_count > 0 and face_detected_count < total_frames * 0.3:
-            raise SessionFlowError(
-                user_message="lost tracking, please stay in frame"
-            )
-        
-        if passing_frames_count < MIN_PASSING_FRAMES:
-            raise SessionFlowError(
-                user_message="validation failed, please try again"
-            )
-        
-        # Create a mock JPEG frame (black frame with success text)
-        mock_image = np.zeros((480, 640, 3), dtype=np.uint8)
-        if cv2:
-            cv2.putText(mock_image, "MOCK VALIDATION SUCCESS", (150, 240),
-                       cv2.FONT_HERSHEY_SIMPLEX, 1.0, (0, 255, 0), 2)
-            ret, enc = cv2.imencode(".jpg", mock_image, [cv2.IMWRITE_JPEG_QUALITY, 85])
-            if ret:
-                return enc.tobytes()
-        
-        # Minimal fallback JPEG (1x1 black pixel)
-        return base64.b64decode(
-            b"/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDL/wAARCAABAAEDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD5/ooooA//2Q=="
-        )
-    
     async def _show_complete(self) -> None:
         """
         Step 6: Show success screen.
         Duration: 3s
         """
-        await self._advance_phase(SessionPhase.COMPLETE, min_duration=3.0)
+        await self._advance_phase(SessionPhase.COMPLETE, min_duration=self.settings.phases.complete)
         logger.info("🎉 Session complete")
     
     async def _show_error(self, message: str) -> None:
@@ -959,7 +854,7 @@ class SessionManager:
         Show error screen and return to idle.
         Duration: 3s
         """
-        await self._advance_phase(SessionPhase.ERROR, error=message, min_duration=3.0)
+        await self._advance_phase(SessionPhase.ERROR, error=message, min_duration=self.settings.phases.error)
         logger.error(f"❌ Error: {message}")
     
     async def _cleanup_session(self) -> None:
