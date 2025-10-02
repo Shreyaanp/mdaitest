@@ -1,2 +1,0 @@
-/usr/bin/ar qc libvl53l0x.a CMakeFiles/vl53l0x.dir/third_party/vl53l0x/src/vl53l0x.cpp.o CMakeFiles/vl53l0x.dir/third_party/vl53l0x/src/vl53lxx.cpp.o CMakeFiles/vl53l0x.dir/third_party/vl53l0x/src/interfaces/i2cdev.cpp.o CMakeFiles/vl53l0x.dir/third_party/vl53l0x/src/interfaces/i2c_interface.cpp.o
-/usr/bin/ranlib libvl53l0x.a
