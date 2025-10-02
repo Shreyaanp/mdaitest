@@ -352,9 +352,9 @@ class SimpleMediaPipeLiveness:
             depth_frame, self.depth_scale_m, bbox, self.config
         )
         
-        logger.info(
-            "Face score=%.3f bbox=%s live=%s reason=%s metrics=%s",
-            det.score[0], bbox, is_live, reason, metrics
+        logger.debug(
+            "Face detected: bbox=%s live=%s reason=%s metrics=%s",
+            bbox, is_live, reason, metrics
         )
         
         return SimpleLivenessResult(
@@ -532,19 +532,27 @@ class SimpleRealSenseService:
         return out
     
     async def _preview_loop(self) -> None:
-        """Main preview loop - RPi 5 optimized with frame rate limiting and GC."""
-        target_fps = 30
-        frame_delay = 1.0 / target_fps
+        """Main preview loop - RPi 5 optimized with frame skipping for performance."""
+        # Process every frame but only broadcast previews every 3rd frame
+        # This allows validation to get ~10 FPS while preview stays smooth
+        frame_skip_counter = 0
         
         try:
             while not self._stop_event.is_set():
                 frame_start = time.time()
                 
                 if self.enable_hardware and self._hardware_active and self._instance:
+                    # Process frame (fast - no lock contention)
                     result = await self._run_process()
-                    frame_bytes = self._serialize_frame(result)
-                    self._broadcast_frame(frame_bytes)
+                    
+                    # Broadcast result for validation (always)
                     self._broadcast_result(result)
+                    
+                    # Only generate and broadcast preview every 3rd frame (reduces load)
+                    frame_skip_counter += 1
+                    if frame_skip_counter % 3 == 0:
+                        frame_bytes = self._serialize_frame(result)
+                        self._broadcast_frame(frame_bytes)
                     
                     self._frame_count += 1
                     
@@ -554,10 +562,10 @@ class SimpleRealSenseService:
                         self._last_gc = time.time()
                         logger.debug(f"GC run after {self._frame_count} frames")
                     
-                    # Frame rate limiting - maintain 30 FPS
+                    # Minimal delay for throughput (aim for ~10-15 FPS)
                     elapsed = time.time() - frame_start
-                    if elapsed < frame_delay:
-                        await asyncio.sleep(frame_delay - elapsed)
+                    if elapsed < 0.033:  # ~30 FPS max
+                        await asyncio.sleep(0.033 - elapsed)
                     elif result is None:
                         await asyncio.sleep(0.05)
                         

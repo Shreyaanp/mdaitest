@@ -1,1 +1,2 @@
-/home/ubuntu/Desktop/mdaitest/controller/.venv/bin/python: No module named uvicorn
+INFO:     Will watch for changes in these directories: ['/home/ubuntu/Desktop/mdaitest/controller']
+ERROR:    [Errno 98] Address already in use

@@ -1,0 +1,21 @@
+[Unit]
+Description=MDAI Frontend (Vite dev server with HMR)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+WorkingDirectory=/home/ubuntu/Desktop/mdaitest/mdai-ui
+Environment="PATH=/home/ubuntu/.nvm/versions/node/v22.20.0/bin:/usr/bin:/bin"
+Environment="HOST=0.0.0.0"
+Environment="PORT=3000"
+Environment="NODE_ENV=development"
+ExecStart=/home/ubuntu/.nvm/versions/node/v22.20.0/bin/npm run dev -- --host 0.0.0.0 --port 3000
+Restart=always
+RestartSec=10
+StandardOutput=append:/home/ubuntu/Desktop/mdaitest/logs/frontend.log
+StandardError=append:/home/ubuntu/Desktop/mdaitest/logs/frontend.log
+
+[Install]
+WantedBy=default.target
+

@@ -1,0 +1,49 @@
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 322 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://192.168.105.152:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 1767 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+1:04:52 AM [vite] hmr update /src/components/DebugFlowController.tsx
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 1714 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+1:28:26 AM [vite] hmr update /src/App.tsx
+1:28:26 AM [vite] hmr update /src/App.tsx
+1:29:06 AM [vite] hmr update /src/App.tsx
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 1790 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 1691 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/

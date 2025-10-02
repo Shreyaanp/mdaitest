@@ -589,7 +589,7 @@ export default function DebugFlowController() {
         </div>
       </div>
 
-      {/* Bottom-Right: Live Logs
+
       <div style={{
         position: 'absolute',
         bottom: '20px',
@@ -632,7 +632,7 @@ export default function DebugFlowController() {
         {logs.length === 0 && (
           <div style={{ opacity: 0.4 }}>Waiting for events...</div>
         )}
-      </div> */}
+      </div> 
 
       {/* Bottom-Left: Phase Timing Info */}
       <div style={{

@@ -21,7 +21,7 @@ class ToFSensor:
         *,
         threshold_mm: int,
         debounce_ms: int = 150,
-        poll_interval_ms: int = 50,
+        poll_interval_ms: int = 100,  # 10Hz polling (100ms interval)
         distance_provider: DistanceProvider,
     ) -> None:
         self.threshold_mm = threshold_mm

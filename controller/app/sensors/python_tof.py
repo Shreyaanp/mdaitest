@@ -9,11 +9,11 @@ from typing import Optional
 logger = logging.getLogger(__name__)
 
 try:
-    import smbus
+    import smbus2 as smbus
     SMBUS_AVAILABLE = True
 except ImportError:
     SMBUS_AVAILABLE = False
-    logger.warning("smbus not available - install with: sudo apt install python3-smbus")
+    logger.warning("smbus2 not available - install with: pip install smbus2")
 
 
 class PythonVL53L0X:
@@ -162,9 +162,13 @@ class PythonVL53L0X:
             return None
     
     def _read_distance_blocking(self) -> Optional[int]:
-        """Read distance measurement (blocking I/O)."""
+        """Read distance measurement (blocking I/O) with noise filtering."""
         try:
-            # In continuous mode, just read the result registers directly
+            # In continuous mode, sensor continuously updates result registers
+            # Add a small delay to ensure sensor has updated registers (VL53L0X measurement cycle ~33ms)
+            time.sleep(0.04)  # 40ms delay to sync with sensor measurement cycle
+            
+            # Read the distance registers directly
             distance_high = self.bus.read_byte_data(self.i2c_address, 0x1E)
             distance_low = self.bus.read_byte_data(self.i2c_address, 0x1F)
             distance = (distance_high << 8) | distance_low
@@ -172,6 +176,18 @@ class PythonVL53L0X:
             # Filter out invalid readings
             if distance == 0 or distance > 8000:
                 return None
+            
+            # Filter out obvious noise/glitches (sudden jumps to very low values)
+            # VL53L0X commonly glitches to 20mm - filter these out
+            if distance < 50 and self._last_distance and self._last_distance > 100:
+                # Glitch detected: reading dropped from >100mm to <50mm
+                return self._last_distance  # Return previous stable reading
+            
+            # Apply median filtering for stable readings (smooth out small variations)
+            if self._last_distance:
+                # If readings are within 100mm, apply light smoothing
+                if abs(distance - self._last_distance) < 100:
+                    distance = int((distance + self._last_distance) / 2)
                 
             return distance
             

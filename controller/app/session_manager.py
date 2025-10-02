@@ -128,13 +128,14 @@ class SessionManager:
         self._tof = ToFSensor(
             threshold_mm=self.settings.tof_threshold_mm,
             debounce_ms=self.settings.tof_debounce_ms,
+            poll_interval_ms=100,  # Poll every 100ms to match sensor measurement time
             distance_provider=tof_distance_provider,
         )
         self._tof.register_callback(self._handle_tof_trigger)
 
         liveness_config = {
-            "confidence": self.settings.mediapipe_confidence,
-            "stride": self.settings.mediapipe_stride,
+            "confidence": 0.5,  # Lower confidence for faster detection (was 0.5)
+            "stride": 5,        # Higher stride for faster processing (was 3)
             "display": False,
         }
         # Production-ready thresholds - VERY lenient for real-world use
@@ -163,12 +164,8 @@ class SessionManager:
             # GENERAL
             "max_depth_m": 4,  # Allow people farther away (was 2.0, 25% increase)
         }
-        # Preserve RealSense enablement even if ToF binary missing (test mode still allowed)
-        force_test_mode = not self.settings.tof_reader_binary or not Path(self.settings.tof_reader_binary).exists()
+        # Initialize RealSense service (Python ToF handles distance sensing)
         enable_realsense = self.settings.realsense_enable_hardware
-
-        if force_test_mode and enable_realsense:
-            logger.warning("🧪 TEST MODE: ToF binary missing - continuing with RealSense enabled")
         
         self._realsense = RealSenseService(
             enable_hardware=enable_realsense,
@@ -667,7 +664,7 @@ class SessionManager:
         
         Returns: Best frame as JPEG bytes
         """
-        VALIDATION_DURATION = 3.5  # Strict 3.5 seconds
+        VALIDATION_DURATION = 10  # Strict 3.5 seconds
         MIN_PASSING_FRAMES = 10    # Need at least 10 good frames
         
         await self._advance_phase(SessionPhase.HUMAN_DETECT)
@@ -694,6 +691,10 @@ class SessionManager:
                 user_message="camera unavailable, please contact support",
                 log_message="RealSense activation failed"
             )
+        
+        # Give the camera time to warm up and start streaming
+        logger.info("⏱️ Warming up camera (500ms)...")
+        await asyncio.sleep(0.5)
         
         try:
             # Collect frames for exactly 3.5 seconds
@@ -785,6 +786,7 @@ class SessionManager:
             await self._save_best_frame_to_captures(best_bytes, best_frame)
             
             logger.info(f"✅ Human validation SUCCESS: {len(passing_frames)} passing frames, score={best_score:.3f}")
+            logger.info(f"🔑 Platform ID at end of validation: {self._current_session.platform_id}")
             return best_bytes
             
         finally:
@@ -801,13 +803,15 @@ class SessionManager:
         """
         await self._advance_phase(SessionPhase.PROCESSING)
         logger.info("🚀 Starting processing phase")
+        logger.info(f"🔑 Platform ID at start of upload: {self._current_session.platform_id}")
         
         # Encode frame as base64
         frame_b64 = base64.b64encode(best_frame_bytes).decode()
         
         # Upload to backend via websocket
         if not self._current_session.platform_id:
-            raise SessionFlowError("Platform ID missing", user_message="Please try again")
+            logger.error(f"🚨 Platform ID is None! Session state: {self._current_session}")
+            raise SessionFlowError("Please try again", log_message="Platform ID missing")
         
         payload = {
             "type": "to_backend",
@@ -1338,6 +1342,7 @@ class SessionManager:
                 platform_id = data.get("platform_id")
                 if platform_id:
                     self._current_session.platform_id = platform_id
+                    logger.info(f"🔑 Platform ID set: {platform_id}")
                     if self._app_ready_event and not self._app_ready_event.is_set():
                         self._app_ready_event.set()
                 return
@@ -1529,8 +1534,3 @@ class SessionManager:
             
         except Exception:
             logger.exception("Failed to save best frame to captures directory")
-
-        self._session_task = None
-        self._app_ready_event = None
-        self._ack_event = None
-        self._current_session = SessionContext()

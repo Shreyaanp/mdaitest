@@ -7,6 +7,7 @@ websockets
 python-dotenv
 eth-account
 psutil  # CPU/Memory monitoring
+smbus2  # I2C communication for ToF sensor (VL53L0X)
 # Sensor + CV stack (install Jetson-compatible builds)
 opencv-python
 numpy

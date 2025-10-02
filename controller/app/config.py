@@ -49,7 +49,7 @@ class Settings(BaseSettings):
     )
 
     realsense_enable_hardware: bool = Field(
-        False, description="Enable RealSense hardware pipeline (set True on Jetson with camera attached)"
+        True, description="Enable RealSense hardware pipeline (set True on Jetson with camera attached)"
     )
 
     log_level: str = Field("INFO", description="Logging level for controller")

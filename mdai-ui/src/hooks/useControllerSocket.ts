@@ -22,20 +22,32 @@ type SendEvent = (event: SessionEvent) => void
 
 export function useControllerSocket(send: SendEvent, options?: ControllerSocketOptions) {
   const socketRef = useRef<WebSocket | null>(null)
+  const reconnectTimerRef = useRef<NodeJS.Timeout | null>(null)
 
   useEffect(() => {
     const wsUrl = options?.wsUrl ?? DEFAULT_WS_URL
     const onEvent = options?.onEvent
     const onStatusChange = options?.onStatusChange
     let cancelled = false
+    let reconnectDelay = 1000 // Start with 1 second
 
     const connect = () => {
       if (cancelled) return
+      
+      // Clear any existing socket
+      if (socketRef.current) {
+        socketRef.current.close()
+        socketRef.current = null
+      }
+      
       onStatusChange?.('connecting')
+      console.log('[WebSocket] Connecting to', wsUrl)
       const socket = new WebSocket(wsUrl)
       socketRef.current = socket
 
       socket.onopen = () => {
+        console.log('[WebSocket] Connected')
+        reconnectDelay = 1000 // Reset delay on successful connection
         onStatusChange?.('open')
       }
 
@@ -62,10 +74,20 @@ export function useControllerSocket(send: SendEvent, options?: ControllerSocketO
 
       socket.onclose = () => {
         if (cancelled) return
+        console.log('[WebSocket] Disconnected, reconnecting in', reconnectDelay, 'ms')
         onStatusChange?.('closed')
+        
+        // Attempt to reconnect with exponential backoff
+        reconnectTimerRef.current = setTimeout(() => {
+          if (!cancelled) {
+            reconnectDelay = Math.min(reconnectDelay * 1.5, 10000) // Max 10 seconds
+            connect()
+          }
+        }, reconnectDelay)
       }
 
-      socket.onerror = () => {
+      socket.onerror = (err) => {
+        console.error('[WebSocket] Error:', err)
         socket.close()
       }
     }
@@ -74,6 +96,10 @@ export function useControllerSocket(send: SendEvent, options?: ControllerSocketO
 
     return () => {
       cancelled = true
+      if (reconnectTimerRef.current) {
+        clearTimeout(reconnectTimerRef.current)
+        reconnectTimerRef.current = null
+      }
       socketRef.current?.close()
       socketRef.current = null
       onStatusChange?.('closed')
