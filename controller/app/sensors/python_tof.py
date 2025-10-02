@@ -231,14 +231,22 @@ class PythonToFProvider:
         """Get distance measurement with optional debug logging."""
         distance = await self._sensor.get_distance()
         
-        # Optional debug logging (similar to what we added to tof_process.py)
+        # Optional debug logging (rate limited to once per second)
         current_time = time.time()
-        if current_time - self._last_log_time > 1.0:  # Log at most once per second
+        if current_time - self._last_log_time > 1.0:
             if distance is not None:
-                threshold_status = "≤ 500mm (TRIGGER)" if distance <= 500 else "> 500mm (no trigger)"
-                logger.info("📏 Python ToF reading: %dmm %s", distance, threshold_status)
+                if distance < 100:
+                    logger.info("📏 Python ToF reading: %dmm < 100mm (TOO CLOSE)", distance)
+                elif distance <= 500:
+                    logger.info("📏 Python ToF reading: %dmm 100-500mm (TRIGGER)", distance)
+                else:
+                    logger.info("📏 Python ToF reading: %dmm > 500mm (TOO FAR)", distance)
             else:
                 logger.debug("📏 Python ToF: No reading available")
             self._last_log_time = current_time
+        
+        # Filter out values that are too close (< 100mm) to prevent false triggers
+        if distance is not None and distance < 100:
+            return 5000  # Return out-of-range value to prevent triggering
             
         return distance

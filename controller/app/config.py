@@ -82,13 +82,22 @@ class Settings(BaseSettings):
     controller_host: str = Field("0.0.0.0", description="Host interface for local FastAPI server")
     controller_port: int = Field(5000, description="Port for FastAPI server")
 
-    # ToF Sensor
-    tof_threshold_mm: int = Field(500, description="Distance threshold that triggers workflow")
-    tof_debounce_ms: int = Field(1500, description="Debounce period before treating ToF trigger as valid")
-    tof_i2c_bus: str = Field("/dev/i2c-1", description="I2C bus for ToF sensor")
-    tof_i2c_address: int = Field(0x29, description="7-bit I2C address for ToF sensor")
-    tof_output_hz: int = Field(10, description="ToF polling rate (Hz)")
-
+    tof_threshold_mm: int = Field(500, description="Distance threshold that triggers workflow (increased for stability)")
+    tof_min_threshold_mm: int = Field(100, description="Minimum distance threshold (prevents triggers when too close)")
+    tof_debounce_ms: int = Field(1500, description="Debounce period before treating ToF trigger as valid (1.5s to avoid false triggers)")
+    tof_reader_binary: Optional[str] = Field(
+        None,
+        description="Path to the compiled tof-reader executable (enables hardware polling when set)",
+    )
+    tof_i2c_bus: str = Field("/dev/i2c-1", description="I2C bus exposed by the ToF sensor")
+    tof_i2c_address: int = Field(0x29, description="7-bit I2C address for the ToF sensor")
+    tof_xshut_path: Optional[str] = Field(
+        None,
+        description="Optional sysfs GPIO value path to toggle the sensor XSHUT line",
+    )
+    tof_output_hz: int = Field(10, description="Polling rate (Hz) - reduced to 10Hz for less I2C traffic")
+    tof_use_python: bool = Field(True, description="Use Python I2C implementation instead of C++ binary")
+      
     # RealSense Hardware
     realsense_enable_hardware: bool = Field(True, description="Enable RealSense hardware pipeline")
 

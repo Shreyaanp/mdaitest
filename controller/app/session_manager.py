@@ -104,6 +104,7 @@ class SessionManager:
 
         self._tof = ToFSensor(
             threshold_mm=self.settings.tof_threshold_mm,
+            min_threshold_mm=self.settings.tof_min_threshold_mm,
             debounce_ms=self.settings.tof_debounce_ms,
             poll_interval_ms=100,  # Poll every 100ms to match sensor measurement time
             distance_provider=tof_distance_provider,
@@ -416,18 +417,19 @@ class SessionManager:
         """
         try:
             threshold = self.settings.tof_threshold_mm
+            min_threshold = self.settings.tof_min_threshold_mm
             debounce_seconds = self.settings.tof_debounce_ms / 1000.0
             
-            logger.debug(f"ToF: distance={distance}mm, phase={self.phase.value}, threshold={threshold}mm")
+            logger.debug(f"ToF: distance={distance}mm, phase={self.phase.value}, range={min_threshold}-{threshold}mm")
             self._current_session.latest_distance_mm = distance
             
             # Behavior depends on current phase
             current_phase = self.phase
             
-            # IDLE state: Start session if user is close
+            # IDLE state: Start session if user is in valid range
             if current_phase == SessionPhase.IDLE:
-                if distance <= threshold:
-                    logger.info(f"👆 ToF triggered (distance={distance}mm ≤ {threshold}mm) - starting session")
+                if min_threshold <= distance <= threshold:
+                    logger.info(f"👆 ToF triggered (distance={distance}mm in range {min_threshold}-{threshold}mm) - starting session")
                     self._schedule_session()
                 return
             
@@ -435,13 +437,14 @@ class SessionManager:
             if current_phase in {SessionPhase.COMPLETE, SessionPhase.ERROR}:
                 return
             
-            # Active session states: Monitor distance and cancel if user walks away
+            # Active session states: Monitor distance and cancel if user walks away OR gets too close
             # Applies to: PAIRING_REQUEST, HELLO_HUMAN, SCAN_PROMPT, QR_DISPLAY, HUMAN_DETECT, PROCESSING
-            if distance > threshold:
-                # User is too far - check if they've been away for debounce duration
+            if distance > threshold or distance < min_threshold:
+                # User is out of valid range (too far or too close)
                 if not hasattr(self, '_tof_far_since'):
                     self._tof_far_since = time.time()
-                    logger.info(f"⚠️ User moved away (distance={distance}mm > {threshold}mm) - will cancel in {debounce_seconds}s...")
+                    reason = "too far" if distance > threshold else "too close"
+                    logger.info(f"⚠️ User moved {reason} (distance={distance}mm, valid range {min_threshold}-{threshold}mm) - will cancel in {debounce_seconds}s...")
                     
                     # Schedule delayed check (for mock ToF that doesn't poll continuously)
                     async def delayed_cancel():
