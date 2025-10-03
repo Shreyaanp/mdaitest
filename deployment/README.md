@@ -26,6 +26,7 @@ cd /home/ubuntu/Desktop/mdaitest/deployment
 | `uninstall-kiosk.sh` | Completely remove all services |
 | `update-code.sh` | Zero-downtime git pull (runs automatically every 5 min) |
 | `launch-kiosk.sh` | Launch Chromium kiosk (runs automatically with GUI) |
+| `configure-gdm-autologin.sh` | Preconfigure GNOME autologin session and suppress first-run wizard |
 
 ## Service Files
 
@@ -63,9 +64,19 @@ sudo tee /etc/gdm3/custom.conf > /dev/null <<'EOF'
 AutomaticLoginEnable=True
 AutomaticLogin=ubuntu
 WaylandEnable=false
+AutomaticLoginSession=gnome-xorg.desktop
+DefaultSession=gnome-xorg.desktop
 EOF
 
 sudo systemctl restart gdm3
+
+# Run once as the autologin user to suppress the first-login wizards
+sudo -u ubuntu /home/ubuntu/Desktop/mdaitest/scripts/configure-gdm-autologin.sh
+
+# (Optional) Supply a different session name if needed
+# sudo -u ubuntu /home/ubuntu/Desktop/mdaitest/scripts/configure-gdm-autologin.sh ubuntu.desktop
+
+sudo loginctl enable-linger ubuntu
 ```
 
 ### Enable I²C Access (If Using ToF Sensor)
@@ -201,4 +212,3 @@ git branch --set-upstream-to=origin/main main
 ## Support
 
 Run `./check-status.sh` for a complete health check of your installation.
-

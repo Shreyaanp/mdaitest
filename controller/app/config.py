@@ -84,7 +84,7 @@ class Settings(BaseSettings):
 
     tof_threshold_mm: int = Field(500, description="Distance threshold that triggers workflow (increased for stability)")
     tof_min_threshold_mm: int = Field(100, description="Minimum distance threshold (prevents triggers when too close)")
-    tof_debounce_ms: int = Field(1500, description="Debounce period before treating ToF trigger as valid (1.5s to avoid false triggers)")
+    tof_debounce_ms: int = Field(5000, description="Debounce period before treating ToF trigger as valid (1.5s to avoid false triggers)")
     tof_reader_binary: Optional[str] = Field(
         None,
         description="Path to the compiled tof-reader executable (enables hardware polling when set)",

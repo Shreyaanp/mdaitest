@@ -103,7 +103,7 @@ export default function StageRouter({ state, qrPayload }: StageRouterProps) {
   if (state.matches('scan_prompt')) {
     return (
       <HandjetMessage 
-        lines={['scan this to', 'get started']}
+        lines={['Scan this QR', 'on Mercle app']}
         durationMs={3000}
       />
     )
@@ -136,7 +136,7 @@ export default function StageRouter({ state, qrPayload }: StageRouterProps) {
   if (state.matches('processing')) {
     return (
       <ProcessingScreen
-        statusLines={['processing', 'dont move away']}
+        statusLines={['Processing', 'dont move away']}
         durationMs={15000}  // Max duration for animation
       />
     )

@@ -1,4 +1,5 @@
 import { SessionPhase } from '../app-state/sessionMachine'
+import { defaultCRTSettings, CRTSettings } from './crtSettings'
 
 type StageMessage = {
   title: string
@@ -20,6 +21,7 @@ type BackendConfig = {
 type FrontendConfig = {
   previewVisiblePhases: ReadonlySet<SessionPhase>
   stageMessages: StageMessageMap
+  crtSettings: CRTSettings
 }
 
 const env = import.meta.env as Record<string, string | undefined>
@@ -134,5 +136,6 @@ const stageMessages: StageMessageMap = {
  */
 export const frontendConfig: FrontendConfig = {
   previewVisiblePhases: new Set<SessionPhase>(['human_detect']),
-  stageMessages
+  stageMessages,
+  crtSettings: defaultCRTSettings
 }

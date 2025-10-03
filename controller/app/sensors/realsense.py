@@ -556,7 +556,6 @@ class SimpleRealSenseService:
         self._result_subscribers.append(q)
         # OPTIMIZATION: Pre-allocate list with expected capacity hint (reduces resizing)
         out: list[SimpleLivenessResult] = []
-        out.reserve = self._result_buffer_capacity  # Python hint (no-op but documents intent)
         loop = asyncio.get_running_loop()
         start = loop.time()
         

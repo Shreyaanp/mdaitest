@@ -76,7 +76,7 @@ export default function StageRouter({ state, qrPayload }) {
     }
     // Phase 4: SCAN_PROMPT - "Scan this to get started" (3s)
     if (state.matches('scan_prompt')) {
-        return (_jsx(HandjetMessage, { lines: ['scan this to', 'get started'], durationMs: 3000 }));
+        return (_jsx(HandjetMessage, { lines: ['scan this to2', 'get started'], durationMs: 3000 }));
     }
     // Phase 4: QR_DISPLAY - Show QR code (indefinite)
     if (state.matches('qr_display')) {
@@ -93,7 +93,7 @@ export default function StageRouter({ state, qrPayload }) {
     }
     // Phase 6: PROCESSING - Processing animation (3-15s)
     if (state.matches('processing')) {
-        return (_jsx(ProcessingScreen, { statusLines: ['processing', 'dont move away'], durationMs: 15000 }));
+        return (_jsx(ProcessingScreen, { statusLines: ['Processing', 'dont move away'], durationMs: 15000 }));
     }
     // Phase 7: COMPLETE - Success screen (3s) with hieroglyph icon
     if (state.matches('complete')) {

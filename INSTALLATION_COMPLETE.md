@@ -149,9 +149,16 @@ sudo tee /etc/gdm3/custom.conf > /dev/null <<'EOF'
 AutomaticLoginEnable=True
 AutomaticLogin=ubuntu
 WaylandEnable=false
+AutomaticLoginSession=gnome-xorg.desktop
+DefaultSession=gnome-xorg.desktop
 EOF
 
 sudo systemctl restart gdm3
+
+# Suppress desktop selection + GNOME tour prompts
+sudo -u ubuntu /home/ubuntu/Desktop/mdaitest/scripts/configure-gdm-autologin.sh
+# (Optional) Use a different session name if you ship another desktop.
+# sudo -u ubuntu /home/ubuntu/Desktop/mdaitest/scripts/configure-gdm-autologin.sh ubuntu.desktop
 ```
 
 **Lingering** (for services to start on boot without login):
@@ -256,4 +263,3 @@ cd /home/ubuntu/Desktop/mdaitest/deployment
 Then open a browser to `http://localhost:3000` or let the kiosk service launch it automatically!
 
 🚀 Enjoy your zero-downtime, resilient RPi 5 kiosk!
-

@@ -44,12 +44,13 @@ export default function ProcessingScreen({
 
   return (
     <main className="processing-screen" data-processing-screen>
-      <img className="processing-screen__hero" src={imageSrc} alt={imageAlt} />
+    
       <div className="processing-screen__status">
         {statusLines.map((line) => (
           <span key={line}>{line}</span>
         ))}
       </div>
+      <img className="processing-screen__hero" src={imageSrc} alt={imageAlt} />
     </main>
   )
 }

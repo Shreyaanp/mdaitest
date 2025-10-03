@@ -66,3 +66,446 @@
   ➜  Local:   http://localhost:3000/
   ➜  Network: http://10.235.170.151:3000/
 3:16:28 AM [vite] hmr update /src/App.tsx
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 5419 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 1156 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+11:11:41 AM [vite] changed tsconfig file detected: /home/ubuntu/Desktop/mdaitest/mdai-ui/tsconfig.json - Clearing cache and forcing full-reload to ensure TypeScript is compiled with updated config values.
+11:11:41 AM [vite] vite.config.js changed, restarting server...
+11:11:41 AM [vite] page reload index.html
+11:11:41 AM [vite] hmr update /src/App.tsx
+11:11:41 AM [vite] hmr update /src/main.tsx
+11:11:41 AM [vite] hmr update /src/components/DebugScreenGallery.tsx, /src/components/DebugFlowController.tsx
+11:11:41 AM [vite] hmr update /src/components/ControlPanel.tsx
+11:11:41 AM [vite] hmr update /src/components/DebugFlowController.tsx
+11:11:41 AM [vite] hmr update /src/components/DebugPreview.tsx
+11:11:41 AM [vite] hmr update /src/components/DebugScreenGallery.tsx
+11:11:41 AM [vite] hmr update /src/components/ErrorOverlay.tsx
+11:11:41 AM [vite] hmr update /src/components/HandjetMessage.tsx
+11:11:41 AM [vite] hmr update /src/components/HelloHumanHero.tsx
+11:11:41 AM [vite] hmr update /src/components/IdleScreen.tsx
+11:11:41 AM [vite] hmr update /src/components/InstructionStage.tsx
+11:11:41 AM [vite] hmr update /src/components/LogConsole.tsx
+11:11:41 AM [vite] hmr update /src/components/PreviewSurface.tsx
+11:11:41 AM [vite] hmr update /src/components/ProcessingScreen.tsx
+11:11:41 AM [vite] hmr update /src/components/QRCodeStage.tsx
+11:11:41 AM [vite] hmr update /src/components/StageRouter.tsx
+11:11:41 AM [vite] hmr update /src/components/TVBars.tsx
+11:11:41 AM [vite] page reload src/config/index.ts
+11:11:41 AM [vite] page reload src/config/mockFlowData.ts
+11:11:41 AM [vite] hmr update /src/styles/index.css
+11:11:41 AM [vite] page reload src/hooks/useControllerSocket.ts
+11:11:42 AM [vite] server restarted.
+(!) Could not auto-determine entry point from rollupOptions or html files and there are no explicit optimizeDeps.include patterns. Skipping dependency pre-bundling.
+11:12:18 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-dev-runtime" from "src/main.tsx". Does the file exist?
+11:12:18 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/App.js". Does the file exist?
+11:12:18 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/DebugPreview.js". Does the file exist?
+11:12:18 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/DebugScreenGallery.js". Does the file exist?
+11:12:18 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/StageRouter.js". Does the file exist?
+11:12:18 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/StageRouter.js". Does the file exist?
+11:12:18 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/ControlPanel.js". Does the file exist?
+11:12:18 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/PreviewSurface.js". Does the file exist?
+11:12:18 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/PreviewSurface.js". Does the file exist?
+11:12:18 AM [vite] Pre-transform error: Failed to resolve import "react" from "src/hooks/useControllerSocket.js". Does the file exist?
+11:12:18 AM [vite] Pre-transform error: Failed to resolve import "xstate" from "src/app-state/sessionMachine.js". Does the file exist?
+11:12:18 AM [vite] Pre-transform error: Failed to resolve import "xstate" from "src/app-state/sessionMachine.js". Does the file exist?
+11:12:18 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/IdleScreen.js". Does the file exist?
+11:12:18 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/IdleScreen.js". Does the file exist?
+11:12:18 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-dev-runtime" from "src/components/CRTWrapperEffect.tsx". Does the file exist?
+11:12:18 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-dev-runtime" from "src/components/DebugFlowController.tsx". Does the file exist?
+11:12:18 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/ErrorOverlay.js". Does the file exist?
+11:12:18 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/HelloHumanHero.js". Does the file exist?
+11:12:18 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/HelloHumanHero.js". Does the file exist?
+11:12:18 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/HandjetMessage.js". Does the file exist?
+11:12:18 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/InstructionStage.js". Does the file exist?
+11:12:18 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/QRCodeStage.js". Does the file exist?
+11:12:18 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/ProcessingScreen.js". Does the file exist?
+11:12:18 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/LogConsole.js". Does the file exist?
+11:12:18 AM [vite] Pre-transform error: Failed to resolve import "xstate" from "src/app-state/sessionMachine.js". Does the file exist?
+11:12:18 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/StageRouter.js". Does the file exist?
+11:12:18 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/PreviewSurface.js". Does the file exist?
+11:12:18 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/TVBars.js". Does the file exist?
+11:12:18 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/ErrorOverlay.js". Does the file exist?
+11:12:18 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/HelloHumanHero.js". Does the file exist?
+11:12:18 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/IdleScreen.js". Does the file exist?
+11:12:18 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/HandjetMessage.js". Does the file exist?
+11:12:18 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/InstructionStage.js". Does the file exist?
+11:12:18 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/QRCodeStage.js". Does the file exist?
+11:12:18 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/ProcessingScreen.js". Does the file exist?
+11:12:18 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/HelloHumanHero.js". Does the file exist?
+11:12:18 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/TVBars.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-dev-runtime" from "src/main.tsx". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/App.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/DebugScreenGallery.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/DebugPreview.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/StageRouter.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/StageRouter.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/PreviewSurface.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/PreviewSurface.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/ControlPanel.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "xstate" from "src/app-state/sessionMachine.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "xstate" from "src/app-state/sessionMachine.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react" from "src/hooks/useControllerSocket.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/IdleScreen.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/IdleScreen.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-dev-runtime" from "src/components/CRTWrapperEffect.tsx". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-dev-runtime" from "src/components/DebugFlowController.tsx". Does the file exist?
+✘ [ERROR] Could not resolve "react"
+
+    node_modules/@xstate/react/dist/xstate-react.development.esm.js:1:23:
+      1 │ import * as React from 'react';
+        ╵                        ~~~~~~~
+
+  You can mark the path "react" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/ErrorOverlay.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/HelloHumanHero.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/HelloHumanHero.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/HandjetMessage.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/InstructionStage.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/QRCodeStage.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/ProcessingScreen.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/LogConsole.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/TVBars.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "xstate" from "src/app-state/sessionMachine.js". Does the file exist?
+✘ [ERROR] Could not resolve "use-isomorphic-layout-effect"
+
+    node_modules/@xstate/react/dist/xstate-react.development.esm.js:3:38:
+      3 │ import useIsomorphicLayoutEffect from 'use-isomorphic-layout-effect';
+        ╵                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  You can mark the path "use-isomorphic-layout-effect" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/StageRouter.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/PreviewSurface.js". Does the file exist?
+✘ [ERROR] Could not resolve "use-sync-external-store/shim/with-selector"
+
+    node_modules/@xstate/react/dist/xstate-react.development.esm.js:5:49:
+      5 │ ...reWithSelector } from 'use-sync-external-store/shim/with-selector';
+        ╵                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  You can mark the path "use-sync-external-store/shim/with-selector" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+
+✘ [ERROR] Could not resolve "use-sync-external-store/shim"
+
+    node_modules/@xstate/react/dist/xstate-react.development.esm.js:6:37:
+      6 │ import { useSyncExternalStore } from 'use-sync-external-store/shim';
+        ╵                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  You can mark the path "use-sync-external-store/shim" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+
+11:12:20 AM [vite] Internal server error: Failed to resolve import "react/jsx-dev-runtime" from "src/main.tsx". Does the file exist?
+  Plugin: vite:import-analysis
+  File: /home/ubuntu/Desktop/mdaitest/mdai-ui/src/main.tsx:29:8
+  1  |  import { jsxDEV } from "react/jsx-dev-runtime";
+     |                          ^
+  2  |  import React from "react";
+  3  |  import ReactDOM from "react-dom/client";
+      at TransformPluginContext._formatError (file:///home/ubuntu/Desktop/mdaitest/mdai-ui/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49258:41)
+      at TransformPluginContext.error (file:///home/ubuntu/Desktop/mdaitest/mdai-ui/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49253:16)
+      at normalizeUrl (file:///home/ubuntu/Desktop/mdaitest/mdai-ui/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:64306:23)
+      at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+      at async file:///home/ubuntu/Desktop/mdaitest/mdai-ui/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:64438:39
+      at async Promise.all (index 0)
+      at async TransformPluginContext.transform (file:///home/ubuntu/Desktop/mdaitest/mdai-ui/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:64365:7)
+      at async PluginContainer.transform (file:///home/ubuntu/Desktop/mdaitest/mdai-ui/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:49099:18)
+      at async loadAndTransform (file:///home/ubuntu/Desktop/mdaitest/mdai-ui/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:51977:27)
+      at async viteTransformMiddleware (file:///home/ubuntu/Desktop/mdaitest/mdai-ui/node_modules/vite/dist/node/chunks/dep-D_zLpgQd.js:62105:24)
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/ErrorOverlay.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/HelloHumanHero.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/IdleScreen.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/QRCodeStage.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/InstructionStage.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/HandjetMessage.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/ProcessingScreen.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/DebugPreview.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/DebugScreenGallery.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/App.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/HelloHumanHero.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/TVBars.js". Does the file exist?
+11:12:20 AM [vite] error while updating dependencies:
+Error: Build failed with 4 errors:
+node_modules/@xstate/react/dist/xstate-react.development.esm.js:1:23: ERROR: Could not resolve "react"
+node_modules/@xstate/react/dist/xstate-react.development.esm.js:3:38: ERROR: Could not resolve "use-isomorphic-layout-effect"
+node_modules/@xstate/react/dist/xstate-react.development.esm.js:5:49: ERROR: Could not resolve "use-sync-external-store/shim/with-selector"
+node_modules/@xstate/react/dist/xstate-react.development.esm.js:6:37: ERROR: Could not resolve "use-sync-external-store/shim"
+    at failureErrorWithLog (/home/ubuntu/Desktop/mdaitest/mdai-ui/node_modules/esbuild/lib/main.js:1472:15)
+    at /home/ubuntu/Desktop/mdaitest/mdai-ui/node_modules/esbuild/lib/main.js:945:25
+    at /home/ubuntu/Desktop/mdaitest/mdai-ui/node_modules/esbuild/lib/main.js:1353:9
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-dev-runtime" from "src/components/CRTWrapperEffect.tsx". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "xstate" from "src/app-state/sessionMachine.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "xstate" from "src/app-state/sessionMachine.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/StageRouter.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/StageRouter.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/PreviewSurface.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/PreviewSurface.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/IdleScreen.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/IdleScreen.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/ControlPanel.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react" from "src/hooks/useControllerSocket.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-dev-runtime" from "src/components/DebugFlowController.tsx". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/ErrorOverlay.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/HelloHumanHero.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/HelloHumanHero.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/HandjetMessage.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/InstructionStage.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/QRCodeStage.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/ProcessingScreen.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/TVBars.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/LogConsole.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "xstate" from "src/app-state/sessionMachine.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/StageRouter.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/PreviewSurface.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/ErrorOverlay.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/IdleScreen.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/HelloHumanHero.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/HelloHumanHero.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/HandjetMessage.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/InstructionStage.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/QRCodeStage.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/ProcessingScreen.js". Does the file exist?
+11:12:20 AM [vite] Pre-transform error: Failed to resolve import "react/jsx-runtime" from "src/components/TVBars.js". Does the file exist?
+✘ [ERROR] Could not resolve "react"
+
+    node_modules/@xstate/react/dist/xstate-react.development.esm.js:1:23:
+      1 │ import * as React from 'react';
+        ╵                        ~~~~~~~
+
+  You can mark the path "react" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+
+✘ [ERROR] Could not resolve "use-isomorphic-layout-effect"
+
+    node_modules/@xstate/react/dist/xstate-react.development.esm.js:3:38:
+      3 │ import useIsomorphicLayoutEffect from 'use-isomorphic-layout-effect';
+        ╵                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  You can mark the path "use-isomorphic-layout-effect" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+
+✘ [ERROR] Could not resolve "use-sync-external-store/shim/with-selector"
+
+    node_modules/@xstate/react/dist/xstate-react.development.esm.js:5:49:
+      5 │ ...reWithSelector } from 'use-sync-external-store/shim/with-selector';
+        ╵                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  You can mark the path "use-sync-external-store/shim/with-selector" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+
+✘ [ERROR] Could not resolve "use-sync-external-store/shim"
+
+    node_modules/@xstate/react/dist/xstate-react.development.esm.js:6:37:
+      6 │ import { useSyncExternalStore } from 'use-sync-external-store/shim';
+        ╵                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  You can mark the path "use-sync-external-store/shim" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+
+11:12:20 AM [vite] error while updating dependencies:
+Error: Build failed with 4 errors:
+node_modules/@xstate/react/dist/xstate-react.development.esm.js:1:23: ERROR: Could not resolve "react"
+node_modules/@xstate/react/dist/xstate-react.development.esm.js:3:38: ERROR: Could not resolve "use-isomorphic-layout-effect"
+node_modules/@xstate/react/dist/xstate-react.development.esm.js:5:49: ERROR: Could not resolve "use-sync-external-store/shim/with-selector"
+node_modules/@xstate/react/dist/xstate-react.development.esm.js:6:37: ERROR: Could not resolve "use-sync-external-store/shim"
+    at failureErrorWithLog (/home/ubuntu/Desktop/mdaitest/mdai-ui/node_modules/esbuild/lib/main.js:1472:15)
+    at /home/ubuntu/Desktop/mdaitest/mdai-ui/node_modules/esbuild/lib/main.js:945:25
+    at /home/ubuntu/Desktop/mdaitest/mdai-ui/node_modules/esbuild/lib/main.js:1353:9
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+11:12:23 AM [vite] Pre-transform error: Failed to resolve import "xstate" from "src/app-state/sessionMachine.js". Does the file exist?
+11:12:23 AM [vite] Pre-transform error: Failed to resolve import "xstate" from "src/app-state/sessionMachine.js". Does the file exist?
+11:12:23 AM [vite] Pre-transform error: Failed to resolve import "xstate" from "src/app-state/sessionMachine.js". Does the file exist?
+✘ [ERROR] Could not resolve "use-isomorphic-layout-effect"
+
+    node_modules/@xstate/react/dist/xstate-react.development.esm.js:3:38:
+      3 │ import useIsomorphicLayoutEffect from 'use-isomorphic-layout-effect';
+        ╵                                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  You can mark the path "use-isomorphic-layout-effect" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+
+✘ [ERROR] Could not resolve "use-sync-external-store/shim/with-selector"
+
+    node_modules/@xstate/react/dist/xstate-react.development.esm.js:5:49:
+      5 │ ...reWithSelector } from 'use-sync-external-store/shim/with-selector';
+        ╵                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  You can mark the path "use-sync-external-store/shim/with-selector" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+
+✘ [ERROR] Could not resolve "use-sync-external-store/shim"
+
+    node_modules/@xstate/react/dist/xstate-react.development.esm.js:6:37:
+      6 │ import { useSyncExternalStore } from 'use-sync-external-store/shim';
+        ╵                                      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  You can mark the path "use-sync-external-store/shim" as external to exclude it from the bundle, which will remove this error and leave the unresolved path in the bundle.
+
+11:12:24 AM [vite] error while updating dependencies:
+Error: Build failed with 3 errors:
+node_modules/@xstate/react/dist/xstate-react.development.esm.js:3:38: ERROR: Could not resolve "use-isomorphic-layout-effect"
+node_modules/@xstate/react/dist/xstate-react.development.esm.js:5:49: ERROR: Could not resolve "use-sync-external-store/shim/with-selector"
+node_modules/@xstate/react/dist/xstate-react.development.esm.js:6:37: ERROR: Could not resolve "use-sync-external-store/shim"
+    at failureErrorWithLog (/home/ubuntu/Desktop/mdaitest/mdai-ui/node_modules/esbuild/lib/main.js:1472:15)
+    at /home/ubuntu/Desktop/mdaitest/mdai-ui/node_modules/esbuild/lib/main.js:945:25
+    at /home/ubuntu/Desktop/mdaitest/mdai-ui/node_modules/esbuild/lib/main.js:1353:9
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 5993 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 3334 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 2598 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 4167 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 3526 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 1718 ms
+
+  ➜  Local:   http://localhost:3000/
+                                                        
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 1615 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 1051 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 1690 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 945 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 1863 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 2286 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 1904 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 1541 ms
+
+  ➜  Local:   http://localhost:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 1665 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 1612 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 2469 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/

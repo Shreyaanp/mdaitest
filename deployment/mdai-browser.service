@@ -1,0 +1,14 @@
+[Unit]
+Description=Launch browser for MDAI frontend once the graphical session is ready
+After=graphical-session.target
+Wants=graphical-session.target
+ConditionEnvironment=DISPLAY
+
+[Service]
+Type=oneshot
+Environment=WORKSPACE_INDEX=0
+ExecStart=/home/ubuntu/Desktop/mdaitest/scripts/open-mdai-browser.sh http://localhost:3000
+RemainAfterExit=yes
+
+[Install]
+WantedBy=graphical-session.target

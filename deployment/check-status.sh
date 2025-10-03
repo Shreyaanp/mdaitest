@@ -85,6 +85,22 @@ else
   warning "Lingering NOT enabled - run: sudo loginctl enable-linger ubuntu"
 fi
 
+# Check desktop session selection
+DMRC_PATH="$HOME/.dmrc"
+if [[ -f "$DMRC_PATH" ]] && SESSION_LINE=$(grep -E '^Session=' "$DMRC_PATH" 2>/dev/null); then
+  success ".dmrc configured (${SESSION_LINE#Session=})"
+else
+  warning ".dmrc missing or Session= not set – run scripts/configure-gdm-autologin.sh"
+fi
+
+# Check GNOME initial setup suppression
+AUTOSTART_FILE="$HOME/.config/autostart/gnome-initial-setup-first-login.desktop"
+if [[ -f "$AUTOSTART_FILE" ]]; then
+  success "GNOME initial-setup autostart disabled"
+else
+  warning "GNOME initial-setup still enabled – run scripts/configure-gdm-autologin.sh"
+fi
+
 # Check I²C
 if groups ubuntu | grep -q "i2c"; then
   success "I²C permissions configured"
@@ -107,4 +123,3 @@ echo "  View logs:       tail -f ~/Desktop/mdaitest/logs/backend.log"
 echo "  Stop services:   systemctl --user stop mdai-backend mdai-frontend mdai-kiosk"
 echo "  Restart:         systemctl --user restart mdai-backend.service"
 echo ""
-

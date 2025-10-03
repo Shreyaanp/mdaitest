@@ -4,6 +4,7 @@ import { useMachine } from '@xstate/react'
 import StageRouter from './components/StageRouter'
 import PreviewSurface from './components/PreviewSurface'
 import ControlPanel from './components/ControlPanel'
+import CRTWrapperEffect from './components/CRTWrapperEffect'
 import { sessionMachine, type SessionPhase } from './app-state/sessionMachine'
 import {
   ControllerMessage,
@@ -220,32 +221,43 @@ export default function App() {
     }
   }, [state, appendLog])
 
+  const crtSettings = frontendConfig.crtSettings
+
   return (
-    <div className="app-shell">
-      <div className="visual-area">
-        <StageRouter
-          state={state}
+    <CRTWrapperEffect
+      enabled={crtSettings.enabled}
+      curvature={crtSettings.curvature}
+      vignette={crtSettings.vignette}
+      scanline={crtSettings.scanline}
+      bloom={crtSettings.bloom}
+      chromAberr={crtSettings.chromAberr}
+    >
+      <div className="app-shell">
+        <div className="visual-area">
+          <StageRouter
+            state={state}
+            qrPayload={qrPayloadOverride ?? qrPayload}
+          />
+          <PreviewSurface
+            visible={showPreview}
+            previewUrl={previewUrl}
+          />
+        </div>
+        <ControlPanel
+          deviceId={deviceId}
+          deviceAddress={deviceAddress}
+          backendUrl={backendApiBase}
+          controllerUrl={controllerUrl}
+          connectionStatus={connectionStatus}
+          currentPhase={String(state.value)}
+          pairingToken={pairingToken}
           qrPayload={qrPayloadOverride ?? qrPayload}
-        />
-        <PreviewSurface
-          visible={showPreview}
-          previewUrl={previewUrl}
+          expiresInSeconds={expiresInSeconds}
+          lastHeartbeatSeconds={heartbeatAgeSeconds}
+          metrics={metrics}
+          logs={logs}
         />
       </div>
-      <ControlPanel
-        deviceId={deviceId}
-        deviceAddress={deviceAddress}
-        backendUrl={backendApiBase}
-        controllerUrl={controllerUrl}
-        connectionStatus={connectionStatus}
-        currentPhase={String(state.value)}
-        pairingToken={pairingToken}
-        qrPayload={qrPayloadOverride ?? qrPayload}
-        expiresInSeconds={expiresInSeconds}
-        lastHeartbeatSeconds={heartbeatAgeSeconds}
-        metrics={metrics}
-        logs={logs}
-      />
-    </div>
+    </CRTWrapperEffect>
   )
 }
