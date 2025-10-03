@@ -509,3 +509,278 @@ node_modules/@xstate/react/dist/xstate-react.development.esm.js:6:37: ERROR: Cou
 
   ➜  Local:   http://localhost:3000/
   ➜  Network: http://10.235.170.151:3000/
+3:35:08 AM [vite] hmr update /src/components/PreviewSurface.tsx
+3:35:11 AM [vite] hmr update /src/components/PreviewSurface.tsx
+3:35:17 AM [vite] hmr update /src/components/PreviewSurface.tsx
+3:35:19 AM [vite] hmr update /src/components/PreviewSurface.tsx
+3:35:22 AM [vite] hmr update /src/components/PreviewSurface.tsx
+3:41:16 AM [vite] hmr update /src/components/PreviewSurface.tsx
+3:41:44 AM [vite] hmr update /src/components/PreviewSurface.tsx
+3:41:47 AM [vite] hmr update /src/components/PreviewSurface.tsx
+3:42:12 AM [vite] hmr update /src/components/PreviewSurface.tsx
+3:42:14 AM [vite] hmr update /src/components/PreviewSurface.tsx
+3:43:14 AM [vite] hmr update /src/components/PreviewSurface.tsx
+3:46:12 AM [vite] hmr update /src/components/PreviewSurface.tsx
+3:46:26 AM [vite] hmr update /src/components/PreviewSurface.tsx
+3:50:13 AM [vite] hmr update /src/components/PreviewSurface.tsx
+3:50:18 AM [vite] hmr update /src/styles/index.css
+3:53:33 AM [vite] hmr update /src/components/DebugPreview.tsx
+3:54:21 AM [vite] hmr update /src/components/DebugPreview.tsx
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 1493 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 1750 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 1809 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 1975 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 1725 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 1818 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 1989 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 1784 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 1956 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 2009 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 1689 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 2058 ms
+
+  ➜  Local:   http://localhost:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 1974 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 1943 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 2080 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 1518 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 1902 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 1625 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 953 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 2051 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 1487 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 1943 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 2390 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 1213 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 2453 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 1921 ms
+
+  ➜  Local:   http://localhost:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 2233 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 1723 ms
+
+  ➜  Local:   http://localhost:3000/
+  ➜  Network: http://10.235.170.151:3000/
+
+> mdai-ui@0.1.0 dev
+> vite --host 0.0.0.0 --port 3000
+
+
+  VITE v5.4.20  ready in 1863 ms
+
+  ➜  Local:   http://localhost:3000/

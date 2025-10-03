@@ -10,7 +10,7 @@ from asyncio import QueueEmpty
 import base64
 import logging
 import time
-from typing import AsyncIterator, Optional
+from typing import Any, AsyncIterator, Dict, Optional
 from dataclasses import dataclass
 
 import numpy as np
@@ -34,6 +34,47 @@ _PLACEHOLDER_JPEG = base64.b64decode(
 )
 
 
+def extract_eye_landmarks_from_mesh(mesh_result, image_width: int, image_height: int) -> Optional[Dict[str, Any]]:
+    """
+    Extract eye landmark pixel coordinates from MediaPipe face mesh result.
+    This is called once during face detection to avoid duplicate MediaPipe processing.
+    
+    Returns: {"left_eye": [(x,y), ...], "right_eye": [(x,y), ...], "left_center": (x,y), "right_center": (x,y)}
+    """
+    if not mesh_result or not mesh_result.multi_face_landmarks:
+        return None
+    
+    try:
+        face_landmarks = mesh_result.multi_face_landmarks[0]
+        
+        # Eye contour indices (from eye_tracking_viz.py)
+        LEFT_EYE_CONTOUR = [33, 160, 158, 133, 153, 144, 163, 7]
+        RIGHT_EYE_CONTOUR = [362, 385, 387, 263, 373, 380, 381, 382]
+        
+        def to_pixel(idx: int):
+            landmark = face_landmarks.landmark[idx]
+            px = int(landmark.x * image_width)
+            py = int(landmark.y * image_height)
+            return px, py
+        
+        left_eye_points = [to_pixel(idx) for idx in LEFT_EYE_CONTOUR]
+        right_eye_points = [to_pixel(idx) for idx in RIGHT_EYE_CONTOUR]
+        
+        # Compute eye centers from contour
+        left_center = tuple(np.mean(left_eye_points, axis=0).astype(int).tolist())
+        right_center = tuple(np.mean(right_eye_points, axis=0).astype(int).tolist())
+        
+        return {
+            "left_eye": left_eye_points,
+            "right_eye": right_eye_points,
+            "left_center": left_center,
+            "right_center": right_center
+        }
+    except Exception as e:
+        logger.warning(f"Error extracting eye landmarks: {e}")
+        return None
+
+
 @dataclass
 class WebcamFrame:
     """Simple frame data from webcam."""
@@ -43,6 +84,8 @@ class WebcamFrame:
     # Simulate liveness for testing (no real depth sensor)
     depth_ok: bool = True  # Always pass depth check in test mode
     stability_score: float = 0.8  # Mock stability
+    # Eye tracking optimization: pre-extracted eye landmarks
+    eye_landmarks: Optional[Dict[str, Any]] = None
 
 
 class WebcamService:
@@ -118,7 +161,7 @@ class WebcamService:
         
         self._face_mesh = mp.solutions.face_mesh.FaceMesh(
             max_num_faces=1,
-            refine_landmarks=True,
+            refine_landmarks=False,  # Performance optimization: no iris/lip refinement needed
             min_detection_confidence=0.5,
             min_tracking_confidence=0.5
         )
@@ -178,17 +221,30 @@ class WebcamService:
         
         # Detect face
         face_detected = False
+        eye_landmarks = None
         if self._face_detector:
             try:
                 result = self._face_detector.process(rgb_frame)
                 face_detected = bool(result and result.detections)
+                
+                # If face detected, extract eye landmarks for Eye of Horus (avoid duplicate processing)
+                if face_detected and self._face_mesh:
+                    try:
+                        mesh_result = self._face_mesh.process(rgb_frame)
+                        if mesh_result:
+                            h, w = frame.shape[:2]
+                            eye_landmarks = extract_eye_landmarks_from_mesh(mesh_result, w, h)
+                    except Exception as e:
+                        logger.warning(f"Eye landmark extraction error: {e}")
+                        
             except Exception as e:
                 logger.warning(f"Face detection error: {e}")
         
         return WebcamFrame(
             timestamp=time.time(),
             color_image=frame,  # Keep as BGR for display
-            face_detected=face_detected
+            face_detected=face_detected,
+            eye_landmarks=eye_landmarks
         )
     
     def _simulate_depth_processing(self, frame: np.ndarray):
@@ -284,23 +340,26 @@ class WebcamService:
         return frame
     
     def _create_eye_tracking_frame(self, frame_data: WebcamFrame) -> np.ndarray:
-        """Create Eye of Horus tracking visualization."""
+        """Create Eye of Horus tracking visualization - uses pre-extracted landmarks (no duplicate MediaPipe!)."""
         try:
             # Lazy init eye renderer
             if self._eye_renderer is None:
                 from .eye_tracking_viz import EyeOfHorusRenderer
                 self._eye_renderer = EyeOfHorusRenderer(width=640, height=480, mirror_input=True)
             
-            # Run face mesh if face detected
+            # No face detected - render empty state
             if not frame_data.face_detected:
                 return self._eye_renderer.render(None, progress=self._validation_progress)
             
-            # Convert BGR to RGB for MediaPipe
-            rgb_image = cv2.cvtColor(frame_data.color_image, cv2.COLOR_BGR2RGB)
-            mesh_result = self._face_mesh.process(rgb_image)
-            
-            # Render using the mesh result with progress
-            return self._eye_renderer.render_from_mesh_result(mesh_result, 640, 480, self._validation_progress)
+            # OPTIMIZATION: Use pre-extracted eye landmarks from frame_data (no duplicate MediaPipe pass!)
+            # Landmarks were already extracted during _capture_frame() call
+            if frame_data.eye_landmarks:
+                h, w = frame_data.color_image.shape[:2]
+                eye_data = self._eye_renderer.create_eye_data_from_precomputed(frame_data.eye_landmarks, w)
+                return self._eye_renderer.render(eye_data, show_guide=True, progress=self._validation_progress)
+            else:
+                # Fallback: no landmarks available
+                return self._eye_renderer.render(None, progress=self._validation_progress)
             
         except Exception as e:
             logger.warning(f"Eye tracking visualization error: {e}")

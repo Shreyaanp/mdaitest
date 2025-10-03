@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 
 const DEFAULT_TITLE = 'Camera Preview'
 
@@ -14,45 +14,11 @@ export default function PreviewSurface({
   title = DEFAULT_TITLE
 }: PreviewSurfaceProps) {
   console.log('📹 [PREVIEW SURFACE] Rendered | visible:', visible, '| previewUrl:', previewUrl)
-  
-  const imageRef = useRef<HTMLImageElement | null>(null)
 
+  // Placeholder surface; stream disabled in favor of a static GIF
   useEffect(() => {
-    console.log('📹 [PREVIEW EFFECT] useEffect triggered | visible:', visible)
-    const imageEl = imageRef.current
-
-    if (!imageEl) {
-      console.log('📹 [PREVIEW EFFECT] No image element')
-      return () => {}
-    }
-
-    if (!visible) {
-      console.log('📹 [PREVIEW EFFECT] Not visible - clearing src')
-      imageEl.src = ''
-      return () => {}
-    }
-    
-    console.log('📹 [PREVIEW EFFECT] Visible - setting MJPEG stream URL:', previewUrl)
-    // Add timestamp to prevent caching
-    const streamUrl = `${previewUrl}?t=${Date.now()}`
-    imageEl.src = streamUrl
-    
-    imageEl.onerror = (e) => {
-      console.error('📹 [PREVIEW EFFECT] Image load error:', e)
-    }
-    
-    imageEl.onload = () => {
-      console.log('📹 [PREVIEW EFFECT] Image loaded successfully')
-    }
-
-    return () => {
-      if (imageEl) {
-        imageEl.src = ''
-        imageEl.onerror = null
-        imageEl.onload = null
-      }
-    }
-  }, [previewUrl, visible])
+    console.log('📹 [PREVIEW EFFECT] Placeholder active | visible:', visible)
+  }, [visible])
 
   const classNames = [
     'preview-surface',
@@ -61,10 +27,11 @@ export default function PreviewSurface({
 
   return (
     <div className={classNames.join(' ')} data-preview-surface>
+      <div className="preview-surface__status" aria-live="polite">Scanning…</div>
       <img
-        ref={imageRef}
         className="preview-surface__img preview-surface__media"
-        alt={title}
+        src="/hero/scan.gif"
+        alt={title || 'Scanning placeholder'}
         style={{
           width: '100%',
           height: '100%',

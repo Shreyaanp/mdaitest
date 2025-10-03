@@ -17,7 +17,7 @@ import time
 from collections import Counter, deque
 from dataclasses import dataclass
 from pathlib import Path
-from typing import AsyncIterator, Deque, Dict, List, Optional, Tuple
+from typing import Any, AsyncIterator, Deque, Dict, List, Optional, Tuple
 
 import numpy as np
 
@@ -101,6 +101,10 @@ class SimpleLivenessResult:
     mean_distance_m: Optional[float] = None
     depth_variance_m: Optional[float] = None
     valid_points: int = 0
+    
+    # Eye tracking optimization: pre-extracted eye landmarks (pixel coords)
+    # Format: {"left_eye": [(x,y), ...], "right_eye": [(x,y), ...], "left_center": (x,y), "right_center": (x,y)}
+    eye_landmarks: Optional[Dict[str, Any]] = None
     
     # Backward compatibility aliases
     @property
@@ -205,6 +209,47 @@ def simple_liveness_check(
         "depth_variance_m": depth_std,
         "valid_points": len(valid_depths)
     }
+
+
+def extract_eye_landmarks_from_mesh(mesh_result, image_width: int, image_height: int) -> Optional[Dict[str, Any]]:
+    """
+    Extract eye landmark pixel coordinates from MediaPipe face mesh result.
+    This is called once during liveness detection to avoid duplicate MediaPipe processing.
+    
+    Returns: {"left_eye": [(x,y), ...], "right_eye": [(x,y), ...], "left_center": (x,y), "right_center": (x,y)}
+    """
+    if not mesh_result or not mesh_result.multi_face_landmarks:
+        return None
+    
+    try:
+        face_landmarks = mesh_result.multi_face_landmarks[0]
+        
+        # Eye contour indices (from eye_tracking_viz.py)
+        LEFT_EYE_CONTOUR = [33, 160, 158, 133, 153, 144, 163, 7]
+        RIGHT_EYE_CONTOUR = [362, 385, 387, 263, 373, 380, 381, 382]
+        
+        def to_pixel(idx: int) -> Tuple[int, int]:
+            landmark = face_landmarks.landmark[idx]
+            px = int(landmark.x * image_width)
+            py = int(landmark.y * image_height)
+            return px, py
+        
+        left_eye_points = [to_pixel(idx) for idx in LEFT_EYE_CONTOUR]
+        right_eye_points = [to_pixel(idx) for idx in RIGHT_EYE_CONTOUR]
+        
+        # Compute eye centers from contour
+        left_center = tuple(np.mean(left_eye_points, axis=0).astype(int).tolist())
+        right_center = tuple(np.mean(right_eye_points, axis=0).astype(int).tolist())
+        
+        return {
+            "left_eye": left_eye_points,
+            "right_eye": right_eye_points,
+            "left_center": left_center,
+            "right_center": right_center
+        }
+    except Exception as e:
+        logger.warning(f"Error extracting eye landmarks: {e}")
+        return None
 
 
 # ============================================================
@@ -330,7 +375,8 @@ class SimpleMediaPipeLiveness:
                 bbox=None,
                 face_detected=False,
                 is_live=False,
-                reason="no_face_detected"
+                reason="no_face_detected",
+                eye_landmarks=None
             )
         
         # Get face landmarks and compute bounding box
@@ -362,6 +408,9 @@ class SimpleMediaPipeLiveness:
             depth_frame, self.depth_scale_m, bbox, self.config
         )
         
+        # Extract eye landmarks for Eye of Horus rendering (avoid duplicate MediaPipe pass)
+        eye_landmarks = extract_eye_landmarks_from_mesh(mesh_result, w, h)
+        
         logger.debug(
             "Face detected: bbox=%s live=%s reason=%s metrics=%s",
             bbox, is_live, reason, metrics
@@ -377,7 +426,8 @@ class SimpleMediaPipeLiveness:
             reason=reason,
             mean_distance_m=metrics.get("mean_distance_m"),
             depth_variance_m=metrics.get("depth_variance_m"),
-            valid_points=metrics.get("valid_points", 0)
+            valid_points=metrics.get("valid_points", 0),
+            eye_landmarks=eye_landmarks
         )
 
 
@@ -704,7 +754,7 @@ class SimpleRealSenseService:
         return frame
     
     def _create_eye_tracking_frame(self, result: Optional[SimpleLivenessResult]) -> np.ndarray:
-        """Create Eye of Horus tracking visualization - optimized to reuse existing MediaPipe."""
+        """Create Eye of Horus tracking visualization - uses pre-extracted landmarks (no duplicate MediaPipe!)."""
         try:
             # Lazy init eye renderer
             if self._eye_renderer is None:
@@ -717,22 +767,15 @@ class SimpleRealSenseService:
             if result is None or not result.face_detected or result.color_image is None:
                 return self._eye_renderer.render(None, progress=self._validation_progress)
             
-            # RPi 5 OPTIMIZATION: Reuse face_mesh from the instance
-            # The instance already ran face_mesh in process(), so we access it directly
-            if not self._instance or not hasattr(self._instance, 'face_mesh'):
-                # Fallback if instance not available
-                return self._create_face_dot_frame(result)
-            
-            # Convert BGR to RGB for MediaPipe
-            rgb_image = cv2.cvtColor(result.color_image, cv2.COLOR_BGR2RGB)
-            
-            # Reuse the SAME face_mesh instance (already created, no duplication)
-            mesh_result = self._instance.face_mesh.process(rgb_image)
-            
-            # Render using the mesh result with progress
-            width = self._settings.eye_of_horus.width if self._settings else 640
-            height = self._settings.eye_of_horus.height if self._settings else 480
-            return self._eye_renderer.render_from_mesh_result(mesh_result, width, height, self._validation_progress)
+            # OPTIMIZATION: Use pre-extracted eye landmarks from the result (no duplicate MediaPipe pass!)
+            # Landmarks were already extracted during process() call
+            if result.eye_landmarks:
+                h, w = result.color_image.shape[:2]
+                eye_data = self._eye_renderer.create_eye_data_from_precomputed(result.eye_landmarks, w)
+                return self._eye_renderer.render(eye_data, show_guide=True, progress=self._validation_progress)
+            else:
+                # Fallback: no landmarks available
+                return self._eye_renderer.render(None, progress=self._validation_progress)
             
         except Exception as e:
             logger.warning(f"Eye tracking visualization error: {e}")

@@ -105,6 +105,44 @@ class EyeOfHorusRenderer:
             print(f"Error extracting eye landmarks: {e}")
             return None
     
+    def create_eye_data_from_precomputed(self, eye_landmarks: dict, image_width: int) -> Optional[EyeData]:
+        """
+        Create EyeData from pre-extracted eye landmarks (optimization to avoid duplicate MediaPipe).
+        
+        Args:
+            eye_landmarks: Dict with "left_eye", "right_eye", "left_center", "right_center"
+            image_width: Image width for mirror calculation
+        
+        Returns:
+            EyeData object ready for rendering
+        """
+        if not eye_landmarks:
+            return None
+        
+        try:
+            left_eye = eye_landmarks["left_eye"]
+            right_eye = eye_landmarks["right_eye"]
+            left_center = eye_landmarks["left_center"]
+            right_center = eye_landmarks["right_center"]
+            
+            # Apply mirroring if needed
+            if self.mirror_input:
+                left_eye = [((image_width - 1) - x, y) for x, y in left_eye]
+                right_eye = [((image_width - 1) - x, y) for x, y in right_eye]
+                left_center = ((image_width - 1) - left_center[0], left_center[1])
+                right_center = ((image_width - 1) - right_center[0], right_center[1])
+            
+            return EyeData(
+                left_eye_points=left_eye,
+                right_eye_points=right_eye,
+                left_center=left_center,
+                right_center=right_center,
+                face_detected=True
+            )
+        except Exception as e:
+            print(f"Error creating EyeData from precomputed landmarks: {e}")
+            return None
+    
     def draw_eye_of_horus(
         self, 
         canvas: np.ndarray, 

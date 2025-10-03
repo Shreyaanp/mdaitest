@@ -63,8 +63,9 @@ export default function DebugPreview() {
         addLog(`📷 Camera source: ${data.camera_source}`)
         
         // If camera is active, restart stream with new source
+        // UI stream disabled; keep placeholder
         if (cameraActive && imgRef.current) {
-          imgRef.current.src = `http://localhost:5000/preview?t=${Date.now()}`
+          imgRef.current.src = '/hero/scan.gif'
         }
       } else {
         addLog(`❌ Failed to switch camera source: ${response.status}`)
@@ -98,11 +99,10 @@ export default function DebugPreview() {
           addLog(`✅ RealSense activated (hardware=${data.hardware_active}, liveness=${data.liveness_active})`)
         }
         
-        // Setup MJPEG stream
+        // UI stream disabled; use placeholder only
         if (imgRef.current) {
-          const streamUrl = `http://localhost:5000/preview?t=${Date.now()}`
-          imgRef.current.src = streamUrl
-          addLog(`📺 MJPEG stream started: ${streamUrl}`)
+          imgRef.current.src = '/hero/scan.gif'
+          addLog('📺 Placeholder image shown (stream disabled)')
         }
         
         // Connect to metrics websocket (only for RealSense)
@@ -418,7 +418,7 @@ export default function DebugPreview() {
             borderRadius: '4px',
             marginBottom: '10px'
           }}>
-            <div>📺 Stream: MJPEG {eyeTrackingMode ? '(Eye Tracking)' : '(Normal)'}</div>
+            <div>📺 Stream: Placeholder GIF (no /preview)</div>
             <div>📷 Source: {cameraSource === 'webcam' ? 'Laptop Camera' : 'RealSense D435i'}</div>
             {cameraSource === 'realsense' && (
               <>

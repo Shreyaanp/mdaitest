@@ -23,11 +23,10 @@ export default function DebugPreview() {
                 const data = await response.json();
                 setCameraActive(true);
                 addLog(`✅ Camera activated (hardware=${data.hardware_active}, liveness=${data.liveness_active})`);
-                // Setup MJPEG stream
+                // UI stream disabled; show placeholder image instead
                 if (imgRef.current) {
-                    const streamUrl = `http://localhost:5000/preview?t=${Date.now()}`;
-                    imgRef.current.src = streamUrl;
-                    addLog(`📺 MJPEG stream started: ${streamUrl}`);
+                    imgRef.current.src = '/hero/scan.gif';
+                    addLog('📺 Placeholder image shown (stream disabled)');
                 }
                 // Connect to metrics websocket
                 const ws = new WebSocket('ws://localhost:5000/ws/ui');
@@ -154,7 +153,7 @@ export default function DebugPreview() {
                                     background: '#111',
                                     borderRadius: '4px',
                                     marginBottom: '10px'
-                                }, children: [_jsx("div", { children: "\uD83D\uDCFA Stream: MJPEG (simple)" }), _jsx("div", { children: "\uD83D\uDCCA Metrics: WebSocket" }), _jsx("div", { children: "\uD83D\uDD2C Heuristics: IR + Depth + Movement" })] })] }), _jsxs("div", { style: { flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column' }, children: [_jsxs("h3", { style: { margin: '0 0 10px 0', fontSize: '14px' }, children: ["\uD83D\uDCCB Event Logs (", logs.length, ")"] }), _jsxs("div", { style: {
+                                }, children: [_jsx("div", { children: "\uD83D\uDCFA Stream: Placeholder (no /preview)" }), _jsx("div", { children: "\uD83D\uDCCA Metrics: WebSocket" }), _jsx("div", { children: "\uD83D\uDD2C Heuristics: IR + Depth + Movement" })] })] }), _jsxs("div", { style: { flex: 1, overflow: 'hidden', display: 'flex', flexDirection: 'column' }, children: [_jsxs("h3", { style: { margin: '0 0 10px 0', fontSize: '14px' }, children: ["\uD83D\uDCCB Event Logs (", logs.length, ")"] }), _jsxs("div", { style: {
                                     flex: 1,
                                     background: '#000',
                                     padding: '10px',
