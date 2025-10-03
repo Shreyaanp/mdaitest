@@ -315,30 +315,27 @@ async def debug_app_ready(payload: dict[str, Any] | None = Body(default=None)) -
 
 @app.get("/preview")
 async def preview_stream() -> StreamingResponse:
-    """Stream preview from active camera source (realsense or webcam)."""
-    boundary = "frame"
-
-    async def frame_iterator() -> AsyncIterator[bytes]:
-        try:
-            # Route to appropriate camera source
-            if active_camera_source == "webcam":
-                source = webcam_service.preview_stream()
-            else:
-                source = manager.preview_frames()
-            
-            async for frame in source:
-                header = (
-                    f"--{boundary}\r\n"
-                    f"Content-Type: image/jpeg\r\n"
-                    f"Content-Length: {len(frame)}\r\n\r\n"
-                ).encode("ascii")
-                yield header + frame + b"\r\n"
-        except Exception as e:
-            logger.error(f"Preview stream error: {e}")
-            # Stream will end gracefully
-
-    media_type = f"multipart/x-mixed-replace; boundary={boundary}"
-    return StreamingResponse(frame_iterator(), media_type=media_type)
+    """
+    Preview stream DISABLED to save Raspberry Pi resources.
+    
+    Returns a static placeholder image instead of live MJPEG stream.
+    This saves significant CPU by avoiding JPEG encoding on every frame.
+    """
+    # Return a simple static response instead of streaming
+    from fastapi.responses import Response
+    
+    # Return a 1x1 black pixel PNG
+    black_pixel = b'\x89PNG\r\n\x1a\n\x00\x00\x00\rIHDR\x00\x00\x00\x01\x00\x00\x00\x01\x08\x02\x00\x00\x00\x90wS\xde\x00\x00\x00\x0cIDATx\x9cc\x00\x01\x00\x00\x05\x00\x01\r\n-\xb4\x00\x00\x00\x00IEND\xaeB`\x82'
+    
+    return Response(
+        content=black_pixel,
+        media_type="image/png",
+        headers={
+            "Cache-Control": "no-cache, no-store, must-revalidate",
+            "Pragma": "no-cache",
+            "Expires": "0"
+        }
+    )
 
 
 @app.websocket("/ws/ui")

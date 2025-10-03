@@ -22145,3 +22145,1456 @@
 2025-10-03 13:38:42,650 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
 2025-10-03 13:38:43,781 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
 2025-10-03 13:38:44,911 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:38:46,041 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:38:47,170 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:38:48,298 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:38:49,426 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:38:50,558 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:38:51,690 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:38:52,817 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:38:53,948 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:38:55,079 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:38:56,208 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:38:57,340 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:38:58,471 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:38:59,600 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:00,739 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:01,867 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:02,997 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:04,128 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:05,258 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:06,391 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:07,519 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:08,651 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:09,782 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:10,915 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:12,047 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:13,177 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:14,308 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:15,437 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:16,563 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:17,689 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:18,818 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:19,945 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:21,068 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:22,198 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:23,327 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:24,464 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:25,594 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:26,724 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:27,852 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:28,982 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:30,109 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:31,242 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:32,369 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:33,496 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:34,624 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:35,758 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:36,887 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:38,019 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:39,150 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:40,279 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:41,407 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:42,539 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:43,668 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:44,800 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:45,928 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:47,058 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:48,187 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:49,321 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:50,451 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:51,582 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:52,712 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:53,845 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:54,978 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:56,107 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:57,235 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:58,361 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:39:59,495 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:00,623 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:01,749 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:02,878 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:04,016 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:05,145 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:06,276 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:07,405 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:08,537 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:09,665 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:10,790 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:11,915 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:13,045 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:14,170 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:15,299 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:16,428 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:17,559 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:18,691 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:19,822 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:20,950 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:22,079 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:23,214 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:24,343 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:25,471 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:26,600 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:27,730 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:28,857 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:29,988 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:31,120 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:32,249 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:33,380 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:34,510 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:35,638 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:36,766 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:37,890 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:39,016 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:40,146 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:41,276 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:42,405 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:43,535 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:44,666 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:45,797 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:46,926 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:48,057 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:49,186 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:50,317 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:51,444 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:52,575 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:53,698 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:54,830 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:55,962 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:57,091 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:58,222 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:40:59,351 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:00,484 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:01,615 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:02,741 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:03,869 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:04,996 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:06,125 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:07,252 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:08,380 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:09,510 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:10,639 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:11,770 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:12,906 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:14,036 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:15,165 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:16,294 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:17,420 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:18,549 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:19,678 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:20,807 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:21,937 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:23,069 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:24,200 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:25,330 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:26,458 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:27,593 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:28,721 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:29,847 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:30,975 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:32,099 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:33,233 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:34,365 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:35,495 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:36,628 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:37,757 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:38,887 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:40,015 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:41,144 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:42,272 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:43,398 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:44,525 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:45,652 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:46,784 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:47,913 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:49,041 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:50,171 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:51,301 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:52,434 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:53,562 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:54,689 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:55,817 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:56,945 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:58,075 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:41:59,204 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:00,334 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:01,463 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:02,594 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:03,720 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:04,850 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:05,980 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:07,109 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:08,234 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:09,362 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:10,492 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:11,619 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:12,747 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:13,873 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:14,999 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:16,131 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:17,261 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:18,390 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:19,519 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:20,652 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:21,782 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:22,907 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:24,035 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:25,162 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:26,287 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:27,412 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:28,540 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:29,669 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:30,798 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:31,929 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:33,058 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:34,187 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:35,319 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:36,450 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:37,576 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:38,705 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:39,833 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:40,960 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:42,086 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:43,212 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:44,343 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:45,472 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:46,601 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:47,731 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:48,865 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:49,994 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:51,123 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:52,254 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:53,384 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:54,510 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:55,639 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:56,765 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:57,893 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:42:59,021 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:00,149 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:01,276 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:02,405 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:03,533 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:04,659 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:05,786 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:06,914 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:08,044 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:09,174 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:10,304 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:11,433 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:12,566 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:13,699 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:14,824 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:15,953 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:17,084 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:18,210 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:19,336 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:20,461 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:21,588 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:22,723 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:23,851 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:24,980 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:26,108 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:27,239 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:28,368 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:29,497 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:30,626 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:31,755 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:32,885 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:34,015 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:35,143 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:36,285 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:37,415 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:38,546 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:39,676 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:40,801 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:41,933 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:43,058 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:44,187 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:45,310 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:46,442 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:47,570 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:48,697 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:49,824 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:50,954 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:52,082 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:53,209 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:54,338 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:55,468 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:56,596 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:57,724 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:58,853 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:43:59,980 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:01,109 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:02,240 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:03,368 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:04,497 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:05,631 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:06,764 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:07,896 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:09,029 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:10,160 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:11,290 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:12,421 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:13,551 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:14,682 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:15,808 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:16,937 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:18,063 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:19,193 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:20,325 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:21,453 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:22,583 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:23,716 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:24,848 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:25,979 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:27,112 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:28,246 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:29,377 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:30,508 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:31,640 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:32,771 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:33,785 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:34,925 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:36,064 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:37,199 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:38,330 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:39,465 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:40,598 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:41,731 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:42,864 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:43,879 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:45,013 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:46,152 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:47,286 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:48,420 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:49,425 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:50,559 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:51,695 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:52,828 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:53,963 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:55,099 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:56,234 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:57,370 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:58,509 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:44:59,645 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:00,777 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:01,909 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:03,042 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:04,176 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:05,311 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:06,444 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:07,580 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:08,713 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:09,851 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:10,984 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:12,119 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:13,252 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:14,386 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:15,518 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:16,650 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:17,785 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:18,919 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:20,054 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:21,188 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:22,320 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:23,452 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:24,587 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:25,720 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:26,855 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:27,990 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:29,127 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:30,263 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:31,396 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:32,531 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:33,665 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:34,672 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:35,811 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:36,943 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:38,076 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:39,210 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:40,344 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:41,477 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:42,612 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:43,746 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:44,881 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:46,014 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:47,149 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:48,286 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:49,420 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:50,552 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:51,686 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:52,820 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:53,955 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:55,091 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:56,226 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:57,361 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:58,492 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:45:59,627 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:00,761 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:01,894 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:03,026 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:04,160 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:05,292 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:06,426 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:07,560 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:08,694 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:09,826 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:10,960 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:12,092 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:13,226 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:14,359 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:15,496 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:16,630 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:17,763 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:18,896 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:20,031 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:21,167 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:22,302 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:23,434 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:24,568 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:25,702 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:26,837 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:27,972 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:29,105 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:30,240 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:31,373 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:32,506 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:33,639 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:34,775 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:35,909 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:37,042 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:38,175 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:39,310 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:40,448 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:41,587 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:42,721 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:43,853 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:44,985 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:46,125 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:47,260 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:48,394 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:49,531 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:50,671 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:51,809 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:52,943 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:54,075 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:55,208 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:56,345 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:57,485 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:58,618 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:46:59,750 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:00,884 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:02,019 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:03,154 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:04,289 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:05,423 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:06,560 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:07,694 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:08,829 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:09,961 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:11,096 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:12,233 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:13,372 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:14,505 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:15,639 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:16,774 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:17,908 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:19,042 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:20,174 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:21,307 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:22,441 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:23,577 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:24,710 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:25,840 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:26,973 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:28,107 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:29,240 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:30,374 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:31,508 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:32,641 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:33,774 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:34,908 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:36,041 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:37,174 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:38,308 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:39,441 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:40,574 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:41,706 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:42,839 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:43,974 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:45,108 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:46,243 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:47,375 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:48,508 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:49,640 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:50,774 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:51,907 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:53,040 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:54,173 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:55,307 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:56,440 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:57,572 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:58,705 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:47:59,841 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:00,977 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:02,108 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:03,242 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:04,377 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:05,513 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:06,646 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:07,780 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:08,915 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:10,048 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:11,185 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:12,320 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:13,454 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:14,586 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:15,721 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:16,854 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:17,987 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:19,120 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:20,256 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:21,389 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:22,523 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:23,656 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:24,789 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:25,922 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:27,056 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:28,191 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:29,322 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:30,455 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:31,588 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:32,723 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:33,856 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:34,990 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:36,122 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:37,255 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:38,389 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:39,522 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:40,655 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:41,790 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:42,925 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:44,061 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 104mm 100-500mm (TRIGGER)
+2025-10-03 13:48:45,197 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:48:46,332 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 112mm 100-500mm (TRIGGER)
+2025-10-03 13:48:47,467 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 110mm 100-500mm (TRIGGER)
+2025-10-03 13:48:48,606 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 110mm 100-500mm (TRIGGER)
+2025-10-03 13:48:49,739 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 110mm 100-500mm (TRIGGER)
+2025-10-03 13:48:50,872 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 110mm 100-500mm (TRIGGER)
+2025-10-03 13:48:52,005 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 110mm 100-500mm (TRIGGER)
+2025-10-03 13:48:53,139 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 110mm 100-500mm (TRIGGER)
+2025-10-03 13:48:54,272 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 110mm 100-500mm (TRIGGER)
+2025-10-03 13:48:55,406 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 110mm 100-500mm (TRIGGER)
+2025-10-03 13:48:56,538 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 110mm 100-500mm (TRIGGER)
+2025-10-03 13:48:57,673 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 110mm 100-500mm (TRIGGER)
+2025-10-03 13:48:58,808 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 110mm 100-500mm (TRIGGER)
+2025-10-03 13:48:59,942 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 110mm 100-500mm (TRIGGER)
+2025-10-03 13:49:01,075 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 110mm 100-500mm (TRIGGER)
+2025-10-03 13:49:02,207 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 110mm 100-500mm (TRIGGER)
+2025-10-03 13:49:02,675 | INFO | app.session_manager | Stopping session manager
+2025-10-03 13:49:02,736 | INFO | app.sensors.python_tof | Python ToF sensor stopped
+2025-10-03 13:49:02,736 | INFO | app.sensors.python_tof | Python ToF provider stopped
+2025-10-03 13:49:02,774 | INFO | app.session_manager | Watchdog loop cancelled
+2025-10-03 13:49:02,775 | INFO | app.session_manager | Session manager stopped
+2025-10-03 13:49:02,797 | INFO | webcam_service | Webcam preview loop stopped
+2025-10-03 13:49:02,798 | INFO | webcam_service | Webcam service stopped
+2025-10-03 13:49:02,799 | INFO | app.main | Application shutdown complete
+2025-10-03 13:49:04,776 | INFO | app.session_manager | 🐍 Using Python ToF implementation
+2025-10-03 13:49:04,945 | INFO | app.main | 📷 Default camera source: realsense
+2025-10-03 13:49:04,958 | INFO | app.session_manager | Starting session manager
+2025-10-03 13:49:04,959 | INFO | app.sensors.python_tof | Initializing VL53L0X (attempt 1/3)...
+2025-10-03 13:49:05,011 | INFO | app.sensors.python_tof | VL53L0X found: Model ID 0xee, Revision ID 0x10
+2025-10-03 13:49:05,115 | INFO | app.sensors.python_tof | ✅ VL53L0X initialization successful (test reading: 106mm)
+2025-10-03 13:49:05,116 | INFO | app.sensors.python_tof | Python ToF sensor initialized on I2C bus 1, address 0x29
+2025-10-03 13:49:05,116 | INFO | app.sensors.python_tof | Python ToF provider started @ 10Hz
+2025-10-03 13:49:05,116 | INFO | app.session_manager | Session manager started in IDLE state (camera inactive)
+2025-10-03 13:49:05,116 | INFO | webcam_service | Webcam service started
+2025-10-03 13:49:05,116 | INFO | app.main | Application started successfully (including webcam service)
+2025-10-03 13:49:05,116 | INFO | app.sensors.tof | ToF sensor active (range=100-500mm, debounce=10000ms)
+2025-10-03 13:49:05,117 | INFO | app.session_manager | Watchdog loop started
+2025-10-03 13:49:05,158 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 106mm 100-500mm (TRIGGER)
+2025-10-03 13:49:05,158 | INFO | app.session_manager | 👆 ToF triggered (distance=106mm) - starting session
+2025-10-03 13:49:05,976 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-10-03 13:49:06,292 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 110mm 100-500mm (TRIGGER)
+2025-10-03 13:49:07,006 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-10-03 13:49:07,007 | INFO | app.session_manager | 📱 Token issued: eyJhbGciOiJI... (expires in 180s)
+2025-10-03 13:49:07,425 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 113mm 100-500mm (TRIGGER)
+2025-10-03 13:49:08,558 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:49:08,976 | INFO | app.session_manager | 👋 Showing hello human screen (3.0s)
+2025-10-03 13:49:09,692 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 102mm 100-500mm (TRIGGER)
+2025-10-03 13:49:10,825 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 98mm < 100mm (TOO CLOSE)
+2025-10-03 13:49:11,959 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 92mm < 100mm (TOO CLOSE)
+2025-10-03 13:49:11,977 | INFO | app.session_manager | 📱 Showing scan prompt screen
+2025-10-03 13:49:11,977 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiNTYwZjNhZjQxZjljNDY3MTkzYjcwNDQ4ZjBjYmU2NGUiLCJleHAiOjE3NTk0OTk1MjZ9.IpVKqPHxNYEOLIBcvEEJmr0aQVOmGgmyT5y1ePLZDO0
+2025-10-03 13:49:13,048 | INFO | app.session_manager | 📱 QR code displayed - waiting for mobile app
+2025-10-03 13:49:13,048 | INFO | app.session_manager | ⏳ Waiting for mobile app connection (timeout=175.0s)
+2025-10-03 13:49:13,048 | INFO | app.session_manager | Bridge message received: joined
+2025-10-03 13:49:13,087 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 88mm < 100mm (TOO CLOSE)
+2025-10-03 13:49:14,218 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 86mm < 100mm (TOO CLOSE)
+2025-10-03 13:49:15,207 | INFO | app.session_manager | ⚠️ User out of range (distance=5000mm) - will cancel in 10.0s if they don't return...
+2025-10-03 13:49:15,348 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 84mm < 100mm (TOO CLOSE)
+2025-10-03 13:49:16,475 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 84mm < 100mm (TOO CLOSE)
+2025-10-03 13:49:17,606 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 83mm < 100mm (TOO CLOSE)
+2025-10-03 13:49:18,736 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 84mm < 100mm (TOO CLOSE)
+2025-10-03 13:49:19,865 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 85mm < 100mm (TOO CLOSE)
+2025-10-03 13:49:20,996 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 86mm < 100mm (TOO CLOSE)
+2025-10-03 13:49:22,127 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 87mm < 100mm (TOO CLOSE)
+2025-10-03 13:49:23,257 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 88mm < 100mm (TOO CLOSE)
+2025-10-03 13:49:24,387 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 88mm < 100mm (TOO CLOSE)
+2025-10-03 13:49:25,207 | WARNING | app.session_manager | 🚶 User away for 10.0s - cancelling session
+2025-10-03 13:49:25,207 | INFO | app.session_manager | ⚠️ Session cancelled (user walked away)
+2025-10-03 13:49:25,207 | INFO | app.session_manager | 📷 Camera deactivated in cleanup
+2025-10-03 13:49:25,272 | INFO | app.session_manager | Stopping session manager
+2025-10-03 13:49:25,338 | INFO | app.sensors.python_tof | Python ToF sensor stopped
+2025-10-03 13:49:25,339 | INFO | app.sensors.python_tof | Python ToF provider stopped
+2025-10-03 13:49:25,388 | INFO | app.session_manager | Watchdog loop cancelled
+2025-10-03 13:49:25,511 | INFO | app.session_manager | 🔄 Session cleaned up, returning to idle
+2025-10-03 13:49:25,512 | INFO | app.session_manager | Session manager stopped
+2025-10-03 13:49:25,574 | INFO | webcam_service | Webcam preview loop stopped
+2025-10-03 13:49:25,574 | INFO | webcam_service | Webcam service stopped
+2025-10-03 13:49:25,574 | INFO | app.main | Application shutdown complete
+2025-10-03 13:49:27,036 | INFO | app.session_manager | 🐍 Using Python ToF implementation
+2025-10-03 13:49:27,166 | INFO | app.main | 📷 Default camera source: realsense
+2025-10-03 13:49:27,175 | INFO | app.session_manager | Starting session manager
+2025-10-03 13:49:27,175 | INFO | app.sensors.python_tof | Initializing VL53L0X (attempt 1/3)...
+2025-10-03 13:49:27,227 | INFO | app.sensors.python_tof | VL53L0X found: Model ID 0xee, Revision ID 0x10
+2025-10-03 13:49:27,332 | INFO | app.sensors.python_tof | ✅ VL53L0X initialization successful (test reading: 88mm)
+2025-10-03 13:49:27,332 | INFO | app.sensors.python_tof | Python ToF sensor initialized on I2C bus 1, address 0x29
+2025-10-03 13:49:27,332 | INFO | app.sensors.python_tof | Python ToF provider started @ 10Hz
+2025-10-03 13:49:27,332 | INFO | app.session_manager | Session manager started in IDLE state (camera inactive)
+2025-10-03 13:49:27,332 | INFO | webcam_service | Webcam service started
+2025-10-03 13:49:27,332 | INFO | app.main | Application started successfully (including webcam service)
+2025-10-03 13:49:27,333 | INFO | app.sensors.tof | ToF sensor active (range=100-500mm, debounce=10000ms)
+2025-10-03 13:49:27,333 | INFO | app.session_manager | Watchdog loop started
+2025-10-03 13:49:27,374 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 88mm < 100mm (TOO CLOSE)
+2025-10-03 13:49:28,505 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 89mm < 100mm (TOO CLOSE)
+2025-10-03 13:49:29,634 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 88mm < 100mm (TOO CLOSE)
+2025-10-03 13:49:30,764 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 88mm < 100mm (TOO CLOSE)
+2025-10-03 13:49:31,894 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 89mm < 100mm (TOO CLOSE)
+2025-10-03 13:49:33,025 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 91mm < 100mm (TOO CLOSE)
+2025-10-03 13:49:34,155 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 92mm < 100mm (TOO CLOSE)
+2025-10-03 13:49:35,284 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 93mm < 100mm (TOO CLOSE)
+2025-10-03 13:49:36,413 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 94mm < 100mm (TOO CLOSE)
+2025-10-03 13:49:37,543 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 97mm < 100mm (TOO CLOSE)
+2025-10-03 13:49:38,671 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 97mm < 100mm (TOO CLOSE)
+2025-10-03 13:49:39,799 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 99mm < 100mm (TOO CLOSE)
+2025-10-03 13:49:40,082 | INFO | app.session_manager | 👆 ToF triggered (distance=100mm) - starting session
+2025-10-03 13:49:40,082 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-10-03 13:49:40,913 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-10-03 13:49:40,917 | INFO | app.session_manager | 📱 Token issued: eyJhbGciOiJI... (expires in 180s)
+2025-10-03 13:49:40,934 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 98mm < 100mm (TOO CLOSE)
+2025-10-03 13:49:42,065 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 98mm < 100mm (TOO CLOSE)
+2025-10-03 13:49:43,082 | INFO | app.session_manager | 👋 Showing hello human screen (3.0s)
+2025-10-03 13:49:43,197 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 99mm < 100mm (TOO CLOSE)
+2025-10-03 13:49:44,328 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 100mm 100-500mm (TRIGGER)
+2025-10-03 13:49:45,460 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 100mm 100-500mm (TRIGGER)
+2025-10-03 13:49:46,083 | INFO | app.session_manager | 📱 Showing scan prompt screen
+2025-10-03 13:49:46,083 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiZGQ3MTY3YjU1OWI5NDhmOTg4ZGRhMmU4YTgwZjY1NDkiLCJleHAiOjE3NTk0OTk1NjB9.F5Yd7vm5kkDa0Xpr41dRqMJz3sCgteD4Xk7IsIjsE60
+2025-10-03 13:49:46,465 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 101mm 100-500mm (TRIGGER)
+2025-10-03 13:49:46,936 | INFO | app.session_manager | 📱 QR code displayed - waiting for mobile app
+2025-10-03 13:49:46,939 | INFO | app.session_manager | ⏳ Waiting for mobile app connection (timeout=175.0s)
+2025-10-03 13:49:46,939 | INFO | app.session_manager | Bridge message received: joined
+2025-10-03 13:49:47,595 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 103mm 100-500mm (TRIGGER)
+2025-10-03 13:49:48,727 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 103mm 100-500mm (TRIGGER)
+2025-10-03 13:49:49,858 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 104mm 100-500mm (TRIGGER)
+2025-10-03 13:49:50,989 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 105mm 100-500mm (TRIGGER)
+2025-10-03 13:49:52,121 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 105mm 100-500mm (TRIGGER)
+2025-10-03 13:49:53,252 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 105mm 100-500mm (TRIGGER)
+2025-10-03 13:49:54,381 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 107mm 100-500mm (TRIGGER)
+2025-10-03 13:49:55,510 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 106mm 100-500mm (TRIGGER)
+2025-10-03 13:49:56,641 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 106mm 100-500mm (TRIGGER)
+2025-10-03 13:49:57,771 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 107mm 100-500mm (TRIGGER)
+2025-10-03 13:49:58,900 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 108mm 100-500mm (TRIGGER)
+2025-10-03 13:50:00,032 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 106mm 100-500mm (TRIGGER)
+2025-10-03 13:50:01,163 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:50:02,293 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 107mm 100-500mm (TRIGGER)
+2025-10-03 13:50:03,425 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 108mm 100-500mm (TRIGGER)
+2025-10-03 13:50:04,556 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 108mm 100-500mm (TRIGGER)
+2025-10-03 13:50:05,687 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 108mm 100-500mm (TRIGGER)
+2025-10-03 13:50:06,816 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:50:07,945 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 110mm 100-500mm (TRIGGER)
+2025-10-03 13:50:09,076 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 108mm 100-500mm (TRIGGER)
+2025-10-03 13:50:10,206 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 108mm 100-500mm (TRIGGER)
+2025-10-03 13:50:11,337 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 107mm 100-500mm (TRIGGER)
+2025-10-03 13:50:12,469 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:50:13,599 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 107mm 100-500mm (TRIGGER)
+2025-10-03 13:50:14,731 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 108mm 100-500mm (TRIGGER)
+2025-10-03 13:50:15,863 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:50:16,993 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 110mm 100-500mm (TRIGGER)
+2025-10-03 13:50:18,124 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 108mm 100-500mm (TRIGGER)
+2025-10-03 13:50:19,255 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 111mm 100-500mm (TRIGGER)
+2025-10-03 13:50:20,384 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 112mm 100-500mm (TRIGGER)
+2025-10-03 13:50:21,511 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 111mm 100-500mm (TRIGGER)
+2025-10-03 13:50:22,640 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 110mm 100-500mm (TRIGGER)
+2025-10-03 13:50:23,769 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:50:24,899 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:50:26,031 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 108mm 100-500mm (TRIGGER)
+2025-10-03 13:50:27,162 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:50:27,337 | INFO | app.session_manager | Stopping session manager
+2025-10-03 13:50:27,404 | INFO | app.sensors.python_tof | Python ToF sensor stopped
+2025-10-03 13:50:27,405 | INFO | app.sensors.python_tof | Python ToF provider stopped
+2025-10-03 13:50:27,415 | INFO | app.session_manager | Watchdog loop cancelled
+2025-10-03 13:50:27,742 | INFO | app.session_manager | Session manager stopped
+2025-10-03 13:50:27,839 | INFO | webcam_service | Webcam preview loop stopped
+2025-10-03 13:50:27,840 | INFO | webcam_service | Webcam service stopped
+2025-10-03 13:50:27,840 | INFO | app.main | Application shutdown complete
+2025-10-03 13:50:29,282 | INFO | app.session_manager | 🐍 Using Python ToF implementation
+2025-10-03 13:50:29,411 | INFO | app.main | 📷 Default camera source: realsense
+2025-10-03 13:50:29,420 | INFO | app.session_manager | Starting session manager
+2025-10-03 13:50:29,421 | INFO | app.sensors.python_tof | Initializing VL53L0X (attempt 1/3)...
+2025-10-03 13:50:29,472 | INFO | app.sensors.python_tof | VL53L0X found: Model ID 0xee, Revision ID 0x10
+2025-10-03 13:50:29,577 | INFO | app.sensors.python_tof | ✅ VL53L0X initialization successful (test reading: 107mm)
+2025-10-03 13:50:29,578 | INFO | app.sensors.python_tof | Python ToF sensor initialized on I2C bus 1, address 0x29
+2025-10-03 13:50:29,578 | INFO | app.sensors.python_tof | Python ToF provider started @ 10Hz
+2025-10-03 13:50:29,578 | INFO | app.session_manager | Session manager started in IDLE state (camera inactive)
+2025-10-03 13:50:29,578 | INFO | webcam_service | Webcam service started
+2025-10-03 13:50:29,578 | INFO | app.main | Application started successfully (including webcam service)
+2025-10-03 13:50:29,578 | INFO | app.sensors.tof | ToF sensor active (range=100-500mm, debounce=10000ms)
+2025-10-03 13:50:29,578 | INFO | app.session_manager | Watchdog loop started
+2025-10-03 13:50:31,038 | INFO | app.session_manager | 🐍 Using Python ToF implementation
+2025-10-03 13:50:31,171 | INFO | app.main | 📷 Default camera source: realsense
+2025-10-03 13:50:31,179 | INFO | app.session_manager | Starting session manager
+2025-10-03 13:50:31,180 | INFO | app.sensors.python_tof | Initializing VL53L0X (attempt 1/3)...
+2025-10-03 13:50:31,232 | INFO | app.sensors.python_tof | VL53L0X found: Model ID 0xee, Revision ID 0x10
+2025-10-03 13:50:31,336 | INFO | app.sensors.python_tof | ✅ VL53L0X initialization successful (test reading: 106mm)
+2025-10-03 13:50:31,337 | INFO | app.sensors.python_tof | Python ToF sensor initialized on I2C bus 1, address 0x29
+2025-10-03 13:50:31,337 | INFO | app.sensors.python_tof | Python ToF provider started @ 10Hz
+2025-10-03 13:50:31,337 | INFO | app.session_manager | Session manager started in IDLE state (camera inactive)
+2025-10-03 13:50:31,337 | INFO | webcam_service | Webcam service started
+2025-10-03 13:50:31,337 | INFO | app.main | Application started successfully (including webcam service)
+2025-10-03 13:50:31,338 | INFO | app.sensors.tof | ToF sensor active (range=100-500mm, debounce=10000ms)
+2025-10-03 13:50:31,338 | INFO | app.session_manager | Watchdog loop started
+2025-10-03 13:50:31,379 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 106mm 100-500mm (TRIGGER)
+2025-10-03 13:50:31,379 | INFO | app.session_manager | 👆 ToF triggered (distance=106mm) - starting session
+2025-10-03 13:50:32,238 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-10-03 13:50:32,510 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 105mm 100-500mm (TRIGGER)
+2025-10-03 13:50:33,112 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-10-03 13:50:33,113 | INFO | app.session_manager | 📱 Token issued: eyJhbGciOiJI... (expires in 180s)
+2025-10-03 13:50:33,644 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 105mm 100-500mm (TRIGGER)
+2025-10-03 13:50:34,779 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 106mm 100-500mm (TRIGGER)
+2025-10-03 13:50:35,238 | INFO | app.session_manager | 👋 Showing hello human screen (3.0s)
+2025-10-03 13:50:35,914 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 107mm 100-500mm (TRIGGER)
+2025-10-03 13:50:37,046 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 107mm 100-500mm (TRIGGER)
+2025-10-03 13:50:38,182 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 106mm 100-500mm (TRIGGER)
+2025-10-03 13:50:38,239 | INFO | app.session_manager | 📱 Showing scan prompt screen
+2025-10-03 13:50:38,239 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiZjc1OTc3OGEzNzhjNGZmNDg2ZjdiNjI4MWNlNzc0M2MiLCJleHAiOjE3NTk0OTk2MTN9.Ypo2wKNSJe5sT4F_djfIJGs5iJGWNp3QhAiY8l9Fyc0
+2025-10-03 13:50:39,186 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 108mm 100-500mm (TRIGGER)
+2025-10-03 13:50:40,293 | INFO | app.session_manager | 📱 QR code displayed - waiting for mobile app
+2025-10-03 13:50:40,293 | INFO | app.session_manager | ⏳ Waiting for mobile app connection (timeout=175.0s)
+2025-10-03 13:50:40,294 | INFO | app.session_manager | Bridge message received: joined
+2025-10-03 13:50:40,316 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 13:50:41,449 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 108mm 100-500mm (TRIGGER)
+2025-10-03 13:50:42,580 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 110mm 100-500mm (TRIGGER)
+2025-10-03 13:50:43,710 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 110mm 100-500mm (TRIGGER)
+2025-10-03 13:50:44,840 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 112mm 100-500mm (TRIGGER)
+2025-10-03 13:50:45,967 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 112mm 100-500mm (TRIGGER)
+2025-10-03 13:50:47,098 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 112mm 100-500mm (TRIGGER)
+2025-10-03 13:50:48,228 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 111mm 100-500mm (TRIGGER)
+2025-10-03 13:50:49,356 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 113mm 100-500mm (TRIGGER)
+2025-10-03 13:50:50,488 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 111mm 100-500mm (TRIGGER)
+2025-10-03 13:50:51,619 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 111mm 100-500mm (TRIGGER)
+2025-10-03 13:50:52,750 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 111mm 100-500mm (TRIGGER)
+2025-10-03 13:50:53,880 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 111mm 100-500mm (TRIGGER)
+2025-10-03 13:50:55,009 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 112mm 100-500mm (TRIGGER)
+2025-10-03 13:50:56,139 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 111mm 100-500mm (TRIGGER)
+2025-10-03 13:50:57,268 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 112mm 100-500mm (TRIGGER)
+2025-10-03 13:50:58,399 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 112mm 100-500mm (TRIGGER)
+2025-10-03 13:50:59,532 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 112mm 100-500mm (TRIGGER)
+2025-10-03 13:51:00,663 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 112mm 100-500mm (TRIGGER)
+2025-10-03 13:51:01,793 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 112mm 100-500mm (TRIGGER)
+2025-10-03 13:51:02,920 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 110mm 100-500mm (TRIGGER)
+2025-10-03 13:51:04,048 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 110mm 100-500mm (TRIGGER)
+2025-10-03 13:51:05,176 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 112mm 100-500mm (TRIGGER)
+2025-10-03 13:51:06,308 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 111mm 100-500mm (TRIGGER)
+2025-10-03 13:51:07,434 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 111mm 100-500mm (TRIGGER)
+2025-10-03 13:51:08,564 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 111mm 100-500mm (TRIGGER)
+2025-10-03 13:51:09,698 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 113mm 100-500mm (TRIGGER)
+2025-10-03 13:51:10,827 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 112mm 100-500mm (TRIGGER)
+2025-10-03 13:51:11,958 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 112mm 100-500mm (TRIGGER)
+2025-10-03 13:51:13,090 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 113mm 100-500mm (TRIGGER)
+2025-10-03 13:51:14,221 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 113mm 100-500mm (TRIGGER)
+2025-10-03 13:51:15,353 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 112mm 100-500mm (TRIGGER)
+2025-10-03 13:51:16,483 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 113mm 100-500mm (TRIGGER)
+2025-10-03 13:51:17,614 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 112mm 100-500mm (TRIGGER)
+2025-10-03 13:51:18,747 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 113mm 100-500mm (TRIGGER)
+2025-10-03 13:51:19,878 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 113mm 100-500mm (TRIGGER)
+2025-10-03 13:51:21,008 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 113mm 100-500mm (TRIGGER)
+2025-10-03 13:51:22,139 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 114mm 100-500mm (TRIGGER)
+2025-10-03 13:51:23,269 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 113mm 100-500mm (TRIGGER)
+2025-10-03 13:51:24,399 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 113mm 100-500mm (TRIGGER)
+2025-10-03 13:51:25,525 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 114mm 100-500mm (TRIGGER)
+2025-10-03 13:51:26,655 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 113mm 100-500mm (TRIGGER)
+2025-10-03 13:51:27,787 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 113mm 100-500mm (TRIGGER)
+2025-10-03 13:51:28,917 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 114mm 100-500mm (TRIGGER)
+2025-10-03 13:51:30,049 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 114mm 100-500mm (TRIGGER)
+2025-10-03 13:51:31,182 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 112mm 100-500mm (TRIGGER)
+2025-10-03 13:51:31,434 | INFO | app.session_manager | Stopping session manager
+2025-10-03 13:51:31,567 | INFO | app.sensors.python_tof | Python ToF sensor stopped
+2025-10-03 13:51:31,567 | INFO | app.sensors.python_tof | Python ToF provider stopped
+2025-10-03 13:51:31,592 | INFO | app.session_manager | Watchdog loop cancelled
+2025-10-03 13:51:32,471 | INFO | app.session_manager | Session manager stopped
+2025-10-03 13:51:32,536 | INFO | webcam_service | Webcam preview loop stopped
+2025-10-03 13:51:32,537 | INFO | webcam_service | Webcam service stopped
+2025-10-03 13:51:32,537 | INFO | app.main | Application shutdown complete
+2025-10-03 13:53:45,488 | INFO | app.main | 📷 Default camera source: realsense
+2025-10-03 13:53:45,496 | INFO | app.session_manager | Starting session manager
+2025-10-03 13:53:45,496 | INFO | d435i_liveness | Hardware request: idle_detection (total=1)
+2025-10-03 13:53:45,497 | INFO | d435i_liveness | Activating RealSense pipeline
+2025-10-03 13:53:45,513 | INFO | d435i_liveness | Operational mode changed: idle_detection → idle_detection
+2025-10-03 13:53:45,513 | INFO | app.session_manager | 🎥 RealSense started in idle_detection mode (1s burst intervals)
+2025-10-03 13:53:45,513 | INFO | app.session_manager | Session manager started in IDLE state (camera in idle detection mode)
+2025-10-03 13:53:45,513 | INFO | webcam_service | Webcam service started
+2025-10-03 13:53:45,513 | INFO | app.main | Application started successfully (including webcam service)
+2025-10-03 13:53:45,513 | INFO | app.session_manager | Watchdog loop started
+2025-10-03 13:53:45,689 | INFO | d435i_liveness | Connected to Intel RealSense D435I (S/N 215322072881) depth_scale=0.001000 m
+2025-10-03 13:55:15,597 | INFO | app.session_manager | Stopping session manager
+2025-10-03 13:55:16,768 | INFO | app.session_manager | Watchdog loop cancelled
+2025-10-03 13:55:16,773 | INFO | app.session_manager | Session manager stopped
+2025-10-03 13:55:16,804 | INFO | webcam_service | Webcam preview loop stopped
+2025-10-03 13:55:16,804 | INFO | webcam_service | Webcam service stopped
+2025-10-03 13:55:16,804 | INFO | app.main | Application shutdown complete
+2025-10-03 13:55:18,413 | INFO | app.main | 📷 Default camera source: realsense
+2025-10-03 13:55:18,422 | INFO | app.session_manager | Starting session manager
+2025-10-03 13:55:18,422 | INFO | d435i_liveness | Hardware request: idle_detection (total=1)
+2025-10-03 13:55:18,422 | INFO | d435i_liveness | Activating RealSense pipeline
+2025-10-03 13:55:18,434 | INFO | d435i_liveness | Operational mode changed: idle_detection → idle_detection
+2025-10-03 13:55:18,434 | INFO | app.session_manager | 🎥 RealSense started in idle_detection mode (1s burst intervals)
+2025-10-03 13:55:18,434 | INFO | app.session_manager | Session manager started in IDLE state (camera in idle detection mode)
+2025-10-03 13:55:18,434 | INFO | webcam_service | Webcam service started
+2025-10-03 13:55:18,434 | INFO | app.main | Application started successfully (including webcam service)
+2025-10-03 13:55:18,435 | INFO | app.session_manager | Watchdog loop started
+2025-10-03 13:55:18,589 | INFO | d435i_liveness | Connected to Intel RealSense D435I (S/N 215322072881) depth_scale=0.001000 m
+2025-10-03 13:55:48,485 | INFO | app.session_manager | Stopping session manager
+2025-10-03 13:55:49,409 | INFO | app.session_manager | Watchdog loop cancelled
+2025-10-03 13:55:49,413 | INFO | app.session_manager | Session manager stopped
+2025-10-03 13:55:49,513 | INFO | webcam_service | Webcam preview loop stopped
+2025-10-03 13:55:49,514 | INFO | webcam_service | Webcam service stopped
+2025-10-03 13:55:49,514 | INFO | app.main | Application shutdown complete
+2025-10-03 13:55:51,102 | INFO | app.main | 📷 Default camera source: realsense
+2025-10-03 13:55:51,112 | INFO | app.session_manager | Starting session manager
+2025-10-03 13:55:51,112 | INFO | d435i_liveness | Hardware request: idle_detection (total=1)
+2025-10-03 13:55:51,112 | INFO | d435i_liveness | Activating RealSense pipeline
+2025-10-03 13:55:51,124 | INFO | d435i_liveness | Operational mode changed: idle_detection → idle_detection
+2025-10-03 13:55:51,125 | INFO | app.session_manager | 🎥 RealSense started in idle_detection mode (1s burst intervals)
+2025-10-03 13:55:51,125 | INFO | app.session_manager | Session manager started in IDLE state (camera in idle detection mode)
+2025-10-03 13:55:51,125 | INFO | webcam_service | Webcam service started
+2025-10-03 13:55:51,125 | INFO | app.main | Application started successfully (including webcam service)
+2025-10-03 13:55:51,125 | INFO | app.session_manager | Watchdog loop started
+2025-10-03 13:55:51,280 | INFO | d435i_liveness | Connected to Intel RealSense D435I (S/N 215322072881) depth_scale=0.001000 m
+2025-10-03 13:57:51,224 | INFO | app.session_manager | Stopping session manager
+2025-10-03 13:57:51,619 | INFO | app.session_manager | Watchdog loop cancelled
+2025-10-03 13:57:51,624 | INFO | app.session_manager | Session manager stopped
+2025-10-03 13:57:51,654 | INFO | webcam_service | Webcam preview loop stopped
+2025-10-03 13:57:51,654 | INFO | webcam_service | Webcam service stopped
+2025-10-03 13:57:51,654 | INFO | app.main | Application shutdown complete
+2025-10-03 13:57:53,281 | INFO | app.main | 📷 Default camera source: realsense
+2025-10-03 13:57:53,290 | INFO | app.session_manager | Starting session manager
+2025-10-03 13:57:53,290 | INFO | d435i_liveness | Hardware request: idle_detection (total=1)
+2025-10-03 13:57:53,290 | INFO | d435i_liveness | Activating RealSense pipeline
+2025-10-03 13:57:53,303 | INFO | d435i_liveness | Operational mode changed: idle_detection → idle_detection
+2025-10-03 13:57:53,303 | INFO | app.session_manager | 🎥 RealSense started in idle_detection mode (1s burst intervals)
+2025-10-03 13:57:53,304 | INFO | app.session_manager | Session manager started in IDLE state (camera in idle detection mode)
+2025-10-03 13:57:53,304 | INFO | webcam_service | Webcam service started
+2025-10-03 13:57:53,304 | INFO | app.main | Application started successfully (including webcam service)
+2025-10-03 13:57:53,304 | INFO | app.session_manager | Watchdog loop started
+2025-10-03 13:57:53,459 | INFO | d435i_liveness | Connected to Intel RealSense D435I (S/N 215322072881) depth_scale=0.001000 m
+2025-10-03 13:58:28,978 | INFO | d435i_liveness | 🔍 Idle face detection: True
+2025-10-03 13:58:28,978 | INFO | app.session_manager | 👤 Face detected - starting session
+2025-10-03 13:58:28,988 | INFO | d435i_liveness | Operational mode changed: idle_detection → active
+2025-10-03 13:58:28,988 | INFO | app.session_manager | 📷 Camera switched to active mode (warm state)
+2025-10-03 13:58:28,988 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-10-03 13:58:29,863 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-10-03 13:58:29,866 | INFO | app.session_manager | 📱 Token issued: eyJhbGciOiJI... (expires in 180s)
+2025-10-03 13:58:32,000 | INFO | app.session_manager | 👋 Showing hello human screen (3.0s)
+2025-10-03 13:58:32,074 | INFO | app.session_manager | Stopping session manager
+2025-10-03 13:58:32,319 | INFO | app.session_manager | Watchdog loop cancelled
+2025-10-03 13:58:32,320 | INFO | app.session_manager | Session manager stopped
+2025-10-03 13:58:32,419 | INFO | webcam_service | Webcam preview loop stopped
+2025-10-03 13:58:32,419 | INFO | webcam_service | Webcam service stopped
+2025-10-03 13:58:32,419 | INFO | app.main | Application shutdown complete
+2025-10-03 13:58:34,315 | INFO | app.main | 📷 Default camera source: realsense
+2025-10-03 13:58:34,323 | INFO | app.session_manager | Starting session manager
+2025-10-03 13:58:34,323 | INFO | d435i_liveness | Hardware request: idle_detection (total=1)
+2025-10-03 13:58:34,323 | INFO | d435i_liveness | Activating RealSense pipeline
+2025-10-03 13:58:34,336 | INFO | d435i_liveness | Operational mode changed: idle_detection → idle_detection
+2025-10-03 13:58:34,336 | INFO | app.session_manager | 🎥 RealSense started in idle_detection mode (1s burst intervals)
+2025-10-03 13:58:34,336 | INFO | app.session_manager | Session manager started in IDLE state (camera in idle detection mode)
+2025-10-03 13:58:34,336 | INFO | webcam_service | Webcam service started
+2025-10-03 13:58:34,337 | INFO | app.main | Application started successfully (including webcam service)
+2025-10-03 13:58:34,337 | INFO | app.session_manager | Watchdog loop started
+2025-10-03 13:58:34,501 | INFO | d435i_liveness | Connected to Intel RealSense D435I (S/N 215322072881) depth_scale=0.001000 m
+2025-10-03 13:58:39,306 | INFO | d435i_liveness | 🔍 [IDLE_DETECTION] Face detection state changed: False → True
+2025-10-03 13:58:39,306 | INFO | app.session_manager | 👤 Face detected - starting session
+2025-10-03 13:58:39,315 | INFO | d435i_liveness | Operational mode changed: idle_detection → active
+2025-10-03 13:58:39,315 | INFO | app.session_manager | 📷 Camera switched to active mode (warm state)
+2025-10-03 13:58:39,315 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-10-03 13:58:40,137 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-10-03 13:58:40,140 | INFO | app.session_manager | 📱 Token issued: eyJhbGciOiJI... (expires in 180s)
+2025-10-03 13:58:42,316 | INFO | app.session_manager | 👋 Showing hello human screen (3.0s)
+2025-10-03 13:58:45,321 | INFO | app.session_manager | 📱 Showing scan prompt screen
+2025-10-03 13:58:45,322 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiMGEyZDM0ZjM1MDIyNDZiZDlmYThiM2FhNTg5M2E5NTYiLCJleHAiOjE3NTk1MDAxMDB9.HcOS3K9nduwG70EdVjuy2He-ghcPalqOT8Edw9kXtGs
+2025-10-03 13:58:45,478 | INFO | app.session_manager | Stopping session manager
+2025-10-03 13:58:46,218 | INFO | app.session_manager | Watchdog loop cancelled
+2025-10-03 13:58:46,218 | INFO | app.session_manager | Session manager stopped
+2025-10-03 13:58:46,261 | INFO | app.session_manager | 📱 QR code displayed - waiting for mobile app
+2025-10-03 13:58:46,261 | INFO | app.session_manager | ⏳ Waiting for mobile app connection (timeout=175.0s)
+2025-10-03 13:58:46,319 | INFO | webcam_service | Webcam preview loop stopped
+2025-10-03 13:58:46,319 | INFO | webcam_service | Webcam service stopped
+2025-10-03 13:58:46,319 | INFO | app.main | Application shutdown complete
+2025-10-03 13:58:48,363 | INFO | app.main | 📷 Default camera source: realsense
+2025-10-03 13:58:48,381 | INFO | app.session_manager | Starting session manager
+2025-10-03 13:58:48,382 | INFO | d435i_liveness | Hardware request: idle_detection (total=1)
+2025-10-03 13:58:48,382 | INFO | d435i_liveness | Activating RealSense pipeline
+2025-10-03 13:58:48,395 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Operational mode: idle_detection → idle_detection
+2025-10-03 13:58:48,395 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Mode details:
+2025-10-03 13:58:48,395 | INFO | d435i_liveness |    - idle_detection: 1s bursts, face detection only
+2025-10-03 13:58:48,395 | INFO | d435i_liveness |    - active: Continuous, face detection only (warm state)
+2025-10-03 13:58:48,396 | INFO | d435i_liveness |    - validation: Full liveness with depth checks
+2025-10-03 13:58:48,396 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Now in 'idle_detection' mode
+2025-10-03 13:58:48,396 | INFO | app.session_manager | 🎥 RealSense started in idle_detection mode (1s burst intervals)
+2025-10-03 13:58:48,396 | INFO | app.session_manager | Session manager started in IDLE state (camera in idle detection mode)
+2025-10-03 13:58:48,396 | INFO | webcam_service | Webcam service started
+2025-10-03 13:58:48,396 | INFO | app.main | Application started successfully (including webcam service)
+2025-10-03 13:58:48,396 | INFO | app.session_manager | Watchdog loop started
+2025-10-03 13:58:48,570 | INFO | d435i_liveness | Connected to Intel RealSense D435I (S/N 215322072881) depth_scale=0.001000 m
+2025-10-03 13:58:51,322 | INFO | d435i_liveness | 🔍 [IDLE_DETECTION] Face detection state changed: False → True
+2025-10-03 13:58:51,322 | INFO | app.session_manager | 👤 Face detected - starting session
+2025-10-03 13:58:51,330 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Operational mode: idle_detection → active
+2025-10-03 13:58:51,330 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Mode details:
+2025-10-03 13:58:51,330 | INFO | d435i_liveness |    - idle_detection: 1s bursts, face detection only
+2025-10-03 13:58:51,331 | INFO | d435i_liveness |    - active: Continuous, face detection only (warm state)
+2025-10-03 13:58:51,331 | INFO | d435i_liveness |    - validation: Full liveness with depth checks
+2025-10-03 13:58:51,331 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Now in 'active' mode
+2025-10-03 13:58:51,331 | INFO | app.session_manager | 📷 Camera switched to active mode (warm state)
+2025-10-03 13:58:51,331 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-10-03 13:58:52,232 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-10-03 13:58:52,234 | INFO | app.session_manager | 📱 Token issued: eyJhbGciOiJI... (expires in 180s)
+2025-10-03 13:58:54,330 | INFO | app.session_manager | 👋 Showing hello human screen (3.0s)
+2025-10-03 13:58:57,337 | INFO | app.session_manager | 📱 Showing scan prompt screen
+2025-10-03 13:58:57,340 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiNjRlODNjMDgwNTcxNDJmNDk0N2EwNTc5YzFmMmY5MzciLCJleHAiOjE3NTk1MDAxMTJ9.USukGIHgIn4Hfrd_1zdnenE0LX5RT5uxTkeEjyenFuM
+2025-10-03 13:58:58,205 | INFO | app.session_manager | 📱 QR code displayed - waiting for mobile app
+2025-10-03 13:58:58,206 | INFO | app.session_manager | ⏳ Waiting for mobile app connection (timeout=175.0s)
+2025-10-03 13:58:58,206 | INFO | app.session_manager | Bridge message received: joined
+2025-10-03 13:59:18,411 | INFO | app.session_manager | Stopping session manager
+2025-10-03 13:59:19,485 | INFO | app.session_manager | Watchdog loop cancelled
+2025-10-03 13:59:19,783 | INFO | app.session_manager | Session manager stopped
+2025-10-03 13:59:19,815 | INFO | webcam_service | Webcam preview loop stopped
+2025-10-03 13:59:19,815 | INFO | webcam_service | Webcam service stopped
+2025-10-03 13:59:19,815 | INFO | app.main | Application shutdown complete
+2025-10-03 13:59:21,401 | INFO | app.main | 📷 Default camera source: realsense
+2025-10-03 13:59:21,410 | INFO | app.session_manager | Starting session manager
+2025-10-03 13:59:21,410 | INFO | d435i_liveness | Hardware request: idle_detection (total=1)
+2025-10-03 13:59:21,411 | INFO | d435i_liveness | Activating RealSense pipeline
+2025-10-03 13:59:21,423 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Operational mode: idle_detection → idle_detection
+2025-10-03 13:59:21,423 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Mode details:
+2025-10-03 13:59:21,423 | INFO | d435i_liveness |    - idle_detection: 1s bursts, face detection only
+2025-10-03 13:59:21,423 | INFO | d435i_liveness |    - active: Continuous, face detection only (warm state)
+2025-10-03 13:59:21,423 | INFO | d435i_liveness |    - validation: Full liveness with depth checks
+2025-10-03 13:59:21,423 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Now in 'idle_detection' mode
+2025-10-03 13:59:21,423 | INFO | app.session_manager | 🎥 RealSense started in idle_detection mode (1s burst intervals)
+2025-10-03 13:59:21,423 | INFO | app.session_manager | Session manager started in IDLE state (camera in idle detection mode)
+2025-10-03 13:59:21,423 | INFO | webcam_service | Webcam service started
+2025-10-03 13:59:21,424 | INFO | app.main | Application started successfully (including webcam service)
+2025-10-03 13:59:21,424 | INFO | app.session_manager | Watchdog loop started
+2025-10-03 13:59:21,577 | INFO | d435i_liveness | Connected to Intel RealSense D435I (S/N 215322072881) depth_scale=0.001000 m
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       2025-10-03 13:59:40,478 | INFO | app.main | 📷 Default camera source: realsense
+2025-10-03 13:59:40,502 | INFO | app.session_manager | Starting session manager
+2025-10-03 13:59:40,502 | INFO | d435i_liveness | Hardware request: idle_detection (total=1)
+2025-10-03 13:59:40,503 | INFO | d435i_liveness | Activating RealSense pipeline
+2025-10-03 13:59:40,566 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Operational mode: idle_detection → idle_detection
+2025-10-03 13:59:40,566 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Mode details:
+2025-10-03 13:59:40,566 | INFO | d435i_liveness |    - idle_detection: 1s bursts, face detection only
+2025-10-03 13:59:40,566 | INFO | d435i_liveness |    - active: Continuous, face detection only (warm state)
+2025-10-03 13:59:40,566 | INFO | d435i_liveness |    - validation: Full liveness with depth checks
+2025-10-03 13:59:40,566 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Now in 'idle_detection' mode
+2025-10-03 13:59:40,566 | INFO | app.session_manager | 🎥 RealSense started in idle_detection mode (1s burst intervals)
+2025-10-03 13:59:40,566 | INFO | app.session_manager | Session manager started in IDLE state (camera in idle detection mode)
+2025-10-03 13:59:40,566 | INFO | webcam_service | Webcam service started
+2025-10-03 13:59:40,566 | INFO | app.main | Application started successfully (including webcam service)
+2025-10-03 13:59:40,566 | INFO | app.session_manager | Watchdog loop started
+2025-10-03 13:59:40,875 | INFO | d435i_liveness | Connected to Intel RealSense D435I (S/N 215322072881) depth_scale=0.001000 m
+2025-10-03 14:03:00,813 | INFO | d435i_liveness | 🔍 [IDLE_DETECTION] Face detection state changed: False → True
+2025-10-03 14:03:00,814 | INFO | app.session_manager | 👤 [FACE_TRIGGER] ✅ Face detected in IDLE - starting session
+2025-10-03 14:03:00,833 | INFO | app.session_manager | 🎬 [SESSION_START] ================================
+2025-10-03 14:03:00,834 | INFO | app.session_manager | 🎬 [SESSION_START] New session starting
+2025-10-03 14:03:00,834 | INFO | app.session_manager | 🎬 [SESSION_START] ================================
+2025-10-03 14:03:00,834 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Operational mode: idle_detection → active
+2025-10-03 14:03:00,834 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Mode details:
+2025-10-03 14:03:00,834 | INFO | d435i_liveness |    - idle_detection: 1s bursts, face detection only
+2025-10-03 14:03:00,835 | INFO | d435i_liveness |    - active: Continuous, face detection only (warm state)
+2025-10-03 14:03:00,835 | INFO | d435i_liveness |    - validation: Full liveness with depth checks
+2025-10-03 14:03:00,835 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Now in 'active' mode
+2025-10-03 14:03:00,835 | INFO | app.session_manager | 📷 [SESSION_START] Camera switched to active mode (warm state)
+2025-10-03 14:03:00,835 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-10-03 14:03:01,791 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-10-03 14:03:01,794 | INFO | app.session_manager | 📱 Token issued: eyJhbGciOiJI... (expires in 180s)
+2025-10-03 14:03:03,843 | INFO | app.session_manager | 👋 Showing hello human screen (3.0s)
+2025-10-03 14:03:06,865 | INFO | app.session_manager | 📱 Showing scan prompt screen
+2025-10-03 14:03:06,866 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiODkyYTExMDU4ODA1NDUwMGJiN2IwOTY4N2IzMmNmMzciLCJleHAiOjE3NTk1MDAzNjF9.cxxp31HZS8EPdp1l5a5bW2n1yAmRbNSrdWwGm2Ov-iU
+2025-10-03 14:03:07,880 | INFO | app.session_manager | 📱 QR code displayed - waiting for mobile app
+2025-10-03 14:03:07,880 | INFO | app.session_manager | ⏳ Waiting for mobile app connection (timeout=175.0s)
+2025-10-03 14:03:07,880 | INFO | app.session_manager | Bridge message received: joined
+2025-10-03 14:03:58,197 | INFO | app.session_manager | Stopping session manager
+2025-10-03 14:03:58,688 | INFO | app.session_manager | Watchdog loop cancelled
+2025-10-03 14:03:58,944 | INFO | app.session_manager | Session manager stopped
+2025-10-03 14:03:59,015 | INFO | webcam_service | Webcam preview loop stopped
+2025-10-03 14:03:59,015 | INFO | webcam_service | Webcam service stopped
+2025-10-03 14:03:59,015 | INFO | app.main | Application shutdown complete
+2025-10-03 14:04:01,432 | INFO | app.main | 📷 Default camera source: realsense
+2025-10-03 14:04:01,441 | INFO | app.session_manager | Starting session manager
+2025-10-03 14:04:01,441 | INFO | d435i_liveness | Hardware request: idle_detection (total=1)
+2025-10-03 14:04:01,441 | INFO | d435i_liveness | Activating RealSense pipeline
+2025-10-03 14:04:01,454 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Operational mode: idle_detection → idle_detection
+2025-10-03 14:04:01,454 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Mode details:
+2025-10-03 14:04:01,454 | INFO | d435i_liveness |    - idle_detection: 1s bursts, face detection only
+2025-10-03 14:04:01,455 | INFO | d435i_liveness |    - active: Continuous, face detection only (warm state)
+2025-10-03 14:04:01,455 | INFO | d435i_liveness |    - validation: Full liveness with depth checks
+2025-10-03 14:04:01,455 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Now in 'idle_detection' mode
+2025-10-03 14:04:01,455 | INFO | app.session_manager | 🎥 RealSense started in idle_detection mode (1s burst intervals)
+2025-10-03 14:04:01,455 | INFO | app.session_manager | Session manager started in IDLE state (camera in idle detection mode)
+2025-10-03 14:04:01,455 | INFO | webcam_service | Webcam service started
+2025-10-03 14:04:01,455 | INFO | app.main | Application started successfully (including webcam service)
+2025-10-03 14:04:01,456 | INFO | app.session_manager | Watchdog loop started
+2025-10-03 14:04:03,804 | INFO | app.main | 📷 Default camera source: realsense
+2025-10-03 14:04:03,814 | INFO | app.session_manager | Starting session manager
+2025-10-03 14:04:03,814 | INFO | d435i_liveness | Hardware request: idle_detection (total=1)
+2025-10-03 14:04:03,814 | INFO | d435i_liveness | Activating RealSense pipeline
+2025-10-03 14:04:03,827 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Operational mode: idle_detection → idle_detection
+2025-10-03 14:04:03,827 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Mode details:
+2025-10-03 14:04:03,827 | INFO | d435i_liveness |    - idle_detection: 1s bursts, face detection only
+2025-10-03 14:04:03,827 | INFO | d435i_liveness |    - active: Continuous, face detection only (warm state)
+2025-10-03 14:04:03,827 | INFO | d435i_liveness |    - validation: Full liveness with depth checks
+2025-10-03 14:04:03,827 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Now in 'idle_detection' mode
+2025-10-03 14:04:03,827 | INFO | app.session_manager | 🎥 RealSense started in idle_detection mode (1s burst intervals)
+2025-10-03 14:04:03,828 | INFO | app.session_manager | Session manager started in IDLE state (camera in idle detection mode)
+2025-10-03 14:04:03,828 | INFO | webcam_service | Webcam service started
+2025-10-03 14:04:03,828 | INFO | app.main | Application started successfully (including webcam service)
+2025-10-03 14:04:03,828 | INFO | app.session_manager | Watchdog loop started
+2025-10-03 14:04:04,038 | INFO | d435i_liveness | Connected to Intel RealSense D435I (S/N 215322072881) depth_scale=0.001000 m
+2025-10-03 14:04:33,913 | INFO | app.session_manager | Stopping session manager
+2025-10-03 14:04:34,836 | INFO | app.session_manager | Watchdog loop cancelled
+2025-10-03 14:04:34,840 | INFO | app.session_manager | Session manager stopped
+2025-10-03 14:04:34,868 | INFO | webcam_service | Webcam preview loop stopped
+2025-10-03 14:04:34,868 | INFO | webcam_service | Webcam service stopped
+2025-10-03 14:04:34,868 | INFO | app.main | Application shutdown complete
+2025-10-03 14:04:37,161 | INFO | app.main | 📷 Default camera source: realsense
+2025-10-03 14:04:37,171 | INFO | app.session_manager | Starting session manager
+2025-10-03 14:04:37,171 | INFO | d435i_liveness | Hardware request: idle_detection (total=1)
+2025-10-03 14:04:37,171 | INFO | d435i_liveness | Activating RealSense pipeline
+2025-10-03 14:04:37,184 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Operational mode: idle_detection → idle_detection
+2025-10-03 14:04:37,184 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Mode details:
+2025-10-03 14:04:37,184 | INFO | d435i_liveness |    - idle_detection: 1s bursts, face detection only
+2025-10-03 14:04:37,184 | INFO | d435i_liveness |    - active: Continuous, face detection only (warm state)
+2025-10-03 14:04:37,184 | INFO | d435i_liveness |    - validation: Full liveness with depth checks
+2025-10-03 14:04:37,185 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Now in 'idle_detection' mode
+2025-10-03 14:04:37,185 | INFO | app.session_manager | 🎥 RealSense started in idle_detection mode (1s burst intervals)
+2025-10-03 14:04:37,185 | INFO | app.session_manager | Session manager started in IDLE state (camera in idle detection mode)
+2025-10-03 14:04:37,185 | INFO | webcam_service | Webcam service started
+2025-10-03 14:04:37,185 | INFO | app.main | Application started successfully (including webcam service)
+2025-10-03 14:04:37,185 | INFO | app.session_manager | Watchdog loop started
+2025-10-03 14:04:39,473 | INFO | app.main | 📷 Default camera source: realsense
+2025-10-03 14:04:39,482 | INFO | app.session_manager | Starting session manager
+2025-10-03 14:04:39,483 | INFO | d435i_liveness | Hardware request: idle_detection (total=1)
+2025-10-03 14:04:39,483 | INFO | d435i_liveness | Activating RealSense pipeline
+2025-10-03 14:04:39,497 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Operational mode: idle_detection → idle_detection
+2025-10-03 14:04:39,497 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Mode details:
+2025-10-03 14:04:39,497 | INFO | d435i_liveness |    - idle_detection: 1s bursts, face detection only
+2025-10-03 14:04:39,497 | INFO | d435i_liveness |    - active: Continuous, face detection only (warm state)
+2025-10-03 14:04:39,497 | INFO | d435i_liveness |    - validation: Full liveness with depth checks
+2025-10-03 14:04:39,497 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Now in 'idle_detection' mode
+2025-10-03 14:04:39,497 | INFO | app.session_manager | 🎥 RealSense started in idle_detection mode (1s burst intervals)
+2025-10-03 14:04:39,498 | INFO | app.session_manager | Session manager started in IDLE state (camera in idle detection mode)
+2025-10-03 14:04:39,498 | INFO | webcam_service | Webcam service started
+2025-10-03 14:04:39,498 | INFO | app.main | Application started successfully (including webcam service)
+2025-10-03 14:04:39,498 | INFO | app.session_manager | Watchdog loop started
+2025-10-03 14:04:39,715 | INFO | d435i_liveness | Connected to Intel RealSense D435I (S/N 215322072881) depth_scale=0.001000 m
+2025-10-03 14:05:09,528 | INFO | app.session_manager | Stopping session manager
+2025-10-03 14:05:10,487 | INFO | app.session_manager | Watchdog loop cancelled
+2025-10-03 14:05:10,492 | INFO | app.session_manager | Session manager stopped
+2025-10-03 14:05:10,592 | INFO | webcam_service | Webcam preview loop stopped
+2025-10-03 14:05:10,593 | INFO | webcam_service | Webcam service stopped
+2025-10-03 14:05:10,593 | INFO | app.main | Application shutdown complete
+2025-10-03 14:05:12,808 | INFO | app.main | 📷 Default camera source: realsense
+2025-10-03 14:05:12,816 | INFO | app.session_manager | Starting session manager
+2025-10-03 14:05:12,816 | INFO | app.session_manager | 🎥 [STARTUP] Starting RealSense service...
+2025-10-03 14:05:12,816 | INFO | app.session_manager | 🎥 [STARTUP] Activating camera hardware for idle detection...
+2025-10-03 14:05:12,816 | INFO | d435i_liveness | Hardware request: idle_detection (total=1)
+2025-10-03 14:05:12,816 | INFO | d435i_liveness | Activating RealSense pipeline
+2025-10-03 14:05:12,830 | INFO | app.session_manager | 🎥 [STARTUP] Setting operational mode to idle_detection...
+2025-10-03 14:05:12,830 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Operational mode: idle_detection → idle_detection
+2025-10-03 14:05:12,830 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Mode details:
+2025-10-03 14:05:12,830 | INFO | d435i_liveness |    - idle_detection: 1s bursts, face detection only
+2025-10-03 14:05:12,831 | INFO | d435i_liveness |    - active: Continuous, face detection only (warm state)
+2025-10-03 14:05:12,831 | INFO | d435i_liveness |    - validation: Full liveness with depth checks
+2025-10-03 14:05:12,832 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Now in 'idle_detection' mode
+2025-10-03 14:05:12,832 | INFO | app.session_manager | 🎥 [STARTUP] ✅ RealSense started in idle_detection mode
+2025-10-03 14:05:12,833 | INFO | app.session_manager | 🎥 [STARTUP] 🔍 Camera will take 1-second burst photos to detect faces
+2025-10-03 14:05:12,833 | INFO | app.session_manager | 🎥 [STARTUP] 👤 Face detection will trigger session start
+2025-10-03 14:05:12,834 | INFO | app.session_manager | Session manager started in IDLE state (camera in idle detection mode)
+2025-10-03 14:05:12,835 | INFO | webcam_service | Webcam service started
+2025-10-03 14:05:12,835 | INFO | app.main | Application started successfully (including webcam service)
+2025-10-03 14:05:12,835 | INFO | app.session_manager | Watchdog loop started
+2025-10-03 14:05:14,907 | INFO | app.main | 📷 Default camera source: realsense
+2025-10-03 14:05:14,916 | INFO | app.session_manager | Starting session manager
+2025-10-03 14:05:14,916 | INFO | app.session_manager | 🎥 [STARTUP] Starting RealSense service...
+2025-10-03 14:05:14,916 | INFO | app.session_manager | 🎥 [STARTUP] Activating camera hardware for idle detection...
+2025-10-03 14:05:14,916 | INFO | d435i_liveness | Hardware request: idle_detection (total=1)
+2025-10-03 14:05:14,916 | INFO | d435i_liveness | Activating RealSense pipeline
+2025-10-03 14:05:14,930 | INFO | app.session_manager | 🎥 [STARTUP] Setting operational mode to idle_detection...
+2025-10-03 14:05:14,930 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Operational mode: idle_detection → idle_detection
+2025-10-03 14:05:14,930 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Mode details:
+2025-10-03 14:05:14,930 | INFO | d435i_liveness |    - idle_detection: 1s bursts, face detection only
+2025-10-03 14:05:14,931 | INFO | d435i_liveness |    - active: Continuous, face detection only (warm state)
+2025-10-03 14:05:14,931 | INFO | d435i_liveness |    - validation: Full liveness with depth checks
+2025-10-03 14:05:14,931 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Now in 'idle_detection' mode
+2025-10-03 14:05:14,931 | INFO | app.session_manager | 🎥 [STARTUP] ✅ RealSense started in idle_detection mode
+2025-10-03 14:05:14,931 | INFO | app.session_manager | 🎥 [STARTUP] 🔍 Camera will take 1-second burst photos to detect faces
+2025-10-03 14:05:14,931 | INFO | app.session_manager | 🎥 [STARTUP] 👤 Face detection will trigger session start
+2025-10-03 14:05:14,931 | INFO | app.session_manager | Session manager started in IDLE state (camera in idle detection mode)
+2025-10-03 14:05:14,931 | INFO | webcam_service | Webcam service started
+2025-10-03 14:05:14,931 | INFO | app.main | Application started successfully (including webcam service)
+2025-10-03 14:05:14,931 | INFO | app.session_manager | Watchdog loop started
+2025-10-03 14:05:15,121 | INFO | d435i_liveness | Connected to Intel RealSense D435I (S/N 215322072881) depth_scale=0.001000 m
+2025-10-03 14:05:37,782 | INFO | d435i_liveness | 🔍 [IDLE_DETECTION] Face detection state changed: False → True
+2025-10-03 14:05:37,783 | INFO | app.session_manager | 👤 [FACE_TRIGGER] ✅ Face detected in IDLE - starting session
+2025-10-03 14:05:37,792 | INFO | app.session_manager | 🎬 [SESSION_START] ================================
+2025-10-03 14:05:37,793 | INFO | app.session_manager | 🎬 [SESSION_START] New session starting
+2025-10-03 14:05:37,793 | INFO | app.session_manager | 🎬 [SESSION_START] ================================
+2025-10-03 14:05:37,793 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Operational mode: idle_detection → active
+2025-10-03 14:05:37,793 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Mode details:
+2025-10-03 14:05:37,793 | INFO | d435i_liveness |    - idle_detection: 1s bursts, face detection only
+2025-10-03 14:05:37,793 | INFO | d435i_liveness |    - active: Continuous, face detection only (warm state)
+2025-10-03 14:05:37,793 | INFO | d435i_liveness |    - validation: Full liveness with depth checks
+2025-10-03 14:05:37,793 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Now in 'active' mode
+2025-10-03 14:05:37,793 | INFO | app.session_manager | 📷 [SESSION_START] Camera switched to active mode (warm state)
+2025-10-03 14:05:37,794 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-10-03 14:05:39,167 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-10-03 14:05:39,170 | INFO | app.session_manager | 📱 Token issued: eyJhbGciOiJI... (expires in 180s)
+2025-10-03 14:05:40,813 | INFO | app.session_manager | 👋 Showing hello human screen (3.0s)
+2025-10-03 14:05:43,812 | INFO | app.session_manager | 📱 Showing scan prompt screen
+2025-10-03 14:05:43,823 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiYzkwMTIwM2U3YTJkNDM1M2I1YjNkZGIzMWJhZjRlMGIiLCJleHAiOjE3NTk1MDA1MTl9.uJS6e9VwNf1IAMm0H894lEhZ0f6BEeQlqltpwuGK9WU
+2025-10-03 14:05:44,882 | INFO | app.session_manager | 📱 QR code displayed - waiting for mobile app
+2025-10-03 14:05:44,882 | INFO | app.session_manager | ⏳ Waiting for mobile app connection (timeout=175.0s)
+2025-10-03 14:05:44,883 | INFO | app.session_manager | Bridge message received: joined
+2025-10-03 14:06:45,182 | INFO | app.session_manager | Stopping session manager
+2025-10-03 14:06:45,364 | INFO | app.session_manager | Watchdog loop cancelled
+2025-10-03 14:06:45,614 | INFO | app.session_manager | Session manager stopped
+2025-10-03 14:06:45,664 | INFO | webcam_service | Webcam preview loop stopped
+2025-10-03 14:06:45,664 | INFO | webcam_service | Webcam service stopped
+2025-10-03 14:06:45,664 | INFO | app.main | Application shutdown complete
+2025-10-03 14:06:47,721 | INFO | app.main | 📷 Default camera source: realsense
+2025-10-03 14:06:47,729 | INFO | app.session_manager | Starting session manager
+2025-10-03 14:06:47,729 | INFO | app.session_manager | 🎥 [STARTUP] Starting RealSense service...
+2025-10-03 14:06:47,729 | INFO | app.session_manager | 🎥 [STARTUP] Activating camera hardware for idle detection...
+2025-10-03 14:06:47,730 | INFO | d435i_liveness | Hardware request: idle_detection (total=1)
+2025-10-03 14:06:47,730 | INFO | d435i_liveness | Activating RealSense pipeline
+2025-10-03 14:06:47,744 | INFO | app.session_manager | 🎥 [STARTUP] Setting operational mode to idle_detection...
+2025-10-03 14:06:47,745 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Operational mode: idle_detection → idle_detection
+2025-10-03 14:06:47,745 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Mode details:
+2025-10-03 14:06:47,745 | INFO | d435i_liveness |    - idle_detection: 1s bursts, face detection only
+2025-10-03 14:06:47,745 | INFO | d435i_liveness |    - active: Continuous, face detection only (warm state)
+2025-10-03 14:06:47,746 | INFO | d435i_liveness |    - validation: Full liveness with depth checks
+2025-10-03 14:06:47,746 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Now in 'idle_detection' mode
+2025-10-03 14:06:47,746 | INFO | app.session_manager | 🎥 [STARTUP] ✅ RealSense started in idle_detection mode
+2025-10-03 14:06:47,746 | INFO | app.session_manager | 🎥 [STARTUP] 🔍 Camera will take 1-second burst photos to detect faces
+2025-10-03 14:06:47,746 | INFO | app.session_manager | 🎥 [STARTUP] 👤 Face detection will trigger session start
+2025-10-03 14:06:47,746 | INFO | app.session_manager | Session manager started in IDLE state (camera in idle detection mode)
+2025-10-03 14:06:47,747 | INFO | webcam_service | Webcam service started
+2025-10-03 14:06:47,747 | INFO | app.main | Application started successfully (including webcam service)
+2025-10-03 14:06:47,747 | INFO | app.session_manager | Watchdog loop started
+2025-10-03 14:06:47,934 | INFO | d435i_liveness | Connected to Intel RealSense D435I (S/N 215322072881) depth_scale=0.001000 m
+2025-10-03 14:08:17,798 | INFO | app.session_manager | Stopping session manager
+2025-10-03 14:08:18,208 | INFO | app.session_manager | Watchdog loop cancelled
+2025-10-03 14:08:18,212 | INFO | app.session_manager | Session manager stopped
+2025-10-03 14:08:18,313 | INFO | webcam_service | Webcam preview loop stopped
+2025-10-03 14:08:18,313 | INFO | webcam_service | Webcam service stopped
+2025-10-03 14:08:18,313 | INFO | app.main | Application shutdown complete
+2025-10-03 14:08:20,389 | INFO | app.main | 📷 Default camera source: realsense
+2025-10-03 14:08:20,397 | INFO | app.session_manager | Starting session manager
+2025-10-03 14:08:20,397 | INFO | app.session_manager | 🎥 [STARTUP] Starting RealSense service...
+2025-10-03 14:08:20,398 | INFO | app.session_manager | 🎥 [STARTUP] Activating camera hardware for idle detection...
+2025-10-03 14:08:20,398 | INFO | d435i_liveness | Hardware request: idle_detection (total=1)
+2025-10-03 14:08:20,398 | INFO | d435i_liveness | Activating RealSense pipeline
+2025-10-03 14:08:20,411 | INFO | app.session_manager | 🎥 [STARTUP] Setting operational mode to idle_detection...
+2025-10-03 14:08:20,411 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Operational mode: idle_detection → idle_detection
+2025-10-03 14:08:20,412 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Mode details:
+2025-10-03 14:08:20,412 | INFO | d435i_liveness |    - idle_detection: 1s bursts, face detection only
+2025-10-03 14:08:20,412 | INFO | d435i_liveness |    - active: Continuous, face detection only (warm state)
+2025-10-03 14:08:20,412 | INFO | d435i_liveness |    - validation: Full liveness with depth checks
+2025-10-03 14:08:20,412 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Now in 'idle_detection' mode
+2025-10-03 14:08:20,412 | INFO | app.session_manager | 🎥 [STARTUP] ✅ RealSense started in idle_detection mode
+2025-10-03 14:08:20,412 | INFO | app.session_manager | 🎥 [STARTUP] 🔍 Camera will take 1-second burst photos to detect faces
+2025-10-03 14:08:20,412 | INFO | app.session_manager | 🎥 [STARTUP] 👤 Face detection will trigger session start
+2025-10-03 14:08:20,412 | INFO | app.session_manager | Session manager started in IDLE state (camera in idle detection mode)
+2025-10-03 14:08:20,412 | INFO | webcam_service | Webcam service started
+2025-10-03 14:08:20,413 | INFO | app.main | Application started successfully (including webcam service)
+2025-10-03 14:08:20,413 | INFO | app.session_manager | Watchdog loop started
+2025-10-03 14:08:22,706 | INFO | app.main | 📷 Default camera source: realsense
+2025-10-03 14:08:22,714 | INFO | app.session_manager | Starting session manager
+2025-10-03 14:08:22,714 | INFO | app.session_manager | 🎥 [STARTUP] Starting RealSense service...
+2025-10-03 14:08:22,714 | INFO | app.session_manager | 🎥 [STARTUP] Activating camera hardware for idle detection...
+2025-10-03 14:08:22,714 | INFO | d435i_liveness | Hardware request: idle_detection (total=1)
+2025-10-03 14:08:22,714 | INFO | d435i_liveness | Activating RealSense pipeline
+2025-10-03 14:08:22,727 | INFO | app.session_manager | 🎥 [STARTUP] Setting operational mode to idle_detection...
+2025-10-03 14:08:22,727 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Operational mode: idle_detection → idle_detection
+2025-10-03 14:08:22,727 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Mode details:
+2025-10-03 14:08:22,727 | INFO | d435i_liveness |    - idle_detection: 1s bursts, face detection only
+2025-10-03 14:08:22,727 | INFO | d435i_liveness |    - active: Continuous, face detection only (warm state)
+2025-10-03 14:08:22,728 | INFO | d435i_liveness |    - validation: Full liveness with depth checks
+2025-10-03 14:08:22,728 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Now in 'idle_detection' mode
+2025-10-03 14:08:22,728 | INFO | app.session_manager | 🎥 [STARTUP] ✅ RealSense started in idle_detection mode
+2025-10-03 14:08:22,728 | INFO | app.session_manager | 🎥 [STARTUP] 🔍 Camera will take 1-second burst photos to detect faces
+2025-10-03 14:08:22,728 | INFO | app.session_manager | 🎥 [STARTUP] 👤 Face detection will trigger session start
+2025-10-03 14:08:22,729 | INFO | app.session_manager | Session manager started in IDLE state (camera in idle detection mode)
+2025-10-03 14:08:22,729 | INFO | webcam_service | Webcam service started
+2025-10-03 14:08:22,729 | INFO | app.main | Application started successfully (including webcam service)
+2025-10-03 14:08:22,729 | INFO | app.session_manager | Watchdog loop started
+2025-10-03 14:08:22,906 | INFO | d435i_liveness | Connected to Intel RealSense D435I (S/N 215322072881) depth_scale=0.001000 m
+2025-10-03 14:09:22,745 | INFO | app.session_manager | Stopping session manager
+2025-10-03 14:09:22,956 | INFO | app.session_manager | Watchdog loop cancelled
+2025-10-03 14:09:22,960 | INFO | app.session_manager | Session manager stopped
+2025-10-03 14:09:22,984 | INFO | webcam_service | Webcam preview loop stopped
+2025-10-03 14:09:22,984 | INFO | webcam_service | Webcam service stopped
+2025-10-03 14:09:22,984 | INFO | app.main | Application shutdown complete
+2025-10-03 14:09:25,354 | INFO | app.main | 📷 Default camera source: realsense
+2025-10-03 14:09:25,377 | INFO | app.session_manager | Starting session manager
+2025-10-03 14:09:25,377 | INFO | app.session_manager | 🎥 [STARTUP] Starting RealSense service...
+2025-10-03 14:09:25,378 | INFO | app.session_manager | 🎥 [STARTUP] Activating camera hardware for idle detection...
+2025-10-03 14:09:25,378 | INFO | d435i_liveness | Hardware request: idle_detection (total=1)
+2025-10-03 14:09:25,378 | INFO | d435i_liveness | Activating RealSense pipeline
+2025-10-03 14:09:25,410 | INFO | app.session_manager | 🎥 [STARTUP] Setting operational mode to idle_detection...
+2025-10-03 14:09:25,411 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Operational mode: idle_detection → idle_detection
+2025-10-03 14:09:25,411 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Mode details:
+2025-10-03 14:09:25,411 | INFO | d435i_liveness |    - idle_detection: 1s bursts, face detection only
+2025-10-03 14:09:25,411 | INFO | d435i_liveness |    - active: Continuous, face detection only (warm state)
+2025-10-03 14:09:25,411 | INFO | d435i_liveness |    - validation: Full liveness with depth checks
+2025-10-03 14:09:25,411 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Now in 'idle_detection' mode
+2025-10-03 14:09:25,411 | INFO | app.session_manager | 🎥 [STARTUP] ✅ RealSense started in idle_detection mode
+2025-10-03 14:09:25,412 | INFO | app.session_manager | 🎥 [STARTUP] 🔍 Camera will take 1-second burst photos to detect faces
+2025-10-03 14:09:25,412 | INFO | app.session_manager | 🎥 [STARTUP] 👤 Face detection will trigger session start
+2025-10-03 14:09:25,412 | INFO | app.session_manager | Session manager started in IDLE state (camera in idle detection mode)
+2025-10-03 14:09:25,412 | INFO | webcam_service | Webcam service started
+2025-10-03 14:09:25,412 | INFO | app.main | Application started successfully (including webcam service)
+2025-10-03 14:09:25,413 | INFO | app.session_manager | Watchdog loop started
+2025-10-03 14:09:25,597 | INFO | d435i_liveness | Connected to Intel RealSense D435I (S/N 215322072881) depth_scale=0.001000 m
+2025-10-03 14:09:37,995 | INFO | d435i_liveness | 🔍 [IDLE_DETECTION] Face detection state changed: False → True
+2025-10-03 14:09:37,996 | INFO | app.session_manager | 👤 [FACE_TRIGGER] ✅ Face detected in IDLE - starting session
+2025-10-03 14:09:38,018 | INFO | app.session_manager | 🎬 [SESSION_START] ================================
+2025-10-03 14:09:38,018 | INFO | app.session_manager | 🎬 [SESSION_START] New session starting
+2025-10-03 14:09:38,018 | INFO | app.session_manager | 🎬 [SESSION_START] ================================
+2025-10-03 14:09:38,018 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Operational mode: idle_detection → active
+2025-10-03 14:09:38,018 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Mode details:
+2025-10-03 14:09:38,019 | INFO | d435i_liveness |    - idle_detection: 1s bursts, face detection only
+2025-10-03 14:09:38,019 | INFO | d435i_liveness |    - active: Continuous, face detection only (warm state)
+2025-10-03 14:09:38,019 | INFO | d435i_liveness |    - validation: Full liveness with depth checks
+2025-10-03 14:09:38,019 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Now in 'active' mode
+2025-10-03 14:09:38,019 | INFO | app.session_manager | 📷 [SESSION_START] Camera switched to active mode (warm state)
+2025-10-03 14:09:38,019 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-10-03 14:09:38,927 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-10-03 14:09:38,931 | INFO | app.session_manager | 📱 Token issued: eyJhbGciOiJI... (expires in 180s)
+2025-10-03 14:09:41,022 | INFO | app.session_manager | 👋 Showing hello human screen (3.0s)
+2025-10-03 14:09:44,028 | INFO | app.session_manager | 📱 Showing scan prompt screen
+2025-10-03 14:09:44,031 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiN2QwYThmYWEzMzlmNDEyZDhiZjM0OWUxMzA2NDU4ZTUiLCJleHAiOjE3NTk1MDA3NTh9.k_HrQXFELK-uluDsXkcx7dQOpC4DjnCi0I0_aZ3QQ_A
+2025-10-03 14:09:44,988 | INFO | app.session_manager | 📱 QR code displayed - waiting for mobile app
+2025-10-03 14:09:44,988 | INFO | app.session_manager | ⏳ Waiting for mobile app connection (timeout=175.0s)
+2025-10-03 14:09:44,989 | INFO | app.session_manager | Bridge message received: joined
+2025-10-03 14:09:48,916 | INFO | d435i_liveness | 👤 [ACTIVE_MODE] Face detection state changed: True → False
+2025-10-03 14:09:48,917 | INFO | app.session_manager | 👤 [FACE_TRIGGER] ⚠️ Face lost in qr_display - starting 3s countdown...
+2025-10-03 14:09:51,921 | WARNING | app.session_manager | 👤 [FACE_TRIGGER] 🚶 No face for 3.0s - CANCELLING SESSION
+2025-10-03 14:09:51,923 | INFO | app.session_manager | 👤 [FACE_TRIGGER] Session task cancelled due to no face
+2025-10-03 14:09:51,924 | INFO | app.session_manager | ⚠️ Session cancelled (user walked away)
+2025-10-03 14:09:51,924 | INFO | app.session_manager | 🏁 [SESSION_END] Session cleanup starting
+2025-10-03 14:09:51,954 | INFO | app.session_manager | 📷 Camera deactivated in cleanup
+2025-10-03 14:09:52,213 | INFO | app.session_manager | 🔄 Session cleaned up, returning to idle
+2025-10-03 14:09:52,215 | INFO | app.session_manager | 📷 [SESSION_END] Returning camera to idle_detection mode
+2025-10-03 14:09:52,217 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Operational mode: active → idle_detection
+2025-10-03 14:09:52,217 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Mode details:
+2025-10-03 14:09:52,217 | INFO | d435i_liveness |    - idle_detection: 1s bursts, face detection only
+2025-10-03 14:09:52,218 | INFO | d435i_liveness |    - active: Continuous, face detection only (warm state)
+2025-10-03 14:09:52,218 | INFO | d435i_liveness |    - validation: Full liveness with depth checks
+2025-10-03 14:09:52,218 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Now in 'idle_detection' mode
+2025-10-03 14:09:52,218 | INFO | app.session_manager | 📷 [SESSION_END] Camera returned to idle_detection mode (1s burst intervals)
+2025-10-03 14:09:52,218 | INFO | app.session_manager | 🏁 [SESSION_END] ================================
+2025-10-03 14:09:52,218 | INFO | app.session_manager | 🏁 [SESSION_END] Session ended, back to IDLE
+2025-10-03 14:09:52,218 | INFO | app.session_manager | 🏁 [SESSION_END] ================================
+2025-10-03 14:10:11,301 | INFO | d435i_liveness | 🔍 [IDLE_DETECTION] Face detection state changed: False → True
+2025-10-03 14:10:11,302 | INFO | app.session_manager | 👤 [FACE_TRIGGER] ✅ Face detected in IDLE - starting session
+2025-10-03 14:10:11,322 | INFO | app.session_manager | 🎬 [SESSION_START] ================================
+2025-10-03 14:10:11,322 | INFO | app.session_manager | 🎬 [SESSION_START] New session starting
+2025-10-03 14:10:11,323 | INFO | app.session_manager | 🎬 [SESSION_START] ================================
+2025-10-03 14:10:11,323 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Operational mode: idle_detection → active
+2025-10-03 14:10:11,323 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Mode details:
+2025-10-03 14:10:11,324 | INFO | d435i_liveness |    - idle_detection: 1s bursts, face detection only
+2025-10-03 14:10:11,324 | INFO | d435i_liveness |    - active: Continuous, face detection only (warm state)
+2025-10-03 14:10:11,325 | INFO | d435i_liveness |    - validation: Full liveness with depth checks
+2025-10-03 14:10:11,325 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Now in 'active' mode
+2025-10-03 14:10:11,325 | INFO | app.session_manager | 📷 [SESSION_START] Camera switched to active mode (warm state)
+2025-10-03 14:10:11,325 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-10-03 14:10:12,157 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-10-03 14:10:12,185 | INFO | app.session_manager | 📱 Token issued: eyJhbGciOiJI... (expires in 180s)
+2025-10-03 14:10:14,379 | INFO | app.session_manager | 👋 Showing hello human screen (3.0s)
+2025-10-03 14:10:17,005 | INFO | d435i_liveness | 👤 [ACTIVE_MODE] Face detection state changed: True → False
+2025-10-03 14:10:17,005 | INFO | app.session_manager | 👤 [FACE_TRIGGER] ⚠️ Face lost in hello_human - starting 3s countdown...
+2025-10-03 14:10:17,389 | INFO | app.session_manager | 📱 Showing scan prompt screen
+2025-10-03 14:10:17,390 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiOGY4MjljMjdkNmUyNDkxMzhmMTk1MzdmYmEyMGIzNDciLCJleHAiOjE3NTk1MDA3OTJ9.2GnyYnAdNooPSeoD0WiHFLJSD17Pm-qZU1TbHLZUMDE
+2025-10-03 14:10:18,352 | INFO | app.session_manager | 📱 QR code displayed - waiting for mobile app
+2025-10-03 14:10:18,353 | INFO | app.session_manager | ⏳ Waiting for mobile app connection (timeout=175.0s)
+2025-10-03 14:10:18,353 | INFO | app.session_manager | Bridge message received: joined
+2025-10-03 14:10:20,024 | WARNING | app.session_manager | 👤 [FACE_TRIGGER] 🚶 No face for 3.0s - CANCELLING SESSION
+2025-10-03 14:10:20,025 | INFO | app.session_manager | 👤 [FACE_TRIGGER] Session task cancelled due to no face
+2025-10-03 14:10:20,026 | INFO | app.session_manager | ⚠️ Session cancelled (user walked away)
+2025-10-03 14:10:20,027 | INFO | app.session_manager | 🏁 [SESSION_END] Session cleanup starting
+2025-10-03 14:10:20,070 | INFO | app.session_manager | 📷 Camera deactivated in cleanup
+2025-10-03 14:10:20,368 | INFO | app.session_manager | 🔄 Session cleaned up, returning to idle
+2025-10-03 14:10:20,369 | INFO | app.session_manager | 📷 [SESSION_END] Returning camera to idle_detection mode
+2025-10-03 14:10:20,371 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Operational mode: active → idle_detection
+2025-10-03 14:10:20,372 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Mode details:
+2025-10-03 14:10:20,372 | INFO | d435i_liveness |    - idle_detection: 1s bursts, face detection only
+2025-10-03 14:10:20,372 | INFO | d435i_liveness |    - active: Continuous, face detection only (warm state)
+2025-10-03 14:10:20,373 | INFO | d435i_liveness |    - validation: Full liveness with depth checks
+2025-10-03 14:10:20,374 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Now in 'idle_detection' mode
+2025-10-03 14:10:20,375 | INFO | app.session_manager | 📷 [SESSION_END] Camera returned to idle_detection mode (1s burst intervals)
+2025-10-03 14:10:20,375 | INFO | app.session_manager | 🏁 [SESSION_END] ================================
+2025-10-03 14:10:20,375 | INFO | app.session_manager | 🏁 [SESSION_END] Session ended, back to IDLE
+2025-10-03 14:10:20,375 | INFO | app.session_manager | 🏁 [SESSION_END] ================================
+2025-10-03 14:12:53,642 | INFO | d435i_liveness | 🔍 [IDLE_DETECTION] Face detection state changed: False → True
+2025-10-03 14:12:53,643 | INFO | app.session_manager | 👤 [FACE_TRIGGER] ✅ Face detected in IDLE - starting session
+2025-10-03 14:12:53,663 | INFO | app.session_manager | 🎬 [SESSION_START] ================================
+2025-10-03 14:12:53,663 | INFO | app.session_manager | 🎬 [SESSION_START] New session starting
+2025-10-03 14:12:53,664 | INFO | app.session_manager | 🎬 [SESSION_START] ================================
+2025-10-03 14:12:53,664 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Operational mode: idle_detection → active
+2025-10-03 14:12:53,664 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Mode details:
+2025-10-03 14:12:53,664 | INFO | d435i_liveness |    - idle_detection: 1s bursts, face detection only
+2025-10-03 14:12:53,664 | INFO | d435i_liveness |    - active: Continuous, face detection only (warm state)
+2025-10-03 14:12:53,664 | INFO | d435i_liveness |    - validation: Full liveness with depth checks
+2025-10-03 14:12:53,664 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Now in 'active' mode
+2025-10-03 14:12:53,664 | INFO | app.session_manager | 📷 [SESSION_START] Camera switched to active mode (warm state)
+2025-10-03 14:12:53,665 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-10-03 14:12:54,608 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-10-03 14:12:54,612 | INFO | app.session_manager | 📱 Token issued: eyJhbGciOiJI... (expires in 180s)
+2025-10-03 14:12:56,697 | INFO | app.session_manager | 👋 Showing hello human screen (3.0s)
+2025-10-03 14:12:59,729 | INFO | app.session_manager | 📱 Showing scan prompt screen
+2025-10-03 14:12:59,730 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiYzI3YzNiMzdlMzNmNGVkZmIzYzg2ZWFiNjUxOWFjYWUiLCJleHAiOjE3NTk1MDA5NTR9.WUKJGghgk8eaw-IE7NICUXSZL7QcgkWgiOz1BuQUyiE
+2025-10-03 14:13:00,688 | INFO | app.session_manager | 📱 QR code displayed - waiting for mobile app
+2025-10-03 14:13:00,689 | INFO | app.session_manager | ⏳ Waiting for mobile app connection (timeout=175.0s)
+2025-10-03 14:13:00,689 | INFO | app.session_manager | Bridge message received: joined
+2025-10-03 14:13:04,216 | INFO | d435i_liveness | 👤 [ACTIVE_MODE] Face detection state changed: True → False
+2025-10-03 14:13:04,216 | INFO | app.session_manager | 👤 [FACE_TRIGGER] ⚠️ Face lost in qr_display - starting 3s countdown...
+2025-10-03 14:13:07,226 | WARNING | app.session_manager | 👤 [FACE_TRIGGER] 🚶 No face for 3.0s - CANCELLING SESSION
+2025-10-03 14:13:07,227 | INFO | app.session_manager | 👤 [FACE_TRIGGER] Session task cancelled due to no face
+2025-10-03 14:13:07,227 | INFO | app.session_manager | ⚠️ Session cancelled (user walked away)
+2025-10-03 14:13:07,228 | INFO | app.session_manager | 🏁 [SESSION_END] Session cleanup starting
+2025-10-03 14:13:07,239 | INFO | app.session_manager | 📷 Camera deactivated in cleanup
+2025-10-03 14:13:07,514 | INFO | app.session_manager | 🔄 Session cleaned up, returning to idle
+2025-10-03 14:13:07,514 | INFO | app.session_manager | 📷 [SESSION_END] Returning camera to idle_detection mode
+2025-10-03 14:13:07,515 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Operational mode: active → idle_detection
+2025-10-03 14:13:07,515 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Mode details:
+2025-10-03 14:13:07,515 | INFO | d435i_liveness |    - idle_detection: 1s bursts, face detection only
+2025-10-03 14:13:07,516 | INFO | d435i_liveness |    - active: Continuous, face detection only (warm state)
+2025-10-03 14:13:07,516 | INFO | d435i_liveness |    - validation: Full liveness with depth checks
+2025-10-03 14:13:07,516 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Now in 'idle_detection' mode
+2025-10-03 14:13:07,516 | INFO | app.session_manager | 📷 [SESSION_END] Camera returned to idle_detection mode (1s burst intervals)
+2025-10-03 14:13:07,516 | INFO | app.session_manager | 🏁 [SESSION_END] ================================
+2025-10-03 14:13:07,516 | INFO | app.session_manager | 🏁 [SESSION_END] Session ended, back to IDLE
+2025-10-03 14:13:07,517 | INFO | app.session_manager | 🏁 [SESSION_END] ================================
+2025-10-03 14:21:25,452 | INFO | app.session_manager | Stopping session manager
+2025-10-03 14:21:26,486 | INFO | app.session_manager | Watchdog loop cancelled
+2025-10-03 14:21:26,486 | INFO | app.session_manager | Session manager stopped
+2025-10-03 14:21:26,490 | INFO | webcam_service | Webcam preview loop stopped
+2025-10-03 14:21:26,490 | INFO | webcam_service | Webcam service stopped
+2025-10-03 14:21:26,490 | INFO | app.main | Application shutdown complete
+2025-10-03 14:21:29,650 | INFO | app.main | 📷 Default camera source: realsense
+2025-10-03 14:21:29,660 | INFO | app.session_manager | Starting session manager
+2025-10-03 14:21:29,661 | INFO | app.session_manager | 🎥 [STARTUP] Starting RealSense service...
+2025-10-03 14:21:29,661 | INFO | app.session_manager | 🎥 [STARTUP] Activating camera hardware for idle detection...
+2025-10-03 14:21:29,661 | INFO | d435i_liveness | Hardware request: idle_detection (total=1)
+2025-10-03 14:21:29,661 | INFO | d435i_liveness | Activating RealSense pipeline
+2025-10-03 14:21:29,682 | INFO | app.session_manager | 🎥 [STARTUP] Setting operational mode to idle_detection...
+2025-10-03 14:21:29,683 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Operational mode: idle_detection → idle_detection
+2025-10-03 14:21:29,684 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Mode details:
+2025-10-03 14:21:29,684 | INFO | d435i_liveness |    - idle_detection: 1s bursts, face detection only
+2025-10-03 14:21:29,688 | INFO | d435i_liveness |    - active: Continuous, face detection only (warm state)
+2025-10-03 14:21:29,689 | INFO | d435i_liveness |    - validation: Full liveness with depth checks
+2025-10-03 14:21:29,689 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Now in 'idle_detection' mode
+2025-10-03 14:21:29,690 | INFO | app.session_manager | 🎥 [STARTUP] ✅ RealSense started in idle_detection mode
+2025-10-03 14:21:29,691 | INFO | app.session_manager | 🎥 [STARTUP] 🔍 Camera will take 1-second burst photos to detect faces
+2025-10-03 14:21:29,692 | INFO | app.session_manager | 🎥 [STARTUP] 👤 Face detection will trigger session start
+2025-10-03 14:21:29,692 | INFO | app.session_manager | Session manager started in IDLE state (camera in idle detection mode)
+2025-10-03 14:21:29,693 | INFO | webcam_service | Webcam service started
+2025-10-03 14:21:29,694 | INFO | app.main | Application started successfully (including webcam service)
+2025-10-03 14:21:29,695 | INFO | app.session_manager | Watchdog loop started
+2025-10-03 14:21:29,881 | INFO | d435i_liveness | Connected to Intel RealSense D435I (S/N 215322072881) depth_scale=0.001000 m
+2025-10-03 14:21:59,784 | INFO | app.session_manager | Stopping session manager
+2025-10-03 14:22:00,716 | INFO | app.session_manager | Watchdog loop cancelled
+2025-10-03 14:22:00,721 | INFO | app.session_manager | Session manager stopped
+2025-10-03 14:22:00,726 | INFO | webcam_service | Webcam preview loop stopped
+2025-10-03 14:22:00,727 | INFO | webcam_service | Webcam service stopped
+2025-10-03 14:22:00,727 | INFO | app.main | Application shutdown complete
+2025-10-03 14:22:03,990 | INFO | app.main | 📷 Default camera source: realsense
+2025-10-03 14:22:04,015 | INFO | app.session_manager | Starting session manager
+2025-10-03 14:22:04,015 | INFO | app.session_manager | 🎥 [STARTUP] Starting RealSense service...
+2025-10-03 14:22:04,015 | INFO | app.session_manager | 🎥 [STARTUP] Activating camera hardware for idle detection...
+2025-10-03 14:22:04,015 | INFO | d435i_liveness | Hardware request: idle_detection (total=1)
+2025-10-03 14:22:04,016 | INFO | d435i_liveness | Activating RealSense pipeline
+2025-10-03 14:22:04,035 | INFO | app.session_manager | 🎥 [STARTUP] Setting operational mode to idle_detection...
+2025-10-03 14:22:04,036 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Operational mode: idle_detection → idle_detection
+2025-10-03 14:22:04,037 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Mode details:
+2025-10-03 14:22:04,038 | INFO | d435i_liveness |    - idle_detection: 1s bursts, face detection only
+2025-10-03 14:22:04,038 | INFO | d435i_liveness |    - active: Continuous, face detection only (warm state)
+2025-10-03 14:22:04,038 | INFO | d435i_liveness |    - validation: Full liveness with depth checks
+2025-10-03 14:22:04,038 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Now in 'idle_detection' mode
+2025-10-03 14:22:04,038 | INFO | app.session_manager | 🎥 [STARTUP] ✅ RealSense started in idle_detection mode
+2025-10-03 14:22:04,038 | INFO | app.session_manager | 🎥 [STARTUP] 🔍 Camera will take 1-second burst photos to detect faces
+2025-10-03 14:22:04,038 | INFO | app.session_manager | 🎥 [STARTUP] 👤 Face detection will trigger session start
+2025-10-03 14:22:04,039 | INFO | app.session_manager | Session manager started in IDLE state (camera in idle detection mode)
+2025-10-03 14:22:04,040 | INFO | webcam_service | Webcam service started
+2025-10-03 14:22:04,040 | INFO | app.main | Application started successfully (including webcam service)
+2025-10-03 14:22:04,041 | INFO | app.session_manager | Watchdog loop started
+2025-10-03 14:22:07,174 | INFO | app.main | 📷 Default camera source: realsense
+2025-10-03 14:22:07,187 | INFO | app.session_manager | Starting session manager
+2025-10-03 14:22:07,187 | INFO | app.session_manager | 🎥 [STARTUP] Starting RealSense service...
+2025-10-03 14:22:07,187 | INFO | app.session_manager | 🎥 [STARTUP] Activating camera hardware for idle detection...
+2025-10-03 14:22:07,187 | INFO | d435i_liveness | Hardware request: idle_detection (total=1)
+2025-10-03 14:22:07,187 | INFO | d435i_liveness | Activating RealSense pipeline
+2025-10-03 14:22:07,208 | INFO | app.session_manager | 🎥 [STARTUP] Setting operational mode to idle_detection...
+2025-10-03 14:22:07,209 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Operational mode: idle_detection → idle_detection
+2025-10-03 14:22:07,209 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Mode details:
+2025-10-03 14:22:07,210 | INFO | d435i_liveness |    - idle_detection: 1s bursts, face detection only
+2025-10-03 14:22:07,211 | INFO | d435i_liveness |    - active: Continuous, face detection only (warm state)
+2025-10-03 14:22:07,211 | INFO | d435i_liveness |    - validation: Full liveness with depth checks
+2025-10-03 14:22:07,212 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Now in 'idle_detection' mode
+2025-10-03 14:22:07,213 | INFO | app.session_manager | 🎥 [STARTUP] ✅ RealSense started in idle_detection mode
+2025-10-03 14:22:07,213 | INFO | app.session_manager | 🎥 [STARTUP] 🔍 Camera will take 1-second burst photos to detect faces
+2025-10-03 14:22:07,214 | INFO | app.session_manager | 🎥 [STARTUP] 👤 Face detection will trigger session start
+2025-10-03 14:22:07,214 | INFO | app.session_manager | Session manager started in IDLE state (camera in idle detection mode)
+2025-10-03 14:22:07,214 | INFO | webcam_service | Webcam service started
+2025-10-03 14:22:07,214 | INFO | app.main | Application started successfully (including webcam service)
+2025-10-03 14:22:07,214 | INFO | app.session_manager | Watchdog loop started
+2025-10-03 14:22:07,394 | INFO | d435i_liveness | Connected to Intel RealSense D435I (S/N 215322072881) depth_scale=0.001000 m
+2025-10-03 14:22:37,278 | INFO | app.session_manager | Stopping session manager
+2025-10-03 14:22:38,260 | INFO | app.session_manager | Watchdog loop cancelled
+2025-10-03 14:22:38,273 | INFO | app.session_manager | Session manager stopped
+2025-10-03 14:22:38,373 | INFO | webcam_service | Webcam preview loop stopped
+2025-10-03 14:22:38,373 | INFO | webcam_service | Webcam service stopped
+2025-10-03 14:22:38,373 | INFO | app.main | Application shutdown complete
+2025-10-03 14:22:41,249 | INFO | app.main | 📷 Default camera source: realsense
+2025-10-03 14:22:41,262 | INFO | app.session_manager | Starting session manager
+2025-10-03 14:22:41,262 | INFO | app.session_manager | 🎥 [STARTUP] Starting RealSense service...
+2025-10-03 14:22:41,262 | INFO | app.session_manager | 🎥 [STARTUP] Activating camera hardware for idle detection...
+2025-10-03 14:22:41,262 | INFO | d435i_liveness | Hardware request: idle_detection (total=1)
+2025-10-03 14:22:41,262 | INFO | d435i_liveness | Activating RealSense pipeline
+2025-10-03 14:22:41,285 | INFO | app.session_manager | 🎥 [STARTUP] Setting operational mode to idle_detection...
+2025-10-03 14:22:41,286 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Operational mode: idle_detection → idle_detection
+2025-10-03 14:22:41,286 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Mode details:
+2025-10-03 14:22:41,286 | INFO | d435i_liveness |    - idle_detection: 1s bursts, face detection only
+2025-10-03 14:22:41,286 | INFO | d435i_liveness |    - active: Continuous, face detection only (warm state)
+2025-10-03 14:22:41,286 | INFO | d435i_liveness |    - validation: Full liveness with depth checks
+2025-10-03 14:22:41,287 | INFO | d435i_liveness | ⚙️ [MODE_SWITCH] Now in 'idle_detection' mode
+2025-10-03 14:22:41,287 | INFO | app.session_manager | 🎥 [STARTUP] ✅ RealSense started in idle_detection mode
+2025-10-03 14:22:41,287 | INFO | app.session_manager | 🎥 [STARTUP] 🔍 Camera will take 1-second burst photos to detect faces
+2025-10-03 14:22:41,287 | INFO | app.session_manager | 🎥 [STARTUP] 👤 Face detection will trigger session start
+2025-10-03 14:22:41,287 | INFO | app.session_manager | Session manager started in IDLE state (camera in idle detection mode)
+2025-10-03 14:22:41,288 | INFO | webcam_service | Webcam service started
+2025-10-03 14:22:41,288 | INFO | app.main | Application started successfully (including webcam service)
+2025-10-03 14:22:41,288 | INFO | app.session_manager | Watchdog loop started
+2025-10-03 14:22:41,576 | INFO | d435i_liveness | Connected to Intel RealSense D435I (S/N 215322072881) depth_scale=0.001000 m

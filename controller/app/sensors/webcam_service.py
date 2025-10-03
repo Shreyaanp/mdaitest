@@ -272,7 +272,7 @@ class WebcamService:
         _ = cv2.Sobel(gray, cv2.CV_64F, 0, 1, ksize=3)
     
     async def _preview_loop(self) -> None:
-        """Main preview loop."""
+        """Main preview loop - PREVIEW DISABLED to save CPU resources."""
         try:
             while not self._stop_event.is_set():
                 if self._active and self._cap:
@@ -280,15 +280,17 @@ class WebcamService:
                     loop = asyncio.get_running_loop()
                     frame_data = await loop.run_in_executor(None, self._capture_frame)
                     
+                    # PREVIEW DISABLED: Saves CPU by not encoding/broadcasting frames
                     # Serialize and broadcast
-                    frame_bytes = self._serialize_frame(frame_data)
-                    self._broadcast_frame(frame_bytes)
+                    # frame_bytes = self._serialize_frame(frame_data)
+                    # self._broadcast_frame(frame_bytes)
                     
                     # Small delay to control frame rate
                     await asyncio.sleep(0.033)  # ~30 FPS
                 else:
+                    # PREVIEW DISABLED: Don't broadcast placeholder
                     # Inactive - send placeholder
-                    self._broadcast_frame(self._placeholder_frame())
+                    # self._broadcast_frame(self._placeholder_frame())
                     await asyncio.sleep(0.1)
         except asyncio.CancelledError:
             raise

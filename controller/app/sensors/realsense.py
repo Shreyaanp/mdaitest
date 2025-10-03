@@ -676,9 +676,10 @@ class SimpleRealSenseService:
                             else:
                                 logger.warning(f"🔍 [IDLE_DETECTION] Burst capture returned None")
                             
+                            # PREVIEW DISABLED: Saves CPU by not encoding JPEG frames
                             # Broadcast frame for preview (optional)
-                            frame_bytes = self._serialize_frame(result)
-                            self._broadcast_frame(frame_bytes)
+                            # frame_bytes = self._serialize_frame(result)
+                            # self._broadcast_frame(frame_bytes)
                         
                         # Sleep until next burst
                         await asyncio.sleep(0.1)
@@ -709,11 +710,12 @@ class SimpleRealSenseService:
                                     except Exception as e:
                                         logger.exception(f"👤 [ACTIVE_MODE] Callback {i+1}/{len(self._face_detection_callbacks)} failed: {e}")
                         
+                        # PREVIEW DISABLED: Saves CPU by not encoding JPEG frames
                         # Only generate and broadcast preview every Nth frame (reduces load)
-                        frame_skip_counter += 1
-                        if frame_skip_counter % frame_skip == 0:
-                            frame_bytes = self._serialize_frame(result)
-                            self._broadcast_frame(frame_bytes)
+                        # frame_skip_counter += 1
+                        # if frame_skip_counter % frame_skip == 0:
+                        #     frame_bytes = self._serialize_frame(result)
+                        #     self._broadcast_frame(frame_bytes)
                         
                         self._frame_count += 1
                         
@@ -732,7 +734,8 @@ class SimpleRealSenseService:
                             await asyncio.sleep(0.05)
                         
                 elif not self.enable_hardware:
-                    self._broadcast_frame(self._placeholder_frame())
+                    # PREVIEW DISABLED: Don't broadcast placeholder frames
+                    # self._broadcast_frame(self._placeholder_frame())
                     self._broadcast_result(None)
                     await asyncio.sleep(0.1)
                 else:
