@@ -10070,3 +10070,1714 @@ INFO:     127.0.0.1:36256 - "GET /preview?t=1759460439832 HTTP/1.1" 200 OK
 2025-10-03 03:04:25,113 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
 2025-10-03 03:04:26,122 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 38mm < 100mm (TOO CLOSE)
 2025-10-03 03:04:27,259 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 36mm < 100mm (TOO CLOSE)
+2025-10-03 03:04:28,399 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 28mm < 100mm (TOO CLOSE)
+2025-10-03 03:04:29,534 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 33mm < 100mm (TOO CLOSE)
+2025-10-03 03:04:30,672 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:04:31,810 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:04:32,944 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:04:34,083 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:04:35,083 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 31mm < 100mm (TOO CLOSE)
+2025-10-03 03:04:36,219 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:04:37,356 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 28mm < 100mm (TOO CLOSE)
+2025-10-03 03:04:38,362 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 56mm < 100mm (TOO CLOSE)
+2025-10-03 03:04:39,372 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:04:40,374 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 57mm < 100mm (TOO CLOSE)
+2025-10-03 03:04:41,511 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
+2025-10-03 03:04:42,648 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 55mm < 100mm (TOO CLOSE)
+2025-10-03 03:04:43,783 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:04:44,784 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 37mm < 100mm (TOO CLOSE)
+2025-10-03 03:04:45,919 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 41mm < 100mm (TOO CLOSE)
+2025-10-03 03:04:46,921 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 68mm < 100mm (TOO CLOSE)
+2025-10-03 03:04:48,054 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:04:49,191 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 54mm < 100mm (TOO CLOSE)
+2025-10-03 03:04:50,324 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:04:51,459 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 57mm < 100mm (TOO CLOSE)
+2025-10-03 03:04:52,593 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:04:53,594 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 28mm < 100mm (TOO CLOSE)
+2025-10-03 03:04:54,728 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:04:55,861 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
+2025-10-03 03:04:56,995 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 42mm < 100mm (TOO CLOSE)
+2025-10-03 03:04:58,129 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:04:59,264 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 37mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:00,401 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:01,535 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 33mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:02,536 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 29mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:03,669 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:04,805 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:05,940 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:07,078 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 38mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:08,214 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:09,348 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:10,487 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 29mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:11,629 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:12,771 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:13,906 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:15,039 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:16,172 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:17,306 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:18,440 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 58mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:19,578 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 29mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:20,712 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:21,850 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:22,984 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 68mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:24,119 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 26mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:25,255 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:26,392 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:27,525 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:28,660 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:29,797 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 37mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:30,932 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:32,065 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:33,200 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:34,331 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:35,472 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:36,606 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:37,739 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:38,874 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:40,006 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:41,142 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:42,274 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:43,406 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 59mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:44,546 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 58mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:45,683 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:46,818 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:47,953 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:49,090 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:50,223 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:51,355 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:52,490 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 57mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:53,627 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:54,760 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:55,894 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:57,029 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 23mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:58,164 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:05:59,299 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:00,436 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:01,570 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:02,707 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:03,841 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:04,976 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 54mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:06,113 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:07,251 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:08,389 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 55mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:09,524 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 28mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:10,659 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:11,797 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:12,933 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:14,066 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 40mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:15,205 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:16,339 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:17,474 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:18,612 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:19,750 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:20,886 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:21,887 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:23,025 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 30mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:24,160 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:25,292 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:26,431 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:27,570 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:28,702 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:29,835 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:30,972 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 82mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:32,105 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:33,245 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:34,376 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:35,376 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:36,377 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:37,514 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:38,646 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:39,788 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:40,925 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:42,061 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:43,198 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 48mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:44,336 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:45,469 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:46,602 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:47,734 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 38mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:48,871 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:50,009 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:51,146 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:52,286 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:53,423 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:54,560 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:55,696 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:56,832 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:57,967 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:06:59,101 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:00,240 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:01,380 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:02,513 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:03,647 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 29mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:04,780 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:05,913 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:07,048 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:08,183 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 29mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:09,321 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:10,461 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:11,598 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:12,732 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:13,866 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:15,001 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:16,138 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:17,272 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:18,277 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:19,412 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:20,546 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:21,680 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 57mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:22,815 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:23,949 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:25,083 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:26,217 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:27,218 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:28,355 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:29,490 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 39mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:30,625 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:31,757 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:32,897 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 57mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:34,029 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:35,163 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:36,304 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:37,438 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:38,573 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:39,707 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:40,841 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:41,978 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 29mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:43,113 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:44,245 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 28mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:45,385 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 55mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:46,522 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:47,654 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:48,789 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:49,925 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:51,064 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:52,199 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:53,334 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:54,470 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:55,604 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 33mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:56,740 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:07:57,591 | INFO | app.session_manager | 👆 ToF triggered (distance=133mm) - starting session
+2025-10-03 03:07:57,591 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-10-03 03:07:57,875 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 133mm 100-500mm (TRIGGER)
+2025-10-03 03:07:58,614 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-10-03 03:07:58,616 | INFO | app.session_manager | 📱 Token issued: eyJhbGciOiJI... (expires in 180s)
+2025-10-03 03:07:59,011 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 111mm 100-500mm (TRIGGER)
+2025-10-03 03:08:00,142 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 60mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:00,591 | INFO | app.session_manager | 👋 Showing hello human screen (3.0s)
+2025-10-03 03:08:00,710 | INFO | app.session_manager | ⚠️ User out of range (distance=5000mm) - will cancel in 3.0s if they don't return...
+2025-10-03 03:08:01,277 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:02,092 | INFO | app.session_manager | 📱 Showing scan prompt screen
+2025-10-03 03:08:02,092 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiYjI4ZTJkZjExZmMyNGU3NzkzMTMzN2EyMmFiYjFiNmMiLCJleHAiOjE3NTk0NjEwNTh9.bKL9NlICVk-noGI9yAiEVRi92u0rMiK6U7YDKQFcbqg
+2025-10-03 03:08:02,359 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:03,220 | INFO | app.session_manager | 📱 QR code displayed - waiting for mobile app
+2025-10-03 03:08:03,220 | INFO | app.session_manager | ⏳ Waiting for mobile app connection (timeout=175.0s)
+2025-10-03 03:08:03,220 | INFO | app.session_manager | Bridge message received: joined
+2025-10-03 03:08:03,490 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:03,710 | WARNING | app.session_manager | 🚶 User away for 3.0s - cancelling session
+2025-10-03 03:08:03,710 | INFO | app.session_manager | ⚠️ Session cancelled (user walked away)
+2025-10-03 03:08:03,710 | INFO | app.session_manager | 📷 Camera deactivated in cleanup
+2025-10-03 03:08:03,974 | INFO | app.session_manager | 🔄 Session cleaned up, returning to idle
+2025-10-03 03:08:04,628 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 58mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:05,762 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:06,897 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:08,030 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:09,167 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:10,300 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:11,438 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:12,571 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:13,703 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:14,835 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:15,968 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:17,102 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:18,237 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:19,370 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 39mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:20,505 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:21,644 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 61mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:22,777 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 25mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:23,911 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 61mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:25,047 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+WARNING:  WatchFiles detected changes in 'app/session_manager.py'. Reloading...
+INFO:     Shutting down
+INFO:     connection closed
+INFO:     Waiting for background tasks to complete. (CTRL+C to force quit)
+2025-10-03 03:08:26,182 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:27,182 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:28,315 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:29,315 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:30,449 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 25mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:31,583 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 25mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:32,716 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:33,852 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 66mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:34,986 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 30mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:36,119 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 61mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:37,257 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 41mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:38,259 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:39,264 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:40,396 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:41,529 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:42,666 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:43,803 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:44,936 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 64mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:46,071 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 26mm < 100mm (TOO CLOSE)
+2025-10-03 03:08:47,066 | INFO | app.session_manager | 👆 ToF triggered (distance=128mm) - starting session
+2025-10-03 03:08:47,066 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+INFO:     Waiting for application shutdown.
+2025-10-03 03:08:47,116 | INFO | app.session_manager | Stopping session manager
+2025-10-03 03:08:47,167 | INFO | app.sensors.python_tof | Python ToF sensor stopped
+2025-10-03 03:08:47,168 | INFO | app.sensors.python_tof | Python ToF provider stopped
+2025-10-03 03:08:47,217 | INFO | app.session_manager | Watchdog loop cancelled
+2025-10-03 03:08:47,218 | INFO | app.session_manager | Session manager stopped
+2025-10-03 03:08:47,316 | INFO | webcam_service | Webcam preview loop stopped
+2025-10-03 03:08:47,317 | INFO | webcam_service | Webcam service stopped
+2025-10-03 03:08:47,317 | INFO | app.main | Application shutdown complete
+INFO:     Application shutdown complete.
+INFO:     Finished server process [12276]
+2025-10-03 03:08:49,765 | INFO | app.session_manager | 🐍 Using Python ToF implementation
+2025-10-03 03:08:49,972 | INFO | app.main | 📷 Default camera source: realsense
+INFO:     Started server process [29567]
+INFO:     Waiting for application startup.
+2025-10-03 03:08:49,992 | INFO | app.session_manager | Starting session manager
+2025-10-03 03:08:49,993 | INFO | app.sensors.python_tof | Initializing VL53L0X (attempt 1/3)...
+2025-10-03 03:08:50,048 | INFO | app.sensors.python_tof | VL53L0X found: Model ID 0xee, Revision ID 0x10
+2025-10-03 03:08:50,156 | INFO | app.sensors.python_tof | ✅ VL53L0X initialization successful (test reading: 125mm)
+2025-10-03 03:08:50,156 | INFO | app.sensors.python_tof | Python ToF sensor initialized on I2C bus 1, address 0x29
+2025-10-03 03:08:50,156 | INFO | app.sensors.python_tof | Python ToF provider started @ 10Hz
+2025-10-03 03:08:50,157 | INFO | app.session_manager | Session manager started in IDLE state (camera inactive)
+2025-10-03 03:08:50,157 | INFO | webcam_service | Webcam service started
+2025-10-03 03:08:50,157 | INFO | app.main | Application started successfully (including webcam service)
+2025-10-03 03:08:50,158 | INFO | app.sensors.tof | ToF sensor active (range=100-500mm, debounce=3000ms)
+2025-10-03 03:08:50,158 | INFO | app.session_manager | Watchdog loop started
+INFO:     Application startup complete.
+INFO:     127.0.0.1:51372 - "WebSocket /ws/ui" [accepted]
+INFO:     connection open
+2025-10-03 03:08:50,200 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 125mm 100-500mm (TRIGGER)
+2025-10-03 03:08:50,202 | INFO | app.session_manager | 👆 ToF triggered (distance=125mm) - starting session
+2025-10-03 03:08:50,965 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-10-03 03:08:51,340 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 137mm 100-500mm (TRIGGER)
+2025-10-03 03:08:51,940 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-10-03 03:08:51,941 | INFO | app.session_manager | 📱 Token issued: eyJhbGciOiJI... (expires in 180s)
+2025-10-03 03:08:52,477 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 134mm 100-500mm (TRIGGER)
+2025-10-03 03:08:53,612 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 134mm 100-500mm (TRIGGER)
+2025-10-03 03:08:53,965 | INFO | app.session_manager | 👋 Showing hello human screen (3.0s)
+2025-10-03 03:08:54,750 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 129mm 100-500mm (TRIGGER)
+2025-10-03 03:08:55,465 | INFO | app.session_manager | 📱 Showing scan prompt screen
+2025-10-03 03:08:55,465 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiYmVlZmE5YmRkYWQ5NDRhNmE5Y2E4MGQwMTQ4ZDQ3YTEiLCJleHAiOjE3NTk0NjExMTF9.WCaEbRb2tgrmJJlZUNwTHpdhir3yxer2t_zA5QQS3kE
+2025-10-03 03:08:55,885 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 122mm 100-500mm (TRIGGER)
+2025-10-03 03:08:56,381 | INFO | app.session_manager | 📱 QR code displayed - waiting for mobile app
+2025-10-03 03:08:56,381 | INFO | app.session_manager | ⏳ Waiting for mobile app connection (timeout=175.0s)
+2025-10-03 03:08:56,381 | INFO | app.session_manager | Bridge message received: joined
+2025-10-03 03:08:57,015 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 121mm 100-500mm (TRIGGER)
+2025-10-03 03:08:58,146 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 114mm 100-500mm (TRIGGER)
+2025-10-03 03:08:59,283 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 116mm 100-500mm (TRIGGER)
+2025-10-03 03:09:00,414 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 117mm 100-500mm (TRIGGER)
+2025-10-03 03:09:01,547 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 119mm 100-500mm (TRIGGER)
+2025-10-03 03:09:02,658 | INFO | app.session_manager | Bridge message received: from_app
+2025-10-03 03:09:02,678 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 121mm 100-500mm (TRIGGER)
+2025-10-03 03:09:03,721 | INFO | app.session_manager | Bridge message received: from_app
+2025-10-03 03:09:03,722 | INFO | app.session_manager | 🔑 Platform ID set: PLT_pkEPiGU5lbSs
+2025-10-03 03:09:03,722 | INFO | app.session_manager | ✅ Mobile app connected: PLT_pkEPiGU5lbSs
+2025-10-03 03:09:03,722 | INFO | app.session_manager | 📷 Pre-warming RealSense camera for upcoming validation...
+2025-10-03 03:09:03,723 | INFO | d435i_liveness | Hardware request: validation (total=1)
+2025-10-03 03:09:03,723 | INFO | d435i_liveness | Activating RealSense pipeline
+2025-10-03 03:09:03,739 | INFO | app.session_manager | 📷 RealSense camera pre-warmed successfully
+2025-10-03 03:09:03,740 | INFO | app.session_manager | 📸 Starting human validation (10.0s, need ≥10 frames)
+2025-10-03 03:09:03,740 | INFO | app.session_manager | ⏱️ Camera already active, stabilizing (500ms)...
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+W0000 00:00:1759460943.744378   29888 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1759460943.758701   29887 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+INFO:     127.0.0.1:45242 - "GET /preview?t=1759460943764 HTTP/1.1" 200 OK
+2025-10-03 03:09:03,887 | INFO | d435i_liveness | Connected to Intel RealSense D435I (S/N 215322072881) depth_scale=0.001000 m
+2025-10-03 03:09:03,888 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 124mm 100-500mm (TRIGGER)
+2025-10-03 03:09:04,253 | INFO | app.session_manager | Bridge message received: from_app
+2025-10-03 03:09:04,253 | INFO | app.session_manager | 🔑 Platform ID set: PLT_pkEPiGU5lbSs
+/home/ubuntu/Desktop/mdaitest/controller/.venv/lib/python3.12/site-packages/google/protobuf/symbol_database.py:55: UserWarning: SymbolDatabase.GetPrototype() is deprecated. Please use message_factory.GetMessageClass() instead. SymbolDatabase.GetPrototype() will be removed soon.
+  warnings.warn('SymbolDatabase.GetPrototype() is deprecated. Please '
+2025-10-03 03:09:05,043 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 131mm 100-500mm (TRIGGER)
+2025-10-03 03:09:06,088 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 133mm 100-500mm (TRIGGER)
+2025-10-03 03:09:06,216 | WARNING | d435i_liveness | RealSense error: Frame didn't arrive within 1000
+2025-10-03 03:09:07,223 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 136mm 100-500mm (TRIGGER)
+2025-10-03 03:09:07,268 | WARNING | d435i_liveness | RealSense error: Frame didn't arrive within 1000
+2025-10-03 03:09:08,319 | WARNING | d435i_liveness | RealSense error: Frame didn't arrive within 1000
+2025-10-03 03:09:08,351 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 135mm 100-500mm (TRIGGER)
+2025-10-03 03:09:09,369 | WARNING | d435i_liveness | RealSense error: Frame didn't arrive within 1000
+2025-10-03 03:09:09,484 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 137mm 100-500mm (TRIGGER)
+2025-10-03 03:09:10,422 | WARNING | d435i_liveness | RealSense error: Frame didn't arrive within 1000
+2025-10-03 03:09:10,619 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 137mm 100-500mm (TRIGGER)
+2025-10-03 03:09:11,473 | WARNING | d435i_liveness | RealSense error: Frame didn't arrive within 1000
+2025-10-03 03:09:11,754 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 138mm 100-500mm (TRIGGER)
+2025-10-03 03:09:12,524 | WARNING | d435i_liveness | RealSense error: Frame didn't arrive within 1000
+2025-10-03 03:09:12,885 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 139mm 100-500mm (TRIGGER)
+2025-10-03 03:09:13,576 | WARNING | d435i_liveness | RealSense error: Frame didn't arrive within 1000
+2025-10-03 03:09:14,020 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 138mm 100-500mm (TRIGGER)
+2025-10-03 03:09:14,268 | INFO | app.session_manager | 📊 Validation complete: 15/15 frames passed, faces_detected=15/15, best_score=0.720
+2025-10-03 03:09:14,275 | INFO | app.session_manager | Saved best frame to /home/ubuntu/Desktop/mdaitest/captures/20251003_030914_PLT_pkEPiGU5lbSs_BEST.jpg
+2025-10-03 03:09:14,276 | INFO | app.session_manager | ✅ Human validation SUCCESS: 15 passing frames, score=0.720
+2025-10-03 03:09:14,276 | INFO | app.session_manager | 🔑 Platform ID at end of validation: PLT_pkEPiGU5lbSs
+2025-10-03 03:09:14,630 | WARNING | d435i_liveness | RealSense error: Frame didn't arrive within 1000
+2025-10-03 03:09:14,630 | INFO | d435i_liveness | Hardware release: validation (total=0)
+2025-10-03 03:09:14,630 | INFO | d435i_liveness | Deactivating RealSense pipeline
+2025-10-03 03:09:15,152 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 140mm 100-500mm (TRIGGER)
+2025-10-03 03:09:15,681 | INFO | app.session_manager | 🚀 Starting processing phase
+2025-10-03 03:09:15,681 | INFO | app.session_manager | 🔑 Platform ID at start of upload: PLT_pkEPiGU5lbSs
+2025-10-03 03:09:15,689 | INFO | app.session_manager | 📤 Frame uploaded (80536 chars base64)
+2025-10-03 03:09:16,261 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 139mm 100-500mm (TRIGGER)
+2025-10-03 03:09:17,395 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 138mm 100-500mm (TRIGGER)
+2025-10-03 03:09:18,531 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 140mm 100-500mm (TRIGGER)
+2025-10-03 03:09:18,689 | WARNING | app.session_manager | ⚠️ Backend ACK timeout (3s) - continuing anyway
+2025-10-03 03:09:18,690 | INFO | app.session_manager | 🎉 Session complete
+2025-10-03 03:09:18,690 | INFO | app.session_manager | ✅ Session completed successfully
+2025-10-03 03:09:18,691 | INFO | app.session_manager | 📷 Camera deactivated in cleanup
+2025-10-03 03:09:19,665 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 140mm 100-500mm (TRIGGER)
+2025-10-03 03:09:20,801 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 140mm 100-500mm (TRIGGER)
+2025-10-03 03:09:21,690 | INFO | app.session_manager | 🔄 Session cleaned up, returning to idle
+2025-10-03 03:09:21,939 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 139mm 100-500mm (TRIGGER)
+2025-10-03 03:09:23,079 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 134mm 100-500mm (TRIGGER)
+2025-10-03 03:09:24,215 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 122mm 100-500mm (TRIGGER)
+2025-10-03 03:09:25,353 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 121mm 100-500mm (TRIGGER)
+2025-10-03 03:09:26,487 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 121mm 100-500mm (TRIGGER)
+2025-10-03 03:09:27,622 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 121mm 100-500mm (TRIGGER)
+2025-10-03 03:09:28,757 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 123mm 100-500mm (TRIGGER)
+2025-10-03 03:09:29,762 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 123mm 100-500mm (TRIGGER)
+2025-10-03 03:09:30,901 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 122mm 100-500mm (TRIGGER)
+2025-10-03 03:09:32,035 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 117mm 100-500mm (TRIGGER)
+2025-10-03 03:09:33,170 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 119mm 100-500mm (TRIGGER)
+WARNING:  WatchFiles detected changes in 'app/config.py'. Reloading...
+INFO:     Shutting down
+INFO:     connection closed
+INFO:     Waiting for background tasks to complete. (CTRL+C to force quit)
+2025-10-03 03:09:34,302 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 122mm 100-500mm (TRIGGER)
+2025-10-03 03:09:35,437 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 123mm 100-500mm (TRIGGER)
+2025-10-03 03:09:36,571 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 124mm 100-500mm (TRIGGER)
+2025-10-03 03:09:37,709 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 126mm 100-500mm (TRIGGER)
+2025-10-03 03:09:38,847 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 125mm 100-500mm (TRIGGER)
+2025-10-03 03:09:39,986 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 126mm 100-500mm (TRIGGER)
+2025-10-03 03:09:41,124 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 127mm 100-500mm (TRIGGER)
+2025-10-03 03:09:42,258 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 125mm 100-500mm (TRIGGER)
+2025-10-03 03:09:43,391 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 122mm 100-500mm (TRIGGER)
+2025-10-03 03:09:44,525 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 127mm 100-500mm (TRIGGER)
+2025-10-03 03:09:45,660 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 126mm 100-500mm (TRIGGER)
+2025-10-03 03:09:46,795 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 124mm 100-500mm (TRIGGER)
+2025-10-03 03:09:47,929 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 126mm 100-500mm (TRIGGER)
+2025-10-03 03:09:49,069 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 128mm 100-500mm (TRIGGER)
+INFO:     Waiting for application shutdown.
+2025-10-03 03:09:50,178 | INFO | app.session_manager | Stopping session manager
+2025-10-03 03:09:50,205 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 129mm 100-500mm (TRIGGER)
+2025-10-03 03:09:50,306 | INFO | app.sensors.python_tof | Python ToF sensor stopped
+2025-10-03 03:09:50,307 | INFO | app.sensors.python_tof | Python ToF provider stopped
+2025-10-03 03:09:50,329 | INFO | app.session_manager | Watchdog loop cancelled
+2025-10-03 03:09:50,330 | INFO | app.session_manager | Session manager stopped
+2025-10-03 03:09:50,374 | INFO | webcam_service | Webcam preview loop stopped
+2025-10-03 03:09:50,375 | INFO | webcam_service | Webcam service stopped
+2025-10-03 03:09:50,375 | INFO | app.main | Application shutdown complete
+INFO:     Application shutdown complete.
+INFO:     Finished server process [29567]
+2025-10-03 03:09:52,564 | INFO | app.session_manager | 🐍 Using Python ToF implementation
+2025-10-03 03:09:52,740 | INFO | app.main | 📷 Default camera source: realsense
+INFO:     Started server process [30415]
+INFO:     Waiting for application startup.
+2025-10-03 03:09:52,752 | INFO | app.session_manager | Starting session manager
+2025-10-03 03:09:52,753 | INFO | app.sensors.python_tof | Initializing VL53L0X (attempt 1/3)...
+2025-10-03 03:09:52,805 | INFO | app.sensors.python_tof | VL53L0X found: Model ID 0xee, Revision ID 0x10
+2025-10-03 03:09:52,911 | INFO | app.sensors.python_tof | ✅ VL53L0X initialization successful (test reading: 127mm)
+2025-10-03 03:09:52,913 | INFO | app.sensors.python_tof | Python ToF sensor initialized on I2C bus 1, address 0x29
+2025-10-03 03:09:52,915 | INFO | app.sensors.python_tof | Python ToF provider started @ 10Hz
+2025-10-03 03:09:52,916 | INFO | app.session_manager | Session manager started in IDLE state (camera inactive)
+2025-10-03 03:09:52,916 | INFO | webcam_service | Webcam service started
+2025-10-03 03:09:52,916 | INFO | app.main | Application started successfully (including webcam service)
+2025-10-03 03:09:52,917 | INFO | app.sensors.tof | ToF sensor active (range=100-500mm, debounce=3000ms)
+2025-10-03 03:09:52,917 | INFO | app.session_manager | Watchdog loop started
+INFO:     Application startup complete.
+INFO:     127.0.0.1:37180 - "WebSocket /ws/ui" [accepted]
+INFO:     connection open
+2025-10-03 03:09:52,960 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 128mm 100-500mm (TRIGGER)
+2025-10-03 03:09:52,962 | INFO | app.session_manager | 👆 ToF triggered (distance=128mm) - starting session
+2025-10-03 03:09:53,764 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-10-03 03:09:54,101 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 124mm 100-500mm (TRIGGER)
+2025-10-03 03:09:54,751 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-10-03 03:09:54,752 | INFO | app.session_manager | 📱 Token issued: eyJhbGciOiJI... (expires in 180s)
+2025-10-03 03:09:55,235 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 122mm 100-500mm (TRIGGER)
+2025-10-03 03:09:56,367 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 123mm 100-500mm (TRIGGER)
+2025-10-03 03:09:56,764 | INFO | app.session_manager | 👋 Showing hello human screen (3.0s)
+2025-10-03 03:09:57,504 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 123mm 100-500mm (TRIGGER)
+2025-10-03 03:09:58,264 | INFO | app.session_manager | 📱 Showing scan prompt screen
+2025-10-03 03:09:58,265 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiMWE0YWU0OTVhMDc2NGZmNzhkNzEyNTAxOWMwYmY5ZDUiLCJleHAiOjE3NTk0NjExNzR9.fS-RDTMqkJyDmIZ9hqhQCaSv_zGLZ6-IP2Jk91ml4O8
+2025-10-03 03:09:58,506 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 123mm 100-500mm (TRIGGER)
+2025-10-03 03:09:59,212 | INFO | app.session_manager | 📱 QR code displayed - waiting for mobile app
+2025-10-03 03:09:59,212 | INFO | app.session_manager | ⏳ Waiting for mobile app connection (timeout=175.0s)
+2025-10-03 03:09:59,214 | INFO | app.session_manager | Bridge message received: joined
+2025-10-03 03:09:59,639 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 122mm 100-500mm (TRIGGER)
+2025-10-03 03:10:00,774 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 125mm 100-500mm (TRIGGER)
+2025-10-03 03:10:01,906 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 121mm 100-500mm (TRIGGER)
+2025-10-03 03:10:03,038 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 120mm 100-500mm (TRIGGER)
+2025-10-03 03:10:04,173 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 120mm 100-500mm (TRIGGER)
+2025-10-03 03:10:05,302 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 120mm 100-500mm (TRIGGER)
+2025-10-03 03:10:06,430 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 118mm 100-500mm (TRIGGER)
+2025-10-03 03:10:07,564 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 118mm 100-500mm (TRIGGER)
+2025-10-03 03:10:08,412 | INFO | app.session_manager | ⚠️ User out of range (distance=5000mm) - will cancel in 3.0s if they don't return...
+2025-10-03 03:10:08,697 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 39mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:09,831 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:10,970 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:11,413 | WARNING | app.session_manager | 🚶 User away for 3.0s - cancelling session
+2025-10-03 03:10:11,413 | INFO | app.session_manager | ⚠️ Session cancelled (user walked away)
+2025-10-03 03:10:11,414 | INFO | app.session_manager | 📷 Camera deactivated in cleanup
+2025-10-03 03:10:11,691 | INFO | app.session_manager | 🔄 Session cleaned up, returning to idle
+2025-10-03 03:10:12,105 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 28mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:13,105 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:14,241 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 54mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:15,377 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:16,509 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:17,645 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 28mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:18,781 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:19,914 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:21,055 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:22,189 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 37mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:23,325 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:24,459 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:25,599 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:26,734 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:27,734 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 60mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:28,870 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 37mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:30,001 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 34mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:31,138 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 66mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:32,273 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 26mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:33,409 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:34,543 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 42mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:35,679 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 69mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:36,815 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 25mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:37,948 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:39,084 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:40,218 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:41,354 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 43mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:42,488 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 29mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:43,622 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 45mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:44,755 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:45,889 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 46mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:47,026 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 55mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:48,160 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 69mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:49,299 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:50,436 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 23mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:51,574 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:52,710 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 23mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:53,849 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 56mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:54,984 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 31mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:56,119 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:56,970 | INFO | app.session_manager | 👆 ToF triggered (distance=100mm) - starting session
+2025-10-03 03:10:56,971 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-10-03 03:10:57,253 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 40mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:57,831 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-10-03 03:10:57,836 | INFO | app.session_manager | 📱 Token issued: eyJhbGciOiJI... (expires in 180s)
+2025-10-03 03:10:58,393 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 60mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:59,527 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:10:59,973 | INFO | app.session_manager | 👋 Showing hello human screen (3.0s)
+2025-10-03 03:11:00,094 | INFO | app.session_manager | ⚠️ User out of range (distance=5000mm) - will cancel in 3.0s if they don't return...
+2025-10-03 03:11:00,659 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 72mm < 100mm (TOO CLOSE)
+2025-10-03 03:11:01,473 | INFO | app.session_manager | 📱 Showing scan prompt screen
+2025-10-03 03:11:01,473 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiNjk0YTZmZjZjNDc4NDA2Zjk5ZjJhYzhmOWI0ZjAwZTkiLCJleHAiOjE3NTk0NjEyMzd9.FP2WoVZgt39XiNFTZ0wrQ26inuIOpsPV0innFLChoiY
+2025-10-03 03:11:01,660 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 102mm 100-500mm (TRIGGER)
+2025-10-03 03:11:02,315 | INFO | app.session_manager | 📱 QR code displayed - waiting for mobile app
+2025-10-03 03:11:02,315 | INFO | app.session_manager | ⏳ Waiting for mobile app connection (timeout=175.0s)
+2025-10-03 03:11:02,315 | INFO | app.session_manager | Bridge message received: joined
+2025-10-03 03:11:02,794 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 102mm 100-500mm (TRIGGER)
+2025-10-03 03:11:03,094 | WARNING | app.session_manager | 🚶 User away for 3.0s - cancelling session
+2025-10-03 03:11:03,095 | INFO | app.session_manager | ⚠️ Session cancelled (user walked away)
+2025-10-03 03:11:03,095 | INFO | app.session_manager | 📷 Camera deactivated in cleanup
+2025-10-03 03:11:03,217 | INFO | app.session_manager | 👆 ToF triggered (distance=102mm) - starting session
+2025-10-03 03:11:03,218 | INFO | app.session_manager | Session already in progress; ignoring trigger
+2025-10-03 03:11:03,345 | INFO | app.session_manager | 🔄 Session cleaned up, returning to idle
+2025-10-03 03:11:03,928 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 102mm 100-500mm (TRIGGER)
+2025-10-03 03:11:05,063 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 107mm 100-500mm (TRIGGER)
+2025-10-03 03:11:06,199 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 03:11:07,338 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 112mm 100-500mm (TRIGGER)
+2025-10-03 03:11:08,472 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 112mm 100-500mm (TRIGGER)
+2025-10-03 03:11:09,605 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 112mm 100-500mm (TRIGGER)
+2025-10-03 03:11:10,741 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 113mm 100-500mm (TRIGGER)
+2025-10-03 03:11:11,877 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 115mm 100-500mm (TRIGGER)
+2025-10-03 03:11:13,009 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 115mm 100-500mm (TRIGGER)
+2025-10-03 03:11:14,142 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 114mm 100-500mm (TRIGGER)
+2025-10-03 03:11:15,154 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 112mm 100-500mm (TRIGGER)
+2025-10-03 03:11:16,287 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 113mm 100-500mm (TRIGGER)
+2025-10-03 03:11:17,422 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 112mm 100-500mm (TRIGGER)
+2025-10-03 03:11:18,557 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 112mm 100-500mm (TRIGGER)
+2025-10-03 03:11:19,691 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 114mm 100-500mm (TRIGGER)
+2025-10-03 03:11:20,825 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 115mm 100-500mm (TRIGGER)
+2025-10-03 03:11:21,956 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 115mm 100-500mm (TRIGGER)
+2025-10-03 03:11:23,089 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 115mm 100-500mm (TRIGGER)
+2025-10-03 03:11:24,223 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 118mm 100-500mm (TRIGGER)
+2025-10-03 03:11:25,358 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 118mm 100-500mm (TRIGGER)
+2025-10-03 03:11:26,493 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 108mm 100-500mm (TRIGGER)
+2025-10-03 03:11:27,624 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 03:11:28,756 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 117mm 100-500mm (TRIGGER)
+2025-10-03 03:11:29,890 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 124mm 100-500mm (TRIGGER)
+2025-10-03 03:11:31,026 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 123mm 100-500mm (TRIGGER)
+2025-10-03 03:11:32,161 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 122mm 100-500mm (TRIGGER)
+2025-10-03 03:11:33,171 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 123mm 100-500mm (TRIGGER)
+2025-10-03 03:11:34,303 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 122mm 100-500mm (TRIGGER)
+2025-10-03 03:11:35,436 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 122mm 100-500mm (TRIGGER)
+2025-10-03 03:11:36,571 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 121mm 100-500mm (TRIGGER)
+2025-10-03 03:11:37,707 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 122mm 100-500mm (TRIGGER)
+2025-10-03 03:11:38,840 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 123mm 100-500mm (TRIGGER)
+2025-10-03 03:11:39,969 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 123mm 100-500mm (TRIGGER)
+2025-10-03 03:11:41,105 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 122mm 100-500mm (TRIGGER)
+2025-10-03 03:11:42,238 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 125mm 100-500mm (TRIGGER)
+2025-10-03 03:11:43,376 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 125mm 100-500mm (TRIGGER)
+WARNING:  WatchFiles detected changes in 'app/sensors/tof.py'. Reloading...
+INFO:     Shutting down
+INFO:     connection closed
+INFO:     Waiting for background tasks to complete. (CTRL+C to force quit)
+2025-10-03 03:11:44,513 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 107mm 100-500mm (TRIGGER)
+2025-10-03 03:11:45,644 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 107mm 100-500mm (TRIGGER)
+2025-10-03 03:11:46,776 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 107mm 100-500mm (TRIGGER)
+2025-10-03 03:11:47,910 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 107mm 100-500mm (TRIGGER)
+2025-10-03 03:11:49,042 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:11:50,178 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:11:51,313 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:11:52,447 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+INFO:     Waiting for application shutdown.
+2025-10-03 03:11:53,005 | INFO | app.session_manager | Stopping session manager
+2025-10-03 03:11:53,119 | INFO | app.sensors.python_tof | Python ToF sensor stopped
+2025-10-03 03:11:53,119 | INFO | app.sensors.python_tof | Python ToF provider stopped
+2025-10-03 03:11:53,133 | INFO | app.session_manager | Watchdog loop cancelled
+2025-10-03 03:11:53,133 | INFO | app.session_manager | Session manager stopped
+2025-10-03 03:11:53,205 | INFO | webcam_service | Webcam preview loop stopped
+2025-10-03 03:11:53,205 | INFO | webcam_service | Webcam service stopped
+2025-10-03 03:11:53,205 | INFO | app.main | Application shutdown complete
+INFO:     Application shutdown complete.
+INFO:     Finished server process [30415]
+Process SpawnProcess-5:
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+    self.run()
+  File "/usr/lib/python3.12/multiprocessing/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/ubuntu/Desktop/mdaitest/controller/.venv/lib/python3.12/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
+    target(sockets=sockets)
+  File "/home/ubuntu/Desktop/mdaitest/controller/.venv/lib/python3.12/site-packages/uvicorn/server.py", line 67, in run
+    return asyncio_run(self.serve(sockets=sockets), loop_factory=self.config.get_loop_factory())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/runners.py", line 194, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "uvloop/loop.pyx", line 1518, in uvloop.loop.Loop.run_until_complete
+  File "/home/ubuntu/Desktop/mdaitest/controller/.venv/lib/python3.12/site-packages/uvicorn/server.py", line 71, in serve
+    await self._serve(sockets)
+  File "/home/ubuntu/Desktop/mdaitest/controller/.venv/lib/python3.12/site-packages/uvicorn/server.py", line 78, in _serve
+    config.load()
+  File "/home/ubuntu/Desktop/mdaitest/controller/.venv/lib/python3.12/site-packages/uvicorn/config.py", line 438, in load
+    self.loaded_app = import_from_string(self.app)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/Desktop/mdaitest/controller/.venv/lib/python3.12/site-packages/uvicorn/importer.py", line 22, in import_from_string
+    raise exc from None
+  File "/home/ubuntu/Desktop/mdaitest/controller/.venv/lib/python3.12/site-packages/uvicorn/importer.py", line 19, in import_from_string
+    module = importlib.import_module(module_str)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 995, in exec_module
+  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
+  File "/home/ubuntu/Desktop/mdaitest/controller/app/main.py", line 15, in <module>
+    from .session_manager import SessionManager
+  File "/home/ubuntu/Desktop/mdaitest/controller/app/session_manager.py", line 25, in <module>
+    from .sensors.tof import DistanceProvider, ToFSensor
+ModuleNotFoundError: No module named 'app.sensors.tof'
+WARNING:  WatchFiles detected changes in 'app/sensors/tof.py'. Reloading...
+2025-10-03 03:13:13,242 | INFO | app.session_manager | 🐍 Using Python ToF implementation
+2025-10-03 03:13:13,462 | INFO | app.main | 📷 Default camera source: realsense
+INFO:     Started server process [32844]
+INFO:     Waiting for application startup.
+2025-10-03 03:13:13,482 | INFO | app.session_manager | Starting session manager
+2025-10-03 03:13:13,484 | INFO | app.sensors.python_tof | Initializing VL53L0X (attempt 1/3)...
+2025-10-03 03:13:13,537 | INFO | app.sensors.python_tof | VL53L0X found: Model ID 0xee, Revision ID 0x10
+2025-10-03 03:13:13,643 | INFO | app.sensors.python_tof | ✅ VL53L0X initialization successful (test reading: 20mm)
+2025-10-03 03:13:13,643 | INFO | app.sensors.python_tof | Python ToF sensor initialized on I2C bus 1, address 0x29
+2025-10-03 03:13:13,644 | INFO | app.sensors.python_tof | Python ToF provider started @ 10Hz
+2025-10-03 03:13:13,644 | INFO | app.session_manager | Session manager started in IDLE state (camera inactive)
+2025-10-03 03:13:13,644 | INFO | webcam_service | Webcam service started
+2025-10-03 03:13:13,644 | INFO | app.main | Application started successfully (including webcam service)
+2025-10-03 03:13:13,644 | INFO | app.sensors.tof | ToF sensor active (range=100-500mm, debounce=3000ms)
+2025-10-03 03:13:13,645 | INFO | app.session_manager | Watchdog loop started
+INFO:     Application startup complete.
+INFO:     127.0.0.1:49536 - "WebSocket /ws/ui" [accepted]
+INFO:     connection open
+2025-10-03 03:13:13,686 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:13:14,823 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:13:15,956 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:13:17,094 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:13:18,230 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:13:19,363 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 51mm < 100mm (TOO CLOSE)
+2025-10-03 03:13:20,496 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:13:21,630 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 73mm < 100mm (TOO CLOSE)
+2025-10-03 03:13:22,769 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:13:23,905 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:13:25,039 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:13:26,174 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:13:27,310 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:13:28,448 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 36mm < 100mm (TOO CLOSE)
+2025-10-03 03:13:29,581 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:13:30,715 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:13:31,850 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 36mm < 100mm (TOO CLOSE)
+2025-10-03 03:13:32,984 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:13:34,118 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:13:35,251 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:13:36,384 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:13:37,516 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:13:38,650 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:13:39,788 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:13:40,924 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:13:42,057 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:13:43,193 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:13:44,327 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:13:45,461 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 36mm < 100mm (TOO CLOSE)
+2025-10-03 03:13:45,743 | INFO | app.session_manager | 👆 ToF triggered (distance=113mm) - starting session
+2025-10-03 03:13:45,744 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-10-03 03:13:46,595 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 150mm 100-500mm (TRIGGER)
+2025-10-03 03:13:46,626 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-10-03 03:13:46,627 | INFO | app.session_manager | 📱 Token issued: eyJhbGciOiJI... (expires in 180s)
+2025-10-03 03:13:47,731 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 150mm 100-500mm (TRIGGER)
+2025-10-03 03:13:48,744 | INFO | app.session_manager | 👋 Showing hello human screen (3.0s)
+2025-10-03 03:13:48,861 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 150mm 100-500mm (TRIGGER)
+2025-10-03 03:13:49,993 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 150mm 100-500mm (TRIGGER)
+2025-10-03 03:13:50,245 | INFO | app.session_manager | 📱 Showing scan prompt screen
+2025-10-03 03:13:50,246 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiY2I4NzYwMzg4NjFhNDk1NWE2MzFkNjhmZDM5NWExODIiLCJleHAiOjE3NTk0NjE0MDZ9.2EoPt5ObPMUIZzw9FVMx5vRrl6rL_4CI9S7xZtpG-Ts
+2025-10-03 03:13:51,016 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 150mm 100-500mm (TRIGGER)
+2025-10-03 03:13:51,142 | INFO | app.session_manager | 📱 QR code displayed - waiting for mobile app
+2025-10-03 03:13:51,143 | INFO | app.session_manager | ⏳ Waiting for mobile app connection (timeout=175.0s)
+2025-10-03 03:13:51,143 | INFO | app.session_manager | Bridge message received: joined
+2025-10-03 03:13:52,147 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 150mm 100-500mm (TRIGGER)
+2025-10-03 03:13:53,278 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 118mm 100-500mm (TRIGGER)
+2025-10-03 03:13:54,410 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 118mm 100-500mm (TRIGGER)
+2025-10-03 03:13:55,539 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 101mm 100-500mm (TRIGGER)
+2025-10-03 03:13:56,531 | INFO | app.session_manager | ⚠️ User out of range (distance=5000mm) - will cancel in 3.0s if they don't return...
+2025-10-03 03:13:56,672 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 56mm < 100mm (TOO CLOSE)
+2025-10-03 03:13:57,803 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:13:58,935 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 54mm < 100mm (TOO CLOSE)
+2025-10-03 03:13:59,532 | WARNING | app.session_manager | 🚶 User away for 3.0s - cancelling session
+2025-10-03 03:13:59,532 | INFO | app.session_manager | ⚠️ Session cancelled (user walked away)
+2025-10-03 03:13:59,532 | INFO | app.session_manager | 📷 Camera deactivated in cleanup
+2025-10-03 03:13:59,839 | INFO | app.session_manager | 🔄 Session cleaned up, returning to idle
+2025-10-03 03:14:00,064 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:01,199 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 28mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:02,219 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:03,353 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 52mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:04,495 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:05,628 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:06,760 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 53mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:07,892 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:09,027 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 36mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:10,160 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 70mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:11,291 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:12,427 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 51mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:13,561 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 42mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:14,694 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:15,829 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:16,961 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:18,094 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:19,233 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:20,237 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 58mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:21,374 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:22,509 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:23,642 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:24,779 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 23mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:25,914 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:27,050 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:28,185 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:29,324 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 33mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:30,463 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:31,595 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 30mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:32,729 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:33,862 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:34,998 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:36,137 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:37,269 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:38,407 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 29mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:39,542 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:40,674 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:41,808 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:42,942 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:44,075 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:45,213 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:46,216 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:47,349 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 67mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:47,775 | INFO | app.session_manager | 👆 ToF triggered (distance=104mm) - starting session
+2025-10-03 03:14:47,775 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-10-03 03:14:48,486 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 103mm 100-500mm (TRIGGER)
+2025-10-03 03:14:48,571 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-10-03 03:14:48,572 | INFO | app.session_manager | 📱 Token issued: eyJhbGciOiJI... (expires in 180s)
+2025-10-03 03:14:49,621 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 84mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:50,753 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:50,776 | INFO | app.session_manager | 👋 Showing hello human screen (3.0s)
+2025-10-03 03:14:50,895 | INFO | app.session_manager | ⚠️ User out of range (distance=5000mm) - will cancel in 3.0s if they don't return...
+2025-10-03 03:14:51,889 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 39mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:52,276 | INFO | app.session_manager | 📱 Showing scan prompt screen
+2025-10-03 03:14:52,276 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiY2QxNWI1NTQ0ZWMzNGE5YmEyMTNjZTY2YWJlODY4NWUiLCJleHAiOjE3NTk0NjE0Njh9.V2tXAuxO1XQPColiS8LjkMSZIjQeBv3yZyMwQws2kQg
+2025-10-03 03:14:53,027 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:53,297 | INFO | app.session_manager | 📱 QR code displayed - waiting for mobile app
+2025-10-03 03:14:53,297 | INFO | app.session_manager | ⏳ Waiting for mobile app connection (timeout=175.0s)
+2025-10-03 03:14:53,298 | INFO | app.session_manager | Bridge message received: joined
+2025-10-03 03:14:53,896 | WARNING | app.session_manager | 🚶 User away for 3.0s - cancelling session
+2025-10-03 03:14:53,896 | INFO | app.session_manager | ⚠️ Session cancelled (user walked away)
+2025-10-03 03:14:53,897 | INFO | app.session_manager | 📷 Camera deactivated in cleanup
+2025-10-03 03:14:54,160 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:54,180 | INFO | app.session_manager | 🔄 Session cleaned up, returning to idle
+2025-10-03 03:14:55,162 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 38mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:56,296 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:57,430 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:58,562 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:14:59,697 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:15:00,838 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 60mm < 100mm (TOO CLOSE)
+2025-10-03 03:15:01,972 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:15:03,105 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
+2025-10-03 03:15:04,239 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 30mm < 100mm (TOO CLOSE)
+2025-10-03 03:15:05,371 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 61mm < 100mm (TOO CLOSE)
+2025-10-03 03:15:06,220 | INFO | app.session_manager | 👆 ToF triggered (distance=127mm) - starting session
+2025-10-03 03:15:06,221 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-10-03 03:15:06,505 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 127mm 100-500mm (TRIGGER)
+2025-10-03 03:15:07,048 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-10-03 03:15:07,049 | INFO | app.session_manager | 📱 Token issued: eyJhbGciOiJI... (expires in 180s)
+2025-10-03 03:15:07,643 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 126mm 100-500mm (TRIGGER)
+2025-10-03 03:15:08,777 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 111mm 100-500mm (TRIGGER)
+2025-10-03 03:15:09,221 | INFO | app.session_manager | 👋 Showing hello human screen (3.0s)
+2025-10-03 03:15:09,779 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 110mm 100-500mm (TRIGGER)
+2025-10-03 03:15:10,722 | INFO | app.session_manager | 📱 Showing scan prompt screen
+2025-10-03 03:15:10,722 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiZjRlYTA3MmY1YzRmNDE4YmJiMjVlOTZiYmM3ZmMzOTAiLCJleHAiOjE3NTk0NjE0ODZ9.pC85fqOkPOstZ2djZWgURXC6vsRtrxk2733v6kERMiw
+2025-10-03 03:15:10,811 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 110mm 100-500mm (TRIGGER)
+2025-10-03 03:15:11,780 | INFO | app.session_manager | 📱 QR code displayed - waiting for mobile app
+2025-10-03 03:15:11,781 | INFO | app.session_manager | ⏳ Waiting for mobile app connection (timeout=175.0s)
+2025-10-03 03:15:11,842 | INFO | app.session_manager | Bridge message received: joined
+2025-10-03 03:15:11,940 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 110mm 100-500mm (TRIGGER)
+2025-10-03 03:15:13,068 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 107mm 100-500mm (TRIGGER)
+2025-10-03 03:15:14,201 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 110mm 100-500mm (TRIGGER)
+2025-10-03 03:15:15,331 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 111mm 100-500mm (TRIGGER)
+2025-10-03 03:15:16,467 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 103mm 100-500mm (TRIGGER)
+2025-10-03 03:15:16,752 | INFO | app.session_manager | ⚠️ User out of range (distance=5000mm) - will cancel in 3.0s if they don't return...
+2025-10-03 03:15:17,602 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
+2025-10-03 03:15:18,735 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:15:19,752 | WARNING | app.session_manager | 🚶 User away for 3.0s - cancelling session
+2025-10-03 03:15:19,753 | INFO | app.session_manager | ⚠️ Session cancelled (user walked away)
+2025-10-03 03:15:19,753 | INFO | app.session_manager | 📷 Camera deactivated in cleanup
+2025-10-03 03:15:19,866 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:15:20,005 | INFO | app.session_manager | 🔄 Session cleaned up, returning to idle
+2025-10-03 03:15:21,000 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 36mm < 100mm (TOO CLOSE)
+2025-10-03 03:15:22,131 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 37mm < 100mm (TOO CLOSE)
+2025-10-03 03:15:23,265 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 30mm < 100mm (TOO CLOSE)
+2025-10-03 03:15:24,402 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 25mm < 100mm (TOO CLOSE)
+2025-10-03 03:15:25,535 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 29mm < 100mm (TOO CLOSE)
+2025-10-03 03:15:26,668 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 66mm < 100mm (TOO CLOSE)
+2025-10-03 03:15:27,802 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 106mm 100-500mm (TRIGGER)
+2025-10-03 03:15:27,803 | INFO | app.session_manager | 👆 ToF triggered (distance=106mm) - starting session
+2025-10-03 03:15:27,803 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-10-03 03:15:28,586 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-10-03 03:15:28,587 | INFO | app.session_manager | 📱 Token issued: eyJhbGciOiJI... (expires in 180s)
+2025-10-03 03:15:28,808 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 138mm 100-500mm (TRIGGER)
+2025-10-03 03:15:29,945 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 121mm 100-500mm (TRIGGER)
+2025-10-03 03:15:30,803 | INFO | app.session_manager | 👋 Showing hello human screen (3.0s)
+2025-10-03 03:15:31,080 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 121mm 100-500mm (TRIGGER)
+2025-10-03 03:15:32,213 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 121mm 100-500mm (TRIGGER)
+2025-10-03 03:15:32,303 | INFO | app.session_manager | 📱 Showing scan prompt screen
+2025-10-03 03:15:32,304 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiYTFkMTFkOTNhMjVhNDQ5ODk3ZjYwZmEyZmVhNTM3YjkiLCJleHAiOjE3NTk0NjE1MDh9.4sC0NyVQkTpIuFobqgQpXXuVjTnFLRucKG3DpEG3lro
+2025-10-03 03:15:33,171 | INFO | app.session_manager | 📱 QR code displayed - waiting for mobile app
+2025-10-03 03:15:33,171 | INFO | app.session_manager | ⏳ Waiting for mobile app connection (timeout=175.0s)
+2025-10-03 03:15:33,172 | INFO | app.session_manager | Bridge message received: joined
+2025-10-03 03:15:33,250 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 108mm 100-500mm (TRIGGER)
+2025-10-03 03:15:34,381 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 108mm 100-500mm (TRIGGER)
+2025-10-03 03:15:35,515 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 108mm 100-500mm (TRIGGER)
+2025-10-03 03:15:36,646 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 108mm 100-500mm (TRIGGER)
+2025-10-03 03:15:37,213 | INFO | app.session_manager | ⚠️ User out of range (distance=5000mm) - will cancel in 3.0s if they don't return...
+2025-10-03 03:15:37,778 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 32mm < 100mm (TOO CLOSE)
+2025-10-03 03:15:38,909 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:15:40,040 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 69mm < 100mm (TOO CLOSE)
+2025-10-03 03:15:40,214 | WARNING | app.session_manager | 🚶 User away for 3.0s - cancelling session
+2025-10-03 03:15:40,214 | INFO | app.session_manager | ⚠️ Session cancelled (user walked away)
+2025-10-03 03:15:40,214 | INFO | app.session_manager | 📷 Camera deactivated in cleanup
+2025-10-03 03:15:40,477 | INFO | app.session_manager | 🔄 Session cleaned up, returning to idle
+2025-10-03 03:15:41,180 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 71mm < 100mm (TOO CLOSE)
+2025-10-03 03:15:42,318 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 72mm < 100mm (TOO CLOSE)
+2025-10-03 03:15:43,451 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:15:44,584 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 33mm < 100mm (TOO CLOSE)
+2025-10-03 03:15:45,719 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:15:46,852 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
+2025-10-03 03:15:47,985 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:15:49,120 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 41mm < 100mm (TOO CLOSE)
+2025-10-03 03:15:50,121 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:15:51,256 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:15:52,394 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 28mm < 100mm (TOO CLOSE)
+2025-10-03 03:15:53,528 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 28mm < 100mm (TOO CLOSE)
+2025-10-03 03:15:54,660 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:15:55,799 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:15:56,937 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 37mm < 100mm (TOO CLOSE)
+2025-10-03 03:15:58,072 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:15:58,498 | INFO | app.session_manager | 👆 ToF triggered (distance=114mm) - starting session
+2025-10-03 03:15:58,498 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-10-03 03:15:59,205 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 114mm 100-500mm (TRIGGER)
+2025-10-03 03:15:59,341 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-10-03 03:15:59,343 | INFO | app.session_manager | 📱 Token issued: eyJhbGciOiJI... (expires in 180s)
+2025-10-03 03:16:00,342 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 123mm 100-500mm (TRIGGER)
+2025-10-03 03:16:01,474 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 140mm 100-500mm (TRIGGER)
+2025-10-03 03:16:01,499 | INFO | app.session_manager | 👋 Showing hello human screen (3.0s)
+2025-10-03 03:16:02,608 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 128mm 100-500mm (TRIGGER)
+2025-10-03 03:16:02,998 | INFO | app.session_manager | 📱 Showing scan prompt screen
+2025-10-03 03:16:02,999 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiODc2ZjQyMWZiM2ZhNDkxMzgxN2M1YzJkNTNkYTMwOTciLCJleHAiOjE3NTk0NjE1Mzl9.07uu38Uf7XyTI88mPEaOpJMLRTC6xHRNX_suo2ydZwM
+2025-10-03 03:16:03,611 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 113mm 100-500mm (TRIGGER)
+2025-10-03 03:16:03,821 | INFO | app.session_manager | 📱 QR code displayed - waiting for mobile app
+2025-10-03 03:16:03,821 | INFO | app.session_manager | ⏳ Waiting for mobile app connection (timeout=175.0s)
+2025-10-03 03:16:03,821 | INFO | app.session_manager | Bridge message received: joined
+2025-10-03 03:16:04,742 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 113mm 100-500mm (TRIGGER)
+2025-10-03 03:16:05,874 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 113mm 100-500mm (TRIGGER)
+2025-10-03 03:16:07,002 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 113mm 100-500mm (TRIGGER)
+2025-10-03 03:16:08,138 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 113mm 100-500mm (TRIGGER)
+2025-10-03 03:16:09,266 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 113mm 100-500mm (TRIGGER)
+2025-10-03 03:16:09,693 | INFO | app.session_manager | ⚠️ User out of range (distance=5000mm) - will cancel in 3.0s if they don't return...
+2025-10-03 03:16:10,403 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 25mm < 100mm (TOO CLOSE)
+2025-10-03 03:16:11,531 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:16:12,664 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:16:12,693 | WARNING | app.session_manager | 🚶 User away for 3.0s - cancelling session
+2025-10-03 03:16:12,693 | INFO | app.session_manager | ⚠️ Session cancelled (user walked away)
+2025-10-03 03:16:12,693 | INFO | app.session_manager | 📷 Camera deactivated in cleanup
+2025-10-03 03:16:12,959 | INFO | app.session_manager | 🔄 Session cleaned up, returning to idle
+2025-10-03 03:16:13,802 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:16:14,937 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 36mm < 100mm (TOO CLOSE)
+2025-10-03 03:16:16,070 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
+2025-10-03 03:16:17,204 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
+2025-10-03 03:16:18,338 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:16:19,475 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:16:20,612 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:16:21,747 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 48mm < 100mm (TOO CLOSE)
+2025-10-03 03:16:22,881 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:16:24,015 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 36mm < 100mm (TOO CLOSE)
+2025-10-03 03:16:25,149 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:16:26,286 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 28mm < 100mm (TOO CLOSE)
+2025-10-03 03:16:27,420 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 36mm < 100mm (TOO CLOSE)
+2025-10-03 03:16:28,554 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:16:29,690 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:16:30,827 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:16:31,963 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:16:33,097 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 37mm < 100mm (TOO CLOSE)
+2025-10-03 03:16:34,231 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:16:35,365 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:16:36,504 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+INFO:     Shutting down
+INFO:     connection closed
+INFO:     Waiting for background tasks to complete. (CTRL+C to force quit)
+2025-10-03 03:16:37,640 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 55mm < 100mm (TOO CLOSE)
+2025-10-03 03:16:38,771 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 28mm < 100mm (TOO CLOSE)
+2025-10-03 03:16:39,906 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
+2025-10-03 03:16:41,043 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:16:42,178 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 37mm < 100mm (TOO CLOSE)
+2025-10-03 03:16:43,180 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+INFO:     Waiting for application shutdown.
+2025-10-03 03:16:43,745 | INFO | app.session_manager | Stopping session manager
+2025-10-03 03:16:43,852 | INFO | app.sensors.python_tof | Python ToF sensor stopped
+2025-10-03 03:16:43,852 | INFO | app.sensors.python_tof | Python ToF provider stopped
+2025-10-03 03:16:43,872 | INFO | app.session_manager | Watchdog loop cancelled
+2025-10-03 03:16:43,872 | INFO | app.session_manager | Session manager stopped
+2025-10-03 03:16:43,945 | INFO | webcam_service | Webcam preview loop stopped
+2025-10-03 03:16:43,945 | INFO | webcam_service | Webcam service stopped
+2025-10-03 03:16:43,945 | INFO | app.main | Application shutdown complete
+INFO:     Application shutdown complete.
+INFO:     Finished server process [32844]
+INFO:     Will watch for changes in these directories: ['/home/ubuntu/Desktop/mdaitest/controller']
+INFO:     Uvicorn running on http://0.0.0.0:5000 (Press CTRL+C to quit)
+INFO:     Started reloader process [35026] using WatchFiles
+2025-10-03 03:16:56,437 | INFO | app.session_manager | 🐍 Using Python ToF implementation
+2025-10-03 03:16:56,612 | INFO | app.main | 📷 Default camera source: realsense
+INFO:     Started server process [35028]
+INFO:     Waiting for application startup.
+2025-10-03 03:16:56,625 | INFO | app.session_manager | Starting session manager
+2025-10-03 03:16:56,626 | INFO | app.sensors.python_tof | Initializing VL53L0X (attempt 1/3)...
+2025-10-03 03:16:56,679 | INFO | app.sensors.python_tof | VL53L0X found: Model ID 0xee, Revision ID 0x10
+2025-10-03 03:16:56,784 | INFO | app.sensors.python_tof | ✅ VL53L0X initialization successful (test reading: 20mm)
+2025-10-03 03:16:56,785 | INFO | app.sensors.python_tof | Python ToF sensor initialized on I2C bus 1, address 0x29
+2025-10-03 03:16:56,785 | INFO | app.sensors.python_tof | Python ToF provider started @ 10Hz
+2025-10-03 03:16:56,785 | INFO | app.session_manager | Session manager started in IDLE state (camera inactive)
+2025-10-03 03:16:56,785 | INFO | webcam_service | Webcam service started
+2025-10-03 03:16:56,786 | INFO | app.main | Application started successfully (including webcam service)
+2025-10-03 03:16:56,786 | INFO | app.sensors.tof | ToF sensor active (range=100-500mm, debounce=6000ms)
+2025-10-03 03:16:56,787 | INFO | app.session_manager | Watchdog loop started
+INFO:     Application startup complete.
+2025-10-03 03:16:56,828 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+INFO:     127.0.0.1:46886 - "WebSocket /ws/ui" [accepted]
+INFO:     connection open
+2025-10-03 03:16:57,964 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:16:59,102 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:17:00,234 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 36mm < 100mm (TOO CLOSE)
+2025-10-03 03:17:01,369 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:17:02,501 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:17:03,633 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:17:04,769 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 56mm < 100mm (TOO CLOSE)
+2025-10-03 03:17:05,905 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:17:07,037 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 29mm < 100mm (TOO CLOSE)
+2025-10-03 03:17:08,037 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:17:09,171 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
+2025-10-03 03:17:10,305 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:17:11,440 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:17:12,577 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 23mm < 100mm (TOO CLOSE)
+2025-10-03 03:17:12,862 | INFO | app.session_manager | 👆 ToF triggered (distance=100mm) - starting session
+2025-10-03 03:17:12,862 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-10-03 03:17:13,673 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-10-03 03:17:13,674 | INFO | app.session_manager | 📱 Token issued: eyJhbGciOiJI... (expires in 180s)
+2025-10-03 03:17:13,712 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 149mm 100-500mm (TRIGGER)
+2025-10-03 03:17:14,845 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 145mm 100-500mm (TRIGGER)
+2025-10-03 03:17:15,862 | INFO | app.session_manager | 👋 Showing hello human screen (3.0s)
+2025-10-03 03:17:15,986 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 145mm 100-500mm (TRIGGER)
+2025-10-03 03:17:17,122 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 107mm 100-500mm (TRIGGER)
+2025-10-03 03:17:17,362 | INFO | app.session_manager | 📱 Showing scan prompt screen
+2025-10-03 03:17:17,363 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiYjllMjUwMjkwNWE4NDBiYjkzNzNkOWU3MTgyOWY2NDkiLCJleHAiOjE3NTk0NjE2MTN9.qHUZj123e845rwgTK54nlnIpPSXpNXrHm3jd2D4kvZw
+2025-10-03 03:17:18,163 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 107mm 100-500mm (TRIGGER)
+2025-10-03 03:17:18,184 | INFO | app.session_manager | 📱 QR code displayed - waiting for mobile app
+2025-10-03 03:17:18,184 | INFO | app.session_manager | ⏳ Waiting for mobile app connection (timeout=175.0s)
+2025-10-03 03:17:18,185 | INFO | app.session_manager | Bridge message received: joined
+2025-10-03 03:17:18,868 | INFO | app.session_manager | ⚠️ User out of range (distance=5000mm) - will cancel in 6.0s if they don't return...
+2025-10-03 03:17:19,295 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:17:20,429 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 61mm < 100mm (TOO CLOSE)
+2025-10-03 03:17:21,558 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 45mm < 100mm (TOO CLOSE)
+2025-10-03 03:17:22,692 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 53mm < 100mm (TOO CLOSE)
+2025-10-03 03:17:23,828 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:17:24,869 | WARNING | app.session_manager | 🚶 User away for 6.0s - cancelling session
+2025-10-03 03:17:24,869 | INFO | app.session_manager | ⚠️ Session cancelled (user walked away)
+2025-10-03 03:17:24,870 | INFO | app.session_manager | 📷 Camera deactivated in cleanup
+2025-10-03 03:17:24,961 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 36mm < 100mm (TOO CLOSE)
+2025-10-03 03:17:25,128 | INFO | app.session_manager | 🔄 Session cleaned up, returning to idle
+2025-10-03 03:17:26,096 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:17:26,809 | INFO | app.session_manager | 👆 ToF triggered (distance=141mm) - starting session
+2025-10-03 03:17:26,811 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-10-03 03:17:27,236 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 135mm 100-500mm (TRIGGER)
+2025-10-03 03:17:27,622 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-10-03 03:17:27,623 | INFO | app.session_manager | 📱 Token issued: eyJhbGciOiJI... (expires in 180s)
+2025-10-03 03:17:28,376 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 97mm < 100mm (TOO CLOSE)
+2025-10-03 03:17:29,507 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:17:29,811 | INFO | app.session_manager | 👋 Showing hello human screen (3.0s)
+2025-10-03 03:17:30,640 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:17:31,312 | INFO | app.session_manager | 📱 Showing scan prompt screen
+2025-10-03 03:17:31,313 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiMTkyNDQyMGVjYTMyNDVhZjgyOWU2Yzg4NmE0NzhhYTQiLCJleHAiOjE3NTk0NjE2Mjd9.lhkFG1gMscyCLE7yQn2h9MLl_xmFaKY1xswnPH9gBmc
+2025-10-03 03:17:31,646 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 28mm < 100mm (TOO CLOSE)
+2025-10-03 03:17:32,160 | INFO | app.session_manager | 📱 QR code displayed - waiting for mobile app
+2025-10-03 03:17:32,161 | INFO | app.session_manager | ⏳ Waiting for mobile app connection (timeout=175.0s)
+2025-10-03 03:17:32,161 | INFO | app.session_manager | Bridge message received: joined
+2025-10-03 03:17:32,781 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 52mm < 100mm (TOO CLOSE)
+2025-10-03 03:17:32,923 | INFO | app.session_manager | ⚠️ User out of range (distance=5000mm) - will cancel in 6.0s if they don't return...
+2025-10-03 03:17:33,910 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:17:35,046 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:17:36,174 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:17:37,306 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:17:38,434 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 26mm < 100mm (TOO CLOSE)
+2025-10-03 03:17:38,923 | WARNING | app.session_manager | 🚶 User away for 6.0s - cancelling session
+2025-10-03 03:17:38,924 | INFO | app.session_manager | ⚠️ Session cancelled (user walked away)
+2025-10-03 03:17:38,924 | INFO | app.session_manager | 📷 Camera deactivated in cleanup
+2025-10-03 03:17:39,213 | INFO | app.session_manager | 🔄 Session cleaned up, returning to idle
+2025-10-03 03:17:39,581 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:17:40,716 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:17:41,850 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 23mm < 100mm (TOO CLOSE)
+2025-10-03 03:17:42,984 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:17:43,412 | INFO | app.session_manager | 👆 ToF triggered (distance=100mm) - starting session
+2025-10-03 03:17:43,412 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-10-03 03:17:43,984 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 133mm 100-500mm (TRIGGER)
+2025-10-03 03:17:44,249 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-10-03 03:17:44,251 | INFO | app.session_manager | 📱 Token issued: eyJhbGciOiJI... (expires in 180s)
+2025-10-03 03:17:45,120 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 133mm 100-500mm (TRIGGER)
+2025-10-03 03:17:46,253 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 131mm 100-500mm (TRIGGER)
+2025-10-03 03:17:46,413 | INFO | app.session_manager | 👋 Showing hello human screen (3.0s)
+2025-10-03 03:17:47,388 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 129mm 100-500mm (TRIGGER)
+2025-10-03 03:17:47,913 | INFO | app.session_manager | 📱 Showing scan prompt screen
+2025-10-03 03:17:47,913 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiOWQ5YTYyZjg1NmFlNGM5MGExNjJjNTFkYzUzNDE4YmMiLCJleHAiOjE3NTk0NjE2NDR9.tuNOsu6e4mSegRI5qqCOA2WdUnwKEVOE0HsXPq2T8z4
+2025-10-03 03:17:48,433 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 131mm 100-500mm (TRIGGER)
+2025-10-03 03:17:48,765 | INFO | app.session_manager | 📱 QR code displayed - waiting for mobile app
+2025-10-03 03:17:48,766 | INFO | app.session_manager | ⏳ Waiting for mobile app connection (timeout=175.0s)
+2025-10-03 03:17:48,766 | INFO | app.session_manager | Bridge message received: joined
+2025-10-03 03:17:49,561 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 130mm 100-500mm (TRIGGER)
+2025-10-03 03:17:50,695 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 129mm 100-500mm (TRIGGER)
+2025-10-03 03:17:51,825 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 130mm 100-500mm (TRIGGER)
+2025-10-03 03:17:52,958 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 130mm 100-500mm (TRIGGER)
+2025-10-03 03:17:54,089 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 126mm 100-500mm (TRIGGER)
+2025-10-03 03:17:55,218 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 128mm 100-500mm (TRIGGER)
+2025-10-03 03:17:56,346 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 127mm 100-500mm (TRIGGER)
+2025-10-03 03:17:57,477 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 127mm 100-500mm (TRIGGER)
+2025-10-03 03:17:58,605 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 127mm 100-500mm (TRIGGER)
+2025-10-03 03:17:59,735 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 126mm 100-500mm (TRIGGER)
+2025-10-03 03:18:00,867 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 127mm 100-500mm (TRIGGER)
+2025-10-03 03:18:01,998 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 127mm 100-500mm (TRIGGER)
+2025-10-03 03:18:03,130 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 127mm 100-500mm (TRIGGER)
+2025-10-03 03:18:04,261 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 128mm 100-500mm (TRIGGER)
+2025-10-03 03:18:05,391 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 129mm 100-500mm (TRIGGER)
+2025-10-03 03:18:06,522 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 108mm 100-500mm (TRIGGER)
+2025-10-03 03:18:07,229 | INFO | app.session_manager | ⚠️ User out of range (distance=5000mm) - will cancel in 6.0s if they don't return...
+2025-10-03 03:18:07,653 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 29mm < 100mm (TOO CLOSE)
+2025-10-03 03:18:08,783 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:18:09,916 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:18:11,050 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:18:12,184 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 54mm < 100mm (TOO CLOSE)
+2025-10-03 03:18:13,229 | WARNING | app.session_manager | 🚶 User away for 6.0s - cancelling session
+2025-10-03 03:18:13,230 | INFO | app.session_manager | ⚠️ Session cancelled (user walked away)
+2025-10-03 03:18:13,230 | INFO | app.session_manager | 📷 Camera deactivated in cleanup
+2025-10-03 03:18:13,313 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:18:13,518 | INFO | app.session_manager | 🔄 Session cleaned up, returning to idle
+2025-10-03 03:18:14,448 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:18:15,451 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:18:16,588 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:18:17,721 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 36mm < 100mm (TOO CLOSE)
+2025-10-03 03:18:18,854 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 36mm < 100mm (TOO CLOSE)
+2025-10-03 03:18:19,854 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:18:20,994 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:18:22,127 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 36mm < 100mm (TOO CLOSE)
+2025-10-03 03:18:23,259 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 36mm < 100mm (TOO CLOSE)
+2025-10-03 03:18:24,392 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 37mm < 100mm (TOO CLOSE)
+2025-10-03 03:18:25,532 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:18:26,667 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:18:27,807 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 45mm < 100mm (TOO CLOSE)
+2025-10-03 03:18:28,944 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 36mm < 100mm (TOO CLOSE)
+2025-10-03 03:18:30,078 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:18:31,212 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 26mm < 100mm (TOO CLOSE)
+2025-10-03 03:18:32,349 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:18:33,480 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 28mm < 100mm (TOO CLOSE)
+2025-10-03 03:18:34,615 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:18:35,751 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:18:36,885 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 53mm < 100mm (TOO CLOSE)
+2025-10-03 03:18:38,020 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 28mm < 100mm (TOO CLOSE)
+2025-10-03 03:18:39,158 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 37mm < 100mm (TOO CLOSE)
+2025-10-03 03:18:40,294 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 61mm < 100mm (TOO CLOSE)
+2025-10-03 03:18:41,430 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:18:42,563 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:18:43,565 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:18:44,700 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:18:45,835 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 28mm < 100mm (TOO CLOSE)
+2025-10-03 03:18:46,827 | INFO | app.session_manager | 👆 ToF triggered (distance=122mm) - starting session
+2025-10-03 03:18:46,828 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-10-03 03:18:46,970 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 129mm 100-500mm (TRIGGER)
+2025-10-03 03:18:47,665 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-10-03 03:18:47,666 | INFO | app.session_manager | 📱 Token issued: eyJhbGciOiJI... (expires in 180s)
+2025-10-03 03:18:48,104 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 138mm 100-500mm (TRIGGER)
+2025-10-03 03:18:49,238 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 138mm 100-500mm (TRIGGER)
+2025-10-03 03:18:49,828 | INFO | app.session_manager | 👋 Showing hello human screen (3.0s)
+2025-10-03 03:18:50,376 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 134mm 100-500mm (TRIGGER)
+2025-10-03 03:18:51,328 | INFO | app.session_manager | 📱 Showing scan prompt screen
+2025-10-03 03:18:51,329 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiZjJiMDE4ZThmZWY5NDNlOThjOGRkMGNjMzk0YTAxMjUiLCJleHAiOjE3NTk0NjE3MDd9.wdu54kh0kIxGRLdD-r3tlslvNlrbs78wr3EpWvAQqbk
+2025-10-03 03:18:51,452 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 131mm 100-500mm (TRIGGER)
+2025-10-03 03:18:52,217 | INFO | app.session_manager | 📱 QR code displayed - waiting for mobile app
+2025-10-03 03:18:52,217 | INFO | app.session_manager | ⏳ Waiting for mobile app connection (timeout=175.0s)
+2025-10-03 03:18:52,217 | INFO | app.session_manager | Bridge message received: joined
+2025-10-03 03:18:52,586 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 130mm 100-500mm (TRIGGER)
+2025-10-03 03:18:53,298 | INFO | app.session_manager | ⚠️ User out of range (distance=5000mm) - will cancel in 6.0s if they don't return...
+2025-10-03 03:18:53,720 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 38mm < 100mm (TOO CLOSE)
+2025-10-03 03:18:54,857 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:18:55,989 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 142mm 100-500mm (TRIGGER)
+2025-10-03 03:18:57,127 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 142mm 100-500mm (TRIGGER)
+2025-10-03 03:18:58,258 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 142mm 100-500mm (TRIGGER)
+2025-10-03 03:18:59,299 | WARNING | app.session_manager | 🚶 User away for 6.0s - cancelling session
+2025-10-03 03:18:59,299 | INFO | app.session_manager | ⚠️ Session cancelled (user walked away)
+2025-10-03 03:18:59,299 | INFO | app.session_manager | 📷 Camera deactivated in cleanup
+2025-10-03 03:18:59,391 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 142mm 100-500mm (TRIGGER)
+2025-10-03 03:18:59,391 | INFO | app.session_manager | 👆 ToF triggered (distance=142mm) - starting session
+2025-10-03 03:18:59,391 | INFO | app.session_manager | Session already in progress; ignoring trigger
+2025-10-03 03:18:59,599 | INFO | app.session_manager | 🔄 Session cleaned up, returning to idle
+2025-10-03 03:19:00,526 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 140mm 100-500mm (TRIGGER)
+2025-10-03 03:19:01,662 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 138mm 100-500mm (TRIGGER)
+2025-10-03 03:19:02,796 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 137mm 100-500mm (TRIGGER)
+2025-10-03 03:19:03,929 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 140mm 100-500mm (TRIGGER)
+2025-10-03 03:19:05,064 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 140mm 100-500mm (TRIGGER)
+2025-10-03 03:19:06,195 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 139mm 100-500mm (TRIGGER)
+2025-10-03 03:19:07,330 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 136mm 100-500mm (TRIGGER)
+2025-10-03 03:19:08,334 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 136mm 100-500mm (TRIGGER)
+2025-10-03 03:19:09,468 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 136mm 100-500mm (TRIGGER)
+2025-10-03 03:19:10,605 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 136mm 100-500mm (TRIGGER)
+2025-10-03 03:19:11,737 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 134mm 100-500mm (TRIGGER)
+2025-10-03 03:19:12,875 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 152mm 100-500mm (TRIGGER)
+2025-10-03 03:19:14,013 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 131mm 100-500mm (TRIGGER)
+2025-10-03 03:19:15,146 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 104mm 100-500mm (TRIGGER)
+2025-10-03 03:19:16,281 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 140mm 100-500mm (TRIGGER)
+2025-10-03 03:19:17,416 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 150mm 100-500mm (TRIGGER)
+2025-10-03 03:19:18,416 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 150mm 100-500mm (TRIGGER)
+2025-10-03 03:19:19,548 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 104mm 100-500mm (TRIGGER)
+2025-10-03 03:19:20,684 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:19:21,815 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 28mm < 100mm (TOO CLOSE)
+2025-10-03 03:19:22,952 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 133mm 100-500mm (TRIGGER)
+2025-10-03 03:19:24,089 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 151mm 100-500mm (TRIGGER)
+2025-10-03 03:19:25,224 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 132mm 100-500mm (TRIGGER)
+2025-10-03 03:19:26,218 | INFO | app.session_manager | 👆 ToF triggered (distance=128mm) - starting session
+2025-10-03 03:19:26,218 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-10-03 03:19:26,359 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 128mm 100-500mm (TRIGGER)
+2025-10-03 03:19:27,004 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-10-03 03:19:27,004 | INFO | app.session_manager | 📱 Token issued: eyJhbGciOiJI... (expires in 180s)
+2025-10-03 03:19:27,492 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 125mm 100-500mm (TRIGGER)
+2025-10-03 03:19:28,625 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 104mm 100-500mm (TRIGGER)
+2025-10-03 03:19:29,218 | INFO | app.session_manager | 👋 Showing hello human screen (3.0s)
+2025-10-03 03:19:29,759 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:19:30,718 | INFO | app.session_manager | 📱 Showing scan prompt screen
+2025-10-03 03:19:30,718 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiMjY5NzNlOWY4ZDA3NGJlZjlhNDZmYWI3MjI0ZDZiZWQiLCJleHAiOjE3NTk0NjE3NDZ9.lIMcenW8QvGSXzS5WxaxiPMJeG-Pc2QOPXjiL-9totE
+2025-10-03 03:19:30,776 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:19:31,621 | INFO | app.session_manager | 📱 QR code displayed - waiting for mobile app
+2025-10-03 03:19:31,621 | INFO | app.session_manager | ⏳ Waiting for mobile app connection (timeout=175.0s)
+2025-10-03 03:19:31,621 | INFO | app.session_manager | Bridge message received: joined
+2025-10-03 03:19:31,908 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:19:32,333 | INFO | app.session_manager | ⚠️ User out of range (distance=5000mm) - will cancel in 6.0s if they don't return...
+2025-10-03 03:19:33,043 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:19:34,177 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 28mm < 100mm (TOO CLOSE)
+2025-10-03 03:19:35,309 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:19:36,437 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:19:37,569 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:19:38,332 | WARNING | app.session_manager | 🚶 User away for 6.0s - cancelling session
+2025-10-03 03:19:38,333 | INFO | app.session_manager | ⚠️ Session cancelled (user walked away)
+2025-10-03 03:19:38,333 | INFO | app.session_manager | 📷 Camera deactivated in cleanup
+2025-10-03 03:19:38,589 | INFO | app.session_manager | 🔄 Session cleaned up, returning to idle
+2025-10-03 03:19:38,704 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:19:39,841 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:19:40,976 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:19:42,111 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:19:43,249 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:19:44,384 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:19:45,518 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:19:46,654 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 52mm < 100mm (TOO CLOSE)
+2025-10-03 03:19:47,785 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:19:48,925 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:19:50,057 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:19:51,192 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:19:52,326 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:19:53,458 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 36mm < 100mm (TOO CLOSE)
+2025-10-03 03:19:54,599 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:19:55,732 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 52mm < 100mm (TOO CLOSE)
+2025-10-03 03:19:56,867 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:19:58,000 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:19:59,135 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:00,267 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:01,399 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:02,533 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:03,674 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:04,240 | INFO | app.session_manager | 👆 ToF triggered (distance=133mm) - starting session
+2025-10-03 03:20:04,241 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-10-03 03:20:04,815 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 133mm 100-500mm (TRIGGER)
+2025-10-03 03:20:05,092 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-10-03 03:20:05,093 | INFO | app.session_manager | 📱 Token issued: eyJhbGciOiJI... (expires in 180s)
+2025-10-03 03:20:05,952 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 113mm 100-500mm (TRIGGER)
+2025-10-03 03:20:07,086 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 102mm 100-500mm (TRIGGER)
+2025-10-03 03:20:07,240 | INFO | app.session_manager | 👋 Showing hello human screen (3.0s)
+2025-10-03 03:20:08,217 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 102mm 100-500mm (TRIGGER)
+2025-10-03 03:20:08,742 | INFO | app.session_manager | 📱 Showing scan prompt screen
+2025-10-03 03:20:08,742 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiNzBkZjA4MzY0ODdlNDkzOGIyYWVlNDkyNjc4MDlkNWEiLCJleHAiOjE3NTk0NjE3ODR9.X0IhHPuwpFuQ5b4ysJ5mXYJqV7DKv_9NOtKVuxAPrxE
+2025-10-03 03:20:09,349 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 102mm 100-500mm (TRIGGER)
+2025-10-03 03:20:09,595 | INFO | app.session_manager | 📱 QR code displayed - waiting for mobile app
+2025-10-03 03:20:09,595 | INFO | app.session_manager | ⏳ Waiting for mobile app connection (timeout=175.0s)
+2025-10-03 03:20:09,595 | INFO | app.session_manager | Bridge message received: joined
+2025-10-03 03:20:10,480 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 102mm 100-500mm (TRIGGER)
+2025-10-03 03:20:11,610 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 102mm 100-500mm (TRIGGER)
+2025-10-03 03:20:12,746 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 97mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:12,746 | INFO | app.session_manager | ⚠️ User out of range (distance=5000mm) - will cancel in 6.0s if they don't return...
+2025-10-03 03:20:13,881 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:15,010 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:16,142 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:17,273 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:18,405 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:18,747 | WARNING | app.session_manager | 🚶 User away for 6.0s - cancelling session
+2025-10-03 03:20:18,747 | INFO | app.session_manager | ⚠️ Session cancelled (user walked away)
+2025-10-03 03:20:18,747 | INFO | app.session_manager | 📷 Camera deactivated in cleanup
+2025-10-03 03:20:19,537 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:20,076 | INFO | app.session_manager | 🔄 Session cleaned up, returning to idle
+2025-10-03 03:20:20,672 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:21,808 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:22,941 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:24,078 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:25,213 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:26,215 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:27,348 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:28,483 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:29,617 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:30,751 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 29mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:31,883 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:33,018 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:34,155 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:35,296 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:36,432 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:37,440 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:38,576 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 29mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:39,710 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:40,845 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:41,983 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:43,116 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:44,248 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 58mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:45,385 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:46,525 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:47,658 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:48,794 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:49,929 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:51,065 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:52,204 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 57mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:53,340 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:54,474 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:55,608 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:56,741 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:57,873 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:20:59,008 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 44mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:00,143 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:01,277 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:01,986 | INFO | app.session_manager | 👆 ToF triggered (distance=124mm) - starting session
+2025-10-03 03:21:01,987 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-10-03 03:21:02,413 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 127mm 100-500mm (TRIGGER)
+2025-10-03 03:21:02,801 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-10-03 03:21:02,801 | INFO | app.session_manager | 📱 Token issued: eyJhbGciOiJI... (expires in 180s)
+2025-10-03 03:21:03,549 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 119mm 100-500mm (TRIGGER)
+2025-10-03 03:21:04,682 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 118mm 100-500mm (TRIGGER)
+2025-10-03 03:21:04,991 | INFO | app.session_manager | 👋 Showing hello human screen (3.0s)
+2025-10-03 03:21:05,814 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 118mm 100-500mm (TRIGGER)
+2025-10-03 03:21:06,491 | INFO | app.session_manager | 📱 Showing scan prompt screen
+2025-10-03 03:21:06,492 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiM2U3NzI1ZDFlZjMwNDU4MGE0OTQzMjFkN2Y5ZDU2ZDkiLCJleHAiOjE3NTk0NjE4NDJ9.X0aicbWIulDTxqfbeIMGt1CgCDsWOUWlwsMVxvIedMM
+2025-10-03 03:21:06,824 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 117mm 100-500mm (TRIGGER)
+2025-10-03 03:21:07,310 | INFO | app.session_manager | 📱 QR code displayed - waiting for mobile app
+2025-10-03 03:21:07,310 | INFO | app.session_manager | ⏳ Waiting for mobile app connection (timeout=175.0s)
+2025-10-03 03:21:07,310 | INFO | app.session_manager | Bridge message received: joined
+2025-10-03 03:21:07,957 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 119mm 100-500mm (TRIGGER)
+2025-10-03 03:21:09,088 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 118mm 100-500mm (TRIGGER)
+2025-10-03 03:21:10,219 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 114mm 100-500mm (TRIGGER)
+2025-10-03 03:21:11,348 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 117mm 100-500mm (TRIGGER)
+2025-10-03 03:21:12,478 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 117mm 100-500mm (TRIGGER)
+2025-10-03 03:21:13,608 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 117mm 100-500mm (TRIGGER)
+2025-10-03 03:21:14,740 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 117mm 100-500mm (TRIGGER)
+2025-10-03 03:21:15,869 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 102mm 100-500mm (TRIGGER)
+2025-10-03 03:21:16,091 | INFO | app.session_manager | Bridge message received: status
+2025-10-03 03:21:16,999 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 102mm 100-500mm (TRIGGER)
+2025-10-03 03:21:17,565 | INFO | app.session_manager | ⚠️ User out of range (distance=5000mm) - will cancel in 6.0s if they don't return...
+2025-10-03 03:21:18,130 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:19,261 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 30mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:20,391 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:21,527 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 53mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:22,657 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:23,564 | WARNING | app.session_manager | 🚶 User away for 6.0s - cancelling session
+2025-10-03 03:21:23,565 | INFO | app.session_manager | ⚠️ Session cancelled (user walked away)
+2025-10-03 03:21:23,565 | INFO | app.session_manager | 📷 Camera deactivated in cleanup
+2025-10-03 03:21:23,788 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:23,840 | INFO | app.session_manager | 🔄 Session cleaned up, returning to idle
+2025-10-03 03:21:24,921 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 28mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:26,056 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:27,192 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 52mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:28,325 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:29,458 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 37mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:30,593 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 53mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:31,726 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:32,857 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:33,993 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 36mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:35,125 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:36,259 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:37,393 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 23mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:38,526 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:39,660 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:40,797 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:41,935 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:43,072 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:44,207 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:45,339 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:46,473 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:47,607 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:48,738 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 28mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:49,880 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:51,015 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:52,154 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 68mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:53,290 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 35mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:54,427 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 30mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:55,559 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:56,693 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:57,829 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 53mm < 100mm (TOO CLOSE)
+2025-10-03 03:21:58,964 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 30mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:00,103 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:01,240 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 37mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:02,375 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:03,509 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 37mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:04,643 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 28mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:05,775 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:06,910 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 53mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:08,045 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:09,180 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:10,314 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:11,447 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:12,578 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:13,715 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:14,851 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:15,986 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:17,121 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:18,259 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:19,396 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:20,531 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:21,669 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:22,806 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:23,941 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 28mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:25,074 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:26,207 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 29mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:27,342 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:28,477 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 70mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:29,615 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:30,750 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 36mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:31,887 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:33,021 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:34,152 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 54mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:35,287 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 28mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:36,421 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:37,554 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:38,554 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:39,694 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:40,826 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:41,963 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:43,099 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:44,237 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:45,369 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:46,506 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:47,642 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:22:48,777 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 104mm 100-500mm (TRIGGER)
+2025-10-03 03:22:48,778 | INFO | app.session_manager | 👆 ToF triggered (distance=104mm) - starting session
+2025-10-03 03:22:48,778 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-10-03 03:22:49,575 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-10-03 03:22:49,575 | INFO | app.session_manager | 📱 Token issued: eyJhbGciOiJI... (expires in 180s)
+2025-10-03 03:22:49,913 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 119mm 100-500mm (TRIGGER)
+2025-10-03 03:22:51,047 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 117mm 100-500mm (TRIGGER)
+2025-10-03 03:22:51,779 | INFO | app.session_manager | 👋 Showing hello human screen (3.0s)
+2025-10-03 03:22:52,184 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 116mm 100-500mm (TRIGGER)
+2025-10-03 03:22:53,280 | INFO | app.session_manager | 📱 Showing scan prompt screen
+2025-10-03 03:22:53,281 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiZTQ1MWM2OTMxODBjNDQ1MmE5ZTMyOTU1ZWJlMjg4OTAiLCJleHAiOjE3NTk0NjE5NDl9.4GKGFAiKPg-XURihhbuQAZh0KeICY8FSOqfb7fefdqQ
+2025-10-03 03:22:53,339 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 121mm 100-500mm (TRIGGER)
+2025-10-03 03:22:54,247 | INFO | app.session_manager | 📱 QR code displayed - waiting for mobile app
+2025-10-03 03:22:54,247 | INFO | app.session_manager | ⏳ Waiting for mobile app connection (timeout=175.0s)
+2025-10-03 03:22:54,247 | INFO | app.session_manager | Bridge message received: joined
+2025-10-03 03:22:54,474 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 118mm 100-500mm (TRIGGER)
+2025-10-03 03:22:55,605 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 116mm 100-500mm (TRIGGER)
+2025-10-03 03:22:56,744 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 115mm 100-500mm (TRIGGER)
+2025-10-03 03:22:57,876 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 115mm 100-500mm (TRIGGER)
+2025-10-03 03:22:59,008 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 117mm 100-500mm (TRIGGER)
+2025-10-03 03:23:00,142 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 121mm 100-500mm (TRIGGER)
+2025-10-03 03:23:00,370 | INFO | app.session_manager | Bridge message received: from_app
+2025-10-03 03:23:01,272 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 126mm 100-500mm (TRIGGER)
+2025-10-03 03:23:01,295 | INFO | app.session_manager | Bridge message received: from_app
+2025-10-03 03:23:01,295 | INFO | app.session_manager | 🔑 Platform ID set: PLT_pkEPiGU5lbSs
+2025-10-03 03:23:01,296 | INFO | app.session_manager | ✅ Mobile app connected: PLT_pkEPiGU5lbSs
+2025-10-03 03:23:01,296 | INFO | app.session_manager | 📷 Pre-warming RealSense camera for upcoming validation...
+2025-10-03 03:23:01,296 | INFO | d435i_liveness | Hardware request: validation (total=1)
+2025-10-03 03:23:01,296 | INFO | d435i_liveness | Activating RealSense pipeline
+2025-10-03 03:23:01,310 | INFO | app.session_manager | 📷 RealSense camera pre-warmed successfully
+2025-10-03 03:23:01,313 | INFO | app.session_manager | 📸 Starting human validation (10.0s, need ≥10 frames)
+2025-10-03 03:23:01,314 | INFO | app.session_manager | ⏱️ Camera already active, stabilizing (500ms)...
+INFO: Created TensorFlow Lite XNNPACK delegate for CPU.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+W0000 00:00:1759461781.317891   37736 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+W0000 00:00:1759461781.331809   37736 inference_feedback_manager.cc:114] Feedback manager requires a model with a single signature inference. Disabling support for feedback tensors.
+2025-10-03 03:23:01,435 | INFO | d435i_liveness | Connected to Intel RealSense D435I (S/N 215322072881) depth_scale=0.001000 m
+INFO:     127.0.0.1:52854 - "GET /preview?t=1759461781336 HTTP/1.1" 200 OK
+2025-10-03 03:23:01,893 | INFO | app.session_manager | Bridge message received: from_app
+2025-10-03 03:23:01,894 | INFO | app.session_manager | 🔑 Platform ID set: PLT_pkEPiGU5lbSs
+/home/ubuntu/Desktop/mdaitest/controller/.venv/lib/python3.12/site-packages/google/protobuf/symbol_database.py:55: UserWarning: SymbolDatabase.GetPrototype() is deprecated. Please use message_factory.GetMessageClass() instead. SymbolDatabase.GetPrototype() will be removed soon.
+  warnings.warn('SymbolDatabase.GetPrototype() is deprecated. Please '
+2025-10-03 03:23:02,342 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 127mm 100-500mm (TRIGGER)
+2025-10-03 03:23:03,358 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 127mm 100-500mm (TRIGGER)
+2025-10-03 03:23:03,995 | WARNING | d435i_liveness | RealSense error: Frame didn't arrive within 1000
+2025-10-03 03:23:04,491 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 130mm 100-500mm (TRIGGER)
+2025-10-03 03:23:05,046 | WARNING | d435i_liveness | RealSense error: Frame didn't arrive within 1000
+2025-10-03 03:23:05,624 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 131mm 100-500mm (TRIGGER)
+2025-10-03 03:23:06,098 | WARNING | d435i_liveness | RealSense error: Frame didn't arrive within 1000
+2025-10-03 03:23:06,757 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 132mm 100-500mm (TRIGGER)
+2025-10-03 03:23:07,149 | WARNING | d435i_liveness | RealSense error: Frame didn't arrive within 1000
+2025-10-03 03:23:07,889 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 132mm 100-500mm (TRIGGER)
+2025-10-03 03:23:08,204 | WARNING | d435i_liveness | RealSense error: Frame didn't arrive within 1000
+2025-10-03 03:23:09,023 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 133mm 100-500mm (TRIGGER)
+2025-10-03 03:23:09,256 | WARNING | d435i_liveness | RealSense error: Frame didn't arrive within 1000
+2025-10-03 03:23:10,154 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 131mm 100-500mm (TRIGGER)
+2025-10-03 03:23:10,307 | WARNING | d435i_liveness | RealSense error: Frame didn't arrive within 1000
+2025-10-03 03:23:11,285 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 130mm 100-500mm (TRIGGER)
+2025-10-03 03:23:11,359 | WARNING | d435i_liveness | RealSense error: Frame didn't arrive within 1000
+2025-10-03 03:23:11,841 | INFO | app.session_manager | 📊 Validation complete: 15/15 frames passed, faces_detected=15/15, best_score=0.723
+2025-10-03 03:23:11,847 | INFO | app.session_manager | Saved best frame to /home/ubuntu/Desktop/mdaitest/captures/20251003_032311_PLT_pkEPiGU5lbSs_BEST.jpg
+2025-10-03 03:23:11,847 | INFO | app.session_manager | ✅ Human validation SUCCESS: 15 passing frames, score=0.723
+2025-10-03 03:23:11,847 | INFO | app.session_manager | 🔑 Platform ID at end of validation: PLT_pkEPiGU5lbSs
+2025-10-03 03:23:12,413 | WARNING | d435i_liveness | RealSense error: Frame didn't arrive within 1000
+2025-10-03 03:23:12,414 | INFO | d435i_liveness | Hardware release: validation (total=0)
+2025-10-03 03:23:12,414 | INFO | d435i_liveness | Deactivating RealSense pipeline
+2025-10-03 03:23:12,420 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 131mm 100-500mm (TRIGGER)
+2025-10-03 03:23:13,232 | INFO | app.session_manager | 🚀 Starting processing phase
+2025-10-03 03:23:13,232 | INFO | app.session_manager | 🔑 Platform ID at start of upload: PLT_pkEPiGU5lbSs
+2025-10-03 03:23:13,240 | INFO | app.session_manager | 📤 Frame uploaded (84680 chars base64)
+2025-10-03 03:23:13,524 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 131mm 100-500mm (TRIGGER)
+2025-10-03 03:23:14,658 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 133mm 100-500mm (TRIGGER)
+2025-10-03 03:23:15,791 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 130mm 100-500mm (TRIGGER)
+2025-10-03 03:23:16,240 | WARNING | app.session_manager | ⚠️ Backend ACK timeout (3s) - continuing anyway
+2025-10-03 03:23:16,241 | INFO | app.session_manager | 🎉 Session complete
+2025-10-03 03:23:16,241 | INFO | app.session_manager | ✅ Session completed successfully
+2025-10-03 03:23:16,241 | INFO | app.session_manager | 📷 Camera deactivated in cleanup
+2025-10-03 03:23:16,926 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 131mm 100-500mm (TRIGGER)
+2025-10-03 03:23:18,066 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 130mm 100-500mm (TRIGGER)
+2025-10-03 03:23:19,201 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 130mm 100-500mm (TRIGGER)
+2025-10-03 03:23:19,240 | INFO | app.session_manager | 🔄 Session cleaned up, returning to idle
+2025-10-03 03:23:20,338 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 129mm 100-500mm (TRIGGER)
+2025-10-03 03:23:21,470 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 111mm 100-500mm (TRIGGER)
+2025-10-03 03:23:22,603 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 108mm 100-500mm (TRIGGER)
+2025-10-03 03:23:23,737 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 108mm 100-500mm (TRIGGER)
+2025-10-03 03:23:24,871 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 113mm 100-500mm (TRIGGER)
+2025-10-03 03:23:26,004 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 03:23:27,138 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 107mm 100-500mm (TRIGGER)
+2025-10-03 03:23:28,272 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 107mm 100-500mm (TRIGGER)
+2025-10-03 03:23:29,404 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 108mm 100-500mm (TRIGGER)
+2025-10-03 03:23:30,541 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 108mm 100-500mm (TRIGGER)
+2025-10-03 03:23:31,676 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 110mm 100-500mm (TRIGGER)
+2025-10-03 03:23:32,811 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 112mm 100-500mm (TRIGGER)
+2025-10-03 03:23:33,949 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 112mm 100-500mm (TRIGGER)
+2025-10-03 03:23:35,084 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 112mm 100-500mm (TRIGGER)
+2025-10-03 03:23:36,219 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 111mm 100-500mm (TRIGGER)
+2025-10-03 03:23:37,353 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 03:23:38,488 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 110mm 100-500mm (TRIGGER)
+2025-10-03 03:23:39,619 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 110mm 100-500mm (TRIGGER)
+2025-10-03 03:23:40,755 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 110mm 100-500mm (TRIGGER)
+2025-10-03 03:23:41,755 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 03:23:42,892 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 03:23:44,026 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 03:23:45,161 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 110mm 100-500mm (TRIGGER)
+2025-10-03 03:23:46,294 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 110mm 100-500mm (TRIGGER)
+2025-10-03 03:23:47,426 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 109mm 100-500mm (TRIGGER)
+2025-10-03 03:23:48,559 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 107mm 100-500mm (TRIGGER)
+2025-10-03 03:23:49,696 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 108mm 100-500mm (TRIGGER)
+2025-10-03 03:23:50,831 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 108mm 100-500mm (TRIGGER)
+2025-10-03 03:23:51,971 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 107mm 100-500mm (TRIGGER)
+2025-10-03 03:23:53,104 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 106mm 100-500mm (TRIGGER)
+2025-10-03 03:23:54,238 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 106mm 100-500mm (TRIGGER)
+2025-10-03 03:23:55,373 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 107mm 100-500mm (TRIGGER)
+2025-10-03 03:23:56,510 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 108mm 100-500mm (TRIGGER)
+2025-10-03 03:23:57,514 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 106mm 100-500mm (TRIGGER)
+2025-10-03 03:23:58,650 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 106mm 100-500mm (TRIGGER)
+2025-10-03 03:23:59,784 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 106mm 100-500mm (TRIGGER)
+2025-10-03 03:24:00,918 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 105mm 100-500mm (TRIGGER)
+2025-10-03 03:24:02,051 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 104mm 100-500mm (TRIGGER)
+2025-10-03 03:24:03,186 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 104mm 100-500mm (TRIGGER)
+2025-10-03 03:24:04,321 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 104mm 100-500mm (TRIGGER)
+2025-10-03 03:24:05,454 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 104mm 100-500mm (TRIGGER)
+2025-10-03 03:24:06,591 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 104mm 100-500mm (TRIGGER)
+2025-10-03 03:24:07,725 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 104mm 100-500mm (TRIGGER)
+2025-10-03 03:24:08,860 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 104mm 100-500mm (TRIGGER)
+2025-10-03 03:24:09,994 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 103mm 100-500mm (TRIGGER)
+2025-10-03 03:24:11,129 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 102mm 100-500mm (TRIGGER)
+2025-10-03 03:24:12,264 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 103mm 100-500mm (TRIGGER)
+2025-10-03 03:24:13,401 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 115mm 100-500mm (TRIGGER)
+2025-10-03 03:24:14,407 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 121mm 100-500mm (TRIGGER)
+2025-10-03 03:24:15,543 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 119mm 100-500mm (TRIGGER)
+2025-10-03 03:24:16,676 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 113mm 100-500mm (TRIGGER)
+2025-10-03 03:24:17,810 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 113mm 100-500mm (TRIGGER)
+2025-10-03 03:24:18,943 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 114mm 100-500mm (TRIGGER)
+2025-10-03 03:24:20,078 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 114mm 100-500mm (TRIGGER)
+2025-10-03 03:24:21,212 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 108mm 100-500mm (TRIGGER)
+2025-10-03 03:24:22,346 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 113mm 100-500mm (TRIGGER)
+2025-10-03 03:24:23,481 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 116mm 100-500mm (TRIGGER)
+2025-10-03 03:24:24,615 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 117mm 100-500mm (TRIGGER)
+2025-10-03 03:24:25,747 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 116mm 100-500mm (TRIGGER)
+2025-10-03 03:24:26,881 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 117mm 100-500mm (TRIGGER)
+2025-10-03 03:24:28,013 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 117mm 100-500mm (TRIGGER)
+2025-10-03 03:24:29,150 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 118mm 100-500mm (TRIGGER)
+2025-10-03 03:24:30,289 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 120mm 100-500mm (TRIGGER)
+2025-10-03 03:24:31,421 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 121mm 100-500mm (TRIGGER)
+2025-10-03 03:24:32,554 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 117mm 100-500mm (TRIGGER)
+2025-10-03 03:24:33,689 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 116mm 100-500mm (TRIGGER)
+2025-10-03 03:24:34,822 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 116mm 100-500mm (TRIGGER)
+2025-10-03 03:24:35,954 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 100mm 100-500mm (TRIGGER)
+2025-10-03 03:24:37,086 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 53mm < 100mm (TOO CLOSE)
+2025-10-03 03:24:38,087 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 36mm < 100mm (TOO CLOSE)
+2025-10-03 03:24:39,223 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:24:40,355 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:24:41,493 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:24:42,629 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:24:43,764 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 35mm < 100mm (TOO CLOSE)
+2025-10-03 03:24:44,901 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:24:46,032 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 28mm < 100mm (TOO CLOSE)
+2025-10-03 03:24:47,167 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:24:48,300 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:24:49,434 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:24:50,568 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:24:51,701 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:24:52,835 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:24:53,970 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:24:55,110 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 56mm < 100mm (TOO CLOSE)
+2025-10-03 03:24:56,250 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 28mm < 100mm (TOO CLOSE)
+2025-10-03 03:24:57,383 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:24:58,518 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:24:59,654 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:25:00,789 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 37mm < 100mm (TOO CLOSE)
+2025-10-03 03:25:01,925 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 25mm < 100mm (TOO CLOSE)
+2025-10-03 03:25:02,930 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:25:04,064 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:25:05,200 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 73mm < 100mm (TOO CLOSE)
+2025-10-03 03:25:05,484 | INFO | app.session_manager | 👆 ToF triggered (distance=110mm) - starting session
+2025-10-03 03:25:05,484 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-10-03 03:25:06,290 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 500 Internal Server Error"
+2025-10-03 03:25:06,292 | ERROR | app.backend.http_client | bridge.issue_token: HTTP 500 - Internal Server Error
+2025-10-03 03:25:06,293 | ERROR | app.session_manager | ❌ Session failed: Failed to get pairing token
+2025-10-03 03:25:06,335 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 128mm 100-500mm (TRIGGER)
+2025-10-03 03:25:07,471 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 122mm 100-500mm (TRIGGER)
+2025-10-03 03:25:08,484 | ERROR | app.session_manager | ❌ Error: Failed to get pairing token
+2025-10-03 03:25:08,484 | INFO | app.session_manager | 📷 Camera deactivated in cleanup
+2025-10-03 03:25:08,601 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 125mm 100-500mm (TRIGGER)
+2025-10-03 03:25:09,736 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 128mm 100-500mm (TRIGGER)
+2025-10-03 03:25:10,872 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 125mm 100-500mm (TRIGGER)
+2025-10-03 03:25:11,484 | INFO | app.session_manager | 🔄 Session cleaned up, returning to idle
+2025-10-03 03:25:12,007 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 104mm 100-500mm (TRIGGER)
+2025-10-03 03:25:13,143 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 104mm 100-500mm (TRIGGER)
+2025-10-03 03:25:14,276 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
+2025-10-03 03:25:15,411 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 33mm < 100mm (TOO CLOSE)
+2025-10-03 03:25:16,544 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:25:17,681 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 71mm < 100mm (TOO CLOSE)
+2025-10-03 03:25:18,684 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:25:19,817 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:25:19,960 | INFO | app.session_manager | 👆 ToF triggered (distance=151mm) - starting session
+2025-10-03 03:25:19,960 | INFO | app.backend.http_client | bridge.issue_token: requesting new hardware token
+2025-10-03 03:25:20,792 | INFO | httpx | HTTP Request: POST https://mdai.mercle.ai/auth "HTTP/1.1 200 OK"
+2025-10-03 03:25:20,794 | INFO | app.session_manager | 📱 Token issued: eyJhbGciOiJI... (expires in 180s)
+2025-10-03 03:25:20,956 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 136mm 100-500mm (TRIGGER)
+2025-10-03 03:25:21,956 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 110mm 100-500mm (TRIGGER)
+2025-10-03 03:25:22,960 | INFO | app.session_manager | 👋 Showing hello human screen (3.0s)
+2025-10-03 03:25:23,090 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 111mm 100-500mm (TRIGGER)
+2025-10-03 03:25:24,227 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 112mm 100-500mm (TRIGGER)
+2025-10-03 03:25:24,461 | INFO | app.session_manager | 📱 Showing scan prompt screen
+2025-10-03 03:25:24,461 | INFO | app.backend.ws_client | Connecting to bridge websocket wss://mdai.mercle.ai/ws/hardware?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJwYWlyIiwianRpIjoiYTVjOWZjZjE3MmU5NGIxODlhZDUxZmE3NDM2NjAxZjUiLCJleHAiOjE3NTk0NjIxMDB9.zccO6uiM0StNR4rrMnm4UUXqBTko6ODMxxmSbfohR9s
+2025-10-03 03:25:25,259 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 112mm 100-500mm (TRIGGER)
+2025-10-03 03:25:25,442 | INFO | app.session_manager | 📱 QR code displayed - waiting for mobile app
+2025-10-03 03:25:25,442 | INFO | app.session_manager | ⏳ Waiting for mobile app connection (timeout=175.0s)
+2025-10-03 03:25:25,442 | INFO | app.session_manager | Bridge message received: joined
+2025-10-03 03:25:26,390 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 117mm 100-500mm (TRIGGER)
+2025-10-03 03:25:27,522 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 116mm 100-500mm (TRIGGER)
+2025-10-03 03:25:28,653 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 115mm 100-500mm (TRIGGER)
+2025-10-03 03:25:29,784 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 120mm 100-500mm (TRIGGER)
+2025-10-03 03:25:30,915 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 121mm 100-500mm (TRIGGER)
+2025-10-03 03:25:32,049 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 125mm 100-500mm (TRIGGER)
+2025-10-03 03:25:33,177 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 125mm 100-500mm (TRIGGER)
+2025-10-03 03:25:34,308 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 105mm 100-500mm (TRIGGER)
+2025-10-03 03:25:35,438 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 105mm 100-500mm (TRIGGER)
+2025-10-03 03:25:36,002 | INFO | app.session_manager | ⚠️ User out of range (distance=5000mm) - will cancel in 6.0s if they don't return...
+2025-10-03 03:25:36,566 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 57mm < 100mm (TOO CLOSE)
+2025-10-03 03:25:37,695 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 56mm < 100mm (TOO CLOSE)
+2025-10-03 03:25:38,823 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:25:39,953 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:25:41,085 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 38mm < 100mm (TOO CLOSE)
+2025-10-03 03:25:42,002 | WARNING | app.session_manager | 🚶 User away for 6.0s - cancelling session
+2025-10-03 03:25:42,003 | INFO | app.session_manager | ⚠️ Session cancelled (user walked away)
+2025-10-03 03:25:42,003 | INFO | app.session_manager | 📷 Camera deactivated in cleanup
+2025-10-03 03:25:42,219 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 55mm < 100mm (TOO CLOSE)
+2025-10-03 03:25:42,254 | INFO | app.session_manager | 🔄 Session cleaned up, returning to idle
+2025-10-03 03:25:43,359 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:25:44,490 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:25:45,624 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:25:46,756 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:25:47,894 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:25:49,028 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:25:50,163 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:25:51,297 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 53mm < 100mm (TOO CLOSE)
+2025-10-03 03:25:52,432 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:25:53,568 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 27mm < 100mm (TOO CLOSE)
+2025-10-03 03:25:54,702 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
+2025-10-03 03:25:55,835 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:25:56,972 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:25:58,110 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 36mm < 100mm (TOO CLOSE)
+2025-10-03 03:25:59,247 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 28mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:00,381 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 26mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:01,515 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 28mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:02,649 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 37mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:03,783 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 38mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:04,917 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:06,052 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:07,193 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:08,327 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 27mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:09,462 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 56mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:10,597 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 28mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:11,732 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 37mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:12,872 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:14,007 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:15,142 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:16,277 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:17,410 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:18,548 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 56mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:19,681 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:20,818 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:21,951 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:23,083 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:24,218 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 27mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:25,355 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:26,493 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:27,634 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 28mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:28,771 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 25mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:29,908 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 28mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:31,045 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:32,181 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 28mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:33,314 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 28mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:34,448 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:35,584 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:36,720 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 27mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:37,855 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:38,993 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 28mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:40,128 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:41,264 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 52mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:42,399 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:43,535 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:44,671 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:45,804 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:46,942 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:48,078 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 52mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:49,212 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:50,346 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 36mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:51,484 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:52,617 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:53,750 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 36mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:54,891 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:56,021 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:57,156 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:58,290 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:26:59,430 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 36mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:00,565 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:01,696 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 36mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:02,830 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:03,967 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:05,104 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:06,238 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:07,370 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:08,505 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:09,641 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:10,777 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:11,913 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 54mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:13,047 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 27mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:14,185 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 37mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:15,317 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 33mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:16,453 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 55mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:17,588 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:18,725 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 59mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:19,856 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:20,989 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 53mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:22,123 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 27mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:23,127 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:24,260 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 36mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:25,395 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:26,532 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 38mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:27,667 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:28,799 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:29,932 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:31,068 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:32,199 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:33,338 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:34,473 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:35,607 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 22mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:36,739 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 24mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:37,872 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:39,009 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:40,146 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 28mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:41,281 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 36mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:42,417 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:43,555 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 53mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:44,688 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 35mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:45,823 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 27mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:46,956 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 23mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:48,091 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:49,225 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:50,365 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 35mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:51,503 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:52,639 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:53,772 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 51mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:54,910 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:56,044 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:57,179 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:58,315 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 40mm < 100mm (TOO CLOSE)
+2025-10-03 03:27:59,455 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:28:00,588 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 21mm < 100mm (TOO CLOSE)
+2025-10-03 03:28:01,723 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 36mm < 100mm (TOO CLOSE)
+2025-10-03 03:28:02,858 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 35mm < 100mm (TOO CLOSE)
+2025-10-03 03:28:03,992 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)
+2025-10-03 03:28:05,127 | INFO | app.sensors.python_tof | 📏 Python ToF reading: 20mm < 100mm (TOO CLOSE)

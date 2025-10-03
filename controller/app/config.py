@@ -34,7 +34,7 @@ class PhaseDurations(BaseModel):
     scan_prompt: float = Field(1.5, description="Scan prompt duration")
     complete: float = Field(3.0, description="Success screen duration")
     error: float = Field(3.0, description="Error screen duration")
-    backend_ack_timeout: float = Field(3.0, description="Max wait for backend acknowledgment")
+    backend_ack_timeout: float = Field(6.0, description="Max wait for backend acknowledgment")
 
 
 class CameraSettings(BaseModel):
