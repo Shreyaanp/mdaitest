@@ -89,10 +89,13 @@ class SessionManager:
         self._ui_subscribers: List[asyncio.Queue[ControllerEvent]] = []
         self._current_session = SessionContext()
 
-        # ToF sensor setup - Python I2C implementation only
+        # ToF sensor disabled - replaced by RealSense face detection
+        # Keeping code for potential fallback but not initializing
         self._python_tof: Optional[PythonToFProvider] = None
+        self._tof: Optional[ToFSensor] = None
+        self._use_tof = False  # Set to True to re-enable TOF sensor
         
-        if tof_distance_provider is None:
+        if self._use_tof and tof_distance_provider is None:
             # Use Python I2C implementation (reliable and simple)
             logger.info("🐍 Using Python ToF implementation")
             self._python_tof = PythonToFProvider(
@@ -102,14 +105,14 @@ class SessionManager:
             )
             tof_distance_provider = self._python_tof.get_distance
 
-        self._tof = ToFSensor(
-            threshold_mm=self.settings.tof_threshold_mm,
-            min_threshold_mm=self.settings.tof_min_threshold_mm,
-            debounce_ms=self.settings.tof_debounce_ms,
-            poll_interval_ms=100,  # Poll every 100ms to match sensor measurement time
-            distance_provider=tof_distance_provider,
-        )
-        self._tof.register_callback(self._handle_tof_trigger)
+            self._tof = ToFSensor(
+                threshold_mm=self.settings.tof_threshold_mm,
+                min_threshold_mm=self.settings.tof_min_threshold_mm,
+                debounce_ms=self.settings.tof_debounce_ms,
+                poll_interval_ms=100,  # Poll every 100ms to match sensor measurement time
+                distance_provider=tof_distance_provider,
+            )
+            self._tof.register_callback(self._handle_tof_trigger)
 
         liveness_config = {
             "confidence": 0.5,  # Lower confidence for faster detection (was 0.5)
@@ -142,7 +145,7 @@ class SessionManager:
             # GENERAL
             "max_depth_m": 4,  # Allow people farther away (was 2.0, 25% increase)
         }
-        # Initialize RealSense service (Python ToF handles distance sensing)
+        # Initialize RealSense service (now also handles idle face detection)
         enable_realsense = self.settings.realsense_enable_hardware
         
         self._realsense = RealSenseService(
@@ -151,6 +154,9 @@ class SessionManager:
             threshold_overrides=threshold_overrides,
             settings=self.settings,  # Pass settings for configuration
         )
+        
+        # Register face detection callback (replaces TOF trigger)
+        self._realsense.register_face_detection_callback(self._handle_face_detection)
         self._http_client = BridgeHttpClient(self.settings)
         self._ws_client = BackendWebSocketClient(self.settings)
 
@@ -172,17 +178,30 @@ class SessionManager:
 
     async def start(self) -> None:
         logger.info("Starting session manager")
-        try:
-            if self._python_tof:
-                await self._python_tof.start()
-            await self._tof.start()
-        except Exception as e:
-            logger.error("Failed to start ToF sensor: %s", e)
-            logger.warning("ToF sensor not available - use debug endpoints for testing")
-            # Continue anyway - ToF can be simulated via debug endpoints
         
+        # Start TOF sensor only if enabled
+        if self._use_tof:
+            try:
+                if self._python_tof:
+                    await self._python_tof.start()
+                if self._tof:
+                    await self._tof.start()
+            except Exception as e:
+                logger.error("Failed to start ToF sensor: %s", e)
+                logger.warning("ToF sensor not available - using RealSense face detection instead")
+        
+        # Start RealSense service
         try:
+            logger.info("🎥 [STARTUP] Starting RealSense service...")
             await self._realsense.start()
+            # Activate camera in idle_detection mode (1s bursts for face detection)
+            logger.info("🎥 [STARTUP] Activating camera hardware for idle detection...")
+            await self._realsense.set_hardware_active(True, source="idle_detection")
+            logger.info("🎥 [STARTUP] Setting operational mode to idle_detection...")
+            await self._realsense.set_operational_mode("idle_detection")
+            logger.info("🎥 [STARTUP] ✅ RealSense started in idle_detection mode")
+            logger.info("🎥 [STARTUP] 🔍 Camera will take 1-second burst photos to detect faces")
+            logger.info("🎥 [STARTUP] 👤 Face detection will trigger session start")
         except Exception as e:
             logger.exception("Failed to start RealSense service: %s", e)
             # Continue anyway - RealSense might not be available yet
@@ -190,18 +209,20 @@ class SessionManager:
         self._background_tasks.append(asyncio.create_task(self._heartbeat_loop(), name="controller-heartbeat"))
         if not self._watchdog_task or self._watchdog_task.done():
             self._watchdog_task = asyncio.create_task(self._watchdog_loop(), name="controller-watchdog")
-        logger.info("Session manager started in IDLE state (camera inactive)")
+        logger.info("Session manager started in IDLE state (camera in idle detection mode)")
 
     async def stop(self) -> None:
         logger.info("Stopping session manager")
 
-        # Stop ToF sensor
-        try:
-            await self._tof.stop()
-            if self._python_tof:
-                await self._python_tof.stop()
-        except Exception as e:
-            logger.warning("Error stopping ToF sensor: %s", e)
+        # Stop ToF sensor (if enabled)
+        if self._use_tof:
+            try:
+                if self._tof:
+                    await self._tof.stop()
+                if self._python_tof:
+                    await self._python_tof.stop()
+            except Exception as e:
+                logger.warning("Error stopping ToF sensor: %s", e)
         
         # Stop RealSense
         try:
@@ -406,6 +427,99 @@ class SessionManager:
         # Returns very far distance (idle) - actual triggers come from /debug/mock-tof endpoint
         return 1000
     
+    async def _handle_face_detection(self, face_detected: bool) -> None:
+        """
+        Handle face detection events from RealSense (replaces TOF trigger).
+        
+        Logic:
+        - face_detected=True in IDLE → Start session
+        - face_detected=False in active session → Cancel (user walked away)
+        - Only active in IDLE and early session phases (before HUMAN_DETECT)
+        """
+        try:
+            current_phase = self.phase
+            
+            logger.debug(f"👤 [FACE_TRIGGER] Received face detection event: detected={face_detected}, phase={current_phase.value}")
+            
+            # IDLE state: Start session if face detected
+            if current_phase == SessionPhase.IDLE:
+                if face_detected:
+                    logger.info(f"👤 [FACE_TRIGGER] ✅ Face detected in IDLE - starting session")
+                    self._schedule_session()
+                else:
+                    logger.debug(f"👤 [FACE_TRIGGER] No face in IDLE (ignoring)")
+                return
+            
+            # COMPLETE/ERROR states: Don't monitor (session ending anyway)
+            if current_phase in {SessionPhase.COMPLETE, SessionPhase.ERROR}:
+                logger.debug(f"👤 [FACE_TRIGGER] Phase is {current_phase.value} (not monitoring)")
+                return
+            
+            # HUMAN_DETECT and later: Don't interfere (validation handles this)
+            if current_phase in {SessionPhase.HUMAN_DETECT, SessionPhase.PROCESSING}:
+                logger.debug(f"👤 [FACE_TRIGGER] Phase is {current_phase.value} (validation handles face detection)")
+                return
+            
+            # Early session states (PAIRING_REQUEST, HELLO_HUMAN, SCAN_PROMPT, QR_DISPLAY):
+            # Cancel if no face for 3 seconds
+            if not face_detected:
+                # User walked away
+                if not hasattr(self, '_face_lost_since'):
+                    # First time no face - start countdown
+                    self._face_lost_since = time.time()
+                    logger.info(f"👤 [FACE_TRIGGER] ⚠️ Face lost in {current_phase.value} - starting 3s countdown...")
+                    
+                    # Create cancellation task
+                    async def delayed_cancel():
+                        try:
+                            logger.debug(f"👤 [FACE_TRIGGER] Countdown started - will cancel in 3s if face not re-detected")
+                            await asyncio.sleep(3.0)  # 3 second grace period
+                            # Check if face still not detected
+                            if hasattr(self, '_face_lost_since'):
+                                time_away = time.time() - self._face_lost_since
+                                logger.warning(f"👤 [FACE_TRIGGER] 🚶 No face for {time_away:.1f}s - CANCELLING SESSION")
+                                if self._session_task and not self._session_task.done():
+                                    self._session_task.cancel()
+                                    logger.info(f"👤 [FACE_TRIGGER] Session task cancelled due to no face")
+                                # Clean up
+                                delattr(self, '_face_lost_since')
+                                if hasattr(self, '_face_cancel_task'):
+                                    delattr(self, '_face_cancel_task')
+                        except asyncio.CancelledError:
+                            logger.info(f"👤 [FACE_TRIGGER] ✅ Cancel countdown aborted (face detected)")
+                            if hasattr(self, '_face_cancel_task'):
+                                delattr(self, '_face_cancel_task')
+                            raise
+                    
+                    self._face_cancel_task = asyncio.create_task(delayed_cancel(), name="face-delayed-cancel")
+                    logger.debug(f"👤 [FACE_TRIGGER] Cancel task created: {self._face_cancel_task.get_name()}")
+                else:
+                    elapsed = time.time() - self._face_lost_since
+                    logger.debug(f"👤 [FACE_TRIGGER] Still no face (elapsed: {elapsed:.1f}s / 3s)")
+            else:
+                # Face detected again - cancel countdown if it exists
+                if hasattr(self, '_face_lost_since'):
+                    time_away = time.time() - self._face_lost_since
+                    logger.info(f"👤 [FACE_TRIGGER] ✅ Face re-detected after {time_away:.1f}s - cancel countdown aborted")
+                    delattr(self, '_face_lost_since')
+                    
+                    # Cancel the background cancellation task
+                    if hasattr(self, '_face_cancel_task'):
+                        cancel_task = self._face_cancel_task
+                        delattr(self, '_face_cancel_task')
+                        if not cancel_task.done():
+                            logger.debug(f"👤 [FACE_TRIGGER] Cancelling countdown task: {cancel_task.get_name()}")
+                            cancel_task.cancel()
+                            try:
+                                await cancel_task
+                            except asyncio.CancelledError:
+                                pass  # Expected
+                else:
+                    logger.debug(f"👤 [FACE_TRIGGER] Face still detected (good)")
+                    
+        except Exception as e:
+            logger.exception(f"Error handling face detection: {e}")
+    
     async def _handle_tof_trigger(self, triggered: bool, distance: int) -> None:
         """
         Handle ToF sensor trigger events.
@@ -511,6 +625,14 @@ class SessionManager:
         8. Return to idle
         """
         try:
+            logger.info("🎬 [SESSION_START] ================================")
+            logger.info("🎬 [SESSION_START] New session starting")
+            logger.info("🎬 [SESSION_START] ================================")
+            
+            # Switch camera from idle_detection to active mode (keeps it warm during session)
+            await self._realsense.set_operational_mode("active")
+            logger.info("📷 [SESSION_START] Camera switched to active mode (warm state)")
+            
             # Step 1: Request token from backend (PAIRING_REQUEST - 1.2s)
             token = await self._request_pairing_token()
             
@@ -524,8 +646,15 @@ class SessionManager:
             await self._show_qr_and_connect(token)
             await self._wait_for_mobile_app()
             
+            # Switch to validation mode before face detection
+            logger.info("📷 [SESSION_FLOW] Switching camera to validation mode (full liveness checks)")
+            await self._realsense.set_operational_mode("validation")
+            logger.info("📷 [SESSION_FLOW] Camera switched to validation mode")
+            
             # Step 4: Validate human face (HUMAN_DETECT - 3.5s exactly)
+            logger.info("📸 [SESSION_FLOW] Starting human presence validation")
             best_frame = await self._validate_human_presence()
+            logger.info("📸 [SESSION_FLOW] Validation completed successfully")
             
             # Step 5: Process and upload (PROCESSING - 3-15s)
             await self._process_and_upload(best_frame)
@@ -550,7 +679,15 @@ class SessionManager:
             await self._show_error("Please try again")
             
         finally:
+            logger.info("🏁 [SESSION_END] Session cleanup starting")
             await self._cleanup_session()
+            # Return camera to idle_detection mode
+            logger.info("📷 [SESSION_END] Returning camera to idle_detection mode")
+            await self._realsense.set_operational_mode("idle_detection")
+            logger.info("📷 [SESSION_END] Camera returned to idle_detection mode (1s burst intervals)")
+            logger.info("🏁 [SESSION_END] ================================")
+            logger.info("🏁 [SESSION_END] Session ended, back to IDLE")
+            logger.info("🏁 [SESSION_END] ================================")
 
     # ============================================================
     # SESSION FLOW METHODS - Clean & Easy to Understand
@@ -711,6 +848,41 @@ class SessionManager:
             await asyncio.sleep(stabilize_time)
         
         try:
+            # GRACE PERIOD: Wait up to 3 seconds for face detection before starting validation
+            # Reset timer if face is detected within grace period
+            GRACE_PERIOD = 3.0
+            grace_start = time.time()
+            grace_face_detected = False
+            
+            logger.info(f"⏳ [GRACE_PERIOD] Waiting up to {GRACE_PERIOD}s for face detection...")
+            logger.info(f"⏳ [GRACE_PERIOD] Timer resets each time face is detected")
+            
+            while time.time() - grace_start < GRACE_PERIOD:
+                results = await self._realsense.gather_results(0.1)
+                for result in results:
+                    if result and result.face_detected:
+                        grace_face_detected = True
+                        grace_elapsed = time.time() - grace_start
+                        logger.info(f"⏳ [GRACE_PERIOD] 👤 Face detected after {grace_elapsed:.1f}s - RESETTING TIMER")
+                        grace_start = time.time()  # Reset timer
+                        break
+                
+                # If face detected, exit grace period and start validation
+                if grace_face_detected:
+                    logger.info(f"⏳ [GRACE_PERIOD] ✅ Face detected, exiting grace period")
+                    break
+                
+                elapsed = time.time() - grace_start
+                if int(elapsed) != int(elapsed - 0.1):  # Log every second
+                    logger.debug(f"⏳ [GRACE_PERIOD] No face yet ({elapsed:.1f}s / {GRACE_PERIOD}s)")
+                
+                await asyncio.sleep(0.05)
+            
+            if not grace_face_detected:
+                logger.warning(f"⏳ [GRACE_PERIOD] ⚠️ No face detected during {GRACE_PERIOD}s grace period, proceeding anyway...")
+            
+            logger.info(f"⏳ [GRACE_PERIOD] Grace period complete, starting validation")
+            
             # Collect frames for exactly 3.5 seconds
             start_time = time.time()
             passing_frames = []

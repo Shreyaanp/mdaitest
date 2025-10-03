@@ -17,7 +17,7 @@ import time
 from collections import Counter, deque
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, AsyncIterator, Deque, Dict, List, Optional, Tuple
+from typing import Any, AsyncIterator, Awaitable, Callable, Deque, Dict, List, Optional, Tuple
 
 import numpy as np
 
@@ -468,6 +468,12 @@ class SimpleRealSenseService:
         self._loop_task: Optional[asyncio.Task[None]] = None
         self._stop_event = asyncio.Event()
         
+        # Idle face detection mode (replaces TOF sensor)
+        self._operational_mode: str = "idle_detection"  # "idle_detection", "active", or "validation"
+        self._face_detection_callbacks: list[Callable[[bool], Awaitable[None]]] = []
+        self._last_face_detected: bool = False
+        self._idle_detection_interval: float = 1.0  # 1 second burst interval
+        
         # Eye tracking visualization renderer (lazy init)
         self._eye_renderer = None
         
@@ -625,44 +631,105 @@ class SimpleRealSenseService:
         return out
     
     async def _preview_loop(self) -> None:
-        """Main preview loop - RPi 5 optimized with frame skipping for performance."""
-        # Process every frame but only broadcast previews every Nth frame
-        # This allows validation to get more CPU while preview stays smooth
+        """Main preview loop - supports idle_detection, active, and validation modes."""
         frame_skip_counter = 0
         frame_skip = self._settings.camera.preview_frame_skip if self._settings else 4
+        last_idle_capture = 0.0
         
         try:
             while not self._stop_event.is_set():
                 frame_start = time.time()
+                current_mode = self._operational_mode
                 
                 if self.enable_hardware and self._hardware_active and self._instance:
-                    # Process frame (fast - no lock contention)
-                    result = await self._run_process()
+                    # IDLE DETECTION MODE: 1-second burst intervals, face detection only
+                    if current_mode == "idle_detection":
+                        # Check if it's time for next burst capture
+                        if time.time() - last_idle_capture >= self._idle_detection_interval:
+                            logger.debug(f"🔍 [IDLE_DETECTION] Taking burst photo (interval={self._idle_detection_interval}s)")
+                            result = await self._run_process()
+                            last_idle_capture = time.time()
+                            
+                            # Check if face detected and trigger callbacks
+                            if result is not None:
+                                face_detected = result.face_detected
+                                
+                                # Log detection state
+                                if face_detected:
+                                    logger.debug(f"🔍 [IDLE_DETECTION] Face detected (bbox={result.bbox})")
+                                else:
+                                    logger.debug(f"🔍 [IDLE_DETECTION] No face detected (reason={result.reason if hasattr(result, 'reason') else 'N/A'})")
+                                
+                                # Trigger callbacks on state change
+                                if face_detected != self._last_face_detected:
+                                    self._last_face_detected = face_detected
+                                    logger.info(f"🔍 [IDLE_DETECTION] Face detection state changed: {not face_detected} → {face_detected}")
+                                    
+                                    # Call registered callbacks
+                                    logger.debug(f"🔍 [IDLE_DETECTION] Calling {len(self._face_detection_callbacks)} registered callback(s)")
+                                    for i, callback in enumerate(self._face_detection_callbacks):
+                                        try:
+                                            await callback(face_detected)
+                                            logger.debug(f"🔍 [IDLE_DETECTION] Callback {i+1}/{len(self._face_detection_callbacks)} executed successfully")
+                                        except Exception as e:
+                                            logger.exception(f"🔍 [IDLE_DETECTION] Callback {i+1}/{len(self._face_detection_callbacks)} failed: {e}")
+                            else:
+                                logger.warning(f"🔍 [IDLE_DETECTION] Burst capture returned None")
+                            
+                            # Broadcast frame for preview (optional)
+                            frame_bytes = self._serialize_frame(result)
+                            self._broadcast_frame(frame_bytes)
+                        
+                        # Sleep until next burst
+                        await asyncio.sleep(0.1)
                     
-                    # Broadcast result for validation (always)
-                    self._broadcast_result(result)
-                    
-                    # Only generate and broadcast preview every Nth frame (reduces load)
-                    frame_skip_counter += 1
-                    if frame_skip_counter % frame_skip == 0:
-                        frame_bytes = self._serialize_frame(result)
-                        self._broadcast_frame(frame_bytes)
-                    
-                    self._frame_count += 1
-                    
-                    # RPi 5 OPTIMIZATION: Periodic garbage collection
-                    if time.time() - self._last_gc > self._gc_interval:
-                        gc.collect()
-                        self._last_gc = time.time()
-                        logger.debug(f"GC run after {self._frame_count} frames")
-                    
-                    # Minimal delay for throughput (aim for ~10-15 FPS)
-                    elapsed = time.time() - frame_start
-                    fps_limit = self._settings.performance.preview_fps_limit if self._settings else 0.033
-                    if elapsed < fps_limit:
-                        await asyncio.sleep(fps_limit - elapsed)
-                    elif result is None:
-                        await asyncio.sleep(0.05)
+                    # ACTIVE/VALIDATION MODE: Continuous operation
+                    else:
+                        # Process frame (fast - no lock contention)
+                        result = await self._run_process()
+                        
+                        # Broadcast result for validation (always)
+                        self._broadcast_result(result)
+                        
+                        # ACTIVE MODE: Also monitor face detection for session cancellation
+                        if current_mode == "active" and result is not None:
+                            face_detected = result.face_detected
+                            
+                            # Trigger callbacks on state change (same as idle_detection)
+                            if face_detected != self._last_face_detected:
+                                self._last_face_detected = face_detected
+                                logger.info(f"👤 [ACTIVE_MODE] Face detection state changed: {not face_detected} → {face_detected}")
+                                
+                                # Call registered callbacks
+                                logger.debug(f"👤 [ACTIVE_MODE] Calling {len(self._face_detection_callbacks)} registered callback(s)")
+                                for i, callback in enumerate(self._face_detection_callbacks):
+                                    try:
+                                        await callback(face_detected)
+                                        logger.debug(f"👤 [ACTIVE_MODE] Callback {i+1}/{len(self._face_detection_callbacks)} executed successfully")
+                                    except Exception as e:
+                                        logger.exception(f"👤 [ACTIVE_MODE] Callback {i+1}/{len(self._face_detection_callbacks)} failed: {e}")
+                        
+                        # Only generate and broadcast preview every Nth frame (reduces load)
+                        frame_skip_counter += 1
+                        if frame_skip_counter % frame_skip == 0:
+                            frame_bytes = self._serialize_frame(result)
+                            self._broadcast_frame(frame_bytes)
+                        
+                        self._frame_count += 1
+                        
+                        # RPi 5 OPTIMIZATION: Periodic garbage collection
+                        if time.time() - self._last_gc > self._gc_interval:
+                            gc.collect()
+                            self._last_gc = time.time()
+                            logger.debug(f"GC run after {self._frame_count} frames")
+                        
+                        # Minimal delay for throughput (aim for ~10-15 FPS)
+                        elapsed = time.time() - frame_start
+                        fps_limit = self._settings.performance.preview_fps_limit if self._settings else 0.033
+                        if elapsed < fps_limit:
+                            await asyncio.sleep(fps_limit - elapsed)
+                        elif result is None:
+                            await asyncio.sleep(0.05)
                         
                 elif not self.enable_hardware:
                     self._broadcast_frame(self._placeholder_frame())
@@ -828,6 +895,45 @@ class SimpleRealSenseService:
             progress: 0.0 to 1.0 (e.g., passing_frames / MIN_PASSING_FRAMES)
         """
         self._validation_progress = max(0.0, min(1.0, progress))
+    
+    def register_face_detection_callback(self, callback: Callable[[bool], Awaitable[None]]) -> None:
+        """Register a callback for face detection events in idle mode."""
+        self._face_detection_callbacks.append(callback)
+    
+    async def set_operational_mode(self, mode: str) -> None:
+        """
+        Set operational mode for the camera.
+        
+        Modes:
+        - "idle_detection": 1-second burst intervals, face detection only (replaces TOF)
+        - "active": Continuous operation, face detection only (warm state)
+        - "validation": Full liveness validation (during HUMAN_DETECT phase)
+        """
+        if mode not in ("idle_detection", "active", "validation"):
+            logger.warning(f"⚙️ [MODE_SWITCH] Invalid operational mode: {mode}, using 'active'")
+            mode = "active"
+        
+        old_mode = self._operational_mode
+        self._operational_mode = mode
+        
+        logger.info(f"⚙️ [MODE_SWITCH] Operational mode: {old_mode} → {mode}")
+        logger.info(f"⚙️ [MODE_SWITCH] Mode details:")
+        logger.info(f"   - idle_detection: 1s bursts, face detection only")
+        logger.info(f"   - active: Continuous, face detection only (warm state)")
+        logger.info(f"   - validation: Full liveness with depth checks")
+        logger.info(f"⚙️ [MODE_SWITCH] Now in '{mode}' mode")
+        
+        # Reset face detection state when entering idle_detection
+        if mode == "idle_detection":
+            self._last_face_detected = False
+            logger.debug(f"⚙️ [MODE_SWITCH] Reset face detection state for idle mode")
+        # When entering active mode from idle, preserve face detection state
+        elif mode == "active":
+            logger.debug(f"⚙️ [MODE_SWITCH] Preserving face detection state: {self._last_face_detected}")
+    
+    def get_operational_mode(self) -> str:
+        """Get current operational mode."""
+        return self._operational_mode
 
 
 # Backward compatibility aliases
